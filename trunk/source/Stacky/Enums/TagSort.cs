@@ -12,10 +12,6 @@
         /// <summary>
         /// Name.
         /// </summary>
-        Name,
-        /// <summary>
-        /// Recent.
-        /// </summary>
-        Recent
+        Name
     }
 }

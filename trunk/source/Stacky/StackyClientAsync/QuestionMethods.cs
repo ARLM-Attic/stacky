@@ -57,9 +57,9 @@ namespace Stacky
             }, (items) => onSuccess(new PagedList<Question>(items.Questions, items)), onError);
         }
 
-        public virtual void GetQuestion(int questionId, Action<Question> onSuccess, Action<ApiException> onError = null, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false)
+        public virtual void GetQuestion(int questionId, Action<Question> onSuccess, Action<ApiException> onError = null, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false)
         {
-            GetQuestions(questionId.ToArray(), returnedQuestions => onSuccess(returnedQuestions.FirstOrDefault()), onError, page, pageSize, includeBody, includeComments);
+            GetQuestions(questionId.ToArray(), returnedQuestions => onSuccess(returnedQuestions.FirstOrDefault()), onError, page, pageSize, includeBody, includeComments, includeAnswers);
         }
 
         public virtual void GetQuestionTimeline(IEnumerable<int> questionIds, Action<IPagedList<PostEvent>> onSuccess, Action<ApiException> onError = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
