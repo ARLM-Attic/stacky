@@ -7,7 +7,7 @@ namespace Stacky
 {
     public static class Sites
     {
-        public static Site StackOverflow
+		public static Site StackOverflow
         {
             get
             {
@@ -19,12 +19,12 @@ namespace Stacky
                     SiteUrl = "http://stackoverflow.com",
                     Description = "Q&A for professional and enthusiast programmers",
                     IconUrl = "http://sstatic.net/stackoverflow/img/apple-touch-icon.png",
-                    State = SiteState.Normal
+					State = SiteState.Normal
                 };
             }
         }
 
-        public static Site ServerFault
+		public static Site ServerFault
         {
             get
             {
@@ -36,12 +36,12 @@ namespace Stacky
                     SiteUrl = "http://serverfault.com",
                     Description = "Q&A for system administrators and IT professionals",
                     IconUrl = "http://sstatic.net/serverfault/img/apple-touch-icon.png",
-                    State = SiteState.Normal
+					State = SiteState.Normal
                 };
             }
         }
 
-        public static Site SuperUser
+		public static Site SuperUser
         {
             get
             {
@@ -53,12 +53,12 @@ namespace Stacky
                     SiteUrl = "http://superuser.com",
                     Description = "Q&A for computer enthusiasts and power users",
                     IconUrl = "http://sstatic.net/superuser/img/apple-touch-icon.png",
-                    State = SiteState.Normal
+					State = SiteState.Normal
                 };
             }
         }
 
-        public static Site MetaStackOverflow
+		public static Site MetaStackOverflow
         {
             get
             {
@@ -70,12 +70,12 @@ namespace Stacky
                     SiteUrl = "http://meta.stackoverflow.com",
                     Description = "Q&A about the Stack Exchange engine powering these sites",
                     IconUrl = "http://sstatic.net/stackoverflowmeta/img/apple-touch-icon.png",
-                    State = SiteState.Normal
+					State = SiteState.Normal
                 };
             }
         }
 
-        public static Site WebApps
+		public static Site WebApps
         {
             get
             {
@@ -87,12 +87,12 @@ namespace Stacky
                     SiteUrl = "http://webapps.stackexchange.com",
                     Description = "Q&A for power users of web applications",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site WebAppsMeta
+		public static Site WebAppsMeta
         {
             get
             {
@@ -104,12 +104,12 @@ namespace Stacky
                     SiteUrl = "http://meta.webapps.stackexchange.com",
                     Description = "Q&A about the Web Apps site",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site Gaming
+		public static Site Gaming
         {
             get
             {
@@ -121,12 +121,12 @@ namespace Stacky
                     SiteUrl = "http://gaming.stackexchange.com",
                     Description = "Q&A for passionate videogamers on all platforms",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site GamingMeta
+		public static Site GamingMeta
         {
             get
             {
@@ -138,12 +138,12 @@ namespace Stacky
                     SiteUrl = "http://meta.gaming.stackexchange.com",
                     Description = "Q&A about the Gaming site",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site Webmasters
+		public static Site Webmasters
         {
             get
             {
@@ -155,12 +155,12 @@ namespace Stacky
                     SiteUrl = "http://webmasters.stackexchange.com",
                     Description = "Q&A for pro webmasters",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site WebmastersMeta
+		public static Site WebmastersMeta
         {
             get
             {
@@ -172,12 +172,12 @@ namespace Stacky
                     SiteUrl = "http://meta.webmasters.stackexchange.com",
                     Description = "Q&A about the pro webmasters site",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site Cooking
+		public static Site Cooking
         {
             get
             {
@@ -189,12 +189,12 @@ namespace Stacky
                     SiteUrl = "http://cooking.stackexchange.com",
                     Description = "Q&A for professional and amateur chefs",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site CookingMeta
+		public static Site CookingMeta
         {
             get
             {
@@ -206,12 +206,12 @@ namespace Stacky
                     SiteUrl = "http://meta.cooking.stackexchange.com",
                     Description = "Q&A about the professional and amateur chefs site",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site GameDevelopers
+		public static Site GameDevelopers
         {
             get
             {
@@ -223,12 +223,12 @@ namespace Stacky
                     SiteUrl = "http://gamedev.stackexchange.com",
                     Description = "Q&A for professional and independent game developers",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site GameDevelopersMeta
+		public static Site GameDevelopersMeta
         {
             get
             {
@@ -240,12 +240,12 @@ namespace Stacky
                     SiteUrl = "http://meta.gamedev.stackexchange.com",
                     Description = "Q&A about the professional and independent game developers site",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site ElectronicGadgets
+		public static Site ElectronicGadgets
         {
             get
             {
@@ -257,12 +257,12 @@ namespace Stacky
                     SiteUrl = "http://gadgets.stackexchange.com",
                     Description = "Q&A for smartphone and gadget enthusiasts",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site ElectronicGadgetsMeta
+		public static Site ElectronicGadgetsMeta
         {
             get
             {
@@ -274,12 +274,12 @@ namespace Stacky
                     SiteUrl = "http://meta.gadgets.stackexchange.com",
                     Description = "Q&A about the smartphone and gadget enthusiasts site",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site Photography
+		public static Site Photography
         {
             get
             {
@@ -291,12 +291,12 @@ namespace Stacky
                     SiteUrl = "http://photo.stackexchange.com",
                     Description = "Q&A for professional photographers, photo editors, and serious enthusiasts",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site PhotographyMeta
+		public static Site PhotographyMeta
         {
             get
             {
@@ -308,12 +308,12 @@ namespace Stacky
                     SiteUrl = "http://meta.photo.stackexchange.com",
                     Description = "Q&A about the professional photographers, photo editors, and serious enthusiasts site",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site StatisticalAnalysis
+		public static Site StatisticalAnalysis
         {
             get
             {
@@ -325,12 +325,12 @@ namespace Stacky
                     SiteUrl = "http://stats.stackexchange.com",
                     Description = "Q&A for statisticians, data analysts, data miners and data visualization experts",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site StatisticalAnalysisMeta
+		public static Site StatisticalAnalysisMeta
         {
             get
             {
@@ -342,12 +342,12 @@ namespace Stacky
                     SiteUrl = "http://meta.stats.stackexchange.com",
                     Description = "Q&A about the statisticians, data analysts, data miners and data visualization experts site",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site Mathematics
+		public static Site Mathematics
         {
             get
             {
@@ -359,12 +359,12 @@ namespace Stacky
                     SiteUrl = "http://math.stackexchange.com",
                     Description = "Q&A for people studying math at any level and professionals in related fields",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site MathematicsMeta
+		public static Site MathematicsMeta
         {
             get
             {
@@ -376,12 +376,12 @@ namespace Stacky
                     SiteUrl = "http://meta.math.stackexchange.com",
                     Description = "Q&A about the people studying math at any level & professionals in related fields site",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site HomeImprovement
+		public static Site HomeImprovement
         {
             get
             {
@@ -393,12 +393,12 @@ namespace Stacky
                     SiteUrl = "http://diy.stackexchange.com",
                     Description = "Q&A for contractors and serious DIYers",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site HomeImprovementMeta
+		public static Site HomeImprovementMeta
         {
             get
             {
@@ -410,12 +410,12 @@ namespace Stacky
                     SiteUrl = "http://meta.diy.stackexchange.com",
                     Description = "Q&A about the contractors and serious DIYers site",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site MetaSuperUser
+		public static Site MetaSuperUser
         {
             get
             {
@@ -427,12 +427,12 @@ namespace Stacky
                     SiteUrl = "http://meta.superuser.com",
                     Description = "Q&A about the computer enthusiasts and power users site",
                     IconUrl = "http://sstatic.net/superusermeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site MetaServerFault
+		public static Site MetaServerFault
         {
             get
             {
@@ -444,12 +444,12 @@ namespace Stacky
                     SiteUrl = "http://meta.serverfault.com",
                     Description = "Q&A about the system administrators and IT professionals site",
                     IconUrl = "http://sstatic.net/serverfaultmeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site GIS
+		public static Site GIS
         {
             get
             {
@@ -461,12 +461,12 @@ namespace Stacky
                     SiteUrl = "http://gis.stackexchange.com",
                     Description = "Q&A for cartographers, geographers and GIS professionals",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site GISMeta
+		public static Site GISMeta
         {
             get
             {
@@ -478,12 +478,12 @@ namespace Stacky
                     SiteUrl = "http://meta.gis.stackexchange.com",
                     Description = "Q&A about the cartographers, geographers and GIS professionals site",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site TeXLaTeX
+		public static Site TeXLaTeX
         {
             get
             {
@@ -495,12 +495,12 @@ namespace Stacky
                     SiteUrl = "http://tex.stackexchange.com",
                     Description = "Q&A site for expert users of TeX, LaTeX and other related typesetting systems",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site TeXLaTeXMeta
+		public static Site TeXLaTeXMeta
         {
             get
             {
@@ -512,12 +512,12 @@ namespace Stacky
                     SiteUrl = "http://meta.tex.stackexchange.com",
                     Description = "Q&A about the site for expert users of TeX, LaTeX and other related typesetting systems",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site Ubuntu
+		public static Site Ubuntu
         {
             get
             {
@@ -529,12 +529,12 @@ namespace Stacky
                     SiteUrl = "http://ubuntu.stackexchange.com",
                     Description = "Q&A site for Ubuntu users and developers",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site UbuntuMeta
+		public static Site UbuntuMeta
         {
             get
             {
@@ -546,12 +546,12 @@ namespace Stacky
                     SiteUrl = "http://meta.ubuntu.stackexchange.com",
                     Description = "Q&A about the site for Ubuntu users and developers",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site PersonalFinanceandMoney
+		public static Site PersonalFinanceandMoney
         {
             get
             {
@@ -563,12 +563,12 @@ namespace Stacky
                     SiteUrl = "http://money.stackexchange.com",
                     Description = "Q&A site for people who want to be financially literate",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site PersonalFinanceandMoneyMeta
+		public static Site PersonalFinanceandMoneyMeta
         {
             get
             {
@@ -580,12 +580,12 @@ namespace Stacky
                     SiteUrl = "http://meta.money.stackexchange.com",
                     Description = "Q&A about the site for people who want to be financially literate.",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site EnglishLanguageandUsage
+		public static Site EnglishLanguageandUsage
         {
             get
             {
@@ -597,12 +597,12 @@ namespace Stacky
                     SiteUrl = "http://english.stackexchange.com",
                     Description = "Q&A site for linguists, etymologists, and serious English language enthusiasts",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site EnglishLanguageandUsageMeta
+		public static Site EnglishLanguageandUsageMeta
         {
             get
             {
@@ -614,12 +614,12 @@ namespace Stacky
                     SiteUrl = "http://meta.english.stackexchange.com",
                     Description = "Q&A site for linguists, etymologists, and serious English language enthusiasts",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site StackApps
+		public static Site StackApps
         {
             get
             {
@@ -631,12 +631,12 @@ namespace Stacky
                     SiteUrl = "http://stackapps.com",
                     Description = "Q&A about apps for and development with the Stack Exchange API",
                     IconUrl = "http://sstatic.net/stackapps/img/apple-touch-icon.png",
-                    State = SiteState.Normal
+					State = SiteState.Normal
                 };
             }
         }
 
-        public static Site UserInterface
+		public static Site UserInterface
         {
             get
             {
@@ -648,12 +648,12 @@ namespace Stacky
                     SiteUrl = "http://ui.stackexchange.com",
                     Description = "Q&A site for user interface researchers and experts",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site UserInterfaceMeta
+		public static Site UserInterfaceMeta
         {
             get
             {
@@ -665,12 +665,12 @@ namespace Stacky
                     SiteUrl = "http://meta.ui.stackexchange.com",
                     Description = "Q&A site for user interface researchers and experts",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site UnixandLinux
+		public static Site UnixandLinux
         {
             get
             {
@@ -682,12 +682,12 @@ namespace Stacky
                     SiteUrl = "http://unix.stackexchange.com",
                     Description = "Q&A site for users of Linux, FreeBSD and other Un*x-like operating systems.",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Open_Beta
+					State = SiteState.Open_Beta
                 };
             }
         }
 
-        public static Site UnixandLinuxMeta
+		public static Site UnixandLinuxMeta
         {
             get
             {
@@ -699,12 +699,12 @@ namespace Stacky
                     SiteUrl = "http://meta.unix.stackexchange.com",
                     Description = "Q&A site for users of Linux, FreeBSD and other Un*x-like operating systems.",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site WordPress
+		public static Site WordPress
         {
             get
             {
@@ -716,12 +716,12 @@ namespace Stacky
                     SiteUrl = "http://wordpress.stackexchange.com",
                     Description = "Q&A site for WordPress developers and administrators",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Closed_Beta
+					State = SiteState.Closed_Beta
                 };
             }
         }
 
-        public static Site WordPressMeta
+		public static Site WordPressMeta
         {
             get
             {
@@ -733,12 +733,12 @@ namespace Stacky
                     SiteUrl = "http://meta.wordpress.stackexchange.com",
                     Description = "Q&A site for WordPress developers and administrators",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site TheoreticalComputerScience
+		public static Site TheoreticalComputerScience
         {
             get
             {
@@ -750,12 +750,12 @@ namespace Stacky
                     SiteUrl = "http://cstheory.stackexchange.com",
                     Description = "Q&A site for theoretical computer scientists and researchers in related fields",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Closed_Beta
+					State = SiteState.Closed_Beta
                 };
             }
         }
 
-        public static Site TheoreticalComputerScienceMeta
+		public static Site TheoreticalComputerScienceMeta
         {
             get
             {
@@ -767,12 +767,12 @@ namespace Stacky
                     SiteUrl = "http://meta.cstheory.stackexchange.com",
                     Description = "Q&A site for theoretical computer scientists and researchers in related fields",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
 
-        public static Site Apple
+		public static Site Apple
         {
             get
             {
@@ -784,12 +784,12 @@ namespace Stacky
                     SiteUrl = "http://apple.stackexchange.com",
                     Description = "Q&A site for power users of Apple hardware and software",
                     IconUrl = "http://sstatic.net/skins/sketchy/img/apple-touch-icon.png",
-                    State = SiteState.Closed_Beta
+					State = SiteState.Closed_Beta
                 };
             }
         }
 
-        public static Site AppleMeta
+		public static Site AppleMeta
         {
             get
             {
@@ -801,7 +801,7 @@ namespace Stacky
                     SiteUrl = "http://meta.apple.stackexchange.com",
                     Description = "Q&A site for power users of Apple hardware and software",
                     IconUrl = "http://sstatic.net/skins/sketchymeta/img/apple-touch-icon.png",
-                    State = SiteState.Linked_Meta
+					State = SiteState.Linked_Meta
                 };
             }
         }
