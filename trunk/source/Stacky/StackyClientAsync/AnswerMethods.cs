@@ -34,7 +34,7 @@ namespace Stacky
 
         public virtual void GetQuestionAnswers(int questionId, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError = null, QuestionsByUserSort sortBy = QuestionsByUserSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false)
         {
-            GetUsersAnswers(questionId.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, includeBody);
+            GetQuestionAnswers(questionId.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, includeBody);
         }
 
         public virtual void GetQuestionAnswers(IEnumerable<int> questionIds, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError = null, QuestionsByUserSort sortBy = QuestionsByUserSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
