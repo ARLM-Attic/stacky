@@ -36,7 +36,7 @@ namespace Stacky
                     if (e.Status == WebExceptionStatus.ProtocolError && e.Response != null)
                     {
                         var response = (HttpWebResponse)e.Response;
-                        if (response.StatusCode != HttpStatusCode.NotFound)
+                        if (response.StatusCode != HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.ProxyAuthenticationRequired)
                         {
                             httpResponse.ParseRateLimit(response.Headers);
                             using (var responseStream = response.GetResponseStream())
@@ -46,6 +46,10 @@ namespace Stacky
                                     httpResponse.Body = reader.ReadToEnd();
                                 }
                             }
+                        }
+                        else
+                        {
+                            throw;
                         }
                     }
                 }
