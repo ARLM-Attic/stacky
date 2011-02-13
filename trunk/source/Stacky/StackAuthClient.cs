@@ -7,16 +7,18 @@ namespace Stacky
 {
     public class StackAuthClient
     {
-        public StackAuthClient(IUrlClient client, IProtocol protocol)
+        public StackAuthClient(string version, IUrlClient client, IProtocol protocol)
         {
             BaseUrl = "http://stackauth.com";
             WebClient = client;
             Protocol = protocol;
+            Version = version;
         }
 
         public IUrlClient WebClient { get; set; }
         public IProtocol Protocol { get; set; }
         public string BaseUrl { get; private set; }
+        public string Version { get; private set; }
 
         #region Methods
        
@@ -42,7 +44,7 @@ namespace Stacky
 
         public HttpResponse GetResponse(string method, string[] urlArguments, Dictionary<string, string> queryStringArguments)
         {
-            Uri url = UrlHelper.BuildUrl(method, "", BaseUrl, urlArguments, queryStringArguments);
+            Uri url = UrlHelper.BuildUrl(method, Version, BaseUrl, urlArguments, queryStringArguments);
             return WebClient.MakeRequest(url);
         }
 

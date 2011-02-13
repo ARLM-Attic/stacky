@@ -32,7 +32,7 @@ namespace Stacky
             GetUsersByBadge(userId.ToArray(), onSuccess, onError, options);
         }
 
-        public virtual void GetUsersByBadge(IEnumerable<int> userIds, Action<IPagedList<User>> onSuccess, Action<ApiException> onError)
+        public virtual void GetUsersByBadge(IEnumerable<int> userIds, Action<IPagedList<User>> onSuccess, Action<ApiException> onError = null)
         {
             GetUsersByBadge(userIds, onSuccess, onError, new BadgeByUserOptions());
         }
@@ -49,7 +49,7 @@ namespace Stacky
             }, (items) => onSuccess(new PagedList<User>(items.Users, items)), onError);
         }
 
-        public virtual void GetTagBasedBadges(Action<IEnumerable<Badge>> onSuccess, Action<ApiException> onError)
+        public virtual void GetTagBasedBadges(Action<IEnumerable<Badge>> onSuccess, Action<ApiException> onError = null)
         {
             GetBadges(onSuccess, onError, "badges", new string[] { "tags" });
         }

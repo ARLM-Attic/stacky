@@ -17,7 +17,7 @@ namespace Stacky.IntegrationTests
         [TestMethod]
         public void Question_GetQuestions_Async()
         {
-            ClientAsync.GetQuestions(questions => Assert.IsNotNull(questions));
+            ClientAsync.GetQuestions(questions => Assert.IsNotNull(questions), error => Assert.Fail());
         }
 
         #region GetQuestions - Sort By Active
@@ -108,7 +108,7 @@ namespace Stacky.IntegrationTests
         [TestMethod]
         public void Question_GetQuestionTimeline_Async()
         {
-            ClientAsync.GetQuestionTimeline(31415, events => Assert.IsNotNull(events));
+            ClientAsync.GetQuestionTimeline(31415, events => Assert.IsNotNull(events), error => Assert.Fail());
         }
 
         [TestMethod]
@@ -121,7 +121,7 @@ namespace Stacky.IntegrationTests
         [TestMethod]
         public void Question_Search_Async()
         {
-            ClientAsync.Search(questions => Assert.IsNotNull(questions), inTitle: "Thread");
+            ClientAsync.Search(questions => Assert.IsNotNull(questions), error => Assert.Fail(), inTitle: "Thread");
         }
 
         [TestMethod]
@@ -160,6 +160,34 @@ namespace Stacky.IntegrationTests
                                     select Convert.ToInt32(q.Id);
             var events = Client.GetQuestionTimeline(editedQuestionIds); //line that causes problems
             Assert.IsNotNull(events);
+        }
+
+        [TestMethod]
+        public void Question_GetLinkedQuestions()
+        {
+            var questions = Client.GetLinkedQuestions(12569);
+            Assert.IsNotNull(questions);
+        }
+
+        [TestMethod]
+        public void Question_GetRelatedQuestions()
+        {
+            var questions = Client.GetRelatedQuestions(12569);
+            Assert.IsNotNull(questions);
+        }
+
+        [TestMethod]
+        public void Question_GetNoAnswerQuestions()
+        {
+            var questions = Client.GetNoAnswerQuestions();
+            Assert.IsNotNull(questions);
+        }
+
+        [TestMethod]
+        public void Question_GetSimilarQuestions()
+        {
+            var questions = Client.GetSimilarQuestions("How to for loop c#?");
+            Assert.IsNotNull(questions);
         }
     }
 }

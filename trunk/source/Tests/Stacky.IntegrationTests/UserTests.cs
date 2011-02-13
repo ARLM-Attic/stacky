@@ -135,5 +135,54 @@ namespace Stacky.IntegrationTests
             Assert.IsNotNull(user.AssociationId);
             Assert.IsFalse(user.AssociationId == Guid.Empty);
         }
+
+        [TestMethod]
+        public void User_GetNoAnswerQuestions()
+        {
+            var questions = Client.GetNoAnswerQuestions(238232);
+            Assert.IsNotNull(questions);
+        }
+
+        [TestMethod]
+        public void User_GetUnacceptedQuestions()
+        {
+            var questions = Client.GetUnacceptedQuestions(38403);
+            Assert.IsNotNull(questions);
+        }
+
+        [TestMethod]
+        public void User_GetUnansweredQuestions()
+        {
+            var questions = Client.GetUnansweredQuestions(38403);
+            Assert.IsNotNull(questions);
+        }
+
+        [TestMethod]
+        public void User_GetTopTaggedAnswers()
+        {
+            var answers = Client.GetTopTaggedAnswers(646, "c#");
+            Assert.IsNotNull(answers);
+        }
+
+        [TestMethod]
+        public void User_GetTopTaggedQuestions()
+        {
+            var questions = Client.GetTopTaggedQuestions(646, "c#");
+            Assert.IsNotNull(questions);
+        }
+
+        [TestMethod]
+        public void User_GetTopAnswerTags()
+        {
+            var topTags = Client.GetTopAnswerTags(646);
+            Assert.IsNotNull(topTags);
+        }
+
+        [TestMethod]
+        public void User_GetTopQuestionTags()
+        {
+            var topTags = Client.GetTopQuestionTags(646);
+            Assert.IsNotNull(topTags);
+        }
     }
 }
