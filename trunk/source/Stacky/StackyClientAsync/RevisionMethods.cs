@@ -10,7 +10,7 @@ namespace Stacky
     public partial class StackyClientAsync
 #endif
     {
-        public virtual void GetRevisions(IEnumerable<int> ids, Action<IEnumerable<Revision>> onSuccess, Action<ApiException> onError = null, DateTime? fromDate = null, DateTime? toDate = null)
+        public virtual void GetRevisions(IEnumerable<int> ids, Action<IEnumerable<Revision>> onSuccess, Action<ApiException> onError, DateTime? fromDate = null, DateTime? toDate = null)
         {
             MakeRequest<RevisionResponse>("revisions", new string[] { ids.Vectorize() }, new
             {
@@ -20,7 +20,7 @@ namespace Stacky
             }, (items) => onSuccess(items.Revisions), onError);
         }
 
-        public virtual void GetRevisions(int id, Action<IEnumerable<Revision>> onSuccess, Action<ApiException> onError = null, DateTime? fromDate = null, DateTime? toDate = null)
+        public virtual void GetRevisions(int id, Action<IEnumerable<Revision>> onSuccess, Action<ApiException> onError, DateTime? fromDate = null, DateTime? toDate = null)
         {
             GetRevisions(id.ToArray(), onSuccess, onError, fromDate, toDate);
         }

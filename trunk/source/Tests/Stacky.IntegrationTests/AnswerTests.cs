@@ -68,5 +68,12 @@ namespace Stacky.IntegrationTests
             var answers = Client.GetAnswers(new int[] { 11738, 122784 });
             Assert.IsNotNull(answers);
         }
+
+        [TestMethod]
+        public void Answer_GetAnswers_NoParams()
+        {
+            var answers = Client.GetAnswers();
+            Assert.IsNotNull(answers);
+        }
     }
 }

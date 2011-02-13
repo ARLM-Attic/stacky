@@ -139,5 +139,40 @@ namespace Stacky
             });
             return new PagedList<Answer>(response.Answers, response);
         }
+
+        /// <summary>
+        /// Returns all the answers in the system
+        /// </summary>
+        /// <param name="sortBy">How a collection should be sorted.</param>
+        /// <param name="sortDirection"></param>
+        /// <param name="page">The pagination offset for the current collection. Affected by the specified pagesize.</param>
+        /// <param name="pageSize">The number of collection results to display during pagination. Should be between 0 and 100 inclusive.</param>
+        /// <param name="includeBody">When "true", a post's body will be included in the response.</param>
+        /// <param name="includeComments">When "true", any comments on a post will be included in the response.</param>
+        /// <param name="includeAnswers"> When "true", the answers to a question will be returned</param>
+        /// <param name="min">Minimum of the range to include in the response according to the current sort.</param>
+        /// <param name="max">Maximum of the range to include in the response according to the current sort.</param>
+        /// <param name="fromDate">Unix timestamp of the minimum creation date on a returned item.</param>
+        /// <param name="toDate">Unix timestamp of the maximum creation date on a returned item.</param>
+        /// <returns></returns>
+        public virtual IPagedList<Answer> GetAnswers(AnswerSort sortBy = AnswerSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
+        {
+            var response = MakeRequest<AnswerResponse>("answers", null, new
+            {
+                key = apiKey,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                body = includeBody ? (bool?)true : null,
+                comments = includeComments ? (bool?)true : null,
+                answers = includeAnswers ? (bool?)true : null,
+                sort = sortBy.ToString().ToLower(),
+                order = GetSortDirection(sortDirection),
+                min = min ?? null,
+                max = max ?? null,
+                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
+                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
+            });
+            return new PagedList<Answer>(response.Answers, response);
+        }
     }
 }

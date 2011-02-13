@@ -108,5 +108,52 @@ namespace Stacky
             });
             return new PagedList<Question>(response.Questions, response);
         }
+
+        public virtual IPagedList<Question> GetLinkedQuestions(int questionId, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
+        {
+            return GetLinkedQuestions(questionId.ToArray(), sortBy, sortDirection, page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max);
+        }
+
+        public virtual IPagedList<Question> GetLinkedQuestions(IEnumerable<int> questionIds, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
+        {
+            return GetQuestions("questions", new string[] { questionIds.Vectorize(), "linked" }, sortBy.ToString(), GetSortDirection(sortDirection), page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max, null);
+        }
+
+        public virtual IPagedList<Question> GetRelatedQuestions(int questionId, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
+        {
+            return GetRelatedQuestions(questionId.ToArray(), sortBy, sortDirection, page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max);
+        }
+
+        public virtual IPagedList<Question> GetRelatedQuestions(IEnumerable<int> questionIds, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
+        {
+            return GetQuestions("questions", new string[] { questionIds.Vectorize(), "related" }, sortBy.ToString(), GetSortDirection(sortDirection), page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max, null);
+        }
+
+        public virtual IPagedList<Question> GetNoAnswerQuestions(QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
+        {
+            return GetQuestions("questions", new string[] { "no-answers" }, sortBy.ToString(), GetSortDirection(sortDirection), page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max, null);
+        }
+
+        public virtual IEnumerable<Question> GetSimilarQuestions(string title, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, IEnumerable<string> tagged = null, IEnumerable<string> notTagged = null)
+        {
+            string taggedString = null;
+            if (tagged != null)
+                taggedString = String.Join(";", tagged);
+
+            string notTaggedString = null;
+            if (notTagged != null)
+                notTaggedString = String.Join(";", notTagged);
+
+            return MakeRequest<QuestionResponse>("similar", null, new
+            {
+                key = apiKey,
+                title = title,
+                body = includeBody ? (bool?)true : null,
+                comments = includeComments ? (bool?)true : null,
+                answers = includeAnswers ? (bool?)true : null,
+                tagged = taggedString,
+                nottagged = notTaggedString
+            }).Questions;
+        }
     }
 }

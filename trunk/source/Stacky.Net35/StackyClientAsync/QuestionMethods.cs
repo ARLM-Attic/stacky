@@ -30,7 +30,7 @@ namespace Stacky
             }, (items) => onSuccess(new PagedList<Question>(items.Questions, items)), onError);
         }
 
-        public virtual void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError)
+        public virtual void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null)
         {
             GetQuestions(onSuccess, onError, new QuestionOptions());
         }
@@ -41,7 +41,7 @@ namespace Stacky
             GetQuestions(onSuccess, onError, "questions", sortArgs.UrlArgs, sortArgs.Sort, GetSortDirection(options.SortDirection), options.Page, options.PageSize, options.IncludeBody, options.IncludeComments, options.IncludeAnswers, options.FromDate, options.ToDate, options.Min, options.Max, options.Tags);
         }
 
-        public virtual void GetQuestionsByUser(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError)
+        public virtual void GetQuestionsByUser(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null)
         {
             GetQuestionsByUser(userId, onSuccess, onError, new QuestionByUserOptions());
         }
@@ -51,7 +51,7 @@ namespace Stacky
             GetQuestions(onSuccess, onError, "users", new string[] { userId.ToString(), "questions" }, options.SortBy.ToString().ToLower(), GetSortDirection(options.SortDirection), options.Page, options.PageSize, options.IncludeBody, options.IncludeComments, options.IncludeAnswers, options.FromDate, options.ToDate, options.Min, options.Max, options.Tags);
         }
 
-        public virtual void GetFavoriteQuestions(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError)
+        public virtual void GetFavoriteQuestions(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null)
         {
             GetFavoriteQuestions(userId, onSuccess, onError, new FavoriteQuestionOptions());
         }
@@ -61,7 +61,7 @@ namespace Stacky
             GetQuestions(onSuccess, onError, "users", new string[] { userId.ToString(), "favorites" }, options.SortBy.ToString().ToLower(), GetSortDirection(options.SortDirection), options.Page, options.PageSize, options.IncludeBody, options.IncludeComments, options.IncludeAnswers, options.FromDate, options.ToDate, options.Min, options.Max, options.Tags);
         }
 
-        public virtual void GetQuestions(IEnumerable<int> questionIds, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError)
+        public virtual void GetQuestions(IEnumerable<int> questionIds, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null)
         {
             GetQuestions(questionIds, onSuccess, onError, new QuestionOptions());
         }

@@ -16,7 +16,7 @@ namespace Stacky.IntegrationTests
         [TestMethod]
         public void Revision_GetRevisions_Async()
         {
-            ClientAsync.GetRevisions(31415, revisions => Assert.IsNotNull(revisions));
+            ClientAsync.GetRevisions(31415, revisions => Assert.IsNotNull(revisions), error => Assert.Fail());
         }
 
         [TestMethod]

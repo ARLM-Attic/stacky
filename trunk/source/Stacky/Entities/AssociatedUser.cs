@@ -6,11 +6,9 @@ namespace Stacky
     public class AssociatedUser : Entity
     {
         private int id;
-        private UserType type;
-        private string displayName;
-        private int reputation;
-        private string emailHash;
-        private Site site;
+        private string siteName;
+        private DateTime userCreationDate;
+        private string associationId;
 
         /// <summary>
         /// Gets or sets the user id.
@@ -23,61 +21,25 @@ namespace Stacky
             set { id = value; NotifyOfPropertyChange(() => Id); }
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="UserType"/>.
-        /// </summary>
-        /// <value>The <see cref="UserType"/>.</value>
-        [JsonProperty("user_type"), JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserType Type
+        [JsonProperty("site_name")]
+        public string SiteName
         {
-            get { return type; }
-            set { type = value; NotifyOfPropertyChange(() => Type); }
+            get { return siteName; }
+            set { siteName = value; NotifyOfPropertyChange(() => SiteName); }
         }
 
-        /// <summary>
-        /// Gets or sets the display name.
-        /// </summary>
-        /// <value>The display name.</value>
-        [JsonProperty("display_name")]
-        public string DisplayName
+        [JsonProperty("user_creation_date"), JsonConverter(typeof(UnixDateTimeConverter))]
+        public DateTime UserCreationDate
         {
-            get { return displayName; }
-            set { displayName = value; NotifyOfPropertyChange(() => DisplayName); }
+            get { return userCreationDate; }
+            set { userCreationDate = value; NotifyOfPropertyChange(() => UserCreationDate); }
         }
 
-        /// <summary>
-        /// Gets or sets the reputation.
-        /// </summary>
-        /// <value>The reputation.</value>
-        [JsonProperty("reputation")]
-        public int Reputation
+        [JsonProperty("association_id")]
+        public string AssociationId
         {
-            get { return reputation; }
-            set { reputation = value; NotifyOfPropertyChange(() => Reputation); }
-        }
-
-        /// <summary>
-        /// Gets or sets the email hash.
-        /// </summary>
-        /// <value>The email hash.</value>
-        [JsonProperty("email_hash")]
-        public string EmailHash
-        {
-            get { return emailHash; }
-            set { emailHash = value; NotifyOfPropertyChange(() => EmailHash); NotifyOfPropertyChange(() => GravatarUrl); }
-        }
-
-        /// <summary>
-        /// Gets the gravatar URL.
-        /// </summary>
-        /// <value>The gravatar URL.</value>
-        public string GravatarUrl { get { return String.Format("http://www.gravatar.com/avatar/{0}?d=identicon&r=PG", EmailHash); } }
-
-        [JsonProperty("on_site")]
-        public Site Site
-        {
-            get { return site; }
-            set { site = value; NotifyOfPropertyChange(() => Site); }
+            get { return associationId; }
+            set { associationId = value; NotifyOfPropertyChange(() => AssociationId); }
         }
     }
 }
