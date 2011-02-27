@@ -59,10 +59,12 @@
     <Compile Include="Entities\PostEvent.cs" />
     <Compile Include="Entities\Privilege.cs" />
     <Compile Include="Entities\Question.cs" />
+    <Compile Include="Entities\RelatedSite.cs" />
     <Compile Include="Entities\Reputation.cs" />
     <Compile Include="Entities\ResponseError.cs" />
     <Compile Include="Entities\Revision.cs" />
     <Compile Include="Entities\Site.cs" />
+    <Compile Include="Entities\SiteInfo.cs" />
     <Compile Include="Entities\SiteStats.cs" />
     <Compile Include="Entities\SiteStyle.cs" />
     <Compile Include="Entities\SortArgsAttribute.cs" />

@@ -10,11 +10,11 @@ namespace GenerateSites
     {
         static void Main(string[] args)
         {
-            var client = new StackAuthClient(new UrlClient(), new JsonProtocol());
-            var sites = client.GetSites();
+            var client = new StackAuthClient("1.1", new UrlClient(), new JsonProtocol());
+            var sites = client.GetSites(pageSize: 100);
             foreach (var site in sites)
             {
-                Console.WriteLine(site.Name);
+                Console.WriteLine(site.MainSite.Name);
             }
             Console.ReadLine();
         }

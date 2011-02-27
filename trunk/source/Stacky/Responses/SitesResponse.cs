@@ -5,7 +5,7 @@ namespace Stacky
 {
     public class SitesResponse
     {
-        [JsonProperty("api_sites")]
-        public List<Site> Sites { get; set; }
+        [JsonProperty("items")]
+        public List<SiteInfo> Sites { get; set; }
     }
 }

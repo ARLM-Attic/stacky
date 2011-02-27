@@ -95,6 +95,9 @@
     <Compile Include="..\Stacky\Entities\Question.cs">
       <Link>Entities\Question.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Entities\RelatedSite.cs">
+      <Link>Entities\RelatedSite.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\Entities\Reputation.cs">
       <Link>Entities\Reputation.cs</Link>
     </Compile>
@@ -106,6 +109,9 @@
     </Compile>
     <Compile Include="..\Stacky\Entities\Site.cs">
       <Link>Entities\Site.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Entities\SiteInfo.cs">
+      <Link>Entities\SiteInfo.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Entities\SiteStats.cs">
       <Link>Entities\SiteStats.cs</Link>
