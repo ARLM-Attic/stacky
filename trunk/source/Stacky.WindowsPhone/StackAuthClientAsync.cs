@@ -69,7 +69,7 @@ namespace Stacky
 
         #endregion
 
-        public void GetSites(Action<IEnumerable<Site>> onSuccess, Action<ApiException> onError = null)
+        public void GetSites(Action<IEnumerable<SiteInfo>> onSuccess, Action<ApiException> onError = null)
         {
             MakeRequest<SitesResponse>("sites", null, response => onSuccess(response.Sites), onError);
         }

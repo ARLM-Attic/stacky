@@ -68,7 +68,7 @@ namespace Stacky.IntegrationTests
             Assert.IsNotNull(sites);
             foreach (var site in sites)
             {
-                Assert.IsNotNull(site.Styling);
+                Assert.IsNotNull(site.MainSite.Styling);
             }
         }
 

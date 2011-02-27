@@ -21,10 +21,11 @@ namespace Stacky
 	JsonProtocol protocol = new JsonProtocol();
 	try
 	{
-		StackAuthClient client = new StackAuthClient(urlClient, protocol);
-		IEnumerable<Site> sites = client.GetSites();
-		foreach(var site in sites)
+		StackAuthClient client = new StackAuthClient("1.1", urlClient, protocol);
+		IEnumerable<SiteInfo> sites = client.GetSites(pageSize: 100);
+		foreach(var siteInfo in sites)
 		{
+			var site = siteInfo.MainSite;
 #>
 		public static Site <#= site.Name.Replace(" ", "").Replace("-", "") #>
         {

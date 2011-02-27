@@ -21,11 +21,11 @@ namespace Stacky
         public string Version { get; private set; }
 
         #region Methods
-       
-        public T MakeRequest<T>(string method, string[] urlArguments)
+
+        public T MakeRequest<T>(string method, string[] urlArguments, object queryStringArguments)
              where T : new()
         {
-            var httpResponse = GetResponse(method, urlArguments, null);
+            var httpResponse = GetResponse(method, urlArguments, UrlHelper.ObjectToDictionary(queryStringArguments));
             return ParseResponse<T>(httpResponse);
         }
 
@@ -50,14 +50,23 @@ namespace Stacky
 
         #endregion
 
-        public virtual IEnumerable<Site> GetSites()
+        public virtual IEnumerable<SiteInfo> GetSites(int? page = null, int? pageSize = null, bool? minimal = null)
         {
-            return MakeRequest<SitesResponse>("sites", null).Sites;
+            return MakeRequest<SitesResponse>("sites", null, new
+            {
+                page = page,
+                pagesize = pageSize,
+                minimal = minimal
+            }).Sites;
         }
 
-        public virtual IEnumerable<AssociatedUser> GetAssociatedUsers(Guid associationId)
+        public virtual IEnumerable<AssociatedUser> GetAssociatedUsers(Guid associationId, int? page = 0, int? pageSize = null)
         {
-            return MakeRequest<AssociatedUsersResponse>("users", new string[] { associationId.ToString(), "associated" }).Users;
+            return MakeRequest<AssociatedUsersResponse>("users", new string[] { associationId.ToString(), "associated" }, new
+            {
+                page = page,
+                pagesize = pageSize
+            }).Users;
         }
     }
 }
