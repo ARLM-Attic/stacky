@@ -16,14 +16,14 @@ namespace Stacky
         /// <param name="objectType">Type of the object.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The <see cref="System.DateTime"/>.</returns>
-        public override object ReadJson(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            if (reader.TokenType != JsonToken.Integer)
-                throw new Exception("Wrong Token Type");
+        //public override object ReadJson(JsonReader reader, Type objectType, JsonSerializer serializer)
+        //{
+        //    if (reader.TokenType != JsonToken.Integer)
+        //        throw new Exception("Wrong Token Type");
 
-            long ticks = (long)reader.Value;
-            return ticks.FromUnixTime();
-        }
+        //    long ticks = (long)reader.Value;
+        //    return ticks.FromUnixTime();
+        //}
 
         /// <summary>
         /// Writes the JSON representation of the object.
@@ -44,6 +44,15 @@ namespace Stacky
                 throw new Exception("Expected date object value.");
             }
             writer.WriteValue(val);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType != JsonToken.Integer)
+                throw new Exception("Wrong Token Type");
+
+            long ticks = (long)reader.Value;
+            return ticks.FromUnixTime();
         }
     }
 }

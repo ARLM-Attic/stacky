@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+        <id>$id$</id>
+        <version>$version$</version>
+        <title>$title$</title>
+        <authors>Luke Foust</authors>
+        <owners>Luke Foust</owners>
+        <licenseUrl>http://stacky.codeplex.com/license</licenseUrl>
+        <projectUrl>http://stacky.codeplex.com</projectUrl>
+        <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>StackApps is a REST API for which provides access to the stackoverflow.com family of websites. Stacky is a .net client for that API. Stacky currently supports .Net 4.0, .Net 3.5, Silverlight 4, and Windows Phone 7.</description>
+        <!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
+        <copyright>Copyright 2011</copyright>
+        <tags>StackOverflow StackExchange</tags>
+    </metadata>
+</package>
