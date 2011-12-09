@@ -92,32 +92,15 @@ namespace Stacky.IntegrationTests.Net35
             Assert.IsTrue(rep.TotalItems > 0);
         }
 
-        [TestMethod]
-        public void User_Returns_Badge_Counts()
-        {
-            var user = Client.GetUser(22656);
+		[TestMethod]
+		public void User_Returns_Badge_Counts()
+		{
+			var user = Client.GetUser(22656);
 
-            Assert.IsNotNull(user);
-            Assert.IsNotNull(user.BadgeCounts);
-            Assert.IsTrue(user.BadgeCounts.Bronze > 0);
-        }
-
-        [TestMethod]
-        public void User_Contains_Urls()
-        {
-            var user = Client.GetUser(22656);
-
-            Assert.IsNotNull(user);
-            Assert.IsFalse(String.IsNullOrEmpty(user.QuestionsUrl));
-            Assert.IsFalse(String.IsNullOrEmpty(user.AnswersUrl));
-            Assert.IsFalse(String.IsNullOrEmpty(user.FavoritesUrl));
-            Assert.IsFalse(String.IsNullOrEmpty(user.TagsUrl));
-            Assert.IsFalse(String.IsNullOrEmpty(user.BadgesUrl));
-            Assert.IsFalse(String.IsNullOrEmpty(user.TimelineUrl));
-            Assert.IsFalse(String.IsNullOrEmpty(user.MentionedUrl));
-            Assert.IsFalse(String.IsNullOrEmpty(user.CommentsUrl));
-            Assert.IsFalse(String.IsNullOrEmpty(user.ReputationUrl));
-        }
+			Assert.IsNotNull(user);
+			Assert.IsNotNull(user.BadgeCounts);
+			Assert.IsTrue(user.BadgeCounts.Bronze > 0);
+		}
 
         [TestMethod]
         public void GetModerators()

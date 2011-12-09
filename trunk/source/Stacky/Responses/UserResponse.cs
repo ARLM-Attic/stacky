@@ -5,7 +5,7 @@ namespace Stacky
 {
     public class UserResponse : Response
     {
-        [JsonProperty("users")]
+        [JsonProperty("items")]
         public List<User> Users { get; set; }
     }
 }

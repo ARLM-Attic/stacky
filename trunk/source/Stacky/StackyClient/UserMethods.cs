@@ -6,14 +6,12 @@ namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IPagedList<User> GetUsers(UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, string filter = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
+        public virtual IPagedList<User> GetUsers(UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
         {
             var response = MakeRequest<UserResponse>("users", null, new
             {
-                key = apiKey,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
-                filter = filter,
                 sort = sortBy.ToString().ToLower(),
                 order = GetSortDirection(sortDirection),
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,

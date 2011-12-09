@@ -2,8 +2,8 @@ namespace Stacky.IntegrationTests
 {
     public abstract class IntegrationTest
     {
-        public static string Version = "1.1";
-        public static string ApiKey = "LU9IfwI8IEScM3yYAjHimA";
+        public static string Version = "2.0";
+		public static string ApiKey = "vvfp9MI3DHe4I5dLjQzTXQ((";
 
         public IntegrationTest()
         {
