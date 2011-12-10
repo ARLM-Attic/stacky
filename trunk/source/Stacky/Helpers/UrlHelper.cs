@@ -26,9 +26,9 @@ namespace Stacky
         /// <param name="urlParameters">The URL parameters.</param>
         /// <param name="queryStringParameters">The query string parameters.</param>
         /// <returns>Stack Overflow method call <see cref="System.Uri"/></returns>
-        public static Uri BuildUrl(string method, string version,string serviceUrl, string[] urlParameters, object queryStringParameters)
+        public static Uri BuildUrl(string method, string version, string[] urlParameters, object queryStringParameters)
         {
-            return BuildUrl(method, version, serviceUrl, urlParameters, BuildParameters(queryStringParameters));
+            return BuildUrl(method, version, urlParameters, BuildParameters(queryStringParameters));
         }
 
         /// <summary>
@@ -40,17 +40,16 @@ namespace Stacky
         /// <param name="urlParameters">The URL parameters.</param>
         /// <param name="queryStringParameters">The query string parameters.</param>
         /// <returns>Stack Overflow method call <see cref="System.Uri"/></returns>
-        public static Uri BuildUrl(string method, string version, string serviceUrl, string[] urlParameters, Dictionary<string, string> queryStringParameters)
+        public static Uri BuildUrl(string method, string version, string[] urlParameters, Dictionary<string, string> queryStringParameters)
         {
-            return BuildUrl(method, version, serviceUrl, urlParameters, BuildParameters(queryStringParameters));
+            return BuildUrl(method, version, urlParameters, BuildParameters(queryStringParameters));
         }
 
-        private static Uri BuildUrl(string method, string version, string serviceUrl, string[] urlParameters, string queryString)
+        private static Uri BuildUrl(string method, string version, string[] urlParameters, string queryString)
         {
             Require.NotNullOrEmpty(method, "method");
-            Require.NotNullOrEmpty(serviceUrl, "serviceUrl");
 
-            string urlBase = String.Format(CultureInfo.CurrentCulture, "{0}/{1}/{2}/", serviceUrl, version, method);
+            string urlBase = String.Format(CultureInfo.CurrentCulture, "http://api.stackexchange.com/{0}/{1}/", version, method);
             if (urlParameters != null)
             {
                 foreach (string param in urlParameters)

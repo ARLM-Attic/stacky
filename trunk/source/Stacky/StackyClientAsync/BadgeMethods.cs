@@ -18,7 +18,7 @@ namespace Stacky
         {
             MakeRequest<BadgeResponse>(method, urlArguments, new
             {
-                key = apiKey
+                site = this.SiteUrlName,
             }, (items) => onSuccess(items.Badges), onError);
         }
 
@@ -31,7 +31,7 @@ namespace Stacky
         {
             MakeRequest<UserResponse>("badges", new string[] { badgeId.Vectorize() }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,

@@ -7,29 +7,23 @@ using System.Globalization;
 
 namespace Stacky
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public partial class StackyClient
+    public partial class StackyClient : StackyClientBase
     {
         private string version;
-        private string apiKey;
 
-        public StackyClient(string version, string apiKey, Site site, IUrlClient client, IProtocol protocol)
-            : this(version, apiKey, site.ApiEndpoint, client, protocol)
+        public StackyClient(string version, Site site, IUrlClient client, IProtocol protocol)
+            : this(version, site.ApiSiteParameter, client, protocol)
         {
         }
 
-        public StackyClient(string version, string apiKey, string baseUrl, IUrlClient client, IProtocol protocol)
+        public StackyClient(string version, string siteUrlName, IUrlClient client, IProtocol protocol)
         {
             Require.NotNullOrEmpty(version, "version");
-            Require.NotNullOrEmpty(baseUrl, "baseUrl");
-            Require.NotNull(client, "client");
+            Require.NotNullOrEmpty(siteUrlName, "baseUrl");
             Require.NotNull(client, "client");
 
             this.version = version;
-            this.apiKey = apiKey;
-            BaseUrl = baseUrl;
+            SiteUrlName = siteUrlName;
             WebClient = client;
             Protocol = protocol;
         }
@@ -67,13 +61,8 @@ namespace Stacky
 
         public HttpResponse GetResponse(string method, string[] urlArguments, Dictionary<string, string> queryStringArguments)
         {
-            Uri url = UrlHelper.BuildUrl(method, version, BaseUrl, urlArguments, queryStringArguments);
+            Uri url = UrlHelper.BuildUrl(method, version, urlArguments, queryStringArguments);
             return WebClient.MakeRequest(url);
-        }
-
-        private string GetSortDirection(SortDirection direction)
-        {
-            return direction == SortDirection.Ascending ? "asc" : "desc";
         }
 
         #endregion
@@ -81,11 +70,6 @@ namespace Stacky
         #region Properties
 
         public IUrlClient WebClient { get; set; }
-        public IProtocol Protocol { get; set; }
-        public string BaseUrl { get; set; }
-
-        public int RemainingRequests { get; internal set; }
-        public int MaxRequests { get; internal set; }
 
         #endregion
     }

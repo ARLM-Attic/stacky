@@ -13,7 +13,7 @@ namespace Stacky
         {
             MakeRequest<StatsResponse>("stats", null, new
             {
-                key = apiKey
+                site = this.SiteUrlName
             }, results => onSuccess(results.Statistics.FirstOrDefault()), onError);
         }
     }

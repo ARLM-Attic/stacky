@@ -296,17 +296,14 @@
     <Compile Include="..\Stacky\Sites.cs">
       <Link>Sites.cs</Link>
     </Compile>
-    <Compile Include="..\Stacky\StackAuthClient.cs">
-      <Link>StackAuthClient.cs</Link>
-    </Compile>
-    <Compile Include="..\Stacky\StackAuthClientAsync.cs">
-      <Link>StackAuthClientAsync.cs</Link>
-    </Compile>
     <Compile Include="..\Stacky\StackyClientAsync\PrivilegeMethods.cs">
       <Link>StackyClientAsync\PrivilegeMethods.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\StackyClientAsync\StackyClientAsync.cs">
       <Link>StackyClientAsync\StackyClientAsync.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\StackyClientBase.cs">
+      <Link>StackyClientBase.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\StackyClient\PrivilegeMethods.cs">
       <Link>StackyClient\PrivilegeMethods.cs</Link>

@@ -16,7 +16,7 @@ namespace Stacky
         {
             return MakeRequest<RevisionResponse>("revisions", new string[] { ids.Vectorize() }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
             }).Revisions;
@@ -36,7 +36,7 @@ namespace Stacky
         {
             return MakeRequest<RevisionResponse>("revisions", new string[] { id.ToString(), revision.ToString() }, new
             {
-                key = apiKey
+                site = this.SiteUrlName
             }).Revisions.FirstOrDefault();
         }
     }

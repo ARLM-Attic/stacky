@@ -4,16 +4,16 @@ using System.Collections.Generic;
 namespace Stacky
 {
 #if SILVERLIGHT
-    public partial class StackyClient
+    public partial class StackyClient : StackyClientBase
 #else
-    public partial class StackyClientAsync
+    public partial class StackyClientAsync : StackyClientBase
 #endif
     {
         private void GetTags(Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError, string method, string[] urlParameters, string filter, string sort, string order, int? page, int? pageSize, DateTime? fromDate, DateTime? toDate, int? min, int? max)
         {
             MakeRequest<TagResponse>(method, urlParameters, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sort,

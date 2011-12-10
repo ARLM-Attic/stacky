@@ -53,7 +53,7 @@ namespace Stacky
         {
             MakeRequest<AnswerResponse>(method, urlParameters, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
                 body = options.IncludeBody ? (bool?)true : null,

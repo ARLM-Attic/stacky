@@ -18,7 +18,7 @@ namespace Stacky
         {
             MakeRequest<TagResponse>(method, urlParameters, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sort,
@@ -41,7 +41,7 @@ namespace Stacky
         {
             MakeRequest<TagSynonymResponse>("tags", new string[] { "synonyms" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sortBy.ToString(),
@@ -60,7 +60,7 @@ namespace Stacky
         {
             MakeRequest<TagSynonymResponse>("tags", new string[] { tags.Vectorize(), "synonyms" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sortBy.ToString(),
@@ -81,7 +81,7 @@ namespace Stacky
         {
             MakeRequest<TagWikiResponse>("tags", new string[] { tags.Vectorize(), "wikis" }, new
             {
-                key = apiKey
+                site = this.SiteUrlName,
             }, (items) => onSuccess(items.TagWikis), onError);
         }
 
@@ -111,7 +111,7 @@ namespace Stacky
             var sortArgs = period.GetAttribute<SortArgsAttribute>();
             MakeRequest<TopUserResponse>("tags", new string[] { tags.Vectorize(), "top-askers", sortArgs.Sort }, new
             {
-                key = apiKey
+                site = this.SiteUrlName,
             }, (items) => onSuccess(items.TopUsers), onError);
         }
 
@@ -141,7 +141,7 @@ namespace Stacky
             var sortArgs = period.GetAttribute<SortArgsAttribute>();
             MakeRequest<TopUserResponse>("tags", new string[] { tags.Vectorize(), "top-answerers", sortArgs.Sort }, new
             {
-                key = apiKey
+                site = this.SiteUrlName,
             }, (items) => onSuccess(items.TopUsers), onError);
         }
     }

@@ -27,7 +27,7 @@ namespace Stacky
         {
             var response = MakeRequest<QuestionResponse>(method, urlArguments, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 body = includeBody ? (bool?)true : null,
@@ -48,7 +48,7 @@ namespace Stacky
         {
             var response = MakeRequest<QuestionResponse>("questions", new string[] { questionIds.Vectorize() }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 body = includeBody ? (bool?)true : null,
                 comments = includeComments ? (bool?)true : null,
                 answers = includeAnswers ? (bool?)true : null,
@@ -71,7 +71,7 @@ namespace Stacky
         {
             var response = MakeRequest<QuestionTimelineResponse>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
                 page = page ?? null,
@@ -97,7 +97,7 @@ namespace Stacky
 
             var response = MakeRequest<QuestionResponse>("search", null, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 intitle = inTitle,
                 tagged = taggedString,
                 nottagged = notTaggedString,
@@ -146,7 +146,7 @@ namespace Stacky
 
             return MakeRequest<QuestionResponse>("similar", null, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 title = title,
                 body = includeBody ? (bool?)true : null,
                 comments = includeComments ? (bool?)true : null,

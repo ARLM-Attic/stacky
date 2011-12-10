@@ -19,7 +19,7 @@ namespace Stacky
         {
             MakeRequest<AnswerResponse>("users", new string[] { userIds.Vectorize(), "answers" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 body = includeBody ? (bool?)true : null,
@@ -41,7 +41,7 @@ namespace Stacky
         {
             MakeRequest<AnswerResponse>("questions", new string[] { questionIds.Vectorize(), "answers" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 body = includeBody ? (bool?)true : null,
@@ -63,7 +63,7 @@ namespace Stacky
         {
             MakeRequest<AnswerResponse>("answers", new string[] { answerIds.Vectorize() }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 body = includeBody ? (bool?)true : null,
@@ -97,7 +97,7 @@ namespace Stacky
         {
             MakeRequest<AnswerResponse>("answers", null, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 body = includeBody ? (bool?)true : null,

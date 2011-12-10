@@ -10,7 +10,7 @@ namespace Stacky
         {
             var response = MakeRequest<UserResponse>("users", null, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 filter = filter,
@@ -28,7 +28,7 @@ namespace Stacky
         {
            var response = MakeRequest<UserResponse>("users", new string[] { userIds.Vectorize() }, new
            {
-               key = apiKey,
+               site = this.SiteUrlName,
                page = page ?? null,
                pagesize = pageSize ?? null,
                filter = filter,
@@ -56,7 +56,7 @@ namespace Stacky
         {
             var response = MakeRequest<CommentResponse>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
                 page = page ?? null,
@@ -78,7 +78,7 @@ namespace Stacky
         {
             var response = MakeRequest<UserEventResponse>("users", new string[] { userIds.Vectorize(), "timeline" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
                 page = page ?? null,
@@ -96,7 +96,7 @@ namespace Stacky
         {
             var response = MakeRequest<ReputationResponse>("users", new string[] { userIds.Vectorize(), "reputation" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
@@ -109,7 +109,7 @@ namespace Stacky
         {
             var response = MakeRequest<UserResponse>("users", new string[] { "moderators" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 filter = filter,
@@ -138,7 +138,7 @@ namespace Stacky
         {
             var response = MakeRequest<QuestionResponse>("users", new string[] { userIds.Vectorize(), "questions", "no-answers" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sortBy.ToString().ToLower(),
@@ -171,7 +171,7 @@ namespace Stacky
         {
             var response = MakeRequest<QuestionResponse>("users", new string[] { userIds.Vectorize(), "questions", "unaccepted" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sortBy.ToString().ToLower(),
@@ -196,7 +196,7 @@ namespace Stacky
         {
             var response = MakeRequest<QuestionResponse>("users", new string[] { userIds.Vectorize(), "questions", "unanswered" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sortBy.ToString().ToLower(),
@@ -230,7 +230,7 @@ namespace Stacky
 
             var response = MakeRequest<AnswerResponse>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-answers" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 body = includeBody,
                 comments = includeComments
             });
@@ -255,7 +255,7 @@ namespace Stacky
 
             var response = MakeRequest<QuestionResponse>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-questions" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 body = includeBody,
                 comments = includeComments,
                 answers = includeAnswers
@@ -270,7 +270,7 @@ namespace Stacky
         {
             var response = MakeRequest<TopTagResponse>("users", new string[] { userId.ToString(), "top-answer-tags" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 id = userId
             });
             return response.TopTags;
@@ -283,7 +283,7 @@ namespace Stacky
         {
             var response = MakeRequest<TopTagResponse>("users", new string[] { userId.ToString(), "top-question-tags" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 id = userId
             });
             return response.TopTags;

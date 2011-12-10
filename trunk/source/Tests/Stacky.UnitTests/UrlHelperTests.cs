@@ -17,26 +17,26 @@ namespace Stacky.UnitTests
         [TestMethod]
         public void BuildUrl_UrlParameters_IncludedInResult()
         {
-            var url = UrlHelper.BuildUrl("TestMethod", version, Sites.StackOverflow.ApiEndpoint, new string[] { "item1", "item2" }, null);
-            Assert.AreEqual("http://api.stackoverflow.com/" + version + "/TestMethod/item1/item2/", url.ToString());
+            var url = UrlHelper.BuildUrl("TestMethod", version, new string[] { "item1", "item2" }, null);
+            Assert.AreEqual("http://api.stackexchange.com/" + version + "/TestMethod/item1/item2/", url.ToString());
         }
 
         [TestMethod]
         public void BuildUrl_NullUrlParameters_ResultsInNoUrlParameters()
         {
-            var url = UrlHelper.BuildUrl("TestMethod", version, Sites.StackOverflow.ApiEndpoint, null, null);
-            Assert.AreEqual("http://api.stackoverflow.com/" + version + "/TestMethod/", url.ToString());
+            var url = UrlHelper.BuildUrl("TestMethod", version, null, null);
+            Assert.AreEqual("http://api.stackexchange.com/" + version + "/TestMethod/", url.ToString());
         }
 
         [TestMethod]
         public void BuildUrl_UrlParamatersAndQueryStringParameters_BuiltCorrectly()
         {
-            var url = UrlHelper.BuildUrl("TestMethod", version, Sites.StackOverflow.ApiEndpoint, new string[] { "item1", "item2" }, new
+            var url = UrlHelper.BuildUrl("TestMethod", version, new string[] { "item1", "item2" }, new
             {
                 key = "key",
                 config = "1"
             });
-            Assert.AreEqual("http://api.stackoverflow.com/" + version + "/TestMethod/item1/item2/?key=key&config=1", url.ToString());
+            Assert.AreEqual("http://api.stackexchange.com/" + version + "/TestMethod/item1/item2/?key=key&config=1", url.ToString());
         }
 
         #endregion
@@ -189,7 +189,7 @@ namespace Stacky.UnitTests
         [TestMethod]
         public void Bug6099_PoundSignEncodedCorrectly()
         {
-            var url = UrlHelper.BuildUrl("questions", version, Sites.StackOverflow.ApiEndpoint, null, new
+            var url = UrlHelper.BuildUrl("questions", version, null, new
             {
                 item1 = "test#one",
                 item2 = "anotherOne"

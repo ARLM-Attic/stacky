@@ -1,19 +1,19 @@
-﻿using Newtonsoft.Json;
-
-namespace Stacky
+﻿namespace Stacky
 {
+    using System;
+    using Newtonsoft.Json;
+
     public class Site : Entity
     {
-        private string name;
-        private string logoUrl;
-        private string apiEndpoint;
-        private string siteUrl;
-        private string description;
-        private string iconUrl;
-        private SiteState state;
-        private string[] aliases;
-        private SiteStyle styling;
+        private string type;
+        [JsonProperty("site_type")]
+        public string Type
+        {
+            get { return type; }
+            set { type = value; NotifyOfPropertyChange(() => Type); }
+        }
 
+        private string name;
         [JsonProperty("name")]
         public string Name
         {
@@ -21,6 +21,7 @@ namespace Stacky
             set { name = value; NotifyOfPropertyChange(() => Name); }
         }
 
+        private string logoUrl;
         [JsonProperty("logo_url")]
         public string LogoUrl
         {
@@ -28,13 +29,23 @@ namespace Stacky
             set { logoUrl = value; NotifyOfPropertyChange(() => LogoUrl); }
         }
 
-        [JsonProperty("api_endpoint")]
-        public string ApiEndpoint
+        private string apiSiteParameter;
+        [JsonProperty("api_site_parameter")]
+        public string ApiSiteParameter
         {
-            get { return apiEndpoint; }
-            set { apiEndpoint = value; NotifyOfPropertyChange(() => ApiEndpoint); }
+            get { return apiSiteParameter; }
+            set { apiSiteParameter = value; NotifyOfPropertyChange(() => ApiSiteParameter); }
         }
 
+        private string audience;
+        [JsonProperty("audience")]
+        public string Audience
+        {
+            get { return audience; }
+            set { audience = value; NotifyOfPropertyChange(() => Audience); }
+        }
+
+        private string siteUrl;
         [JsonProperty("site_url")]
         public string SiteUrl
         {
@@ -42,13 +53,7 @@ namespace Stacky
             set { siteUrl = value; NotifyOfPropertyChange(() => SiteUrl); }
         }
 
-        [JsonProperty("description")]
-        public string Description
-        {
-            get { return description; }
-            set { description = value; NotifyOfPropertyChange(() => Description); }
-        }
-
+        private string iconUrl;
         [JsonProperty("icon_url")]
         public string IconUrl
         {
@@ -56,6 +61,7 @@ namespace Stacky
             set { iconUrl = value; NotifyOfPropertyChange(() => IconUrl); }
         }
 
+        private SiteState state;
         [JsonProperty("state"), JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public SiteState State
         {
@@ -63,6 +69,7 @@ namespace Stacky
             set { state = value; NotifyOfPropertyChange(() => State); }
         }
 
+        private string[] aliases;
         [JsonProperty("aliases")]
         public string[] Aliases
         {
@@ -70,11 +77,65 @@ namespace Stacky
             set { aliases = value; NotifyOfPropertyChange(() => Aliases); }
         }
 
+        private SiteStyle styling;
         [JsonProperty("styling")]
         public SiteStyle Styling
         {
             get { return styling; }
             set { styling = value; NotifyOfPropertyChange(() => Styling); }
         }
+
+        private DateTime closedBetaDate;
+        [JsonProperty("closed_beta_date"), JsonConverter(typeof(UnixDateTimeConverter))]
+        public DateTime ClosedBetaDate
+        {
+            get { return closedBetaDate; }
+            set { closedBetaDate = value; NotifyOfPropertyChange(() => ClosedBetaDate); }
+        }
+
+        private DateTime openBetaDate;
+        [JsonProperty("open_beta_date"), JsonConverter(typeof(UnixDateTimeConverter))]
+        public DateTime OpenBetaDate
+        {
+            get { return openBetaDate; }
+            set { openBetaDate = value; NotifyOfPropertyChange(() => OpenBetaDate); }
+        }
+
+        private DateTime launchDate;
+        [JsonProperty("launch_date"), JsonConverter(typeof(UnixDateTimeConverter))]
+        public DateTime LaunchDate
+        {
+            get { return launchDate; }
+            set { launchDate = value; NotifyOfPropertyChange(() => LaunchDate); }
+        }
+
+        private string faviconUrl;
+        [JsonProperty("favicon_url")]
+        public string FaviconUrl
+        {
+            get { return faviconUrl; }
+            set { faviconUrl = value; NotifyOfPropertyChange(() => FaviconUrl); }
+        }
+
+        private string twitterAccount;
+        [JsonProperty("twitter_account")]
+        public string TwitterAccount
+        {
+            get { return twitterAccount; }
+            set { twitterAccount = value; NotifyOfPropertyChange(() => TwitterAccount); }
+        }
+
+        private string[] markdownExtensions;
+        [JsonProperty("markdown_extensions")]
+        public string[] MarkdownExtensions
+        {
+            get { return markdownExtensions; }
+            set { markdownExtensions = value; NotifyOfPropertyChange(() => MarkdownExtensions); }
+        }
+
+        //TODO: Add related_sites
+        //public List<RelatedSite> RelatedSites
+        //{
+        //}
     }
 }

@@ -4,39 +4,37 @@ using System.Collections.Generic;
 namespace Stacky
 {
 #if SILVERLIGHT
-    public partial class StackyClient
+    public partial class StackyClient : StackyClientBase
 #else
-    public partial class StackyClientAsync
+    public partial class StackyClientAsync : StackyClientBase
 #endif
     {
         private string version;
-        private string apiKey;
 
 #if SILVERLIGHT
-        public StackyClient(string version, string apiKey, Site site, IUrlClient client, IProtocol protocol)
+        public StackyClient(string version, Site site, IUrlClient client, IProtocol protocol)
 #else
-        public StackyClientAsync(string version, string apiKey, Site site, IUrlClientAsync client, IProtocol protocol)
+        public StackyClientAsync(string version, Site site, IUrlClientAsync client, IProtocol protocol)
 #endif
-            : this(version, apiKey, site.ApiEndpoint, client, protocol)
+            : this(version, site.ApiSiteParameter, client, protocol)
         {
         }
 
 #if SILVERLIGHT
-        public StackyClient(string version, string apiKey, string baseUrl, IUrlClient client, IProtocol protocol)
+        public StackyClient(string version, string siteUrlName, IUrlClient client, IProtocol protocol)
 #else
-        public StackyClientAsync(string version, string apiKey, string baseUrl, IUrlClientAsync client, IProtocol protocol)
+        public StackyClientAsync(string version, string siteUrlName, IUrlClientAsync client, IProtocol protocol)
 #endif
         {
             Require.NotNullOrEmpty(version, "version");
-            Require.NotNullOrEmpty(baseUrl, "baseUrl");
+            Require.NotNullOrEmpty(siteUrlName, "baseUrl");
             Require.NotNull(client, "client");
             Require.NotNull(client, "client");
 
             this.version = version;
             WebClient = client;
-            BaseUrl = baseUrl;
+            SiteUrlName = siteUrlName;
             Protocol = protocol;
-            this.apiKey = apiKey;
         }
 
         #region Properties
@@ -47,12 +45,6 @@ namespace Stacky
         public IUrlClientAsync WebClient
 #endif
         { get; set; }
-
-        public IProtocol Protocol { get; set; }
-        public string BaseUrl { get; set; }
-
-        public int RemainingRequests { get; internal set; }
-        public int MaxRequests { get; internal set; }
 
         #endregion
 
@@ -100,13 +92,8 @@ namespace Stacky
 
         public virtual void GetResponse(string method, string[] urlArguments, Dictionary<string, string> queryStringArguments, Action<HttpResponse> onSuccess, Action<ApiException> onError)
         {
-            Uri url = UrlHelper.BuildUrl(method, version, BaseUrl, urlArguments, queryStringArguments);
+            Uri url = UrlHelper.BuildUrl(method, version, urlArguments, queryStringArguments);
             WebClient.MakeRequest(url, onSuccess, onError);
-        }
-
-        private string GetSortDirection(SortDirection direction)
-        {
-            return direction == SortDirection.Ascending ? "asc" : "desc";
         }
 
         #endregion
