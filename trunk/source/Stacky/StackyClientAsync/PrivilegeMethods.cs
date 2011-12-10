@@ -18,7 +18,7 @@ namespace Stacky
         {
             MakeRequest<PrivilegeResponse>("privileges", null, new
             {
-                key = apiKey
+                site = this.SiteUrlName
             }, (items) => onSuccess(items.Privileges), onError);
         }
     }

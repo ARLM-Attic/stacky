@@ -138,8 +138,6 @@
     <Compile Include="Responses\UserEventResponse.cs" />
     <Compile Include="Responses\UserResponse.cs" />
     <Compile Include="Sites.cs" />
-    <Compile Include="StackAuthClient.cs" />
-    <Compile Include="StackAuthClientAsync.cs" />
     <Compile Include="StackyClientAsync\AnswerMethods.cs" />
     <Compile Include="StackyClientAsync\BadgeMethods.cs" />
     <Compile Include="StackyClientAsync\CommentMethods.cs" />
@@ -150,6 +148,7 @@
     <Compile Include="StackyClientAsync\StatsMethods.cs" />
     <Compile Include="StackyClientAsync\TagMethods.cs" />
     <Compile Include="StackyClientAsync\UserMethods.cs" />
+    <Compile Include="StackyClientBase.cs" />
     <Compile Include="StackyClient\AnswerMethods.cs" />
     <Compile Include="StackyClient\BadgeMethods.cs" />
     <Compile Include="StackyClient\CommentMethods.cs" />

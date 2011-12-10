@@ -14,7 +14,7 @@ namespace Stacky
         {
             var response = MakeRequest<TagResponse>(method, urlParameters, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sort,
@@ -38,7 +38,7 @@ namespace Stacky
         {
             var response = MakeRequest<TagSynonymResponse>("tags", new string[] { "synonyms" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sortBy.ToString(),
@@ -58,7 +58,7 @@ namespace Stacky
         {
             var response = MakeRequest<TagSynonymResponse>("tags", new string[] { tags.Vectorize(), "synonyms" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sortBy.ToString(),
@@ -80,7 +80,7 @@ namespace Stacky
         {
             var response = MakeRequest<TagWikiResponse>("tags", new string[] { tags.Vectorize(), "wikis" }, new
             {
-                key = apiKey
+                site = this.SiteUrlName
             });
             return response.TagWikis;
         }
@@ -107,7 +107,7 @@ namespace Stacky
             var sortArgs = period.GetAttribute<SortArgsAttribute>();
             var response = MakeRequest<TopUserResponse>("tags", new string[] { tags.Vectorize(), "top-askers", sortArgs.Sort }, new
             {
-                key = apiKey
+                site = this.SiteUrlName
             });
             return response.TopUsers;
         }
@@ -134,7 +134,7 @@ namespace Stacky
             var sortArgs = period.GetAttribute<SortArgsAttribute>();
             var response = MakeRequest<TopUserResponse>("tags", new string[] { tags.Vectorize(), "top-answerers", sortArgs.Sort }, new
             {
-                key = apiKey
+                site = this.SiteUrlName
             });
             return response.TopUsers;
         }

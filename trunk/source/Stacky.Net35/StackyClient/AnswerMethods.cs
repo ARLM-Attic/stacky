@@ -24,7 +24,7 @@ namespace Stacky
         {
             var response = MakeRequest<AnswerResponse>("users", new string[] { userIds.Vectorize(), "answers" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
                 body = options.IncludeBody ? (bool?)true : null,
@@ -48,7 +48,7 @@ namespace Stacky
         {
             var response = MakeRequest<AnswerResponse>("questions", new string[] { questionIds.Vectorize(), "answers" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
                 body = options.IncludeBody ? (bool?)true : null,
@@ -92,7 +92,7 @@ namespace Stacky
         {
             var response = MakeRequest<AnswerResponse>("answers", new string[] { answerIds.Vectorize() }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
                 body = options.IncludeBody ? (bool?)true : null,

@@ -14,7 +14,7 @@ namespace Stacky
         {
             MakeRequest<UserResponse>("users", urlParameters, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
                 filter = options.Filter,
@@ -71,7 +71,7 @@ namespace Stacky
         {
             MakeRequest<CommentResponse>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
                 filter = options.Filter,
@@ -103,7 +103,7 @@ namespace Stacky
         {
             MakeRequest<UserEventResponse>("users", new string[] { userIds.Vectorize(), "timeline" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
                 page = options.Page ?? null,
@@ -130,7 +130,7 @@ namespace Stacky
         {
             MakeRequest<ReputationResponse>("users", new string[] { userIds.Vectorize(), "reputation" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
                 page = options.Page ?? null,

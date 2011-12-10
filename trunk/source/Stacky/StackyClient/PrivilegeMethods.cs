@@ -13,7 +13,7 @@ namespace Stacky
         {
             return MakeRequest<PrivilegeResponse>("privileges", null, new
             {
-                key = apiKey
+                site = this.SiteUrlName
             }).Privileges;
         }
     }

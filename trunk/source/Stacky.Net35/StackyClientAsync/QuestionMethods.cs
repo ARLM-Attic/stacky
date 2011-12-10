@@ -14,7 +14,7 @@ namespace Stacky
         {
             MakeRequest<QuestionResponse>(method, urlArgs, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 body = includeBody ? (bool?)true : null,
@@ -92,7 +92,7 @@ namespace Stacky
         {
             MakeRequest<QuestionTimelineResponse>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
@@ -122,7 +122,7 @@ namespace Stacky
 
             MakeRequest<QuestionResponse>("search", null, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 intitle = options.InTitle,
                 tagged = taggedString,
                 nottagged = notTaggedString,

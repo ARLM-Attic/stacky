@@ -9,7 +9,7 @@ namespace Stacky
         {
             return MakeRequest<StatsResponse>("stats", null, new
             {
-                key = apiKey
+                site = this.SiteUrlName
             }).Statistics.FirstOrDefault();
         }
     }

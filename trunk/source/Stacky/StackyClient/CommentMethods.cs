@@ -19,7 +19,7 @@ namespace Stacky
 
             var response = MakeRequest<CommentResponse>("users", urlParameters, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
@@ -46,7 +46,7 @@ namespace Stacky
         {
             var response = MakeRequest<CommentResponse>("posts", new string[] { postIds.Vectorize(), "comments" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
@@ -68,7 +68,7 @@ namespace Stacky
         {
             var response = MakeRequest<CommentResponse>("answers", new string[] { answerIds.Vectorize(), "comments" }, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
@@ -97,7 +97,7 @@ namespace Stacky
         {
             var response = MakeRequest<CommentResponse>("answers", null, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,

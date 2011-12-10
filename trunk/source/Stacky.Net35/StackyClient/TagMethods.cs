@@ -19,7 +19,7 @@ namespace Stacky
         {
             var response = MakeRequest<TagResponse>(method, urlParameters, new
             {
-                key = apiKey,
+                site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sort,

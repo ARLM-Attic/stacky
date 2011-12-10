@@ -308,9 +308,6 @@
     <Compile Include="..\Stacky\Sites.cs">
       <Link>Sites.cs</Link>
     </Compile>
-    <Compile Include="..\Stacky\StackAuthClientAsync.cs">
-      <Link>StackAuthClientAsync.cs</Link>
-    </Compile>
     <Compile Include="..\Stacky\StackyClientAsync\AnswerMethods.cs">
       <Link>StackyClient\AnswerMethods.cs</Link>
     </Compile>
@@ -340,6 +337,9 @@
     </Compile>
     <Compile Include="..\Stacky\StackyClientAsync\UserMethods.cs">
       <Link>StackyClient\UserMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\StackyClientBase.cs">
+      <Link>StackyClientBase.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\UrlClientAsync.cs">
       <Link>UrlClientAsync.cs</Link>
