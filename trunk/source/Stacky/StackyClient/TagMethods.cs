@@ -12,7 +12,7 @@ namespace Stacky
 
         private IPagedList<Tag> GetTags(string method, string[] urlParameters, string sort, string order, int? page = null, int? pageSize = null)
         {
-            var response = MakeRequest<TagResponse>(method, urlParameters, new
+            var response = MakeRequest<Tag>(method, urlParameters, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -20,7 +20,7 @@ namespace Stacky
                 sort = sort,
                 order = order
             });
-            return new PagedList<Tag>(response.Tags, response);
+            return new PagedList<Tag>(response);
         }
 
         public virtual IPagedList<Tag> GetTagsByUser(int userId, int? page = null, int? pageSize = null)
@@ -36,7 +36,7 @@ namespace Stacky
 
         public virtual IPagedList<TagSynonym> GetAllTagSynonyms(TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null)
         {
-            var response = MakeRequest<TagSynonymResponse>("tags", new string[] { "synonyms" }, new
+            var response = MakeRequest<TagSynonym>("tags", new string[] { "synonyms" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -46,7 +46,7 @@ namespace Stacky
                 max = max,
                 min = min
             });
-            return new PagedList<TagSynonym>(response.TagSynonyms, response);
+            return new PagedList<TagSynonym>(response);
         }
 
         public virtual IPagedList<TagSynonym> GetTagSynonyms(string tag, TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
@@ -56,7 +56,7 @@ namespace Stacky
 
         public virtual IPagedList<TagSynonym> GetTagSynonyms(IEnumerable<string> tags, TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            var response = MakeRequest<TagSynonymResponse>("tags", new string[] { tags.Vectorize(), "synonyms" }, new
+            var response = MakeRequest<TagSynonym>("tags", new string[] { tags.Vectorize(), "synonyms" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -68,7 +68,7 @@ namespace Stacky
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
             });
-            return new PagedList<TagSynonym>(response.TagSynonyms, response);
+            return new PagedList<TagSynonym>(response);
         }
 
         public IEnumerable<TagWiki> GetTagWikis(string tag)
@@ -78,11 +78,11 @@ namespace Stacky
 
         public IEnumerable<TagWiki> GetTagWikis(IEnumerable<string> tags)
         {
-            var response = MakeRequest<TagWikiResponse>("tags", new string[] { tags.Vectorize(), "wikis" }, new
+            var response = MakeRequest<TagWiki>("tags", new string[] { tags.Vectorize(), "wikis" }, new
             {
                 site = this.SiteUrlName
             });
-            return response.TagWikis;
+            return response.Items;
         }
 
         /// <summary>
@@ -105,11 +105,11 @@ namespace Stacky
         public IEnumerable<TopUser> GetTopAskers(IEnumerable<string> tags, TopUserPeriod period)
         {
             var sortArgs = period.GetAttribute<SortArgsAttribute>();
-            var response = MakeRequest<TopUserResponse>("tags", new string[] { tags.Vectorize(), "top-askers", sortArgs.Sort }, new
+            var response = MakeRequest<TopUser>("tags", new string[] { tags.Vectorize(), "top-askers", sortArgs.Sort }, new
             {
                 site = this.SiteUrlName
             });
-            return response.TopUsers;
+            return response.Items;
         }
 
         /// <summary>
@@ -132,11 +132,11 @@ namespace Stacky
         public IEnumerable<TopUser> GetTopAnswerers(IEnumerable<string> tags, TopUserPeriod period)
         {
             var sortArgs = period.GetAttribute<SortArgsAttribute>();
-            var response = MakeRequest<TopUserResponse>("tags", new string[] { tags.Vectorize(), "top-answerers", sortArgs.Sort }, new
+            var response = MakeRequest<TopUser>("tags", new string[] { tags.Vectorize(), "top-answerers", sortArgs.Sort }, new
             {
                 site = this.SiteUrlName
             });
-            return response.TopUsers;
+            return response.Items;
         }
     }
 }

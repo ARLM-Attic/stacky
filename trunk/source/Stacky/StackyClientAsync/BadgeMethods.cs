@@ -16,10 +16,10 @@ namespace Stacky
 
         private void GetBadges(Action<IEnumerable<Badge>> onSuccess, Action<ApiException> onError, string method, string[] urlArguments)
         {
-            MakeRequest<BadgeResponse>(method, urlArguments, new
+            MakeRequest<Badge>(method, urlArguments, new
             {
                 site = this.SiteUrlName,
-            }, (items) => onSuccess(items.Badges), onError);
+            }, (items) => onSuccess(items.Items), onError);
         }
 
         public virtual void GetUsersByBadge(int badgeId, Action<IPagedList<User>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
@@ -29,14 +29,14 @@ namespace Stacky
 
         public virtual void GetUsersByBadge(IEnumerable<int> badgeId, Action<IPagedList<User>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<UserResponse>("badges", new string[] { badgeId.Vectorize() }, new
+            MakeRequest<User>("badges", new string[] { badgeId.Vectorize() }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<User>(items.Users, items)), onError);
+            }, (items) => onSuccess(new PagedList<User>(items)), onError);
         }
 
         public virtual void GetTagBasedBadges(Action<IEnumerable<Badge>> onSuccess, Action<ApiException> onError = null)

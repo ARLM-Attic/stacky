@@ -17,7 +17,7 @@ namespace Stacky
 
         private IPagedList<Tag> GetTags(string method, string[] urlParameters, string filter, string sort, string order, int? page, int? pageSize, DateTime? fromDate, DateTime? toDate, int? min, int? max)
         {
-            var response = MakeRequest<TagResponse>(method, urlParameters, new
+            var response = MakeRequest<Tag>(method, urlParameters, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -29,7 +29,7 @@ namespace Stacky
                 min = min ?? null,
                 max = max ?? null
             });
-            return new PagedList<Tag>(response.Tags, response);
+            return new PagedList<Tag>(response);
         }
 
         public virtual IPagedList<Tag> GetTagsByUser(int userId)

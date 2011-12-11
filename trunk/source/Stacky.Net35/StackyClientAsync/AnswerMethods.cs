@@ -51,7 +51,7 @@ namespace Stacky
 
         private void GetAnswers(string method, string[] urlParameters, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError, AnswerOptions options)
         {
-            MakeRequest<AnswerResponse>(method, urlParameters, new
+            MakeRequest<Answer>(method, urlParameters, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -64,7 +64,7 @@ namespace Stacky
                 max = options.Max ?? null,
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<Answer>(items.Answers, items)), onError);
+            }, (items) => onSuccess(new PagedList<Answer>(items)), onError);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Stacky
     {
         public virtual void GetUsers(Action<IPagedList<User>> onSuccess, Action<ApiException> onError, UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, string filter = null)
         {
-            MakeRequest<UserResponse>("users", null, new
+            MakeRequest<User>("users", null, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -20,15 +20,15 @@ namespace Stacky
                 filter = filter,
                 sort = sortBy.ToString().ToLower(),
                 order = GetSortDirection(sortDirection)
-            }, (items) => onSuccess(new PagedList<User>(items.Users, items)), onError);
+            }, (items) => onSuccess(new PagedList<User>(items)), onError);
         }
 
         public virtual void GetUsers(IEnumerable<int> userIds, Action<IPagedList<User>> onSuccess, Action<ApiException> onError = null)
         {
-            MakeRequest<UserResponse>("users", new string[] { userIds.Vectorize() }, new
+            MakeRequest<User>("users", new string[] { userIds.Vectorize() }, new
             {
                 site = this.SiteUrlName,
-            }, (items) => onSuccess(new PagedList<User>(items.Users, items)), onError);
+            }, (items) => onSuccess(new PagedList<User>(items)), onError);
         }
 
         public virtual void GetUser(int userId, Action<User> onSuccess, Action<ApiException> onError = null)
@@ -43,7 +43,7 @@ namespace Stacky
 
         public virtual void GetUserMentions(IEnumerable<int> userIds, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError, UserMentionSort sortBy = UserMentionSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
         {
-            MakeRequest<CommentResponse>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
+            MakeRequest<Comment>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
             {
                 site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
@@ -54,7 +54,7 @@ namespace Stacky
                 max = max ?? null,
                 sort = sortBy.ToString().ToLower(),
                 order = GetSortDirection(sortDirection)
-            }, (items) => onSuccess(new PagedList<Comment>(items.Comments, items)), onError);
+            }, (items) => onSuccess(new PagedList<Comment>(items)), onError);
         }
 
         public virtual void GetUserTimeline(int userId, Action<IPagedList<UserEvent>> onSuccess, Action<ApiException> onError, DateTime? fromDate = null, DateTime? toDate = null)
@@ -64,12 +64,12 @@ namespace Stacky
 
         public virtual void GetUserTimeline(IEnumerable<int> userIds, Action<IPagedList<UserEvent>> onSuccess, Action<ApiException> onError, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<UserEventResponse>("users", new string[] { userIds.Vectorize(), "timeline" }, new
+            MakeRequest<UserEvent>("users", new string[] { userIds.Vectorize(), "timeline" }, new
             {
                 site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<UserEvent>(items.Events, items)), onError);
+            }, (items) => onSuccess(new PagedList<UserEvent>(items)), onError);
         }
 
         public virtual void GetUserReputation(int userId, Action<IPagedList<Reputation>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
@@ -79,19 +79,19 @@ namespace Stacky
 
         public virtual void GetUserReputation(IEnumerable<int> userIds, Action<IPagedList<Reputation>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<ReputationResponse>("users", new string[] { userIds.Vectorize(), "reputation" }, new
+            MakeRequest<Reputation>("users", new string[] { userIds.Vectorize(), "reputation" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<Reputation>(items.Reputation, items)), onError);
+            }, (items) => onSuccess(new PagedList<Reputation>(items)), onError);
         }
 
         public virtual void GetModerators(Action<IPagedList<User>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, string filter = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<UserResponse>("users", new string[] { "moderators" }, new
+            MakeRequest<User>("users", new string[] { "moderators" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -101,7 +101,7 @@ namespace Stacky
                 order = GetSortDirection(sortDirection),
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (response) => onSuccess(new PagedList<User>(response.Users, response)), onError);
+            }, (response) => onSuccess(new PagedList<User>(response)), onError);
         }
 
         public virtual void GetNoAnswerQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, int userId, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
@@ -111,7 +111,7 @@ namespace Stacky
 
         public virtual void GetNoAnswerQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
         {
-            MakeRequest<QuestionResponse>("users", new string[] { userIds.Vectorize(), "questions", "no-answers" }, new
+            MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "no-answers" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -125,7 +125,7 @@ namespace Stacky
                 body = includeBody,
                 comments = includeComments,
                 answers = includeAnswers
-            }, (response) => onSuccess(new PagedList<Question>(response.Questions, response)), onError);
+            }, (response) => onSuccess(new PagedList<Question>(response)), onError);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Stacky
         /// </summary>
         public virtual void GetUnacceptedQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
         {
-            MakeRequest<QuestionResponse>("users", new string[] { userIds.Vectorize(), "questions", "unaccepted" }, new
+            MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "unaccepted" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -157,7 +157,7 @@ namespace Stacky
                 body = includeBody,
                 comments = includeComments,
                 answers = includeAnswers
-            }, (response) => onSuccess(new PagedList<Question>(response.Questions, response)), onError);
+            }, (response) => onSuccess(new PagedList<Question>(response)), onError);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Stacky
         /// </summary>
         public virtual void GetUnansweredQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
         {
-            MakeRequest<QuestionResponse>("users", new string[] { userIds.Vectorize(), "questions", "unanswered" }, new
+            MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "unanswered" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -189,7 +189,7 @@ namespace Stacky
                 body = includeBody,
                 comments = includeComments,
                 answers = includeAnswers
-            }, (response) => onSuccess(new PagedList<Question>(response.Questions, response)), onError);
+            }, (response) => onSuccess(new PagedList<Question>(response)), onError);
         }
 
         /// <summary>
@@ -208,12 +208,12 @@ namespace Stacky
             if (tags == null)
                 throw new ArgumentNullException("tags");
 
-            MakeRequest<AnswerResponse>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-answers" }, new
+            MakeRequest<Answer>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-answers" }, new
             {
                 site = this.SiteUrlName,
                 body = includeBody,
                 comments = includeComments
-            }, (response) => onSuccess(new PagedList<Answer>(response.Answers, response)), onError);
+            }, (response) => onSuccess(new PagedList<Answer>(response)), onError);
         }
 
         /// <summary>
@@ -232,13 +232,13 @@ namespace Stacky
             if (tags == null)
                 throw new ArgumentNullException("tags");
 
-            MakeRequest<QuestionResponse>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-questions" }, new
+            MakeRequest<Question>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-questions" }, new
             {
                 site = this.SiteUrlName,
                 body = includeBody,
                 comments = includeComments,
                 answers = includeAnswers
-            }, (response) => onSuccess(new PagedList<Question>(response.Questions, response)), onError);
+            }, (response) => onSuccess(new PagedList<Question>(response)), onError);
         }
 
         /// <summary>
@@ -246,11 +246,11 @@ namespace Stacky
         /// </summary>
         public virtual void GetTopAnswerTags(Action<IEnumerable<TopTag>> onSuccess, Action<ApiException> onError, int userId)
         {
-            MakeRequest<TopTagResponse>("users", new string[] { userId.ToString(), "top-answer-tags" }, new
+            MakeRequest<TopTag>("users", new string[] { userId.ToString(), "top-answer-tags" }, new
             {
                 site = this.SiteUrlName,
                 id = userId
-            }, (response) => onSuccess(response.TopTags), onError);
+            }, (response) => onSuccess(response.Items), onError);
         }
 
         /// <summary>
@@ -258,11 +258,11 @@ namespace Stacky
         /// </summary>
         public virtual void GetTopQuestionTags(Action<IEnumerable<TopTag>> onSuccess, Action<ApiException> onError, int userId)
         {
-            MakeRequest<TopTagResponse>("users", new string[] { userId.ToString(), "top-question-tags" }, new
+            MakeRequest<TopTag>("users", new string[] { userId.ToString(), "top-question-tags" }, new
             {
                 site = this.SiteUrlName,
                 id = userId
-            }, (response) => onSuccess(response.TopTags), onError);
+            }, (response) => onSuccess(response.Items), onError);
         }
     }
 }

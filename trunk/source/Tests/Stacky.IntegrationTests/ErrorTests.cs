@@ -17,7 +17,7 @@ namespace Stacky.IntegrationTests
             Assert.IsNotNull(httpResponse.Error);
             try
             {
-                var response = Client.ParseResponse<CommentResponse>(httpResponse);
+                var response = Client.ParseResponse<Comment>(httpResponse);
             }
             catch (ApiException e)
             {

@@ -12,7 +12,7 @@ namespace Stacky
     {
         private void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, string method, string[] urlArgs, string sort, string sortDirection, int? page, int? pageSize, bool includeBody, bool includeComments, bool includeAnswers, DateTime? fromDate, DateTime? toDate, int? min, int? max, params string[] tags)
         {
-            MakeRequest<QuestionResponse>(method, urlArgs, new
+            MakeRequest<Question>(method, urlArgs, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -27,7 +27,7 @@ namespace Stacky
                 order = sortDirection,
                 min = min ?? null,
                 max = max ?? null
-            }, (items) => onSuccess(new PagedList<Question>(items.Questions, items)), onError);
+            }, (items) => onSuccess(new PagedList<Question>(items)), onError);
         }
 
         public virtual void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null)
@@ -90,14 +90,14 @@ namespace Stacky
 
         public virtual void GetQuestionTimeline(IEnumerable<int> questionIds, Action<IPagedList<PostEvent>> onSuccess, Action<ApiException> onError, QuestionTimelineOptions options)
         {
-            MakeRequest<QuestionTimelineResponse>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
+            MakeRequest<PostEvent>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<PostEvent>(items.Events, items)), onError);
+            }, (items) => onSuccess(new PagedList<PostEvent>(items)), onError);
         }
 
         public virtual void GetQuestionTimeline(int questionId, Action<IPagedList<PostEvent>> onSuccess, Action<ApiException> onError)
@@ -120,7 +120,7 @@ namespace Stacky
             if (options.NotTagged != null)
                 notTaggedString = String.Join(" ", options.NotTagged.ToArray());
 
-            MakeRequest<QuestionResponse>("search", null, new
+            MakeRequest<Question>("search", null, new
             {
                 site = this.SiteUrlName,
                 intitle = options.InTitle,
@@ -132,7 +132,7 @@ namespace Stacky
                 pagesize = options.PageSize ?? null,
                 min = options.Min ?? null,
                 max = options.Max ?? null
-            }, (items) => onSuccess(new PagedList<Question>(items.Questions, items)), onError);
+            }, (items) => onSuccess(new PagedList<Question>(items)), onError);
         }
     }
 }

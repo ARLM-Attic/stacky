@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Stacky.UnitTests
 {
+    /*
     [TestClass]
     public class StackyEnumerableTests
     {
@@ -196,4 +197,5 @@ namespace Stacky.UnitTests
             Assert.AreEqual(maxNumPages, i);
         }
     }
+    */
 }

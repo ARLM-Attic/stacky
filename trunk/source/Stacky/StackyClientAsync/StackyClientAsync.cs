@@ -50,13 +50,13 @@ namespace Stacky
 
         #region Methods
 
-        public virtual void MakeRequest<T>(string method, string[] urlArguments, object queryStringArguments, Action<T> onSuccess, Action<ApiException> onError)
+        public virtual void MakeRequest<T>(string method, string[] urlArguments, object queryStringArguments, Action<Response<T>> onSuccess, Action<ApiException> onError)
             where T : new()
         {
             MakeRequest<T>(method, urlArguments, UrlHelper.ObjectToDictionary(queryStringArguments), onSuccess, onError);
         }
 
-        public virtual void MakeRequest<T>(string method, string[] urlArguments, Dictionary<string, string> queryStringArguments, Action<T> onSuccess, Action<ApiException> onError)
+        public virtual void MakeRequest<T>(string method, string[] urlArguments, Dictionary<string, string> queryStringArguments, Action<Response<T>> onSuccess, Action<ApiException> onError)
              where T : new()
         {
             try
@@ -74,7 +74,7 @@ namespace Stacky
             }
         }
 
-        public virtual void ParseResponse<T>(HttpResponse httpResponse, Action<T> onSuccess, Action<ApiException> onError)
+        public virtual void ParseResponse<T>(HttpResponse httpResponse, Action<Response<T>> onSuccess, Action<ApiException> onError)
             where T : new()
         {
             if (httpResponse.Error != null && String.IsNullOrEmpty(httpResponse.Body))

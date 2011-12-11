@@ -7,10 +7,10 @@ namespace Stacky
     {
         public virtual SiteStats GetSiteStats()
         {
-            return MakeRequest<StatsResponse>("stats", null, new
+            return MakeRequest<SiteStats>("stats", null, new
             {
                 site = this.SiteUrlName
-            }).Statistics.FirstOrDefault();
+            }).Items.FirstOrDefault();
         }
     }
 }

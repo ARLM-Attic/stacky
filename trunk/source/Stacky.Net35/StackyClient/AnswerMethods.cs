@@ -22,7 +22,7 @@ namespace Stacky
 
         public virtual IPagedList<Answer> GetUsersAnswers(IEnumerable<int> userIds, AnswerOptions options)
         {
-            var response = MakeRequest<AnswerResponse>("users", new string[] { userIds.Vectorize(), "answers" }, new
+            var response = MakeRequest<Answer>("users", new string[] { userIds.Vectorize(), "answers" }, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -36,7 +36,7 @@ namespace Stacky
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null
             });
-            return new PagedList<Answer>(response.Answers, response);
+            return new PagedList<Answer>(response);
         }
 
         public virtual IPagedList<Answer> GetQuestionAnswers(IEnumerable<int> questionIds)
@@ -46,7 +46,7 @@ namespace Stacky
 
         public virtual IPagedList<Answer> GetQuestionAnswers(IEnumerable<int> questionIds, AnswerOptions options)
         {
-            var response = MakeRequest<AnswerResponse>("questions", new string[] { questionIds.Vectorize(), "answers" }, new
+            var response = MakeRequest<Answer>("questions", new string[] { questionIds.Vectorize(), "answers" }, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -60,7 +60,7 @@ namespace Stacky
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null
             });
-            return new PagedList<Answer>(response.Answers, response);
+            return new PagedList<Answer>(response);
         }
 
         public virtual IPagedList<Answer> GetQuestionAnswers(int questionId)
@@ -90,7 +90,7 @@ namespace Stacky
 
         public virtual IPagedList<Answer> GetAnswers(IEnumerable<int> answerIds, AnswerOptions options)
         {
-            var response = MakeRequest<AnswerResponse>("answers", new string[] { answerIds.Vectorize() }, new
+            var response = MakeRequest<Answer>("answers", new string[] { answerIds.Vectorize() }, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -103,7 +103,7 @@ namespace Stacky
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null
             });
-            return new PagedList<Answer>(response.Answers, response);
+            return new PagedList<Answer>(response);
         }
     }
 }

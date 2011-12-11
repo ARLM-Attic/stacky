@@ -1,19 +1,34 @@
-﻿using System.Collections.Generic;
-
-namespace Stacky
+﻿namespace Stacky
 {
+    using System.Collections.Generic;
+
     public class PagedList<T> : IPagedList<T>
     {
-        public int TotalItems { get; set; }
-        public int CurrentPage { get; set; }
-        public int PageSize { get; set; }
+        public int TotalItems { get; private set; }
+        public int CurrentPage { get; private set; }
+        public int PageSize { get; private set; }
+
+        public int Count
+        {
+            get
+            {
+                if (Items == null)
+                    return 0;
+                return Items.Count;
+            }
+        }
 
         public PagedList(IEnumerable<T> items)
         {
             Items = new List<T>(items);
         }
 
-        public PagedList(IEnumerable<T> items, Response response)
+        public PagedList(Response<T> response)
+            : this(response.Items, response)
+        {
+        }
+
+        private PagedList(IEnumerable<T> items, Response response)
             : this(items)
         {
             TotalItems = response.Total;

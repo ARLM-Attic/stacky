@@ -22,7 +22,7 @@ namespace Stacky
                 urlParameters = new string[] { fromUserIds.Vectorize(), "comments" };
             }
 
-            var response = MakeRequest<CommentResponse>("users", urlParameters, new
+            var response = MakeRequest<Comment>("users", urlParameters, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -34,7 +34,7 @@ namespace Stacky
                 min = options.Min ?? null,
                 max = options.Max ?? null
             });
-            return new PagedList<Comment>(response.Comments, response);
+            return new PagedList<Comment>(response);
         }
 
         public virtual IPagedList<Comment> GetComments(int fromUserId)
@@ -64,7 +64,7 @@ namespace Stacky
 
         public virtual IPagedList<Comment> GetCommentsByPost(IEnumerable<int> postIds, CommentsByPostOptions options)
         {
-            var response = MakeRequest<CommentResponse>("posts", new string[] { postIds.Vectorize(), "comments" }, new
+            var response = MakeRequest<Comment>("posts", new string[] { postIds.Vectorize(), "comments" }, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -74,7 +74,7 @@ namespace Stacky
                 sort = options.SortBy.ToString().ToLower(),
                 order = GetSortDirection(options.SortDirection),
             });
-            return new PagedList<Comment>(response.Comments, response);
+            return new PagedList<Comment>(response);
         }
 
         public virtual IPagedList<Comment> GetAnswerComments(int answerId)
@@ -94,7 +94,7 @@ namespace Stacky
 
         public virtual IPagedList<Comment> GetAnswerComments(IEnumerable<int> answerIds, CommentsByPostOptions options)
         {
-            var response = MakeRequest<CommentResponse>("answers", new string[] { answerIds.Vectorize(), "comments" }, new
+            var response = MakeRequest<Comment>("answers", new string[] { answerIds.Vectorize(), "comments" }, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -106,7 +106,7 @@ namespace Stacky
                 min = options.Min ?? null,
                 max = options.Max ?? null
             });
-            return new PagedList<Comment>(response.Comments, response);
+            return new PagedList<Comment>(response);
         }
     }
 }

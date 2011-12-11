@@ -52,7 +52,7 @@ namespace Stacky
 
         private IPagedList<Question> GetQuestions(string method, string[] urlArguments, string sort, string sortDirection, int? page, int? pageSize, bool includeBody, bool includeComments, bool includeAnswers, DateTime? fromDate, DateTime? toDate, int? min, int? max, params string[] tags)
         {
-            var response = MakeRequest<QuestionResponse>(method, urlArguments, new
+            var response = MakeRequest<Question>(method, urlArguments, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -68,7 +68,7 @@ namespace Stacky
                 min = min ?? null,
                 max = max ?? null
             });
-            return new PagedList<Question>(response.Questions, response);
+            return new PagedList<Question>(response);
         }
 
         public virtual Question GetQuestion(int questionId)
@@ -88,7 +88,7 @@ namespace Stacky
 
         public virtual IPagedList<PostEvent> GetQuestionTimeline(IEnumerable<int> questionIds, QuestionTimelineOptions options)
         {
-            var response = MakeRequest<QuestionTimelineResponse>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
+            var response = MakeRequest<PostEvent>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -96,7 +96,7 @@ namespace Stacky
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null
             });
-            return new PagedList<PostEvent>(response.Events, response);
+            return new PagedList<PostEvent>(response);
         }
 
         public virtual IEnumerable<PostEvent> GetQuestionTimeline(int questionId)
@@ -119,7 +119,7 @@ namespace Stacky
             if (options.NotTagged != null)
                 notTaggedString = String.Join(" ", options.NotTagged.ToArray());
 
-            var response = MakeRequest<QuestionResponse>("search", null, new
+            var response = MakeRequest<Question>("search", null, new
             {
                 site = this.SiteUrlName,
                 intitle = options.InTitle,
@@ -132,7 +132,7 @@ namespace Stacky
                 min = options.Min ?? null,
                 max = options.Max ?? null
             });
-            return new PagedList<Question>(response.Questions, response);
+            return new PagedList<Question>(response);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Stacky
 
         private IPagedList<User> GetUsers(UserOptions options, string[] urlParameters)
         {
-            var response = MakeRequest<UserResponse>("users", urlParameters, new
+            var response = MakeRequest<User>("users", urlParameters, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -41,7 +41,7 @@ namespace Stacky
                 min = options.Min ?? null,
                 max = options.Max ?? null
             });
-            return new PagedList<User>(response.Users, response);
+            return new PagedList<User>(response);
         }
 
         public virtual User GetUser(int userId)
@@ -66,7 +66,7 @@ namespace Stacky
 
         public virtual IPagedList<Comment> GetUserMentions(IEnumerable<int> userIds, UserMentionsOptions options)
         {
-            var response = MakeRequest<CommentResponse>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
+            var response = MakeRequest<Comment>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -79,7 +79,7 @@ namespace Stacky
                 min = options.Min ?? null,
                 max = options.Max ?? null
             });
-            return new PagedList<Comment>(response.Comments, response);
+            return new PagedList<Comment>(response);
         }
 
         public virtual IPagedList<UserEvent> GetUserTimeline(int userId)
@@ -99,7 +99,7 @@ namespace Stacky
 
         public virtual IPagedList<UserEvent> GetUserTimeline(IEnumerable<int> userIds, UserTimelineOptions options)
         {
-            var response = MakeRequest<UserEventResponse>("users", new string[] { userIds.Vectorize(), "timeline" }, new
+            var response = MakeRequest<UserEvent>("users", new string[] { userIds.Vectorize(), "timeline" }, new
             {
                 site = this.SiteUrlName,
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
@@ -107,7 +107,7 @@ namespace Stacky
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null
             });
-            return new PagedList<UserEvent>(response.Events, response);
+            return new PagedList<UserEvent>(response);
         }
 
         public virtual IPagedList<Reputation> GetUserReputation(int userId)
@@ -127,7 +127,7 @@ namespace Stacky
 
         public virtual IPagedList<Reputation> GetUserReputation(IEnumerable<int> userIds, ReputationOptions options)
         {
-            var response = MakeRequest<ReputationResponse>("users", new string[] { userIds.Vectorize(), "reputation" }, new
+            var response = MakeRequest<Reputation>("users", new string[] { userIds.Vectorize(), "reputation" }, new
             {
                 site = this.SiteUrlName,
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
@@ -135,7 +135,7 @@ namespace Stacky
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null
             });
-            return new PagedList<Reputation>(response.Reputation, response);
+            return new PagedList<Reputation>(response);
         }
 
         public virtual IPagedList<User> GetModerators()

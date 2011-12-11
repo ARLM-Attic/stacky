@@ -12,12 +12,12 @@ namespace Stacky
     {
         public virtual void GetRevisions(IEnumerable<int> ids, Action<IEnumerable<Revision>> onSuccess, Action<ApiException> onError, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<RevisionResponse>("revisions", new string[] { ids.Vectorize() }, new
+            MakeRequest<Revision>("revisions", new string[] { ids.Vectorize() }, new
             {
                 site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(items.Revisions), onError);
+            }, (items) => onSuccess(items.Items), onError);
         }
 
         public virtual void GetRevisions(int id, Action<IEnumerable<Revision>> onSuccess, Action<ApiException> onError, DateTime? fromDate = null, DateTime? toDate = null)
@@ -27,10 +27,10 @@ namespace Stacky
 
         public virtual void GetRevision(int id, Guid revision, Action<Revision> onSuccess, Action<ApiException> onError = null)
         {
-            MakeRequest<RevisionResponse>("revisions", new string[] { id.ToString(), revision.ToString() }, new
+            MakeRequest<Revision>("revisions", new string[] { id.ToString(), revision.ToString() }, new
             {
                 site = this.SiteUrlName
-            }, returnedItems => onSuccess(returnedItems.Revisions.FirstOrDefault()), onError);
+            }, returnedItems => onSuccess(returnedItems.Items.FirstOrDefault()), onError);
         }
     }
 }

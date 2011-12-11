@@ -25,7 +25,7 @@ namespace Stacky
 
         private IPagedList<Question> GetQuestions(string method, string[] urlArguments, string sort, string sortDirection, int? page, int? pageSize, bool includeBody, bool includeComments, bool includeAnswers, DateTime? fromDate, DateTime? toDate, int? min = null, int? max = null, params string[] tags)
         {
-            var response = MakeRequest<QuestionResponse>(method, urlArguments, new
+            var response = MakeRequest<Question>(method, urlArguments, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -41,12 +41,12 @@ namespace Stacky
                 min = min ?? null,
                 max = max ?? null
             });
-            return new PagedList<Question>(response.Questions, response);
+            return new PagedList<Question>(response);
         }
 
         public virtual IPagedList<Question> GetQuestions(IEnumerable<int> questionIds, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string[] tags = null)
         {
-            var response = MakeRequest<QuestionResponse>("questions", new string[] { questionIds.Vectorize() }, new
+            var response = MakeRequest<Question>("questions", new string[] { questionIds.Vectorize() }, new
             {
                 site = this.SiteUrlName,
                 body = includeBody ? (bool?)true : null,
@@ -59,7 +59,7 @@ namespace Stacky
                 min = min ?? null,
                 max = max ?? null
             });
-            return new PagedList<Question>(response.Questions, response);
+            return new PagedList<Question>(response);
         }
 
         public virtual Question GetQuestion(int questionId, bool includeBody = false, bool includeComments = false, bool includeAnswers = false)
@@ -69,7 +69,7 @@ namespace Stacky
 
         public virtual IPagedList<PostEvent> GetQuestionTimeline(IEnumerable<int> questionIds, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            var response = MakeRequest<QuestionTimelineResponse>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
+            var response = MakeRequest<PostEvent>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
             {
                 site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
@@ -77,7 +77,7 @@ namespace Stacky
                 page = page ?? null,
                 pagesize = pageSize ?? null
             });
-            return new PagedList<PostEvent>(response.Events, response);
+            return new PagedList<PostEvent>(response);
         }
 
         public virtual IPagedList<PostEvent> GetQuestionTimeline(int questionId, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
@@ -95,7 +95,7 @@ namespace Stacky
             if (notTagged != null)
                 notTaggedString = String.Join(";", notTagged);
 
-            var response = MakeRequest<QuestionResponse>("search", null, new
+            var response = MakeRequest<Question>("search", null, new
             {
                 site = this.SiteUrlName,
                 intitle = inTitle,
@@ -106,7 +106,7 @@ namespace Stacky
                 page = page ?? null,
                 pagesize = pageSize ?? null
             });
-            return new PagedList<Question>(response.Questions, response);
+            return new PagedList<Question>(response);
         }
 
         public virtual IPagedList<Question> GetLinkedQuestions(int questionId, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
@@ -144,7 +144,7 @@ namespace Stacky
             if (notTagged != null)
                 notTaggedString = String.Join(";", notTagged);
 
-            return MakeRequest<QuestionResponse>("similar", null, new
+            return MakeRequest<Question>("similar", null, new
             {
                 site = this.SiteUrlName,
                 title = title,
@@ -153,7 +153,7 @@ namespace Stacky
                 answers = includeAnswers ? (bool?)true : null,
                 tagged = taggedString,
                 nottagged = notTaggedString
-            }).Questions;
+            }).Items;
         }
     }
 }

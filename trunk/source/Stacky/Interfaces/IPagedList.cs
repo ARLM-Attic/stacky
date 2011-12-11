@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace Stacky
+﻿namespace Stacky
 {
+    using System.Collections.Generic;
+
     public interface IPagedList<T> : IEnumerable<T>
     {
-        int TotalItems { get; set; }
-        int CurrentPage { get; set; }
-        int PageSize { get; set; }
+        int TotalItems { get; }
+        int CurrentPage { get; }
+        int PageSize { get; }
+        int Count { get; }
     }
 }
