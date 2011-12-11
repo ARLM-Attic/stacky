@@ -14,12 +14,12 @@ namespace Stacky
 
         public virtual IEnumerable<Revision> GetRevisions(IEnumerable<int> ids, DateTime? fromDate, DateTime? toDate)
         {
-            return MakeRequest<RevisionResponse>("revisions", new string[] { ids.Vectorize() }, new
+            return MakeRequest<Revision>("revisions", new string[] { ids.Vectorize() }, new
             {
                 site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }).Revisions;
+            }).Items;
         }
 
         public virtual IEnumerable<Revision> GetRevisions(int id)
@@ -34,10 +34,10 @@ namespace Stacky
 
         public virtual Revision GetRevision(int id, Guid revision)
         {
-            return MakeRequest<RevisionResponse>("revisions", new string[] { id.ToString(), revision.ToString() }, new
+            return MakeRequest<Revision>("revisions", new string[] { id.ToString(), revision.ToString() }, new
             {
                 site = this.SiteUrlName
-            }).Revisions.FirstOrDefault();
+            }).Items.FirstOrDefault();
         }
     }
 }

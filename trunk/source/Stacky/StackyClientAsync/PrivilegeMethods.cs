@@ -16,10 +16,10 @@ namespace Stacky
         /// <param name="onError"></param>
         public void GetPrivileges(Action<IEnumerable<Privilege>> onSuccess, Action<ApiException> onError)
         {
-            MakeRequest<PrivilegeResponse>("privileges", null, new
+            MakeRequest<Privilege>("privileges", null, new
             {
                 site = this.SiteUrlName
-            }, (items) => onSuccess(items.Privileges), onError);
+            }, (items) => onSuccess(items.Items), onError);
         }
     }
 }

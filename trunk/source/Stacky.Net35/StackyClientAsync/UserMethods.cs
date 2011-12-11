@@ -12,7 +12,7 @@ namespace Stacky
     {
         private void GetUsers(Action<IPagedList<User>> onSuccess, Action<ApiException> onError, string[] urlParameters, UserOptions options)
         {
-            MakeRequest<UserResponse>("users", urlParameters, new
+            MakeRequest<User>("users", urlParameters, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -24,7 +24,7 @@ namespace Stacky
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
                 min = options.Min ?? null,
                 max = options.Max ?? null
-            }, (items) => onSuccess(new PagedList<User>(items.Users, items)), onError);
+            }, (items) => onSuccess(new PagedList<User>(items)), onError);
         }
 
         public virtual void GetUsers(Action<IPagedList<User>> onSuccess, Action<ApiException> onError)
@@ -69,7 +69,7 @@ namespace Stacky
 
         public virtual void GetUserMentions(IEnumerable<int> userIds, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError, UserOptions options)
         {
-            MakeRequest<CommentResponse>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
+            MakeRequest<Comment>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
@@ -81,7 +81,7 @@ namespace Stacky
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
                 min = options.Min ?? null,
                 max = options.Max ?? null
-            }, (items) => onSuccess(new PagedList<Comment>(items.Comments, items)), onError);
+            }, (items) => onSuccess(new PagedList<Comment>(items)), onError);
         }
 
         public virtual void GetUserTimeline(int userId, Action<IPagedList<UserEvent>> onSuccess, Action<ApiException> onError)
@@ -101,14 +101,14 @@ namespace Stacky
 
         public virtual void GetUserTimeline(IEnumerable<int> userIds, Action<IPagedList<UserEvent>> onSuccess, Action<ApiException> onError, UserTimelineOptions options)
         {
-            MakeRequest<UserEventResponse>("users", new string[] { userIds.Vectorize(), "timeline" }, new
+            MakeRequest<UserEvent>("users", new string[] { userIds.Vectorize(), "timeline" }, new
             {
                 site = this.SiteUrlName,
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null
-            }, (items) => onSuccess(new PagedList<UserEvent>(items.Events, items)), onError);
+            }, (items) => onSuccess(new PagedList<UserEvent>(items)), onError);
         }
 
         public virtual void GetUserReputation(int userId, Action<IPagedList<Reputation>> onSuccess, Action<ApiException> onError)
@@ -128,14 +128,14 @@ namespace Stacky
 
         public virtual void GetUserReputation(IEnumerable<int> userIds, Action<IPagedList<Reputation>> onSuccess, Action<ApiException> onError, ReputationOptions options)
         {
-            MakeRequest<ReputationResponse>("users", new string[] { userIds.Vectorize(), "reputation" }, new
+            MakeRequest<Reputation>("users", new string[] { userIds.Vectorize(), "reputation" }, new
             {
                 site = this.SiteUrlName,
                 fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
                 todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null
-            }, (items) => onSuccess(new PagedList<Reputation>(items.Reputation, items)), onError);
+            }, (items) => onSuccess(new PagedList<Reputation>(items)), onError);
         }
     }
 }

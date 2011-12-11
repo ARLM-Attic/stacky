@@ -28,7 +28,7 @@ namespace Stacky
 
         private void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, string method, string[] urlArgs, string sort, string order, int? page, int? pageSize, bool includeBody, bool includeComments, bool includeAnswers, DateTime? fromDate, DateTime? toDate, int? min, int? max, params string[] tags)
         {
-            MakeRequest<QuestionResponse>(method, urlArgs, new
+            MakeRequest<Question>(method, urlArgs, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -43,12 +43,12 @@ namespace Stacky
                 order = order,
                 min = min,
                 max = max
-            }, (items) => onSuccess(new PagedList<Question>(items.Questions, items)), onError);
+            }, (items) => onSuccess(new PagedList<Question>(items)), onError);
         }
 
         public virtual void GetQuestions(IEnumerable<int> questionIds, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false)
         {
-            MakeRequest<QuestionResponse>("questions", new string[] { questionIds.Vectorize() }, new
+            MakeRequest<Question>("questions", new string[] { questionIds.Vectorize() }, new
             {
                 site = this.SiteUrlName,
                 body = includeBody ? (bool?)true : null,
@@ -56,7 +56,7 @@ namespace Stacky
                 answers = includeAnswers ? (bool?)true : null,
                 page = page ?? null,
                 pagesize = pageSize ?? null
-            }, (items) => onSuccess(new PagedList<Question>(items.Questions, items)), onError);
+            }, (items) => onSuccess(new PagedList<Question>(items)), onError);
         }
 
         public virtual void GetQuestion(int questionId, Action<Question> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false)
@@ -66,14 +66,14 @@ namespace Stacky
 
         public virtual void GetQuestionTimeline(IEnumerable<int> questionIds, Action<IPagedList<PostEvent>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<QuestionTimelineResponse>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
+            MakeRequest<PostEvent>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
             {
                 site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
                 page = page ?? null,
                 pagesize = pageSize ?? null
-            }, (items) => onSuccess(new PagedList<PostEvent>(items.Events, items)), onError);
+            }, (items) => onSuccess(new PagedList<PostEvent>(items)), onError);
         }
 
         public virtual void GetQuestionTimeline(int questionId, Action<IPagedList<PostEvent>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
@@ -91,7 +91,7 @@ namespace Stacky
             if (notTagged != null)
                 notTaggedString = String.Join(" ", notTagged.ToArray());
 
-            MakeRequest<QuestionResponse>("search", null, new
+            MakeRequest<Question>("search", null, new
             {
                 site = this.SiteUrlName,
                 intitle = inTitle,
@@ -101,7 +101,7 @@ namespace Stacky
                 order = GetSortDirection(sortDirection),
                 page = page ?? null,
                 pagesize = pageSize ?? null
-            }, (items) => onSuccess(new PagedList<Question>(items.Questions, items)), onError);
+            }, (items) => onSuccess(new PagedList<Question>(items)), onError);
         }
 
         public virtual void GetLinkedQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, int questionId, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
@@ -139,7 +139,7 @@ namespace Stacky
             if (notTagged != null)
                 notTaggedString = String.Join(";", notTagged.ToArray());
 
-            MakeRequest<QuestionResponse>("similar", null, new
+            MakeRequest<Question>("similar", null, new
             {
                 site = this.SiteUrlName,
                 title = title,
@@ -148,7 +148,7 @@ namespace Stacky
                 answers = includeAnswers ? (bool?)true : null,
                 tagged = taggedString,
                 nottagged = notTaggedString
-            }, (items) => onSuccess(items.Questions), onError);
+            }, (items) => onSuccess(items.Items), onError);
         }
     }
 }

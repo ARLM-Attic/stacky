@@ -8,7 +8,7 @@ namespace Stacky
     {
         public virtual IPagedList<User> GetUsers(UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, string filter = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
         {
-            var response = MakeRequest<UserResponse>("users", null, new
+            var response = MakeRequest<User>("users", null, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -21,12 +21,12 @@ namespace Stacky
                 min = min ?? null,
                 max = max ?? null
             });
-            return new PagedList<User>(response.Users, response);
+            return new PagedList<User>(response);
         }
 
         public virtual IPagedList<User> GetUsers(IEnumerable<int> userIds, UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, string filter = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
         {
-           var response = MakeRequest<UserResponse>("users", new string[] { userIds.Vectorize() }, new
+           var response = MakeRequest<User>("users", new string[] { userIds.Vectorize() }, new
            {
                site = this.SiteUrlName,
                page = page ?? null,
@@ -39,7 +39,7 @@ namespace Stacky
                min = min ?? null,
                max = max ?? null
            });
-           return new PagedList<User>(response.Users, response);
+           return new PagedList<User>(response);
         }
 
         public virtual User GetUser(int userId)
@@ -54,7 +54,7 @@ namespace Stacky
 
         public virtual IPagedList<Comment> GetUserMentions(IEnumerable<int> userIds, UserMentionSort sortBy = UserMentionSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
         {
-            var response = MakeRequest<CommentResponse>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
+            var response = MakeRequest<Comment>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
             {
                 site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
@@ -66,7 +66,7 @@ namespace Stacky
                 sort = sortBy.ToString().ToLower(),
                 order = GetSortDirection(sortDirection)
             });
-            return new PagedList<Comment>(response.Comments, response);
+            return new PagedList<Comment>(response);
         }
 
         public virtual IPagedList<UserEvent> GetUserTimeline(int userId, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
@@ -76,7 +76,7 @@ namespace Stacky
 
         public virtual IPagedList<UserEvent> GetUserTimeline(IEnumerable<int> userIds, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            var response = MakeRequest<UserEventResponse>("users", new string[] { userIds.Vectorize(), "timeline" }, new
+            var response = MakeRequest<UserEvent>("users", new string[] { userIds.Vectorize(), "timeline" }, new
             {
                 site = this.SiteUrlName,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
@@ -84,7 +84,7 @@ namespace Stacky
                 page = page ?? null,
                 pagesize = pageSize ?? null
             });
-            return new PagedList<UserEvent>(response.Events, response);
+            return new PagedList<UserEvent>(response);
         }
 
         public virtual IPagedList<Reputation> GetUserReputation(int userId, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
@@ -94,7 +94,7 @@ namespace Stacky
 
         public virtual IPagedList<Reputation> GetUserReputation(IEnumerable<int> userIds, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            var response = MakeRequest<ReputationResponse>("users", new string[] { userIds.Vectorize(), "reputation" }, new
+            var response = MakeRequest<Reputation>("users", new string[] { userIds.Vectorize(), "reputation" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -102,12 +102,12 @@ namespace Stacky
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
             });
-            return new PagedList<Reputation>(response.Reputation, response);
+            return new PagedList<Reputation>(response);
         }
 
         public virtual IPagedList<User> GetModerators(int? page = null, int? pageSize = null, UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, string filter = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            var response = MakeRequest<UserResponse>("users", new string[] { "moderators" }, new
+            var response = MakeRequest<User>("users", new string[] { "moderators" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -118,7 +118,7 @@ namespace Stacky
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
             });
-            return new PagedList<User>(response.Users, response);
+            return new PagedList<User>(response);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Stacky
         /// </summary>
         public virtual IPagedList<Question> GetNoAnswerQuestions(IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
         {
-            var response = MakeRequest<QuestionResponse>("users", new string[] { userIds.Vectorize(), "questions", "no-answers" }, new
+            var response = MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "no-answers" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -151,7 +151,7 @@ namespace Stacky
                 comments = includeComments,
                 answers = includeAnswers
             });
-            return new PagedList<Question>(response.Questions, response);
+            return new PagedList<Question>(response);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Stacky
         /// </summary>
         public virtual IPagedList<Question> GetUnacceptedQuestions(IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
         {
-            var response = MakeRequest<QuestionResponse>("users", new string[] { userIds.Vectorize(), "questions", "unaccepted" }, new
+            var response = MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "unaccepted" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -184,7 +184,7 @@ namespace Stacky
                 comments = includeComments,
                 answers = includeAnswers
             });
-            return new PagedList<Question>(response.Questions, response);
+            return new PagedList<Question>(response);
         }
 
         public virtual IPagedList<Question> GetUnansweredQuestions(int userId, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
@@ -194,7 +194,7 @@ namespace Stacky
 
         public virtual IPagedList<Question> GetUnansweredQuestions(IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
         {
-            var response = MakeRequest<QuestionResponse>("users", new string[] { userIds.Vectorize(), "questions", "unanswered" }, new
+            var response = MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "unanswered" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -209,7 +209,7 @@ namespace Stacky
                 comments = includeComments,
                 answers = includeAnswers
             });
-            return new PagedList<Question>(response.Questions, response);
+            return new PagedList<Question>(response);
         }
 
         /// <summary>
@@ -221,20 +221,20 @@ namespace Stacky
         }
 
         /// <summary>
-        /// Returns the top 30 answer a user has posted in resposne to questions with the given tags.
+        /// Returns the top 30 answer a user has posted in response to questions with the given tags.
         /// </summary>
         public virtual IEnumerable<Answer> GetTopTaggedAnswers(int userId, IEnumerable<string> tags, bool? includeBody = null, bool? includeComments = null)
         {
             if (tags == null)
                 throw new ArgumentNullException("tags");
 
-            var response = MakeRequest<AnswerResponse>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-answers" }, new
+            var response = MakeRequest<Answer>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-answers" }, new
             {
                 site = this.SiteUrlName,
                 body = includeBody,
                 comments = includeComments
             });
-            return response.Answers;
+            return response.Items;
         }
 
         /// <summary>
@@ -253,14 +253,14 @@ namespace Stacky
             if (tags == null)
                 throw new ArgumentNullException("tags");
 
-            var response = MakeRequest<QuestionResponse>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-questions" }, new
+            var response = MakeRequest<Question>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-questions" }, new
             {
                 site = this.SiteUrlName,
                 body = includeBody,
                 comments = includeComments,
                 answers = includeAnswers
             });
-            return response.Questions;
+            return response.Items;
         }
 
         /// <summary>
@@ -268,12 +268,12 @@ namespace Stacky
         /// </summary>
         public virtual IEnumerable<TopTag> GetTopAnswerTags(int userId)
         {
-            var response = MakeRequest<TopTagResponse>("users", new string[] { userId.ToString(), "top-answer-tags" }, new
+            var response = MakeRequest<TopTag>("users", new string[] { userId.ToString(), "top-answer-tags" }, new
             {
                 site = this.SiteUrlName,
                 id = userId
             });
-            return response.TopTags;
+            return response.Items;
         }
 
         /// <summary>
@@ -281,12 +281,12 @@ namespace Stacky
         /// </summary>
         public virtual IEnumerable<TopTag> GetTopQuestionTags(int userId)
         {
-            var response = MakeRequest<TopTagResponse>("users", new string[] { userId.ToString(), "top-question-tags" }, new
+            var response = MakeRequest<TopTag>("users", new string[] { userId.ToString(), "top-question-tags" }, new
             {
                 site = this.SiteUrlName,
                 id = userId
             });
-            return response.TopTags;
+            return response.Items;
         }
     }
 }

@@ -12,10 +12,10 @@ namespace Stacky
 
         private IEnumerable<Badge> GetBadges(string method, string[] urlArguments)
         {
-            return MakeRequest<BadgeResponse>(method, urlArguments, new
+            return MakeRequest<Badge>(method, urlArguments, new
             {
                 site = this.SiteUrlName,
-            }).Badges;
+            }).Items;
         }
 
         public virtual IEnumerable<User> GetUsersByBadge(int badgeId, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
@@ -25,7 +25,7 @@ namespace Stacky
 
         public virtual IPagedList<User> GetUsersByBadge(IEnumerable<int> badgeIds, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            var response = MakeRequest<UserResponse>("badges", new string[] { badgeIds.Vectorize() }, new
+            var response = MakeRequest<User>("badges", new string[] { badgeIds.Vectorize() }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -33,7 +33,7 @@ namespace Stacky
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
             });
-            return new PagedList<User>(response.Users, response);
+            return new PagedList<User>(response);
         }
 
         public virtual IEnumerable<Badge> GetTagBasedBadges()
@@ -48,10 +48,10 @@ namespace Stacky
 
         public virtual IEnumerable<Badge> GetUserBadges(IEnumerable<int> userIds)
         {
-            return MakeRequest<BadgeResponse>("users", new string[] { userIds.Vectorize(), "badges" }, new
+            return MakeRequest<Badge>("users", new string[] { userIds.Vectorize(), "badges" }, new
             {
                 site = this.SiteUrlName
-            }).Badges;
+            }).Items;
         }
     }
 }

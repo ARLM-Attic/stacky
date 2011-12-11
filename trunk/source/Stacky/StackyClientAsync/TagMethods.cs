@@ -16,14 +16,14 @@ namespace Stacky
 
         private void GetTags(Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError, string method, string[] urlParameters, string sort, string order, int? page = null, int? pageSize = null)
         {
-            MakeRequest<TagResponse>(method, urlParameters, new
+            MakeRequest<Tag>(method, urlParameters, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
                 sort = sort,
                 order = order
-            }, (items) => onSuccess(new PagedList<Tag>(items.Tags, items)), onError);
+            }, (items) => onSuccess(new PagedList<Tag>(items)), onError);
         }
 
         public virtual void GetTagsByUser(int userId, Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null)
@@ -39,7 +39,7 @@ namespace Stacky
 
         public virtual void GetAllTagSynonyms(Action<IPagedList<TagSynonym>> onSuccess, Action<ApiException> onError, TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null)
         {
-            MakeRequest<TagSynonymResponse>("tags", new string[] { "synonyms" }, new
+            MakeRequest<TagSynonym>("tags", new string[] { "synonyms" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -48,7 +48,7 @@ namespace Stacky
                 order = GetSortDirection(sortDirection),
                 max = max,
                 min = min
-            }, (items) => onSuccess(new PagedList<TagSynonym>(items.TagSynonyms, items)), onError);
+            }, (items) => onSuccess(new PagedList<TagSynonym>(items)), onError);
         }
 
         public virtual void GetTagSynonyms(Action<IPagedList<TagSynonym>> onSuccess, Action<ApiException> onError, string tag, TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
@@ -58,7 +58,7 @@ namespace Stacky
 
         public virtual void GetTagSynonyms(Action<IPagedList<TagSynonym>> onSuccess, Action<ApiException> onError, IEnumerable<string> tags, TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<TagSynonymResponse>("tags", new string[] { tags.Vectorize(), "synonyms" }, new
+            MakeRequest<TagSynonym>("tags", new string[] { tags.Vectorize(), "synonyms" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -69,7 +69,7 @@ namespace Stacky
                 min = min,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<TagSynonym>(items.TagSynonyms, items)), onError);
+            }, (items) => onSuccess(new PagedList<TagSynonym>(items)), onError);
         }
 
         public void GetTagWikis(Action<IEnumerable<TagWiki>> onSuccess, Action<ApiException> onError, string tag)
@@ -79,10 +79,10 @@ namespace Stacky
 
         public void GetTagWikis(Action<IEnumerable<TagWiki>> onSuccess, Action<ApiException> onError, IEnumerable<string> tags)
         {
-            MakeRequest<TagWikiResponse>("tags", new string[] { tags.Vectorize(), "wikis" }, new
+            MakeRequest<TagWiki>("tags", new string[] { tags.Vectorize(), "wikis" }, new
             {
                 site = this.SiteUrlName,
-            }, (items) => onSuccess(items.TagWikis), onError);
+            }, (items) => onSuccess(items.Items), onError);
         }
 
         /// <summary>
@@ -109,10 +109,10 @@ namespace Stacky
         public void GetTopAskers(Action<IEnumerable<TopUser>> onSuccess, Action<ApiException> onError, IEnumerable<string> tags, TopUserPeriod period)
         {
             var sortArgs = period.GetAttribute<SortArgsAttribute>();
-            MakeRequest<TopUserResponse>("tags", new string[] { tags.Vectorize(), "top-askers", sortArgs.Sort }, new
+            MakeRequest<TopUser>("tags", new string[] { tags.Vectorize(), "top-askers", sortArgs.Sort }, new
             {
                 site = this.SiteUrlName,
-            }, (items) => onSuccess(items.TopUsers), onError);
+            }, (items) => onSuccess(items.Items), onError);
         }
 
         /// <summary>
@@ -139,10 +139,10 @@ namespace Stacky
         public void GetTopAnswerers(Action<IEnumerable<TopUser>> onSuccess, Action<ApiException> onError, IEnumerable<string> tags, TopUserPeriod period)
         {
             var sortArgs = period.GetAttribute<SortArgsAttribute>();
-            MakeRequest<TopUserResponse>("tags", new string[] { tags.Vectorize(), "top-answerers", sortArgs.Sort }, new
+            MakeRequest<TopUser>("tags", new string[] { tags.Vectorize(), "top-answerers", sortArgs.Sort }, new
             {
                 site = this.SiteUrlName,
-            }, (items) => onSuccess(items.TopUsers), onError);
+            }, (items) => onSuccess(items.Items), onError);
         }
     }
 }

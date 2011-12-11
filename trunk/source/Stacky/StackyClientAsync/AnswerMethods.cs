@@ -17,7 +17,7 @@ namespace Stacky
 
         public virtual void GetUsersAnswers(IEnumerable<int> userIds, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError, QuestionsByUserSort sortBy = QuestionsByUserSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<AnswerResponse>("users", new string[] { userIds.Vectorize(), "answers" }, new
+            MakeRequest<Answer>("users", new string[] { userIds.Vectorize(), "answers" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -29,7 +29,7 @@ namespace Stacky
                 max = max ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<Answer>(items.Answers, items)), onError);
+            }, (items) => onSuccess(new PagedList<Answer>(items)), onError);
         }
 
         public virtual void GetQuestionAnswers(int questionId, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError, QuestionsByUserSort sortBy = QuestionsByUserSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false)
@@ -39,7 +39,7 @@ namespace Stacky
 
         public virtual void GetQuestionAnswers(IEnumerable<int> questionIds, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError, QuestionsByUserSort sortBy = QuestionsByUserSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<AnswerResponse>("questions", new string[] { questionIds.Vectorize(), "answers" }, new
+            MakeRequest<Answer>("questions", new string[] { questionIds.Vectorize(), "answers" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -51,7 +51,7 @@ namespace Stacky
                 max = max ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<Answer>(items.Answers, items)), onError);
+            }, (items) => onSuccess(new PagedList<Answer>(items)), onError);
         }
 
         public virtual void GetAnswer(int answerId, Action<Answer> onSuccess, Action<ApiException> onError, bool includeBody = true, bool includeComments = true)
@@ -61,7 +61,7 @@ namespace Stacky
 
         public virtual void GetAnswers(IEnumerable<int> answerIds, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError, AnswerSort sortBy = AnswerSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<AnswerResponse>("answers", new string[] { answerIds.Vectorize() }, new
+            MakeRequest<Answer>("answers", new string[] { answerIds.Vectorize() }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -73,7 +73,7 @@ namespace Stacky
                 max = max ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<Answer>(items.Answers, items)), onError);
+            }, (items) => onSuccess(new PagedList<Answer>(items)), onError);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Stacky
         /// <returns></returns>
         public virtual void GetAnswers(Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError, AnswerSort sortBy = AnswerSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<AnswerResponse>("answers", null, new
+            MakeRequest<Answer>("answers", null, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -109,7 +109,7 @@ namespace Stacky
                 max = max ?? null,
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<Answer>(items.Answers, items)), onError);
+            }, (items) => onSuccess(new PagedList<Answer>(items)), onError);
         }
     }
 }

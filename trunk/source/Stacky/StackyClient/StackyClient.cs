@@ -30,20 +30,20 @@ namespace Stacky
 
         #region Methods
 
-        public T MakeRequest<T>(string method, string[] urlArguments, object queryStringArguments)
+        public Response<T> MakeRequest<T>(string method, string[] urlArguments, object queryStringArguments)
             where T : new()
         {
             return MakeRequest<T>(method, urlArguments, UrlHelper.ObjectToDictionary(queryStringArguments));
         }
 
-        public T MakeRequest<T>(string method, string[] urlArguments, Dictionary<string, string> queryStringArguments)
+        public Response<T> MakeRequest<T>(string method, string[] urlArguments, Dictionary<string, string> queryStringArguments)
              where T : new()
         {
             var httpResponse = GetResponse(method, urlArguments, queryStringArguments);
             return ParseResponse<T>(httpResponse);
         }
 
-        public T ParseResponse<T>(HttpResponse httpResponse)
+        public Response<T> ParseResponse<T>(HttpResponse httpResponse)
             where T : new()
         {
             if (httpResponse.Error != null && String.IsNullOrEmpty(httpResponse.Body))

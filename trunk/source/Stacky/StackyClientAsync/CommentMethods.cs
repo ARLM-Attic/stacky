@@ -21,7 +21,7 @@ namespace Stacky
                 urlParameters = new string[] { fromUserIds.Vectorize(), "comments" };
             }
 
-            MakeRequest<CommentResponse>("users", urlParameters, new
+            MakeRequest<Comment>("users", urlParameters, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -30,7 +30,7 @@ namespace Stacky
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
                 sort = sortBy.ToString().ToLower(),
                 order = GetSortDirection(sortDirection)
-            }, (items) => onSuccess(new PagedList<Comment>(items.Comments, items)), onError);
+            }, (items) => onSuccess(new PagedList<Comment>(items)), onError);
         }
 
         public virtual void GetComments(int fromUserId, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError, CommentSort sortBy = CommentSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? toUserId = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
@@ -45,7 +45,7 @@ namespace Stacky
 
         public virtual void GetCommentsByPost(IEnumerable<int> postIds, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError, CommentSort sortBy = CommentSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            MakeRequest<CommentResponse>("posts", new string[] { postIds.Vectorize(), "comments" }, new
+            MakeRequest<Comment>("posts", new string[] { postIds.Vectorize(), "comments" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -54,7 +54,7 @@ namespace Stacky
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
                 sort = sortBy.ToString().ToLower(),
                 order = GetSortDirection(sortDirection),
-            }, (items) => onSuccess(new PagedList<Comment>(items.Comments, items)), onError);
+            }, (items) => onSuccess(new PagedList<Comment>(items)), onError);
         }
 
         public virtual void GetAnswerComments(int answerId, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError, CommentSort sortBy = CommentSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
@@ -64,7 +64,7 @@ namespace Stacky
 
         public virtual void GetAnswerComments(IEnumerable<int> answerIds, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError, CommentSort sortBy = CommentSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
         {
-            MakeRequest<CommentResponse>("answers", new string[] { answerIds.Vectorize(), "comments" }, new
+            MakeRequest<Comment>("answers", new string[] { answerIds.Vectorize(), "comments" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -75,7 +75,7 @@ namespace Stacky
                 order = GetSortDirection(sortDirection),
                 min = min ?? null,
                 max = max ?? null
-            }, response => onSuccess(new PagedList<Comment>(response.Comments, response)), onError);
+            }, response => onSuccess(new PagedList<Comment>(response)), onError);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Stacky
         /// <returns></returns>
         public virtual void GetComments(Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError, CommentSort sortBy = CommentSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
         {
-            MakeRequest<CommentResponse>("answers", null, new
+            MakeRequest<Comment>("answers", null, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -105,7 +105,7 @@ namespace Stacky
                 order = GetSortDirection(sortDirection),
                 min = min ?? null,
                 max = max ?? null
-            }, response => onSuccess(new PagedList<Comment>(response.Comments, response)), onError);
+            }, response => onSuccess(new PagedList<Comment>(response)), onError);
         }
     }
 }

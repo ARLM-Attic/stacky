@@ -17,7 +17,7 @@ namespace Stacky
                 urlParameters = new string[] { fromUserIds.Vectorize(), "comments" };
             }
 
-            var response = MakeRequest<CommentResponse>("users", urlParameters, new
+            var response = MakeRequest<Comment>("users", urlParameters, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -29,7 +29,7 @@ namespace Stacky
                 min = min ?? null,
                 max = max ?? null
             });
-            return new PagedList<Comment>(response.Comments, response);
+            return new PagedList<Comment>(response);
         }
 
         public virtual IPagedList<Comment> GetComments(int fromUserId, CommentSort sortBy = CommentSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? toUserId = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
@@ -44,7 +44,7 @@ namespace Stacky
 
         public virtual IPagedList<Comment> GetCommentsByPost(IEnumerable<int> postIds, CommentSort sortBy = CommentSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
         {
-            var response = MakeRequest<CommentResponse>("posts", new string[] { postIds.Vectorize(), "comments" }, new
+            var response = MakeRequest<Comment>("posts", new string[] { postIds.Vectorize(), "comments" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -56,7 +56,7 @@ namespace Stacky
                 min = min ?? null,
                 max = max ?? null
             });
-            return new PagedList<Comment>(response.Comments, response);
+            return new PagedList<Comment>(response);
         }
 
         public virtual IPagedList<Comment> GetAnswerComments(int answerId, CommentSort sortBy = CommentSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
@@ -66,7 +66,7 @@ namespace Stacky
 
         public virtual IPagedList<Comment> GetAnswerComments(IEnumerable<int> answerIds, CommentSort sortBy = CommentSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
         {
-            var response = MakeRequest<CommentResponse>("answers", new string[] { answerIds.Vectorize(), "comments" }, new
+            var response = MakeRequest<Comment>("answers", new string[] { answerIds.Vectorize(), "comments" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -78,7 +78,7 @@ namespace Stacky
                 min = min ?? null,
                 max = max ?? null
             });
-            return new PagedList<Comment>(response.Comments, response);
+            return new PagedList<Comment>(response);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Stacky
         /// <returns></returns>
         public virtual IPagedList<Comment> GetComments(CommentSort sortBy = CommentSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
         {
-            var response = MakeRequest<CommentResponse>("answers", null, new
+            var response = MakeRequest<Comment>("answers", null, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -107,7 +107,7 @@ namespace Stacky
                 min = min ?? null,
                 max = max ?? null
             });
-            return new PagedList<Comment>(response.Comments, response);
+            return new PagedList<Comment>(response);
         }
     }
 }

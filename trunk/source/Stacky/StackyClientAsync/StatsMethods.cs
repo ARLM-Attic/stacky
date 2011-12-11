@@ -11,10 +11,10 @@ namespace Stacky
     {
         public virtual void GetSiteStats(Action<SiteStats> onSuccess, Action<ApiException> onError = null)
         {
-            MakeRequest<StatsResponse>("stats", null, new
+            MakeRequest<SiteStats>("stats", null, new
             {
                 site = this.SiteUrlName
-            }, results => onSuccess(results.Statistics.FirstOrDefault()), onError);
+            }, results => onSuccess(results.Items.FirstOrDefault()), onError);
         }
     }
 }

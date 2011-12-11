@@ -4,50 +4,16 @@ using System.Linq;
 
 namespace Stacky
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public partial class StackyClient
-    {
-
-        /// <summary>
-        /// Gets the users answers.
-        /// </summary>
-        /// <param name="userId">The user id.</param>
-        /// <param name="sortBy">The sort by.</param>
-        /// <param name="sortDirection">The sort direction.</param>
-        /// <param name="page">The page.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="includeBody">if set to <c>true</c> [include body].</param>
-        /// <param name="includeComments">if set to <c>true</c> [include comments].</param>
-        /// <param name="min">The min.</param>
-        /// <param name="max">The max.</param>
-        /// <param name="fromDate">From date.</param>
-        /// <param name="toDate">To date.</param>
-        /// <returns></returns>
+    {   
         public virtual IPagedList<Answer> GetUsersAnswers(int userId, QuestionsByUserSort sortBy = QuestionsByUserSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
             return GetUsersAnswers(userId.ToArray(), sortBy, sortDirection, page, pageSize, includeBody, includeComments, min, max, fromDate, toDate);
         }
 
-        /// <summary>
-        /// Gets the users answers.
-        /// </summary>
-        /// <param name="userIds">The user ids.</param>
-        /// <param name="sortBy">The sort by.</param>
-        /// <param name="sortDirection">The sort direction.</param>
-        /// <param name="page">The page.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="includeBody">if set to <c>true</c> [include body].</param>
-        /// <param name="includeComments">if set to <c>true</c> [include comments].</param>
-        /// <param name="min">The min.</param>
-        /// <param name="max">The max.</param>
-        /// <param name="fromDate">From date.</param>
-        /// <param name="toDate">To date.</param>
-        /// <returns></returns>
         public virtual IPagedList<Answer> GetUsersAnswers(IEnumerable<int> userIds, QuestionsByUserSort sortBy = QuestionsByUserSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            var response = MakeRequest<AnswerResponse>("users", new string[] { userIds.Vectorize(), "answers" }, new
+            var response = MakeRequest<Answer>("users", new string[] { userIds.Vectorize(), "answers" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -61,7 +27,7 @@ namespace Stacky
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
             });
-            return new PagedList<Answer>(response.Answers, response);
+            return new PagedList<Answer>(response);
         }
 
         /// <summary>
@@ -81,7 +47,7 @@ namespace Stacky
         /// <returns></returns>
         public virtual IPagedList<Answer> GetQuestionAnswers(IEnumerable<int> questionIds, QuestionsByUserSort sortBy = QuestionsByUserSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            var response = MakeRequest<AnswerResponse>("questions", new string[] { questionIds.Vectorize(), "answers" }, new
+            var response = MakeRequest<Answer>("questions", new string[] { questionIds.Vectorize(), "answers" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -94,7 +60,7 @@ namespace Stacky
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
             });
-            return new PagedList<Answer>(response.Answers, response);
+            return new PagedList<Answer>(response);
         }
 
         /// <summary>
@@ -124,7 +90,7 @@ namespace Stacky
 
         public virtual IPagedList<Answer> GetAnswers(IEnumerable<int> answerIds, AnswerSort sortBy = AnswerSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            var response = MakeRequest<AnswerResponse>("answers", new string[] { answerIds.Vectorize() }, new
+            var response = MakeRequest<Answer>("answers", new string[] { answerIds.Vectorize() }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -137,7 +103,7 @@ namespace Stacky
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
             });
-            return new PagedList<Answer>(response.Answers, response);
+            return new PagedList<Answer>(response);
         }
 
         /// <summary>
@@ -157,7 +123,7 @@ namespace Stacky
         /// <returns></returns>
         public virtual IPagedList<Answer> GetAnswers(AnswerSort sortBy = AnswerSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
         {
-            var response = MakeRequest<AnswerResponse>("answers", null, new
+            var response = MakeRequest<Answer>("answers", null, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -172,7 +138,7 @@ namespace Stacky
                 fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
             });
-            return new PagedList<Answer>(response.Answers, response);
+            return new PagedList<Answer>(response);
         }
     }
 }

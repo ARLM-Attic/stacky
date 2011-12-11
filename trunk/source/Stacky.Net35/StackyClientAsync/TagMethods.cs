@@ -11,7 +11,7 @@ namespace Stacky
     {
         private void GetTags(Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError, string method, string[] urlParameters, string filter, string sort, string order, int? page, int? pageSize, DateTime? fromDate, DateTime? toDate, int? min, int? max)
         {
-            MakeRequest<TagResponse>(method, urlParameters, new
+            MakeRequest<Tag>(method, urlParameters, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
@@ -22,7 +22,7 @@ namespace Stacky
                 todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
                 min = min ?? null,
                 max = max ?? null
-            }, (items) => onSuccess(new PagedList<Tag>(items.Tags, items)), onError);
+            }, (items) => onSuccess(new PagedList<Tag>(items)), onError);
         }
 
         public virtual void GetTags(Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError)

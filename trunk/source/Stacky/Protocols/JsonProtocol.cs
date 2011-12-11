@@ -4,9 +4,9 @@ namespace Stacky
 {
     public class JsonProtocol : IProtocol
     {
-        public IResponse<T> GetResponse<T>(string message) where T : new()
+        public IPayload<T> GetResponse<T>(string message) where T : new()
         {
-            return new JsonResponse<T>(message);
+            return new JsonPayload<T>(message);
         }
     }
 }

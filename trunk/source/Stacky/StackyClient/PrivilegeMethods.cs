@@ -11,10 +11,10 @@ namespace Stacky
         /// <returns></returns>
         public IEnumerable<Privilege> GetPrivileges()
         {
-            return MakeRequest<PrivilegeResponse>("privileges", null, new
+            return MakeRequest<Privilege>("privileges", null, new
             {
                 site = this.SiteUrlName
-            }).Privileges;
+            }).Items;
         }
     }
 }
