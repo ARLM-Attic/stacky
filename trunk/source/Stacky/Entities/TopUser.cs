@@ -4,12 +4,12 @@ namespace Stacky
 {
     public class TopUser : Entity
     {
-        private UserInfo user;
+        private ShallowUser user;
         private int score;
         private int postCount;
 
         [JsonProperty("user")]
-        public UserInfo User
+        public ShallowUser User
         {
             get { return user; }
             set { user = value; NotifyOfPropertyChange(() => User); }

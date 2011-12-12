@@ -18,4 +18,10 @@
         /// </summary>
         Bronze
     }
+
+    public enum BadgeType
+    {
+        Named,
+        TagBased
+    }
 }

@@ -140,7 +140,7 @@ namespace Stacky.IntegrationTests
             var question = Client.GetQuestion(2930182);
             Assert.IsNotNull(question);
             Assert.IsNotNull(question.Owner);
-            Assert.IsNotNull(question.Owner.UserId);
+            Assert.IsNotNull(question.Owner.Id);
         }
 
         [TestMethod]
