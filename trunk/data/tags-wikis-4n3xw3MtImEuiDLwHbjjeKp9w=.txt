@@ -1,2 +1,11 @@
 https://api.stackexchange.com/2.0/tags/java/wikis?site=stackoverflow
-{"items":[{"tag_name":"java","excerpt":"Java is a programming language with a syntax derived from C/C++, originally developed by Sun Microsystems, now owned by Oracle."}],"quota_remaining":-4500,"quota_max":300}
+{
+  "items": [
+    {
+      "tag_name": "java",
+      "excerpt": "Java is a programming language with a syntax derived from C/C++, originally developed by Sun Microsystems, now owned by Oracle."
+    }
+  ],
+  "quota_remaining": -7328,
+  "quota_max": 300
+}

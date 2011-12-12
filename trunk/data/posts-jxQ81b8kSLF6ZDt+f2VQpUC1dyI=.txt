@@ -1,2 +1,206 @@
 https://api.stackexchange.com/2.0/posts/11?order=desc&sort=activity&site=stackoverflow
-{"items":[{"post_id":11,"post_type":"question","body":"<p>Given a specific <code>DateTime</code> value, how do I display relative time, like</p>\n\n<ul>\n<li>2 hours ago</li>\n<li>3 days ago</li>\n<li>a month ago</li>\n</ul>\n\n<p>etc, etc...?</p>\n","owner":{"user_id":1,"display_name":"Jeff Atwood","reputation":17276,"user_type":"moderator","profile_image":"http://www.gravatar.com/avatar/51d623f33f8b83095db84ff35e15dbe8?d=identicon&r=PG","link":"http://stackoverflow.com/users/1/jeff-atwood"},"creation_date":1217548537,"last_activity_date":1322718089,"last_edit_date":1300122947,"score":276,"up_vote_count":278,"down_vote_count":2,"comments":[{"comment_id":501111,"post_id":11,"creation_date":1238100173,"score":21,"edited":false,"body":"What if you want to calculate a relative time from now to Future?","owner":{"user_id":76832,"display_name":"Jhonny D. Cano -Leftware-","reputation":5989,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/945b3ca99d250de69ec168e93c8f9d27?d=identicon&r=PG","link":"http://stackoverflow.com/users/76832/jhonny-d-cano-leftware"}},{"comment_id":3247593,"post_id":11,"creation_date":1277992488,"edited":false,"body":"I wish you could drop this approach at StackOverflow.  I often see several similar answers that were posted &quot;1 hour ago&quot;, and I just want to upvote the first one (the rest are duplicates that should be removed).","owner":{"user_id":267938,"display_name":"J&#248;rn E. Angeltveit","reputation":1886,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG","link":"http://stackoverflow.com/users/267938/jorn-e-angeltveit"}},{"comment_id":3247716,"post_id":11,"creation_date":1277993184,"score":3,"edited":false,"body":"@J&#248;rn if you hover your mouse over the &quot;1 hour ago,&quot; the title-text will give you the exact time.  I think this is a great combination of ease-of-use (you see quickly how old things are) and advanced features (you can see the exact date easily as well)","owner":{"user_id":134502,"display_name":"NickAldwin","reputation":2512,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/e2ef956a3d389bd39b943ed526a2e237?d=identicon&r=PG","link":"http://stackoverflow.com/users/134502/nickaldwin"},"reply_to_user":{"user_id":267938,"display_name":"J&#248;rn E. Angeltveit","reputation":1886,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG","link":"http://stackoverflow.com/users/267938/jorn-e-angeltveit"}},{"comment_id":3247886,"post_id":11,"creation_date":1277994138,"edited":false,"body":"@NickAldwin:  Ahaaa.  Nice (hidden) feature.  I&#39;ve never noticed that hint before, even though I&#39;ve been looking for these details.  I&#39;m probably not not the only one, but that&#39;s another discussion.  Thanks for the tip.","owner":{"user_id":267938,"display_name":"J&#248;rn E. Angeltveit","reputation":1886,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG","link":"http://stackoverflow.com/users/267938/jorn-e-angeltveit"},"reply_to_user":{"user_id":134502,"display_name":"NickAldwin","reputation":2512,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/e2ef956a3d389bd39b943ed526a2e237?d=identicon&r=PG","link":"http://stackoverflow.com/users/134502/nickaldwin"}},{"comment_id":3247931,"post_id":11,"creation_date":1277994345,"edited":false,"body":"@J&#248;rn You&#39;re welcome.  After noticing it here, I went on to see the same thing on Facebook -- so I guess it&#39;s a pretty common way of doing things.","owner":{"user_id":134502,"display_name":"NickAldwin","reputation":2512,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/e2ef956a3d389bd39b943ed526a2e237?d=identicon&r=PG","link":"http://stackoverflow.com/users/134502/nickaldwin"},"reply_to_user":{"user_id":267938,"display_name":"J&#248;rn E. Angeltveit","reputation":1886,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG","link":"http://stackoverflow.com/users/267938/jorn-e-angeltveit"}},{"comment_id":4227337,"post_id":11,"creation_date":1287361811,"score":7,"edited":false,"body":"Common, yes.  Keep in mind that if it is really useful information then users of touch screen devices (smartphones, tablets) can&#39;t get at it because they can&#39;t hover a pointer.","owner":{"user_id":24874,"display_name":"Drew Noakes","reputation":20521,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/b85169daf0d165b94ea4fa70f409686c?d=identicon&r=PG","link":"http://stackoverflow.com/users/24874/drew-noakes"}},{"comment_id":6719049,"post_id":11,"creation_date":1304260029,"edited":false,"body":"@J&#248;rn E. Angeltveit: It&#39;s like that on lots of website, e.g. facebook.","owner":{"user_id":9536,"display_name":"configurator","reputation":8615,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/8e93a8053f3e1887a7511aab404c8931?d=identicon&r=PG","link":"http://stackoverflow.com/users/9536/configurator"},"reply_to_user":{"user_id":267938,"display_name":"J&#248;rn E. Angeltveit","reputation":1886,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG","link":"http://stackoverflow.com/users/267938/jorn-e-angeltveit"}},{"comment_id":6719413,"post_id":11,"creation_date":1304262570,"edited":false,"body":"@configurator, @NickAldwin: I&#39;ve seen this on a several sites now and has accepted that as an way to get additional information.  But now we have a new problem. How can I hover on my iPad... ;-)","owner":{"user_id":267938,"display_name":"J&#248;rn E. Angeltveit","reputation":1886,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG","link":"http://stackoverflow.com/users/267938/jorn-e-angeltveit"},"reply_to_user":{"user_id":9536,"display_name":"configurator","reputation":8615,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/8e93a8053f3e1887a7511aab404c8931?d=identicon&r=PG","link":"http://stackoverflow.com/users/9536/configurator"}},{"comment_id":6720130,"post_id":11,"creation_date":1304267177,"edited":false,"body":"J&#248;rn E. Angeltveit: On androids long-press will give you a menu including an option for the caption; selecting with the trackpad will also give you hover effects. I don&#39;t generally use an iPad a lot though so no idea...","owner":{"user_id":9536,"display_name":"configurator","reputation":8615,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/8e93a8053f3e1887a7511aab404c8931?d=identicon&r=PG","link":"http://stackoverflow.com/users/9536/configurator"}}]}],"quota_remaining":-4421,"quota_max":300}
+{
+  "items": [
+    {
+      "post_id": 11,
+      "post_type": "question",
+      "body": "<p>Given a specific <code>DateTime</code> value, how do I display relative time, like</p>\n\n<ul>\n<li>2 hours ago</li>\n<li>3 days ago</li>\n<li>a month ago</li>\n</ul>\n\n<p>etc, etc...?</p>\n",
+      "owner": {
+        "user_id": 1,
+        "display_name": "Jeff Atwood",
+        "reputation": 17276,
+        "user_type": "moderator",
+        "profile_image": "http://www.gravatar.com/avatar/51d623f33f8b83095db84ff35e15dbe8?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1/jeff-atwood"
+      },
+      "creation_date": 1217548537,
+      "last_activity_date": 1322718089,
+      "last_edit_date": 1300122947,
+      "score": 276,
+      "up_vote_count": 278,
+      "down_vote_count": 2,
+      "comments": [
+        {
+          "comment_id": 501111,
+          "post_id": 11,
+          "creation_date": 1238100173,
+          "score": 21,
+          "edited": false,
+          "body": "What if you want to calculate a relative time from now to Future?",
+          "owner": {
+            "user_id": 76832,
+            "display_name": "Jhonny D. Cano -Leftware-",
+            "reputation": 5989,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/945b3ca99d250de69ec168e93c8f9d27?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/76832/jhonny-d-cano-leftware"
+          }
+        },
+        {
+          "comment_id": 3247593,
+          "post_id": 11,
+          "creation_date": 1277992488,
+          "edited": false,
+          "body": "I wish you could drop this approach at StackOverflow.  I often see several similar answers that were posted &quot;1 hour ago&quot;, and I just want to upvote the first one (the rest are duplicates that should be removed).",
+          "owner": {
+            "user_id": 267938,
+            "display_name": "J&#248;rn E. Angeltveit",
+            "reputation": 1886,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/267938/jorn-e-angeltveit"
+          }
+        },
+        {
+          "comment_id": 3247716,
+          "post_id": 11,
+          "creation_date": 1277993184,
+          "score": 3,
+          "edited": false,
+          "body": "@J&#248;rn if you hover your mouse over the &quot;1 hour ago,&quot; the title-text will give you the exact time.  I think this is a great combination of ease-of-use (you see quickly how old things are) and advanced features (you can see the exact date easily as well)",
+          "owner": {
+            "user_id": 134502,
+            "display_name": "NickAldwin",
+            "reputation": 2512,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/e2ef956a3d389bd39b943ed526a2e237?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/134502/nickaldwin"
+          },
+          "reply_to_user": {
+            "user_id": 267938,
+            "display_name": "J&#248;rn E. Angeltveit",
+            "reputation": 1886,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/267938/jorn-e-angeltveit"
+          }
+        },
+        {
+          "comment_id": 3247886,
+          "post_id": 11,
+          "creation_date": 1277994138,
+          "edited": false,
+          "body": "@NickAldwin:  Ahaaa.  Nice (hidden) feature.  I&#39;ve never noticed that hint before, even though I&#39;ve been looking for these details.  I&#39;m probably not not the only one, but that&#39;s another discussion.  Thanks for the tip.",
+          "owner": {
+            "user_id": 267938,
+            "display_name": "J&#248;rn E. Angeltveit",
+            "reputation": 1886,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/267938/jorn-e-angeltveit"
+          },
+          "reply_to_user": {
+            "user_id": 134502,
+            "display_name": "NickAldwin",
+            "reputation": 2512,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/e2ef956a3d389bd39b943ed526a2e237?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/134502/nickaldwin"
+          }
+        },
+        {
+          "comment_id": 3247931,
+          "post_id": 11,
+          "creation_date": 1277994345,
+          "edited": false,
+          "body": "@J&#248;rn You&#39;re welcome.  After noticing it here, I went on to see the same thing on Facebook -- so I guess it&#39;s a pretty common way of doing things.",
+          "owner": {
+            "user_id": 134502,
+            "display_name": "NickAldwin",
+            "reputation": 2512,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/e2ef956a3d389bd39b943ed526a2e237?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/134502/nickaldwin"
+          },
+          "reply_to_user": {
+            "user_id": 267938,
+            "display_name": "J&#248;rn E. Angeltveit",
+            "reputation": 1886,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/267938/jorn-e-angeltveit"
+          }
+        },
+        {
+          "comment_id": 4227337,
+          "post_id": 11,
+          "creation_date": 1287361811,
+          "score": 7,
+          "edited": false,
+          "body": "Common, yes.  Keep in mind that if it is really useful information then users of touch screen devices (smartphones, tablets) can&#39;t get at it because they can&#39;t hover a pointer.",
+          "owner": {
+            "user_id": 24874,
+            "display_name": "Drew Noakes",
+            "reputation": 20521,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/b85169daf0d165b94ea4fa70f409686c?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/24874/drew-noakes"
+          }
+        },
+        {
+          "comment_id": 6719049,
+          "post_id": 11,
+          "creation_date": 1304260029,
+          "edited": false,
+          "body": "@J&#248;rn E. Angeltveit: It&#39;s like that on lots of website, e.g. facebook.",
+          "owner": {
+            "user_id": 9536,
+            "display_name": "configurator",
+            "reputation": 8615,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/8e93a8053f3e1887a7511aab404c8931?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/9536/configurator"
+          },
+          "reply_to_user": {
+            "user_id": 267938,
+            "display_name": "J&#248;rn E. Angeltveit",
+            "reputation": 1886,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/267938/jorn-e-angeltveit"
+          }
+        },
+        {
+          "comment_id": 6719413,
+          "post_id": 11,
+          "creation_date": 1304262570,
+          "edited": false,
+          "body": "@configurator, @NickAldwin: I&#39;ve seen this on a several sites now and has accepted that as an way to get additional information.  But now we have a new problem. How can I hover on my iPad... ;-)",
+          "owner": {
+            "user_id": 267938,
+            "display_name": "J&#248;rn E. Angeltveit",
+            "reputation": 1886,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/357213bde0fd9da80040373c66ed4005?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/267938/jorn-e-angeltveit"
+          },
+          "reply_to_user": {
+            "user_id": 9536,
+            "display_name": "configurator",
+            "reputation": 8615,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/8e93a8053f3e1887a7511aab404c8931?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/9536/configurator"
+          }
+        },
+        {
+          "comment_id": 6720130,
+          "post_id": 11,
+          "creation_date": 1304267177,
+          "edited": false,
+          "body": "J&#248;rn E. Angeltveit: On androids long-press will give you a menu including an option for the caption; selecting with the trackpad will also give you hover effects. I don&#39;t generally use an iPad a lot though so no idea...",
+          "owner": {
+            "user_id": 9536,
+            "display_name": "configurator",
+            "reputation": 8615,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/8e93a8053f3e1887a7511aab404c8931?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/9536/configurator"
+          }
+        }
+      ]
+    }
+  ],
+  "quota_remaining": -7297,
+  "quota_max": 300
+}

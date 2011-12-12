@@ -1,4 +1,0 @@
-https://api.stackexchange.com/2.0/errors/502?site=stackoverflow
-System.Net.WebException: The remote server returned an error: (400) Bad Request.
-   at System.Net.HttpWebRequest.GetResponse()
-   at Stacky.UrlClient.MakeRequest(Uri url) in C:\Code\Stacky\trunk\source\Stacky\UrlClient.cs:line 23
