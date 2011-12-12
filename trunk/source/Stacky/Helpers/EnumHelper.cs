@@ -26,5 +26,25 @@ namespace Stacky
                 return null;
             return attributes.FirstOrDefault();
         }
+
+        public static string GetQueryStringValue(this Enum value)
+        {
+            if (value == null)
+                return null;
+            List<char> result = new List<char>();
+            string valueString = value.ToString();
+
+            for (int i = 0; i < valueString.Length; i++)
+            {
+                char item = valueString[i];
+                if (i != 0 && Char.IsUpper(item))
+                {
+                    result.Add('_');
+                }
+                result.Add(Char.ToLower(item));
+            }
+
+            return new string(result.ToArray());
+        }
     }
 }

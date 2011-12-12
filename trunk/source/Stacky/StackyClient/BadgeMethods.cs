@@ -5,9 +5,20 @@ namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IEnumerable<Badge> GetBadges()
+        public virtual IPagedList<Badge> GetBadges(BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromdate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null)
         {
-            return GetBadges("badges", null);
+            var response = MakeRequest<Badge>("badges", null, new
+            {
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                fromDate = GetDateValue(fromdate),
+                toDate = GetDateValue(toDate),
+                min = GetEnumValue(min),
+                max = GetEnumValue(max)
+            });
+            return new PagedList<Badge>(response);
         }
 
         private IEnumerable<Badge> GetBadges(string method, string[] urlArguments)
