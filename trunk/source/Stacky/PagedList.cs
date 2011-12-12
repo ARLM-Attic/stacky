@@ -28,7 +28,7 @@
         {
         }
 
-        private PagedList(IEnumerable<T> items, Response response)
+        private PagedList(IEnumerable<T> items, Response<T> response)
             : this(items)
         {
             TotalItems = response.Total;
