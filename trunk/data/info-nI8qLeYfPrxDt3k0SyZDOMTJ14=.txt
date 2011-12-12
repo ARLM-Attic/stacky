@@ -1,0 +1,2 @@
+https://api.stackexchange.com/2.0/info?site=stackoverflow
+{"items":[{"total_questions":2394862,"total_unanswered":1918155,"total_accepted":1501056,"total_answers":5106336,"questions_per_minute":1.35,"answers_per_minute":2.89,"total_comments":9780675,"total_votes":15182002,"total_badges":2367240,"badges_per_minute":1.35,"total_users":903430,"new_active_users":54,"api_revision":"2011.12.11.1"}],"quota_remaining":-4450,"quota_max":300,"backoff":10}

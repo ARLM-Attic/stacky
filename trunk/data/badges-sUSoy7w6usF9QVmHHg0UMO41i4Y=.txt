@@ -1,0 +1,2 @@
+https://api.stackexchange.com/2.0/badges/11?order=desc&sort=rank&site=stackoverflow
+{"items":[{"badge_id":11,"rank":"silver","name":"Taxonomist","description":"Created a tag used by 50 questions","badge_type":"named","link":"http://stackoverflow.com/badges/11/taxonomist"}],"quota_remaining":-4387,"quota_max":300}
