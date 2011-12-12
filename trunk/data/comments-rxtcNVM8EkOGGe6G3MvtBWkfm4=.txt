@@ -1,2 +1,538 @@
 https://api.stackexchange.com/2.0/comments?order=desc&sort=creation&site=stackoverflow
-{"items":[{"comment_id":10473562,"post_id":8468479,"creation_date":1323647861,"edited":false,"body":"I&#39;d say, &quot;yes, this can be done&quot;; most likely though &quot;this can be done much better using the standard library&quot;, and in any case you are not giving enough detail and code and context by far to allow a meaningful response.","owner":{"user_id":596781,"display_name":"Kerrek SB","reputation":41850,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/a18405dd4b022837867d1f5453a05f41?d=identicon&r=PG","link":"http://stackoverflow.com/users/596781/kerrek-sb"}},{"comment_id":10473561,"post_id":8468464,"creation_date":1323647849,"edited":false,"body":"Why is fopen wrappers a security risk? the op did not say its off nor wanted to know how to achieve it with curl","owner":{"user_id":661872,"display_name":"Lawrence Cherone","reputation":3392,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/6d33977e8a1577df9a50dac21b6e586e?d=identicon&r=PG","link":"http://stackoverflow.com/users/661872/lawrence-cherone"}},{"comment_id":10473560,"post_id":8468379,"creation_date":1323647848,"edited":false,"body":"Well, I don&#39;t know what may be the problem :-/ Google for what the exact error message means. Maybe try to generate the keys again, adhering to some guide (like that one on github help)... or file another question here :-)","owner":{"user_id":1046334,"display_name":"herby","reputation":1011,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/9acd102e1065608f8e8100c082ed7bdb?d=identicon&r=PG","link":"http://stackoverflow.com/users/1046334/herby"},"reply_to_user":{"user_id":364914,"display_name":"Kim Jong Woo","reputation":929,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/55d4ebd4a3adf8bf913b5d58b59028c7?d=identicon&r=PG","link":"http://stackoverflow.com/users/364914/kim-jong-woo"}},{"comment_id":10473559,"post_id":8468435,"creation_date":1323647838,"edited":false,"body":"I suppose that, although memory could be an issue, the GC should be able to cope with this. The situation I&#39;m dealing with has objects boxed for very short amounts of time, so GC should be able to discard the produced objects very quickly.\nThe persisted state is still kept as an int, it&#39;s only when something needs to happen that it gets boxed.","owner":{"user_id":781965,"display_name":"Jeff","reputation":93,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/d2c8ce5d54bdc1e0a078155acfff7597?d=identicon&r=PG","link":"http://stackoverflow.com/users/781965/jeff"}},{"comment_id":10473558,"post_id":8276470,"creation_date":1323647829,"edited":false,"body":"&quot;<i>As you yourself points out, the point of deprecating it is to discourage it&#39;s use.</i>&quot; The point of discouraging its use is that it might disappear some day. My point is that namespace-scope <code>static</code> won&#39;t disappear ever, so it&#39;s wrong to deprecate it. &quot;<i>Yet you make no argument that discouraging its use is wrong.</i>&quot; I have seen no convincing argument that shows that use of namespace-scope <code>static</code> is &quot;wrong&quot;. Deprecating it just to discourage its use is wrong, because no one actually believes it&#39;s going to disappear, and because it doesn&#39;t convince people that using it is &quot;wrong&quot;.","owner":{"user_id":963864,"display_name":"curiousguy","reputation":632,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/d1be55eb013c43a820acae213096664e?d=identicon&r=PG","link":"http://stackoverflow.com/users/963864/curiousguy"},"reply_to_user":{"user_id":734069,"display_name":"Nicol Bolas","reputation":28032,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/f7fd53fa41deafaf563aae8244b73a46?d=identicon&r=PG","link":"http://stackoverflow.com/users/734069/nicol-bolas"}},{"comment_id":10473557,"post_id":8468433,"creation_date":1323647828,"edited":false,"body":"For example like this: <a href=\"http://stackoverflow.com/questions/1770250/how-to-remove-diacritics-from-text\">How to remove diacritics from text?</a>","owner":{"user_id":476,"display_name":"deceze","reputation":71699,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/a235706e3d81b614acaec3368edfea4b?d=identicon&r=PG","link":"http://stackoverflow.com/users/476/deceze"}},{"comment_id":10473556,"post_id":8468481,"creation_date":1323647827,"edited":false,"body":"@Slaks - not if your building a browser plug-in or such. From the question: <code>for system programming.</code> But your guess as to what that means is probably as good as mine though.","owner":{"user_id":355583,"display_name":"Steve","reputation":6327,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/74e5dce2c908e5a3301dc4edbe2f5b7e?d=identicon&r=PG","link":"http://stackoverflow.com/users/355583/steve"},"reply_to_user":{"user_id":34397,"display_name":"SLaks","reputation":187338,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/7deca8ec973c3c0875e9a36e1e3e2c44?d=identicon&r=PG","link":"http://stackoverflow.com/users/34397/slaks"}},{"comment_id":10473555,"post_id":8445531,"creation_date":1323647822,"edited":false,"body":"I spent the weekend migrating to 1.5, where the problem doesn&#39;t occur... Thanks","owner":{"user_id":682559,"display_name":"Nicktar","reputation":698,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/66a63d8fd6258f539377c38bb56455d0?d=identicon&r=PG","link":"http://stackoverflow.com/users/682559/nicktar"}},{"comment_id":10473554,"post_id":8468481,"creation_date":1323647818,"edited":false,"body":"I can also access it. But my problem the codes doesn&#39;t run after document loaded","owner":{"user_id":1042721,"display_name":"relativ","reputation":53,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/2ecdb87072cb72b5ba6bdf5d9ba85fd9?d=identicon&r=PG","link":"http://stackoverflow.com/users/1042721/relativ"}},{"comment_id":10473553,"post_id":8468470,"creation_date":1323647797,"edited":false,"body":"It,s OK but I&#39;m need to show this code like html like in browser, the source code is behind... i need something that will work like browser!  THANKS","owner":{"user_id":1015493,"display_name":"JO JOJO","reputation":33,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/cf1819d3fe336c3f3cbffec299fdbf32?d=identicon&r=PG","link":"http://stackoverflow.com/users/1015493/jo-jojo"}},{"comment_id":10473552,"post_id":8468264,"creation_date":1323647773,"edited":false,"body":"Thank you Benjamin. this is much clearer now you have explained. I managed to get there by declaring a reference to class notebook and changing it accordingly to manipulate int_test. Which is working fine. However, it seems that this solution if you are working on the heap but i shall do it another posting. THank you so much again.","owner":{"user_id":830053,"display_name":"A Elansary","reputation":12,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/cb145695181bfc81f45c5348db7b9cee?d=identicon&r=PG","link":"http://stackoverflow.com/users/830053/a-elansary"}},{"comment_id":10473551,"post_id":8468426,"creation_date":1323647772,"edited":false,"body":"Oh great... so I managed to resolve the conflicts and get my working production branch working again but now my main story board refuses to commit. Awesome.","owner":{"user_id":1072220,"display_name":"Ray Richards","reputation":3,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/2643c6effda2db682ff829da36e422f6?d=identicon&r=PG","link":"http://stackoverflow.com/users/1072220/ray-richards"}},{"comment_id":10473550,"post_id":8468457,"creation_date":1323647763,"edited":false,"body":"Thanks, it actually helps, but do you know how to set up a composite foreign key using phpmyadmin ?","owner":{"user_id":1092796,"display_name":"user1092796","reputation":1,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/15326afac5d4e5a342cdd035e5e5b430?d=identicon&r=PG","link":"http://stackoverflow.com/users/1092796/user1092796"}},{"comment_id":10473549,"post_id":8465125,"creation_date":1323647757,"edited":false,"body":"I can&#39;t figure out that behavior. If you only create the picker using storyboard it should go away when you segue from the view containing the picker to another view.","owner":{"user_id":971518,"display_name":"T.J.","reputation":75,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/dfb182bc5ce563b5936143c0ce483c64?d=identicon&r=PG","link":"http://stackoverflow.com/users/971518/t-j"},"reply_to_user":{"user_id":1066255,"display_name":"yassassin","reputation":17,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/3534d38864306df86b3b6bb420bab28d?d=identicon&r=PG","link":"http://stackoverflow.com/users/1066255/yassassin"}},{"comment_id":10473548,"post_id":7451787,"creation_date":1323647753,"edited":false,"body":"+1 This is really annoying :(","owner":{"user_id":724944,"display_name":"surfen","reputation":303,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/6284b6dfb915af5c5a44c53986820193?d=identicon&r=PG","link":"http://stackoverflow.com/users/724944/surfen"}},{"comment_id":10473547,"post_id":8468477,"creation_date":1323647750,"score":1,"edited":false,"body":"Why do you want to do this ?","owner":{"user_id":1081727,"display_name":"user1081727","reputation":323,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/faa806bdcfdada0413923b1b59664a49?d=identicon&r=PG","link":"http://stackoverflow.com/users/1081727/user1081727"}},{"comment_id":10473546,"post_id":5667552,"creation_date":1323647750,"edited":false,"body":"Note that <code>os.walk()</code> calls <code>os.listdir()</code> for which the <a href=\"http://docs.python.org/library/os.html#os.listdir\" rel=\"nofollow\">python documentation</a> explicitly states that the entries are returned in arbitrary order.\n    os.listdir(path)\n    Return a list containing the names of the entries in the directory given by path. The list is in arbitrary order. It does not include the special entries &#39;.&#39; and &#39;..&#39; even if they are present in the directory.","owner":{"user_id":462302,"display_name":"aculich","reputation":410,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/078e8932d5499a25b7e6d673189bcb75?d=identicon&r=PG","link":"http://stackoverflow.com/users/462302/aculich"}},{"comment_id":10473545,"post_id":8468428,"creation_date":1323647749,"edited":false,"body":"Thank you! I <a href=\"http://www.youtube.com/watch?v=a9xAKttWgP4\" rel=\"nofollow\">heard</a> about the enclose operator, but I didn&#39;t know what that does.","owner":{"user_id":685750,"display_name":"JiminP","reputation":932,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/010cd344eb4545147937fcfc0dc74497?d=identicon&r=PG","link":"http://stackoverflow.com/users/685750/jiminp"}},{"comment_id":10473544,"post_id":8468464,"creation_date":1323647747,"edited":false,"body":"<code>echo &quot;&lt;iframe src=&quot;http:&#47;&#47;www.google.com&#47;&quot; width=&quot;960&quot; height=&quot;600&quot;&gt;&lt;&#47;iframe&gt;&quot;;</code>","owner":{"user_id":486233,"display_name":"mmmshuddup","reputation":2696,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/75e2e05800c4f0fdd5598c13c28d2efd?d=identicon&r=PG","link":"http://stackoverflow.com/users/486233/mmmshuddup"},"reply_to_user":{"user_id":1015493,"display_name":"JO JOJO","reputation":33,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/cf1819d3fe336c3f3cbffec299fdbf32?d=identicon&r=PG","link":"http://stackoverflow.com/users/1015493/jo-jojo"}},{"comment_id":10473543,"post_id":8468433,"creation_date":1323647737,"edited":false,"body":"Just to be clear, this has little to do with UTF-8. You just want to convert latin characters with diacritics into similar latin characters without diacritics.","owner":{"user_id":476,"display_name":"deceze","reputation":71699,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/a235706e3d81b614acaec3368edfea4b?d=identicon&r=PG","link":"http://stackoverflow.com/users/476/deceze"}},{"comment_id":10473542,"post_id":8468481,"creation_date":1323647729,"edited":false,"body":"@relativ: You do need Javascript, since no other language can run in the browser (IE is not a browser)","owner":{"user_id":34397,"display_name":"SLaks","reputation":187338,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/7deca8ec973c3c0875e9a36e1e3e2c44?d=identicon&r=PG","link":"http://stackoverflow.com/users/34397/slaks"},"reply_to_user":{"user_id":1042721,"display_name":"relativ","reputation":53,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/2ecdb87072cb72b5ba6bdf5d9ba85fd9?d=identicon&r=PG","link":"http://stackoverflow.com/users/1042721/relativ"}},{"comment_id":10473541,"post_id":8468483,"creation_date":1323647719,"score":1,"edited":false,"body":"Welcome to StackOverflow, please review the <a href=\"http://stackoverflow.com/faq\">faq</a>. I&#39;d also suggest you read <a href=\"http://blog.stackoverflow.com/2010/10/asking-better-questions/\">this blog post</a> for hints on how to ask better questions.","owner":{"user_id":1029952,"display_name":"Pierre","reputation":1146,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/cd179571f41e9855534afbe112834544?d=identicon&r=PG","link":"http://stackoverflow.com/users/1029952/pierre"}},{"comment_id":10473540,"post_id":8166708,"creation_date":1323647714,"edited":false,"body":"Are the war and ejb-jar a part of one EAR?","owner":{"user_id":920607,"display_name":"Piotr Nowicki","reputation":2547,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/770aa60777a170ba5f1604ce6209a0f9?d=identicon&r=PG","link":"http://stackoverflow.com/users/920607/piotr-nowicki"}},{"comment_id":10473539,"post_id":8468476,"creation_date":1323647714,"edited":false,"body":"Ah, nevermind that. It&#39;s not copied off the source, I just simplified it here. Making a fiddle instead.","owner":{"user_id":830134,"display_name":"Nix","reputation":172,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/3e1aae7530fa95f074d2dde5b4c52194?d=identicon&r=PG","link":"http://stackoverflow.com/users/830134/nix"},"reply_to_user":{"user_id":814761,"display_name":"Purmou","reputation":1239,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/94cde2c6343d22234ceaf589398a5e0f?d=identicon&r=PG","link":"http://stackoverflow.com/users/814761/purmou"}},{"comment_id":10473538,"post_id":8468464,"creation_date":1323647702,"edited":false,"body":"where i need to put Iframe? before echo???","owner":{"user_id":1015493,"display_name":"JO JOJO","reputation":33,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/cf1819d3fe336c3f3cbffec299fdbf32?d=identicon&r=PG","link":"http://stackoverflow.com/users/1015493/jo-jojo"}},{"comment_id":10473537,"post_id":8468379,"creation_date":1323647701,"edited":false,"body":"I&#39;ve added the public key genreated by puttygen and saved the private key to the .ssh folder. i also accepted github&#39;s ssh key....I get <code>Permission denied (publickey).</code>","owner":{"user_id":364914,"display_name":"Kim Jong Woo","reputation":929,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/55d4ebd4a3adf8bf913b5d58b59028c7?d=identicon&r=PG","link":"http://stackoverflow.com/users/364914/kim-jong-woo"}},{"comment_id":10473536,"post_id":8468469,"creation_date":1323647692,"edited":false,"body":"Perhaps a &quot;game&quot; stackexchange site... but not here.","owner":{"user_id":166390,"display_name":"pst","reputation":31368,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/6f378290b6519741614a81f1f67ad679?d=identicon&r=PG","link":"http://stackoverflow.com/users/166390/pst"}},{"comment_id":10473535,"post_id":8357318,"creation_date":1323647679,"edited":false,"body":"ps, check out the site, maybe be helpful if you do any WordPress themes! \u2014 <a href=\"http://www.wpfill.me/\" rel=\"nofollow\">wpfill.me</a>","owner":{"user_id":944822,"display_name":"Merlin Mason","reputation":13,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/50c39170274d39b093a740060592fa62?d=identicon&r=PG","link":"http://stackoverflow.com/users/944822/merlin-mason"}},{"comment_id":10473534,"post_id":8468415,"creation_date":1323647676,"edited":false,"body":"@WarrenP : this user is admin on the box. However i dont know the Disk Utility &#39;Repair permissions&#39; thingie. Will go hunt.","owner":{"user_id":915467,"display_name":"YvesLeBorg","reputation":120,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/431ec5da46260d5d9facc68ecbea306c?d=identicon&r=PG","link":"http://stackoverflow.com/users/915467/yvesleborg"},"reply_to_user":{"user_id":84704,"display_name":"Warren  P","reputation":12455,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/ec669061f44c634fe5b1504a6581cf01?d=identicon&r=PG","link":"http://stackoverflow.com/users/84704/warren-p"}},{"comment_id":10473533,"post_id":8467544,"creation_date":1323647671,"edited":false,"body":"tried what you suggested and now EF created User_Id column without any association and User_Id1 as FK to Users table.","owner":{"user_id":752545,"display_name":"Chuchelo","reputation":185,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/6d0b0eb54dc347304622737df90bdc8e?d=identicon&r=PG","link":"http://stackoverflow.com/users/752545/chuchelo"}}],"quota_remaining":-4407,"quota_max":300}
+{
+  "items": [
+    {
+      "comment_id": 10476260,
+      "post_id": 8411361,
+      "creation_date": 1323668889,
+      "edited": false,
+      "body": "you can either use the multi mapper <code>Query&lt;T,U,V&gt;</code> and the rest, or execute multiple queries and weave",
+      "owner": {
+        "user_id": 17174,
+        "display_name": "Sam Saffron",
+        "reputation": 26009,
+        "user_type": "moderator",
+        "profile_image": "http://www.gravatar.com/avatar/3dcae8378d46c244172a115c28ca49ce?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/17174/sam-saffron"
+      }
+    },
+    {
+      "comment_id": 10476259,
+      "post_id": 6766047,
+      "creation_date": 1323668883,
+      "edited": false,
+      "body": "This is my guess work trying to restate the requirement : Need for a <i>context sensitive code insight manager</i> implementing the logic of a dynamic insertion of some member/method along with their respective implementation (placeholder) to a class type definition given some parametric knowledge stored in an external file (the class domain, member/method signature). I&#39;m I right?",
+      "owner": {
+        "user_id": 744588,
+        "display_name": "menjaraz",
+        "reputation": 387,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/2538a493e7b4485d41a1c51fa9fa70d1?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/744588/menjaraz"
+      }
+    },
+    {
+      "comment_id": 10476258,
+      "post_id": 8465423,
+      "creation_date": 1323668870,
+      "edited": false,
+      "body": "@Rook, true, but that&#39;s not the OP&#39;s problem.  He&#39;s looking for anonymity for the poster, not to hide the entire domain.",
+      "owner": {
+        "user_id": 1072112,
+        "display_name": "ghoti",
+        "reputation": 224,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/fa3fecc914da2b7a82696d52729fc237?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1072112/ghoti"
+      },
+      "reply_to_user": {
+        "user_id": 183528,
+        "display_name": "Rook",
+        "reputation": 22517,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/7cedb843eb2922000eb41b4561ed660d?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/183528/rook"
+      }
+    },
+    {
+      "comment_id": 10476257,
+      "post_id": 4899046,
+      "creation_date": 1323668848,
+      "edited": false,
+      "body": "there are perfectly valid times to encode with javascript, such as when you want to NOT trigger asp.net&#39;s XSS detection when you post &lt;x  newer &#39;decent&#39; wysiwyg editors will do this (And rightfully so) so request validation doesn&#39;t have to be disabled",
+      "owner": {
+        "user_id": 371637,
+        "display_name": "Adam Tuliper",
+        "reputation": 10079,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/d06225d5ab47b3e3ebc47289ed03003a?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/371637/adam-tuliper"
+      }
+    },
+    {
+      "comment_id": 10476256,
+      "post_id": 8470267,
+      "creation_date": 1323668843,
+      "edited": false,
+      "body": "Scripting languages, preferably WSH and similar.",
+      "owner": {
+        "user_id": 982617,
+        "display_name": "moshbear",
+        "reputation": 1177,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/a6e69d9b28f2595857e7c524426a9a11?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/982617/moshbear"
+      }
+    },
+    {
+      "comment_id": 10476255,
+      "post_id": 8470243,
+      "creation_date": 1323668841,
+      "edited": false,
+      "body": "@user1093111: Correct on both counts, yes. Note that when <code>readLine()</code> returns null, that means you&#39;ve reached the end of the data.",
+      "owner": {
+        "user_id": 22656,
+        "display_name": "Jon Skeet",
+        "reputation": 380552,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/6d8ebb117e8d83d74ea95fbdd0f87e13?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/22656/jon-skeet"
+      },
+      "reply_to_user": {
+        "user_id": 1093111,
+        "display_name": "user1093111",
+        "reputation": 6,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/d1b485646c224da1bf5b10b9413f436a?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1093111/user1093111"
+      }
+    },
+    {
+      "comment_id": 10476254,
+      "post_id": 8383785,
+      "creation_date": 1323668835,
+      "edited": false,
+      "body": "Have you mapped your testLabel from your interface builder by creating IBOutlet?",
+      "owner": {
+        "user_id": 493476,
+        "display_name": "Kapil Choubisa",
+        "reputation": 284,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/9e83586434fce09ae775dfff7eecb4bf?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/493476/kapil-choubisa"
+      },
+      "reply_to_user": {
+        "user_id": 970695,
+        "display_name": "jaytrixz",
+        "reputation": 15,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/e94a12448764f161f36678ce08079557?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/970695/jaytrixz"
+      }
+    },
+    {
+      "comment_id": 10476253,
+      "post_id": 8470040,
+      "creation_date": 1323668828,
+      "edited": false,
+      "body": "<code>&lt;p&gt;</code> elements are one of a few kinds of elements where the browser is forgiving about missing closing tags - these days it&#39;s considered bad practice to leave the closing tags off but back in the day they <i>were</i> optional. I would expect the browser sees the markup in the question as a <code>&lt;p&gt;</code> element followed by another <code>&lt;p&gt;</code> element, followed by the <code>&lt;h2&gt;</code> and <code>&lt;ul&gt;</code>, and then finally an orphaned closing <code>&lt;&#47;p&gt;</code> that would be ignored.",
+      "owner": {
+        "user_id": 615754,
+        "display_name": "nnnnnn",
+        "reputation": 7601,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/c68e714465a5e1483b86fc6b81f48bc1?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/615754/nnnnnn"
+      }
+    },
+    {
+      "comment_id": 10476252,
+      "post_id": 8470316,
+      "creation_date": 1323668826,
+      "edited": false,
+      "body": "this <a href=\"http://stackoverflow.com/questions/361285/web-crawler-links-page-logic-in-php\" title=\"web crawler links page logic in php\">stackoverflow.com/questions/361285/&hellip;</a> might be useful for you.",
+      "owner": {
+        "user_id": 1072828,
+        "display_name": "Ampere",
+        "reputation": 80,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/609be1ca6d521ddf7db5c543635ece9a?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1072828/ampere"
+      }
+    },
+    {
+      "comment_id": 10476251,
+      "post_id": 8470274,
+      "creation_date": 1323668824,
+      "edited": false,
+      "body": "Sweet, Thanks. String[] wordBankArr = secretwordbank.toArray(new String[0]); ----replaces--- List&lt;String&gt; secretwordbank = new ArrayList&lt;String&gt;();",
+      "owner": {
+        "user_id": 1093111,
+        "display_name": "user1093111",
+        "reputation": 6,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/d1b485646c224da1bf5b10b9413f436a?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1093111/user1093111"
+      }
+    },
+    {
+      "comment_id": 10476250,
+      "post_id": 8470320,
+      "creation_date": 1323668805,
+      "edited": false,
+      "body": "Also $appointment_template = &quot;This is a reminder to let you know that you have an appointment on {appointment} at &quot;. $this-&gt;usercompany($uid).&quot;&quot;; doesnt work.",
+      "owner": {
+        "user_id": 924723,
+        "display_name": "Meisam Mulla",
+        "reputation": 442,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/699eb4701701c7ea09f68747d1a6a9bc?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/924723/meisam-mulla"
+      }
+    },
+    {
+      "comment_id": 10476249,
+      "post_id": 8470364,
+      "creation_date": 1323668781,
+      "score": 2,
+      "edited": false,
+      "body": "If you execute your class with <code>java</code> you have also to declare the <code>foo.bar.jar</code> in the classpath. So: <code>java -cp foo.bar.jar HelloWorld</code>.",
+      "owner": {
+        "user_id": 855532,
+        "display_name": "vstm",
+        "reputation": 2449,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/c813498f5874062c5f0f0671d0f1f271?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/855532/vstm"
+      }
+    },
+    {
+      "comment_id": 10476248,
+      "post_id": 8454705,
+      "creation_date": 1323668755,
+      "edited": false,
+      "body": "@Mike Braun Possibly we will be migrating to JSF2.0.",
+      "owner": {
+        "user_id": 913559,
+        "display_name": "Hukamanata",
+        "reputation": 71,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/1f43b4d44d46a245cad1fd31ab42a94f?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/913559/hukamanata"
+      },
+      "reply_to_user": {
+        "user_id": 782381,
+        "display_name": "Mike Braun",
+        "reputation": 405,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/643408d254229bbe4443e987b178c6bf?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/782381/mike-braun"
+      }
+    },
+    {
+      "comment_id": 10476247,
+      "post_id": 8470243,
+      "creation_date": 1323668739,
+      "edited": false,
+      "body": "For the bufferReader.readLine(), I could use a while loop correct?",
+      "owner": {
+        "user_id": 1093111,
+        "display_name": "user1093111",
+        "reputation": 6,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/d1b485646c224da1bf5b10b9413f436a?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1093111/user1093111"
+      }
+    },
+    {
+      "comment_id": 10476246,
+      "post_id": 8468117,
+      "creation_date": 1323668725,
+      "edited": false,
+      "body": "what about <code>orange, apple</code> ?",
+      "owner": {
+        "user_id": 466826,
+        "display_name": "ajreal",
+        "reputation": 21071,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/df6d5c2b9459bc0745f7ea9831ce3d08?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/466826/ajreal"
+      }
+    },
+    {
+      "comment_id": 10476245,
+      "post_id": 8470028,
+      "creation_date": 1323668719,
+      "edited": false,
+      "body": "Do I put all this code in my rollActionPerformed method? Aside from populating the array.",
+      "owner": {
+        "user_id": 671936,
+        "display_name": "SkankinJake",
+        "reputation": 16,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/59c59881a9e0d7a7b69b80f85f97703d?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/671936/skankinjake"
+      }
+    },
+    {
+      "comment_id": 10476244,
+      "post_id": 8470267,
+      "creation_date": 1323668716,
+      "edited": false,
+      "body": "@moshbear What tool do you suggest ?",
+      "owner": {
+        "user_id": 684101,
+        "display_name": "CoachNono",
+        "reputation": 38,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/1177a6ab80763947c1282f0c424f5d12?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/684101/coachnono"
+      },
+      "reply_to_user": {
+        "user_id": 982617,
+        "display_name": "moshbear",
+        "reputation": 1177,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/a6e69d9b28f2595857e7c524426a9a11?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/982617/moshbear"
+      }
+    },
+    {
+      "comment_id": 10476243,
+      "post_id": 8470277,
+      "creation_date": 1323668710,
+      "edited": false,
+      "body": "I give up... +1 to you.",
+      "owner": {
+        "user_id": 981049,
+        "display_name": "Michael Dautermann",
+        "reputation": 5570,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/172d39f0e0021d3181ad87be48654c23?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/981049/michael-dautermann"
+      },
+      "reply_to_user": {
+        "user_id": 69634,
+        "display_name": "coneybeare",
+        "reputation": 12591,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/c0577af50b9980045ea1294c69ed9f52?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/69634/coneybeare"
+      }
+    },
+    {
+      "comment_id": 10476242,
+      "post_id": 8470346,
+      "creation_date": 1323668706,
+      "edited": false,
+      "body": "suggest you to post code for the delete failing as above",
+      "owner": {
+        "user_id": 570150,
+        "display_name": "V4Vendetta",
+        "reputation": 5792,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/5998080f2e6c7f0560d20546889287db?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/570150/v4vendetta"
+      }
+    },
+    {
+      "comment_id": 10476241,
+      "post_id": 8470322,
+      "creation_date": 1323668701,
+      "edited": false,
+      "body": "@ajreal thats because in the example, given date is not maximum, nor it is minimum, could not find any other pattern, and gave option of max. anyways, thanks :)",
+      "owner": {
+        "user_id": 966196,
+        "display_name": "Zohaib",
+        "reputation": 2497,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/607bf6a025439b586b58c098aa2976e5?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/966196/zohaib"
+      },
+      "reply_to_user": {
+        "user_id": 466826,
+        "display_name": "ajreal",
+        "reputation": 21071,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/df6d5c2b9459bc0745f7ea9831ce3d08?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/466826/ajreal"
+      }
+    },
+    {
+      "comment_id": 10476240,
+      "post_id": 8466164,
+      "creation_date": 1323668689,
+      "edited": false,
+      "body": "OP&#39;s question is about &#39;symbol hiding&#39;. You must show an way to access hidden variables, such as inline ASM accessing frame pointer directly.",
+      "owner": {
+        "user_id": 558502,
+        "display_name": "9dan",
+        "reputation": 1114,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/2fd6831f047d384983f66cd6d559046c?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/558502/9dan"
+      }
+    },
+    {
+      "comment_id": 10476238,
+      "post_id": 8461726,
+      "creation_date": 1323668675,
+      "edited": false,
+      "body": "This is exactly what I said: dlopen inside libdl is just a wrapper or a glue to some code in ld-linux. The real work is done inside ld-linux, libdl is just some glue code.",
+      "owner": {
+        "user_id": 841108,
+        "display_name": "Basile Starynkevitch",
+        "reputation": 9594,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/bd8d7bbffa57b3af8f3f84edc3c07f75?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/841108/basile-starynkevitch"
+      }
+    },
+    {
+      "comment_id": 10476237,
+      "post_id": 8470347,
+      "creation_date": 1323668672,
+      "edited": false,
+      "body": "What is your question? <a href=\"http://stackoverflow.com/faq#questions\">stackoverflow.com/faq#questions</a>",
+      "owner": {
+        "user_id": 897924,
+        "display_name": "Joe McGrath",
+        "reputation": 792,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/2bd71db57edd5b8043979f2df64122bb?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/897924/joe-mcgrath"
+      }
+    },
+    {
+      "comment_id": 10476236,
+      "post_id": 8470243,
+      "creation_date": 1323668668,
+      "edited": false,
+      "body": "So you&#39;d use an array list because you don&#39;t have to know how big your array is- in this case [80368].",
+      "owner": {
+        "user_id": 1093111,
+        "display_name": "user1093111",
+        "reputation": 6,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/d1b485646c224da1bf5b10b9413f436a?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1093111/user1093111"
+      }
+    },
+    {
+      "comment_id": 10476235,
+      "post_id": 8470351,
+      "creation_date": 1323668667,
+      "edited": false,
+      "body": "I&#39;d suggest having a quick google for &quot;Mobile Device Detection&quot; or something of that nature.",
+      "owner": {
+        "user_id": 61795,
+        "display_name": "Scuzzy",
+        "reputation": 1094,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/8622bd07a6e4fbb934942f541b06e91f?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/61795/scuzzy"
+      }
+    },
+    {
+      "comment_id": 10476234,
+      "post_id": 8426128,
+      "creation_date": 1323668666,
+      "edited": false,
+      "body": "Concretely, when onUpgrade is called, there is only a single database in existence. The example first tries to add a new column to that one database, and in that case there&#39;s no database copying. If, however, the version != DATABASE_VERSION after the switch statement, then it deletes the entire database and recreates it; in this case it has lost all of the data and you are left with an clean installation.",
+      "owner": {
+        "user_id": 355039,
+        "display_name": "Shawn Lauzon",
+        "reputation": 1054,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/f4702fbc73aebbcc525ff25c68af5b94?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/355039/shawn-lauzon"
+      },
+      "reply_to_user": {
+        "user_id": 1036781,
+        "display_name": "vam",
+        "reputation": 52,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/64659c8271d4c6b6d57fe10614ba2964?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1036781/vam"
+      }
+    },
+    {
+      "comment_id": 10476233,
+      "post_id": 8470263,
+      "creation_date": 1323668661,
+      "edited": false,
+      "body": "Lolz... But there is 1 more issue. Table is not displayed in a perfect manner within a frame.",
+      "owner": {
+        "user_id": 1061728,
+        "display_name": "GAMA",
+        "reputation": 36,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/a3af8fc9fb0598ee1e0f37fa4b1bd07d?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1061728/gama"
+      }
+    },
+    {
+      "comment_id": 10476231,
+      "post_id": 8464052,
+      "creation_date": 1323668661,
+      "edited": false,
+      "body": "I agree, thanks for the comment",
+      "owner": {
+        "user_id": 613207,
+        "display_name": "Yasser Sobhdel",
+        "reputation": 184,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/38ce985c3f3483c637a38281004f28ae?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/613207/yasser-sobhdel"
+      },
+      "reply_to_user": {
+        "user_id": 720999,
+        "display_name": "kostix",
+        "reputation": 1360,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/04ee78e90161fa1c4dce14d615315160?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/720999/kostix"
+      }
+    },
+    {
+      "comment_id": 10476232,
+      "post_id": 8448343,
+      "creation_date": 1323668661,
+      "edited": false,
+      "body": "@maxedison i have updated my question please have a look",
+      "owner": {
+        "user_id": 993676,
+        "display_name": "Kamal Deep Singh",
+        "reputation": 311,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/e62a36cc1d9eae683382ab7657261c9e?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/993676/kamal-deep-singh"
+      }
+    },
+    {
+      "comment_id": 10476230,
+      "post_id": 8449262,
+      "creation_date": 1323668655,
+      "edited": false,
+      "body": "I hope you got it working.",
+      "owner": {
+        "user_id": 1024224,
+        "display_name": "Anand",
+        "reputation": 209,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/2a3056517f42ad77f256b553c58731f8?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1024224/anand"
+      },
+      "reply_to_user": {
+        "user_id": 738262,
+        "display_name": "Brian",
+        "reputation": 25,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/f2e482f9ce26faa4d07933640270788e?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/738262/brian"
+      }
+    }
+  ],
+  "quota_remaining": -7291,
+  "quota_max": 300
+}

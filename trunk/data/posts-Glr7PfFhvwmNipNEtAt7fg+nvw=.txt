@@ -1,2 +1,908 @@
 https://api.stackexchange.com/2.0/posts?order=desc&sort=activity&site=stackoverflow
-{"items":[{"post_id":8468508,"post_type":"answer","body":"<p>You can place variables into a string with <code>stringWithFormat:</code>.  In your case, the following would work:</p>\n\n<pre><code>NSString *html = [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@\"document.DetailView.innerHTML; document.getElementsByName('user_name')[0].value = '%@'; document.getElementsByName('user_password')[0].value = 'somevar'; document.DetailView.submit();\" , txtField.text]];\n</code></pre>\n\n<p>There is an additional bug in your code in that you don't properly encode the text field value - consider what would happen if the user entered an apostrophe.</p>\n\n<p>However building up JavaScript in this way isn't a great approach.  Consider factoring out the JavaScript into an external JavaScript file - this will make it much easier to read and write.</p>\n","owner":{"user_id":8427,"display_name":"Jim","reputation":13947,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/1204ff2c65e274123328b48072686bb4?d=identicon&r=PG","link":"http://stackoverflow.com/users/8427/jim"},"creation_date":1323647863,"last_activity_date":1323647863,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468460,"post_type":"question","body":"<p>Starting off I have UTFS. </p>\n\n<p>Trying to insert a variable in the middle of string to populate a web view form without using a string by append and making the code huge.  My current code is</p>\n\n<blockquote>\n  <p>NSString *html = [webView stringByEvaluatingJavaScriptFromString:@\" document.DetailView.innerHTML;\"   @\"document.getElementsByName('user_name')[0].value = 'somuser';\"\n                         @\"document.getElementsByName('user_password')[0].value = 'somevar';\" \n                        @\"document.DetailView.submit();\" ]</p>\n</blockquote>\n\n<p>I have tried </p>\n\n<blockquote>\n  <p>NSString *html = [webView stringByEvaluatingJavaScriptFromString:@\" document.DetailView.innerHTML;\"   @\"document.getElementsByName('user_name')[0].value = '%@';\"\n                         @\"document.getElementsByName('user_password')[0].value = 'somevar';\" \n                        @\"document.DetailView.submit();\" , txtField.text];</p>\n</blockquote>\n\n<p>But it throws me a build error(specifically it's looking for \"]\").  I'm guessing I will have to slowly build the string using stringbyappend but i'm hoping for a little luck that someone will have encountered this or have a workaround for it.  This seemed so simple in c#.   </p>\n","owner":{"user_id":1092834,"display_name":"user1092834","reputation":1,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/8686c23d5d10346120e3c287ded9422b?d=identicon&r=PG","link":"http://stackoverflow.com/users/1092834/user1092834"},"creation_date":1323647278,"last_activity_date":1323647863,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468492,"post_type":"question","body":"<p>Suppose a remote SVN repository has this structure:</p>\n\n<pre><code>/project\n        /src\n        /bulk\n</code></pre>\n\n<p>Now for some reason I already have a copy of <code>bulk</code> (assumed unchanging) elsewhere on my machine. Can I somehow checkout a new copy of the repository, but pre-provide the <code>bulk</code> directory so it doesn't get downloaded again?</p>\n","owner":{"user_id":596781,"display_name":"Kerrek SB","reputation":41850,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/a18405dd4b022837867d1f5453a05f41?d=identicon&r=PG","link":"http://stackoverflow.com/users/596781/kerrek-sb"},"creation_date":1323647669,"last_activity_date":1323647859,"last_edit_date":1323647799,"score":0,"up_vote_count":0,"down_vote_count":0,"comments":[{"comment_id":10473563,"post_id":8468492,"creation_date":1323647868,"edited":false,"body":"I don&#39;t think so but more importantly that leads to the problem that your svn repo is no longer authoritative. In addition what about others (including your future self - on another machine) who don&#39;t have the now magic bulk.","owner":{"user_id":294966,"display_name":"Steve Robillard","reputation":1270,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/22691c0615b6fd46e55c34fa53e1100d?d=identicon&r=PG","link":"http://stackoverflow.com/users/294966/steve-robillard"}}]},{"post_id":8468507,"post_type":"answer","body":"<p>how about creating the project directory manually, copying your current bulk checkout into it, and the just doing a checkout on the src directory, specifying the project directory as the location?</p>\n","owner":{"user_id":49241,"display_name":"Adam Ralph","reputation":9919,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/78e6cdb8bf24413c4576e496e4d05fce?d=identicon&r=PG","link":"http://stackoverflow.com/users/49241/adam-ralph"},"creation_date":1323647859,"last_activity_date":1323647859,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468506,"post_type":"answer","body":"<p>If you want know if a browser support AJAX, you need know the capabilities of the browser, you need this project:</p>\n\n<p><a href=\"https://github.com/clement/django-wurfl/\" rel=\"nofollow\">https://github.com/clement/django-wurfl/</a></p>\n","owner":{"user_id":1073310,"display_name":"Goin","reputation":171,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/9fc6a3b29ee5d37430bc7c4653819bbe?d=identicon&r=PG","link":"http://stackoverflow.com/users/1073310/goin"},"creation_date":1323647856,"last_activity_date":1323647856,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468427,"post_type":"question","body":"<p>In my Django application I would like to know if the browser the client is using has AJAX or not. This is because I have, for example, profile editing. I have a version that edits the user's profile in-place and another one that redirects you to an edit page.</p>\n\n<p>I know that most browsers have AJAX nowadays, but just to make sure, how can I check that in a Django application?</p>\n\n<p>Thank you</p>\n","owner":{"user_id":1034697,"display_name":"Vasco Patricio","reputation":38,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/6f35989a83e850733118c453d56a369e?d=identicon&r=PG","link":"http://stackoverflow.com/users/1034697/vasco-patricio"},"creation_date":1323646693,"last_activity_date":1323647856,"score":1,"up_vote_count":1,"down_vote_count":0},{"post_id":8463531,"post_type":"question","body":"<p>I have a Maven build which uses maven-modello (1.4) to generate Java classes/XSD's etc. from an description file (modello file). I'm searching for a possible solution in Gradle to solve the same problem.</p>\n","owner":{"user_id":296328,"display_name":"khmarbaise","reputation":6235,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/74bd2ca9704f8118877a9d2c880dadf0?d=identicon&r=PG","link":"http://stackoverflow.com/users/296328/khmarbaise"},"creation_date":1323602422,"last_activity_date":1323647856,"last_edit_date":1323647856,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":4065595,"post_type":"question","body":"<p>Listed below is my program. I'm supposed to take two cards of both the dealer and player and evaluate who has the higher card. The player bets a certain amount of cash against that bet, and of course, if he wins he wins what was bet, if he loses, he loses the cash. I seemed to have followed the psuedocode correctly, but I keep receiving errors. Anyone want to guide me in what I'm doing wrong? Please and thank you for responses. The errors are followed by the code.</p>\n\n<pre><code>using System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Text;\n\nnamespace Casino_War\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n\n            string playerName;\n            double cash, betAmount; \n            int player, dealer;\n\n            Console.Write(\"Please Enter Player's Name: \");\n            playerName = Console.ReadLine();\n\n\n            Console.WriteLine(\"Please Enter {0}'s Cash Amount\", playerName);\n            cash = double.Parse(Console.ReadLine());\n\n         Boolean more = \"yes\";\n\n            do\n         {\n             betAmount = 0;\n                Console.WriteLine(\"Please Enter The Bet Amount: \");\n                betAmount = double.Parse(Console.ReadLine());\n\n                if (betAmount &gt; cash)\n                {\n                    Console.WriteLine(\"You Do Not Have Enough Cash For That Bet Amount.\");\n                    Console.WriteLine(\"Cash: {0:C}\", cash);\n                }\n\n         while (betAmount &gt; cash)\n         {\n\n          Console.WriteLine(\"Press Enter To Draw A Card.\");\n          Console.ReadKey();\n\n          Random r = new Random();\n                player = r.Next(1, 15);\n          DisplayCard(player, \"Player\");\n\n                Console.WriteLine(\"Press Enter To Draw A Dealer Card.\");\n          Console.ReadKey();\n\n          Random r = new Random();\n                dealer = r.Next(1, 15);\n          DisplayCard(dealer, \"Dealer\");\n            }\n\n\n\n        private static void EvaluateCash(ref double betAmount, double cash, Boolean winner, string playerName)\n                {\n                    if (winner)\n                    {\n                        Console.WriteLine(\"{0} You Won {1:C}!\", playerName, betAmount);\n                        cash = betAmount + cash;\n                    }\n\n                    else \n                    {\n                        Console.WriteLine(\"{0} You Lose {1:C}!\", playerName, betAmount);\n                        cash = cash - betAmount;\n                    }\n\n                    Console.WriteLine(\"You Now Have {0:C}\", cash);\n                }\n\n        private static Boolean PlayAgain(double cash, double betAmount, string playerName, Boolean more)\n            {\n                if (cash &gt; 0)\n                {\n                    Console.WriteLine(\"You Have {0} Cash In Hand.\", cash);\n                    Console.WriteLine(\"\\nPlay Again (Y/N)? \");\n                    more = Console.ReadLine().ToUpper();\n                    Console.WriteLine(\"\\n\\n\");\n                } \n                while (more == \"Y\");\n                    Console.WriteLine(\"Thanks For Playing!\");\n            }\n\n            public static void DisplayCard(int card)\n            {\n                int card = r.Next(2, 14);\n                if (card == 14)\n                    Console.WriteLine(\"Ace\");\n                else if (card == 13)\n                    Console.WriteLine(\"King\");\n                else if (card == 12)\n                    Console.WriteLine(\"Queen\");\n                else if (card == 11)\n                    Console.WriteLine(\"Jack\");\n                else if (card &gt;= 2 &amp;&amp; card &lt;= 10)\n                    return card;\n                else\n                    Console.WriteLine(\"Error: {0} Is Not Valid.\", card);\n                return card;\n\n            }\n\n        static void Evaluate(int player, int dealer)\n        {\n            if (player &gt; dealer)\n                winner = true;\n                    else if (dealer &gt; player)\n                        winner = false;\n                            else\n                            Console.WriteLine(\"Tie. We Go To WAR!\");\n                            Console.WriteLine(\"Press Enter To Draw A Card.\");\n                            Console.ReadKey();\n\n                      Random r = new Random();\n                            player = r.Next(1, 15);\n                      DisplayCard(player, \"Player\");\n\n                            Console.WriteLine(\"Press Enter To Draw A Dealer Card.\");\n                      Console.ReadKey();\n\n                      Random r = new Random();\n                            dealer = r.Next(1, 15);\n                      DisplayCard(dealer, \"Dealer\");\n\n                            return Evaluate(player, dealer);\n\n        }\n    }\n}\n</code></pre>\n\n<p><img src=\"http://i.stack.imgur.com/YV3K3.jpg\" alt=\"enter image description here\"></p>\n","owner":{"user_id":493073,"display_name":"Jay","reputation":16,"user_type":"unregistered","profile_image":"http://www.gravatar.com/avatar/6f8c473a7b8ea72d229e3fde2e1427f5?d=identicon&r=PG","link":"http://stackoverflow.com/users/493073/jay"},"creation_date":1288565825,"last_activity_date":1323647846,"last_edit_date":1323647846,"score":3,"up_vote_count":3,"down_vote_count":0,"comments":[{"comment_id":4368346,"post_id":4065595,"creation_date":1288566366,"edited":false,"body":"I&#39;m afraid your code has a lot more issues than just missing } and ), you might want to read up a bit more on programming in general.","owner":{"user_id":492813,"display_name":"Doggett","reputation":1150,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/2ee2a04c06205749bfa6eb639832c9b4?d=identicon&r=PG","link":"http://stackoverflow.com/users/492813/doggett"}},{"comment_id":4368374,"post_id":4065595,"creation_date":1288566637,"edited":false,"body":"I agree with Dogget. I would start from scratch: add 1 or 2 lines of code and make sure that those work, then continue. Remember that you always need matching braces to execute blocs of code together. Indentation does not count in C#.","owner":{"user_id":398593,"display_name":"Marco","reputation":938,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/ec9d900c42830acd3cddc7d137ae84b4?d=identicon&r=PG","link":"http://stackoverflow.com/users/398593/marco"}},{"comment_id":4368529,"post_id":4065595,"creation_date":1288568532,"score":1,"edited":false,"body":"Fyi, by pressning <code>CTRL-k CTRL-d</code> you can make Visual Studio indent your whole file properly - at least if it&#39;s not full of syntax errors. So in the future use this feature often; especially before sharing code with others as that makes reading your code much easier.","owner":{"user_id":298479,"display_name":"ThiefMaster","reputation":38802,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/bc66db28aa7c3fa8e4ce4238b696dee9?d=identicon&r=PG","link":"http://stackoverflow.com/users/298479/thiefmaster"}},{"comment_id":4368546,"post_id":4065595,"creation_date":1288568792,"edited":false,"body":"Thanks on the tip. I honestly never knew.","owner":{"user_id":493073,"display_name":"Jay","reputation":16,"user_type":"unregistered","profile_image":"http://www.gravatar.com/avatar/6f8c473a7b8ea72d229e3fde2e1427f5?d=identicon&r=PG","link":"http://stackoverflow.com/users/493073/jay"}}]},{"post_id":8468505,"post_type":"question","body":"<p>How can I set up a subdomain on an IP address using Webmin?</p>\n\n<p>So, if I go to <code>http://directory.127.0.0.1/</code> it goes to the same place as <code>http://directory.localhost/</code> (<code>/var/www/directory</code>)?</p>\n","owner":{"user_id":136924,"display_name":"Jcubed","reputation":1425,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/7f93694661a6d82291a7aa64a38832e1?d=identicon&r=PG","link":"http://stackoverflow.com/users/136924/jcubed"},"creation_date":1323647839,"last_activity_date":1323647839,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468419,"post_type":"question","body":"<p>Objective C:\nI have an NSMutableArray with 3 objects of a class stockHolding</p>\n\n<p>the class has a method valueInDollars which returns the product of \n(numberOfShares * shareMktVlue)</p>\n\n<p>The for loop (below) attempts to dynamically call the method valueInDollars for each element in the Array as follows:</p>\n\n<p>NSUInteger itemCount = [stockHolding count];</p>\n\n<pre><code>    for (int i = 0; i &lt; itemCount; i++) {\n        NSString *itemd = [stockHolding objectAtIndex:i];\n        float mktValue = [AAPL valueInDollars];  \n</code></pre>\n\n<p>The question is:  How can AAPL be declared dynamically so that it changes for each loop iteration to the stock symbol object in the array.</p>\n\n<p>I tried to replace AAPL with \"itemd\" in the code above, but get the error message: </p>\n\n<p>\"NSString may not respond to valueInDollars\"</p>\n\n<p>Any help here would be appreciated.</p>\n","owner":{"user_id":1092817,"display_name":"Michael Nuccio","reputation":1,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/5fbb8abd413c48230091e3c3e4905bc1?d=identicon&r=PG","link":"http://stackoverflow.com/users/1092817/michael-nuccio"},"creation_date":1323646539,"last_activity_date":1323647837,"score":0,"up_vote_count":0,"down_vote_count":0,"comments":[{"comment_id":10473471,"post_id":8468419,"creation_date":1323647060,"score":3,"edited":false,"body":"Sounds like you have an array of strings not an array of <code>StockHolding</code> objects","owner":{"user_id":632339,"display_name":"Paul.s","reputation":4385,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/7de0d2b485ac4f2e4aa2466769b5cdac?d=identicon&r=PG","link":"http://stackoverflow.com/users/632339/paul-s"}},{"comment_id":10473512,"post_id":8468419,"creation_date":1323647461,"edited":false,"body":"I wold love to help with this, but I have a few questions.  What is the name of the class?  What is the name of the array? What are you trying to accomplish with this loop?  What is the purpose of the NSString?  What does APPL represent in the code?  Thanks.","owner":{"user_id":731773,"display_name":"Jeff Wolski","reputation":334,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/b5b10509fa4c70500dc5dda9107b591b?d=identicon&r=PG","link":"http://stackoverflow.com/users/731773/jeff-wolski"}}]},{"post_id":8468504,"post_type":"answer","body":"<p>Your code sample seems to indicate that your <code>NSMutableArray</code> is called <code>stockHolding</code>, whereas your question text indicates that stockHolding is the class of the objects in the array. If we assume that the array name is correct and the objects in it are of class <code>StockHolding</code> then the following should work (using Objective-C 2.0 fast enumeration):</p>\n\n<pre><code>for (StockHolding *stock in stockHolding) {\n    float mktValue = [stock valueInDollars];\n    // ...\n}\n</code></pre>\n","owner":{"user_id":1080717,"display_name":"sjs","reputation":191,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/1ddcfbd17972d6986c3fc2624f8b1efa?d=identicon&r=PG","link":"http://stackoverflow.com/users/1080717/sjs"},"creation_date":1323647837,"last_activity_date":1323647837,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468503,"post_type":"answer","body":"<p>The code as written is fine.  The pointer will be (must be) copied by the add() method, whose signature is presumably <code>void add(MyObject*)</code>.</p>\n\n<p>By the way, your C++ here is invalid:</p>\n\n<pre><code>MyCollection.add(mycollection, newObject);\n</code></pre>\n\n<p>It should probably be:</p>\n\n<pre><code>mycollection.add(newObject);\n</code></pre>\n","owner":{"user_id":4323,"display_name":"John Zwinck","reputation":10836,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/c72de4b11912d3da0be8a5cd064264a4?d=identicon&r=PG","link":"http://stackoverflow.com/users/4323/john-zwinck"},"creation_date":1323647827,"last_activity_date":1323647827,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468479,"post_type":"question","body":"<p>Lets say I have a object whose purpose is to hold a bunch of pointers for an object type MyObject, and lets say I want a function that adds new MyObjects to the collection like so:</p>\n\n<pre><code>void MyCollection::addObject(){\n    MyObject *newObject = new MyObject();\n    MyCollection.add(mycollection, newObject);\n}\n</code></pre>\n\n<p>Lets say that MyCollection.add takes in a particular collection object and a pointer and somehow internally stores it. However the problem with this function is while the newObject itself is persistent, the *newObject pointer gets destroyed after the function call so the add() function no longer has a pointer that really points to the object. Is there any good way to make a persistent pointer somehow?</p>\n\n<p>Thanks</p>\n","owner":{"user_id":1020217,"display_name":"Matt","reputation":194,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/7e3cb9cabfe058e8e6b463163032708e?d=identicon&r=PG","link":"http://stackoverflow.com/users/1020217/matt"},"creation_date":1323647420,"last_activity_date":1323647827,"score":0,"up_vote_count":0,"down_vote_count":0,"comments":[{"comment_id":10473562,"post_id":8468479,"creation_date":1323647861,"edited":false,"body":"I&#39;d say, &quot;yes, this can be done&quot;; most likely though &quot;this can be done much better using the standard library&quot;, and in any case you are not giving enough detail and code and context by far to allow a meaningful response.","owner":{"user_id":596781,"display_name":"Kerrek SB","reputation":41850,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/a18405dd4b022837867d1f5453a05f41?d=identicon&r=PG","link":"http://stackoverflow.com/users/596781/kerrek-sb"}}]},{"post_id":8463092,"post_type":"question","body":"<p>In an app I'm doing at the moment - I recently created a nice styled TTView for a header in one of my views.</p>\n\n<p>I used this code:</p>\n\n<pre><code>TTStyle *style = \n[TTInsetStyle styleWithInset:UIEdgeInsetsMake(0, -5, 0, -5) next: \n[TTShadowStyle styleWithColor:RGBACOLOR(0,0,0,0.5) blur:5 offset:CGSizeMake(0, 2) next:\n[TTLinearGradientFillStyle styleWithColor1:RGBCOLOR(255, 255, 255)\n                                    color2:RGBCOLOR(216, 221, 231) next:nil]]];\nheaderView.style = style;\n</code></pre>\n\n<p>I then wanted to recreate this in another controller - so I set up a new view controller, added a view, changed its class to TTView in IB, and then created an outlet (in IB) called <code>headerView</code>. - All the code was exactly the same - I double checked everything.</p>\n\n<p>I copied in the style code, built and ran it, and the result was just a plain white view - no styling at all.</p>\n\n<p>I spent about 2 hours trying to work out what I'd wrong, and eventually I decided I would just have to compare the two views (by logging them), and make sure they are exactly identical.</p>\n\n<p><strong>Working view</strong></p>\n\n<pre><code>View: &lt;TTView: 0x65143c0; frame = (0 0; 320 45); autoresize = RM+BM; layer = &lt;CALayer: 0x6514300&gt;&gt;\n</code></pre>\n\n<p><strong>Broken View</strong></p>\n\n<pre><code>View: &lt;TTView: 0xa21f0a0; frame = (0 0; 320 45); autoresize = W+H; layer = &lt;CALayer: 0xa211140&gt;&gt;\n</code></pre>\n\n<p>When I noticed the difference (apart from the memory reference, of course) - I thought that it couldn't possible cause it to not render the styles at all, but sure enough, when I changed the broken view to using the same autoresizing options (just Right and Back margins) as the working view - it rendered fine.</p>\n\n<p>Can anyone explain this somewhat strange behaviour?</p>\n","owner":{"user_id":840973,"display_name":"Alex Coplan","reputation":2007,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/94f41db41bffd5cd905586c7e3c1bbc4?d=identicon&r=PG","link":"http://stackoverflow.com/users/840973/alex-coplan"},"creation_date":1323596735,"last_activity_date":1323647823,"last_edit_date":1323647823,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":901225,"post_type":"question","body":"<p>I am currently looking into using Silverlight and Deepzoom in a future project. Can anyone suggest some sites that make good use of these technologies?</p>\n","creation_date":1243071914,"last_activity_date":1323647821,"score":4,"up_vote_count":4,"down_vote_count":0},{"post_id":8468502,"post_type":"answer","body":"<p><a href=\"http://www2.advertiser.com.au/uniquelyrundlemall\" rel=\"nofollow\">http://www2.advertiser.com.au/uniquelyrundlemall</a></p>\n\n<p>Christmas Gift Guide site</p>\n","owner":{"user_id":1092846,"display_name":"Andrew B","reputation":1,"user_type":"unregistered","profile_image":"http://www.gravatar.com/avatar/764e1276362d4a364697f8ac8f32750f?d=identicon&r=PG","link":"http://stackoverflow.com/users/1092846/andrew-b"},"creation_date":1323647821,"last_activity_date":1323647821,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468501,"post_type":"answer","body":"<p>Stack-based data -- like your pointer -- doesn't get \"destroyed\", per se. The variable itself goes out of scope, but the data it contained -- i.e., the address of the <code>MyObject</code> object -- is still totally valid.  If the <code>add()</code> method copies the value of the pointer, all will be good.</p>\n","owner":{"user_id":659804,"display_name":"Ernest Friedman-Hill","reputation":22866,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/7afeb4d1993dc25c6028646840e4868a?d=identicon&r=PG","link":"http://stackoverflow.com/users/659804/ernest-friedman-hill"},"creation_date":1323647817,"last_activity_date":1323647817,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468500,"post_type":"answer","body":"<p>If you know that you're inside a 32-bit JRE on a 64-bit system, you can run the 64-bit WMIC as follows:</p>\n\n<pre><code>%SystemRoot%\\sysnative\\cmd.exe /c wmic computersystem get TotalPhysicalMemory /format:list\n</code></pre>\n\n<p>Note that this command won't work from a 64-bit JRE, or on a 32-bit system, so you need to figure out which environment you're in first.</p>\n","owner":{"user_id":886887,"display_name":"Harry Johnston","reputation":1526,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/1616c7e4fab23f6e014ee11d75408bba?d=identicon&r=PG","link":"http://stackoverflow.com/users/886887/harry-johnston"},"creation_date":1323647802,"last_activity_date":1323647802,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8448905,"post_type":"question","body":"<p>I have a Java Desktop App installed on a 64bit Windows Vista with 24GB of ram. My program is only finding 4 of the 24GB. I am getting the RAM using </p>\n\n<pre><code>wmic computersystem get TotalPhysicalMemory /format:list\n</code></pre>\n\n<p>And if that fails (in case they don't have WMI) I use</p>\n\n<pre><code>com.sun.management.OperatingSystemMXBean bean = (com.sun.management.OperatingSystemMXBean) java.lang.management.ManagementFactory.getOperatingSystemMXBean();\nlong ram = (long) bean.getTotalPhysicalMemorySize();\n</code></pre>\n\n<p>Because I don't have access to the PC I was not able to run tests to confirm which method is used but I am almost certain that the machine does have WMI.</p>\n\n<p>I am suspecting that I am running a 32bit WMI which is likely to have a 4GB limit. How do I run a 64bit WMI?</p>\n","owner":{"user_id":476218,"display_name":"Dorothy","reputation":158,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/f6c75445cc7a0634950b41e9ce6554cc?d=identicon&r=PG","link":"http://stackoverflow.com/users/476218/dorothy"},"creation_date":1323449658,"last_activity_date":1323647802,"score":1,"up_vote_count":1,"down_vote_count":0},{"post_id":8468305,"post_type":"question","body":"<p>Could one of you lovely people shed some light as to why this code doesn't work or a better/correct way of performing it... </p>\n\n<pre><code>        CandidDomainService db = new CandidDomainService();\n\n        GlobalValuesTable newInstanceId =\n            db.GetGlobalValuesTables().Single&lt;GlobalValuesTable&gt;(gId =&gt; gId.RowId == 1);\n\n        newInstanceId.CurrentTestInstance++;\n        db.UpdateGlobalValuesTable(newInstanceId);\n</code></pre>\n\n<p>It's throwing a <code>null</code> exception at <code>db.Update</code>. I'm using the generated add, update, remove and get. The exception is described as being thrown when no changes have been made to the entity model. </p>\n\n<p>Thanks!</p>\n","owner":{"user_id":1092809,"display_name":"user1092809","reputation":6,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/7dd83a7214c6fe730010842856af0b48?d=identicon&r=PG","link":"http://stackoverflow.com/users/1092809/user1092809"},"creation_date":1323645333,"last_activity_date":1323647797,"last_edit_date":1323647169,"score":1,"up_vote_count":1,"down_vote_count":0},{"post_id":8468499,"post_type":"answer","body":"<p>As with most things, I would check that it exists before calling it.</p>\n\n<pre><code>if (newInstanceId)\n{\nnewInstanceId.CurrentTest Instance++;\ndb.UpdateGlobalValuesTable(newInstanceId);\n}\nelse \n{\n//Do something here to notify you.\n}\n</code></pre>\n\n<p>That should at least get you into some better debugging.</p>\n","owner":{"user_id":1092834,"display_name":"user1092834","reputation":1,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/8686c23d5d10346120e3c287ded9422b?d=identicon&r=PG","link":"http://stackoverflow.com/users/1092834/user1092834"},"creation_date":1323647797,"last_activity_date":1323647797,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":7499794,"post_type":"question","body":"<p>I'm programming the CSS of a site, and realized that the Internet Explorer 9 is showing different font size in relation to other browsers (Firefox, Chrome, Safari, IE7 and IE8).</p>\n\n<p>I've tried using some RESETS, and I am specifying the font in PX, but IE9 still shows the difference in font size.</p>\n\n<p>I've tried using font-size in pt, in, percentage, but had no success.</p>\n\n<p>I changed the font before (Georgia, Times New Romam, Verdana). Some of them are shown larger, others are smaller in IE9.</p>\n\n<p>I checked the zoom settings and text size in IE. They are 100% and medium respectively.</p>\n\n<p>To illustrate, I created a simple HTML and CSS as you can see the code below. How to solve this problem? Thanks!</p>\n\n<p>The problem:</p>\n\n<p><img src=\"http://i.stack.imgur.com/EDZxO.png\" alt=\"enter image description here\"></p>\n\n<p>Code:</p>\n\n<p><strong>HTML</strong></p>\n\n<pre><code>&lt;!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"&gt;\n&lt;html xmlns=\"http://www.w3.org/1999/xhtml\"&gt;\n&lt;head&gt;\n&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /&gt;\n&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" /&gt;\n\n&lt;title&gt;Untitled Document&lt;/title&gt;\n\n&lt;/head&gt;\n\n&lt;body&gt;\n           &lt;p&gt;\n           AAAAA BBBBB CCCCC DDDDD EEEEE FFFFF GGGGG HHHHH IIIII JJJJJ KKKKK LLLLL MMMMM NNNNNN OOOOO PPPPP QQQQQ\n           &lt;/p&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n</code></pre>\n\n<p><strong>CSS</strong></p>\n\n<pre><code>/* RESET */\n\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font: inherit;\n    vertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure, \nfooter, header, hgroup, menu, nav, section {\n    display: block;\n}\nbody {\n    line-height: 1;\n}\nol, ul {\n    list-style: none;\n}\nblockquote, q {\n    quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n    content: '';\n    content: none;\n}\ntable {\n    border-collapse: collapse;\n    border-spacing: 0;\n}\n\n/* END OF RESET */\n\nbody {\n    background-image:url(GreenLine.png);\n    background-repeat:no-repeat;\n    font-family:\"Courier New\", Courier, monospace;\n    font-size:12px;\n}\n</code></pre>\n","owner":{"user_id":956954,"display_name":"bbastos","reputation":21,"user_type":"unregistered","profile_image":"http://www.gravatar.com/avatar/e6eb39b96bdde68ce0b4e2586beb324e?d=identicon&r=PG","link":"http://stackoverflow.com/users/956954/bbastos"},"creation_date":1316608426,"last_activity_date":1323647768,"last_edit_date":1323647768,"score":4,"up_vote_count":4,"down_vote_count":0,"comments":[{"comment_id":9080239,"post_id":7499794,"creation_date":1316608979,"edited":false,"body":"Notice red stripes in non-ie browsers - <a href=\"http://ie.microsoft.com/testdrive/\" rel=\"nofollow\">ie.microsoft.com/testdrive</a> - those are caused by differences in font rendering (and aggravated by red background, which makes those browsers look buggy)","owner":{"user_id":946789,"display_name":"c69","reputation":1273,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/65df17cba0f5e1b7fe8e2c2928911153?d=identicon&r=PG","link":"http://stackoverflow.com/users/946789/c69"}},{"comment_id":9080358,"post_id":7499794,"creation_date":1316609377,"edited":false,"body":"You might do better with this question on a more design oriented site like doctype.com, since it looks like it&#39;s related more to font rendering than CSS.","owner":{"user_id":8930,"display_name":"Ishmael","reputation":1669,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/a91fd95a93e7de4b220c98262301d058?d=identicon&r=PG","link":"http://stackoverflow.com/users/8930/ishmael"}},{"comment_id":9081160,"post_id":7499794,"creation_date":1316611965,"edited":false,"body":"What version of Firefox are you checking it against? The answer is &quot;important&quot;. I&#39;d expect the Firefox rendering to match IE9.","owner":{"user_id":405015,"display_name":"thirtydot","reputation":46864,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/74c04b6c96836f044ed927a5db4dc92b?d=identicon&r=PG","link":"http://stackoverflow.com/users/405015/thirtydot"}},{"comment_id":9081373,"post_id":7499794,"creation_date":1316612462,"edited":false,"body":"Screw it, I&#39;ve just answered anyway despite the discrepancy in your description - IE9 and Firefox should match, unless you&#39;re using a version of Firefox older than 4.","owner":{"user_id":405015,"display_name":"thirtydot","reputation":46864,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/74c04b6c96836f044ed927a5db4dc92b?d=identicon&r=PG","link":"http://stackoverflow.com/users/405015/thirtydot"}},{"comment_id":9081688,"post_id":7499794,"creation_date":1316613186,"edited":false,"body":"thirtydot, This is true. I updated Firefox to the latest version. Now Firefox is showing just as IE9.\n\nI updated the other browsers (Safari and Chrome), but the difference remains.","owner":{"user_id":956954,"display_name":"bbastos","reputation":21,"user_type":"unregistered","profile_image":"http://www.gravatar.com/avatar/e6eb39b96bdde68ce0b4e2586beb324e?d=identicon&r=PG","link":"http://stackoverflow.com/users/956954/bbastos"}},{"comment_id":9081803,"post_id":7499794,"creation_date":1316613419,"edited":false,"body":"@Bruno Bastos: I&#39;ve covered the reason this is happening in my answer. Just in case you missed it, check the <a href=\"http://blog.mozilla.com/nattokirai/2011/08/11/directwrite-text-rendering-in-firefox-6/\" rel=\"nofollow\">last link in my answer</a>. <b>There is no way to fix this.</b>","owner":{"user_id":405015,"display_name":"thirtydot","reputation":46864,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/74c04b6c96836f044ed927a5db4dc92b?d=identicon&r=PG","link":"http://stackoverflow.com/users/405015/thirtydot"}}]},{"post_id":8468471,"post_type":"question","body":"<p>Or am I misunderstanding something?</p>\n\n<p>Partial:</p>\n\n<pre><code>app/views/admin/command_templates/_fillerup.html.erb\n</code></pre>\n\n<p>This passes (there is no \"fill\" or \"_fill\" in the view directory):</p>\n\n<pre><code>describe \"GET fillerup\" do\n  it \"assigns some stuff and renders a partial\" do\n    should render_template \"admin/command_templates/_fillerup\"\n    # But so does this:\n    should render_template \"admin/command_templates/_fill\"\n  end\nend\n</code></pre>\n\n<p>This fails (as I expect):</p>\n\n<pre><code>describe \"GET fillerup\" do\n  it \"assigns some stuff and renders a partial\" do\n    should render_template \"admin/command_templates/_fillerupp\" # extra \"p\"\n  end\nend\n</code></pre>\n\n<p>It <em>acts</em> like it's doing a <code>start_with?</code> on the path.</p>\n\n<p>rspec-rails 2.7.0, rails 3.1.2; other info available on request.</p>\n","owner":{"user_id":438992,"display_name":"Dave Newton","reputation":22355,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/e52bc2d5fc3983e2ab1afb2b38b65444?d=identicon&r=PG","link":"http://stackoverflow.com/users/438992/dave-newton"},"creation_date":1323647357,"last_activity_date":1323647768,"last_edit_date":1323647768,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468498,"post_type":"question","body":"<p>I have a list of 80 towns each with their geographical longitude and latitude. I need to find the shortest closed route (taking into account the curvature of the earth). I was thinking I could calculate the distance between each one (using great-circle distance formula) and then list the ones with the shortest distances (that would be 6400 calculations). The thing is I don't have much programming experience but I know a small bit of C# and PHP. Could someone tell point me in the right direction of what I should learn about to solve this problem (eg. should I learn more about php and mysql to use a database or something to sort out the distances?) </p>\n","owner":{"user_id":1092839,"display_name":"Darkphenom","reputation":6,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/96b4c0dfebd98b33993a4c40c50d2830?d=identicon&r=PG","link":"http://stackoverflow.com/users/1092839/darkphenom"},"creation_date":1323647760,"last_activity_date":1323647760,"score":1,"up_vote_count":1,"down_vote_count":0},{"post_id":8468497,"post_type":"question","body":"<p>I am using ASP.NET 4 and MVC and trying to add code to handle the \"select\" link.  Once the user selects the row, I need to go display a new page with more detail.  I have tried to capture the rowcommand but I never hit a the breakpoint.  This is my current GridView code for the first page -</p>\n\n<pre><code>&lt;%@ Page Title=\"\" Language=\"C#\" MasterPageFile=\"~/Views/Shared/Site.Master\" Inherits=\"System.Web.Mvc.ViewPage&lt;IEnumerable&lt;ValidationPortal.Models.Contact&gt;&gt;\" %&gt;\n\n&lt;asp:Content ID=\"Content2\" ContentPlaceHolderID=\"MainContent\" runat=\"server\"&gt;\n\n    &lt;form id=\"form1\" runat=\"server\"&gt;\n\n    &lt;h2&gt;Index&lt;/h2&gt;\n\n    &lt;p&gt;\n        &lt;asp:GridView ID=\"GridView1\" runat=\"server\" AutoGenerateColumns=\"False\" \n            DataKeyNames=\"Id\" DataSourceID=\"SqlDataSource1\"&gt;\n            &lt;Columns&gt;\n                &lt;asp:CommandField ShowSelectButton=\"True\" /&gt;\n                &lt;asp:BoundField DataField=\"Id\" HeaderText=\"Id\" InsertVisible=\"False\" \n                    ReadOnly=\"True\" SortExpression=\"Id\" /&gt;\n                &lt;asp:BoundField DataField=\"FirstName\" HeaderText=\"FirstName\" \n                    SortExpression=\"FirstName\" /&gt;\n                &lt;asp:BoundField DataField=\"LastName\" HeaderText=\"LastName\" \n                    SortExpression=\"LastName\" /&gt;\n                &lt;asp:BoundField DataField=\"Phone\" HeaderText=\"Phone\" SortExpression=\"Phone\" /&gt;\n                &lt;asp:BoundField DataField=\"Email\" HeaderText=\"Email\" SortExpression=\"Email\" /&gt;\n            &lt;/Columns&gt;\n        &lt;/asp:GridView&gt;\n        &lt;asp:SqlDataSource ID=\"SqlDataSource1\" runat=\"server\" \n            ConnectionString=\"&lt;%$ ConnectionStrings:ConnectionString %&gt;\" \n            SelectCommand=\"SELECT * FROM [Contacts]\"&gt;&lt;/asp:SqlDataSource&gt;\n\n    &lt;/p&gt;\n    &lt;/form&gt;\n\n&lt;/asp:Content&gt;\n</code></pre>\n\n<p>What do I need to add to make this work?</p>\n","owner":{"user_id":124658,"display_name":"Craig","reputation":41,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/d140e80b383a2072a376d352f1315e2d?d=identicon&r=PG","link":"http://stackoverflow.com/users/124658/craig"},"creation_date":1323647749,"last_activity_date":1323647749,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468308,"post_type":"question","body":"<p>I would like to match any number that is not preceded by <strong>x</strong> and also not followed by <strong>y</strong>.\nI came up with something like this:\n<code>(?&lt;!x)(\\d+)(?!y)</code></p>\n\n<p>However, that doesn't really help as I also want to match the numbers in strings like <code>x123</code> or <code>456y</code>.</p>\n\n<p>In other words, I want either both assertions to work or none.</p>\n\n<p>Examples:</p>\n\n<ul>\n<li>From \"x123\", \"123\" would be matched</li>\n<li>From \"456y\", \"456\" would be matched</li>\n<li>From \"789\", \"789\" would be matched</li>\n<li>Nothing would be matched from \"x123y\"</li>\n</ul>\n\n<p>Can you help please?</p>\n","owner":{"user_id":460051,"display_name":"Lopata","reputation":6,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/6eac2ea210ab14d3f27da3e85c79eb4e?d=identicon&r=PG","link":"http://stackoverflow.com/users/460051/lopata"},"creation_date":1323645356,"last_activity_date":1323647749,"last_edit_date":1323647749,"score":1,"up_vote_count":1,"down_vote_count":0,"comments":[{"comment_id":10473352,"post_id":8468308,"creation_date":1323646285,"edited":false,"body":"Are the numbers part of a larger string? Also which language?","owner":{"user_id":880096,"display_name":"FailedDev","reputation":10613,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/98745fbe796266f5c479a83a4ca163cb?d=identicon&r=PG","link":"http://stackoverflow.com/users/880096/faileddev"}},{"comment_id":10473496,"post_id":8468308,"creation_date":1323647297,"edited":false,"body":"@FailedDev Yes they are. The language is PHP.","owner":{"user_id":460051,"display_name":"Lopata","reputation":6,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/6eac2ea210ab14d3f27da3e85c79eb4e?d=identicon&r=PG","link":"http://stackoverflow.com/users/460051/lopata"},"reply_to_user":{"user_id":880096,"display_name":"FailedDev","reputation":10613,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/98745fbe796266f5c479a83a4ca163cb?d=identicon&r=PG","link":"http://stackoverflow.com/users/880096/faileddev"}}]},{"post_id":8468496,"post_type":"question","body":"<p>In Resharper, pressing Alt + Enter opens the quick fix list. For StyleCop for C#, an example of the menu that would open is the following:</p>\n\n<p><strong>Resharper 6.0 Quick-Fix</strong>\n<img src=\"http://i.stack.imgur.com/yxgav.png\" alt=\"enter image description here\"></p>\n\n<p>In Reshaper 5.0, I seem to remember the \"Insert Header\" option would be before Suppress. Now, the Suppress option is always the first option, so my quick method of simply hitting Alt + Enter + Enter now auto-inserts a Suppression message instead of doing what I'd like it to.</p>\n\n<p>Is there a way to move the \"Insert header:\" option, and other similiar options, to be the first option instead of Suppress?</p>\n","owner":{"user_id":93306,"display_name":"Will Eddins","reputation":4422,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/852eeb80caedb46ffb2704dd23ea15aa?d=identicon&r=PG","link":"http://stackoverflow.com/users/93306/will-eddins"},"creation_date":1323647745,"last_activity_date":1323647745,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":8468495,"post_type":"question","body":"<p>I'm not sure if this question is a legitimate question for this site -- if it isn't I'll take it down.</p>\n\n<p>I'm looking for a commercial http proxy provider where I can get\n  reasonable bandwidth -- 10 Mbps would be fine\n  no restrictions\n  24/7 access\n  non sequential IP's</p>\n\n<p>Any recommendations?</p>\n\n<p>Thanks.</p>\n","owner":{"user_id":1038507,"display_name":"bubba meow meow","reputation":9,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/a91b3abb9866cab9c2e6fb5f464b6a0d?d=identicon&r=PG","link":"http://stackoverflow.com/users/1038507/bubba-meow-meow"},"creation_date":1323647733,"last_activity_date":1323647733,"score":0,"up_vote_count":0,"down_vote_count":0},{"post_id":6901746,"post_type":"question","body":"<p>I have made a simple paint program in which you can use a brush-tool to paint some different colors and erase (simply paint in white).</p>\n\n<p>It works fine, but I have a very strange graphical bug which causes the toolpanel and the last mouseovered color/tool-icon to be painted on top of the drawpanel.</p>\n\n<p>Implementation: The frame holds two extentions of JPanel: a ToolPanel and a DrawPanel. ToolPanel holds two JPanels which hold the color- and toolbuttons. The Buttons are extensions of JComponent.</p>\n\n<p>link to screenshot (I'm not allowed to post images appearently):</p>\n\n<p><img src=\"http://i.stack.imgur.com/cdzui.png\" alt=\"enter image description here\"></p>\n\n<p>note: The buttons in the second \"fake\" toolpanel are not actual buttons that can be clicked and I can paint on top of it. If I paint on the \"fake\" color button in the left corner it will be repainted again when I mouseover a new color and enter the drawpanel with the mouse.</p>\n\n<p>note 2: I used to have a JMenuBar which was also painted in the drawpanel. It was repainted each time the drawpanel is mouseovered after the window (not just the panel) lost focus once.</p>\n\n<p>Some code:\n(I know the tool selection implementation isn't the best :P)</p>\n\n<p>DrawPanel's paintComponent method:</p>\n\n<pre><code>    public void paintComponent(Graphics g) { \n    if(isMousePressed) {\n        if(tool == \"BRUSH\") {\n            g.setColor(color);\n            g.fillOval(currentEvent.getX(), currentEvent.getY(), 30, 30);\n        } else if(tool == \"ERASER\") {\n            g.setColor(getBackground());\n            g.fillOval(currentEvent.getX(), currentEvent.getY(), 30, 30);\n\n        }\n    }\n}\n</code></pre>\n\n<p>Let me know if there is any relevant information or code that I left out.</p>\n\n<p>Hypothesis:\nI didn't call super.paintComponent in DrawPanels paintComponent-method, maybe that causes some problems? The reason that I didn't is that if I do, it will repaint the background all the time so only the dot I painted last will be visible. Not sure if the supercall actually solves the problem or if the fake-panel is just covered by the background as well. Maybe I need to work around that some other way? Or is it something else? </p>\n\n<p>Thanks!</p>\n","owner":{"user_id":800535,"display_name":"tobes","reputation":21,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/9cba39584819ab028723fbd9c1cf52b6?d=identicon&r=PG","link":"http://stackoverflow.com/users/800535/tobes"},"creation_date":1312217466,"last_activity_date":1323647730,"last_edit_date":1323647730,"score":4,"up_vote_count":4,"down_vote_count":0,"comments":[{"comment_id":8217475,"post_id":6901746,"creation_date":1312217914,"score":1,"edited":false,"body":"+1 For the &quot;WTF&quot; screenshot. :D","owner":{"user_id":584862,"display_name":"Крысa","reputation":9718,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/840ece295cf7c6e79179ad3906308bd1?d=identicon&r=PG","link":"http://stackoverflow.com/users/584862/a"}},{"comment_id":8218187,"post_id":6901746,"creation_date":1312220864,"score":4,"edited":false,"body":"Don&#39;t use &quot;==&quot; to compare Strings. Use the equals(...) method.","owner":{"user_id":131872,"display_name":"camickr","reputation":48713,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/a0ced8e21d2a761db718acb6362b9225?d=identicon&r=PG","link":"http://stackoverflow.com/users/131872/camickr"}},{"comment_id":8871956,"post_id":6901746,"creation_date":1315511569,"edited":false,"body":"Did you ever fix this or could you create an <a href=\"http://sscce.org\" rel=\"nofollow\">SSCCE</a>?","owner":{"user_id":546060,"display_name":"Charles Goodwin","reputation":2193,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/5f12ff8368711f658d186963972385c9?d=identicon&r=PG","link":"http://stackoverflow.com/users/546060/charles-goodwin"}}]},{"post_id":8459811,"post_type":"question","body":"<p>I want to avoid ctors that take a large number of repository interfaces.</p>\n\n<p>Instead, I want to have a single ctor parameter: a typed repository set.</p>\n\n<p>By typed, I mean a class with a bunch of properties for each repository that the enclosing class uses. Something like this:</p>\n\n<pre><code>public sealed class MyRepositorySet\n{\n    public IUserRepository UserRepository { get; set; }\n\n    public IOtherRepository OtherRepository { get; set; }\n}\n</code></pre>\n\n<p>I want to use Ninject to automatically create such a repository set, populate each of the properties by creating an instance of each repository, and then create the dependent class with the initialized repository set.</p>\n\n<p>I know this can be done, but I can't find an example. I don't think I know what a typed repository set is properly called.</p>\n","owner":{"user_id":984335,"display_name":"Travis Parks","reputation":8,"user_type":"registered","profile_image":"http://www.gravatar.com/avatar/421891a2a2db5ac1bdccf96b941c11cb?d=identicon&r=PG","link":"http://stackoverflow.com/users/984335/travis-parks"},"creation_date":1323550569,"last_activity_date":1323647719,"score":0,"up_vote_count":0,"down_vote_count":0}],"quota_remaining":-4417,"quota_max":300}
+{
+  "items": [
+    {
+      "post_id": 8429231,
+      "post_type": "question",
+      "body": "<p>I know that you can create routes in asp.net web forms, but how do I go about creating one that handles all my pages like <code>mydomain.com/aboutus</code>?</p>\n\n<p>I have heard about custom iroute handlers but can someone actually show me an example?</p>\n\n<p>Can someone please send me an example in C# of how I would go about this? I do have a file called <code>page.aspx</code> that will process all the requests for the CMS. I think it's a root handler I need.</p>\n",
+      "owner": {
+        "user_id": 1073293,
+        "display_name": "David Buckley",
+        "reputation": 3,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/b0eb67508bc4c330e2e0c3823472e169?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1073293/david-buckley"
+      },
+      "creation_date": 1323338858,
+      "last_activity_date": 1323668895,
+      "last_edit_date": 1323338987,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470391,
+      "post_type": "answer",
+      "body": "<p>URL Rewrite in IIS 7 and IIS 7.5 does this very nicely. You need to first install URL Rewrite into IIS via the Web Platform Installer. After that, you would place this in your web.config.</p>\n\n<pre><code>&lt;system.webServer&gt;\n    &lt;rewrite&gt;\n        &lt;rules&gt;\n            &lt;rule name=\"aboutus\" stopprocessing=\"true\"&gt;\n                &lt;match url=\"^aboutus$\" /&gt;\n                &lt;action type=\"Rewrite\" url=\"/aboutus.aspx\" /&gt;\n            &lt;/rule&gt;\n        &lt;/rules&gt;\n    &lt;/rewrite&gt;\n&lt;/system.webServer&gt;\n</code></pre>\n",
+      "owner": {
+        "user_id": 775516,
+        "display_name": "emeraldcode.com",
+        "reputation": 62,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/39e8151ad74e548bcb4a7b14415e8d58?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/775516/emeraldcode-com"
+      },
+      "creation_date": 1323668895,
+      "last_activity_date": 1323668895,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470390,
+      "post_type": "question",
+      "body": "<p>I have a collection of controls displayed in a ListBoxDragDropTarget.  It works great when I want the user to be able to drag and drop between listboxes.  But my app has a mode where the dragging is disabled and during that mode clicking on a listboxitem should fire a command.</p>\n\n<p>I think the ListBoxDragDropTarget is stealing the mouse button events...  Hence the title of this question.  FWIW, Google turned up some work arounds that derive from ListBoxDragDropTarget and override and cancel some of the eventing.  I don't think that will work here because I think the event.cancel=true is the problem in the first place.</p>\n\n<p>Any ideas?  My goal is to support two modes:\n1) Dragging the listboxitem between two listboxes\n2) Clicking the listboxitem invokes a command</p>\n\n<p>I am running SL4</p>\n",
+      "owner": {
+        "user_id": 456490,
+        "display_name": "dFlat",
+        "reputation": 80,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/0b5aa376a3ea1927e826357ecf37641c?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/456490/dflat"
+      },
+      "creation_date": 1323668888,
+      "last_activity_date": 1323668888,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470267,
+      "post_type": "question",
+      "body": "<p>I'm looking for material or tutorial on how to customize Windows (OS) (for example, changing time, changing themes, changing wallpapers, etc..) in C++ or C#.</p>\n\n<p>I've looked on google but it seems to precise or too abstract to have good results.</p>\n",
+      "owner": {
+        "user_id": 684101,
+        "display_name": "CoachNono",
+        "reputation": 38,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/1177a6ab80763947c1282f0c424f5d12?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/684101/coachnono"
+      },
+      "creation_date": 1323667634,
+      "last_activity_date": 1323668876,
+      "last_edit_date": 1323668876,
+      "score": -3,
+      "up_vote_count": 0,
+      "down_vote_count": 3,
+      "comments": [
+        {
+          "comment_id": 10476099,
+          "post_id": 8470267,
+          "creation_date": 1323667760,
+          "score": 5,
+          "edited": false,
+          "body": "Instead of looking for a tutorial for all things, look for specific examples for specific things (and in specific languages).",
+          "owner": {
+            "user_id": 166390,
+            "display_name": "pst",
+            "reputation": 31463,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/6f378290b6519741614a81f1f67ad679?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/166390/pst"
+          }
+        },
+        {
+          "comment_id": 10476100,
+          "post_id": 8470267,
+          "creation_date": 1323667780,
+          "edited": false,
+          "body": "The three examples you mentioned don&#39;t really relate very much.",
+          "owner": {
+            "user_id": 200291,
+            "display_name": "icktoofay",
+            "reputation": 17620,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/399cacf55045372a29f1f844d12ee777?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/200291/icktoofay"
+          }
+        },
+        {
+          "comment_id": 10476108,
+          "post_id": 8470267,
+          "creation_date": 1323667821,
+          "score": 2,
+          "edited": false,
+          "body": "No, I don&#39;t think your&#160;question could be less precise.",
+          "owner": {
+            "user_id": 612429,
+            "display_name": "kay",
+            "reputation": 1657,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/ab5b89a4f7d4094c228101519870876e?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/612429/kay"
+          }
+        },
+        {
+          "comment_id": 10476113,
+          "post_id": 8470267,
+          "creation_date": 1323667846,
+          "edited": false,
+          "body": "Maybe I wasn&#39;t clear, what I&#39;m looking for is how does this work? How the interaction is done, probably with Windows Api. Do you have some examples of windows customization ?",
+          "owner": {
+            "user_id": 684101,
+            "display_name": "CoachNono",
+            "reputation": 38,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/1177a6ab80763947c1282f0c424f5d12?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/684101/coachnono"
+          }
+        },
+        {
+          "comment_id": 10476127,
+          "post_id": 8470267,
+          "creation_date": 1323667953,
+          "score": 1,
+          "edited": false,
+          "body": "Setting system time: <a href=\"http://msdn.microsoft.com/en-us/library/ms724942.aspx\" rel=\"nofollow\">msdn.microsoft.com/en-us/library/ms724942.aspx</a>",
+          "owner": {
+            "user_id": 200291,
+            "display_name": "icktoofay",
+            "reputation": 17620,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/399cacf55045372a29f1f844d12ee777?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/200291/icktoofay"
+          }
+        },
+        {
+          "comment_id": 10476153,
+          "post_id": 8470267,
+          "creation_date": 1323668121,
+          "score": 1,
+          "edited": false,
+          "body": "Set wallpaper: <a href=\"http://msdn.microsoft.com/en-us/library/ms724947.aspx\" rel=\"nofollow\">msdn.microsoft.com/en-us/library/ms724947.aspx</a> with <code>SPI_SETDESKWALLPAPER</code>",
+          "owner": {
+            "user_id": 200291,
+            "display_name": "icktoofay",
+            "reputation": 17620,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/399cacf55045372a29f1f844d12ee777?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/200291/icktoofay"
+          }
+        },
+        {
+          "comment_id": 10476160,
+          "post_id": 8470267,
+          "creation_date": 1323668187,
+          "edited": false,
+          "body": "Thanks, now I get that some little adjustments (changing wallpapers or time) are made through Windows Api.",
+          "owner": {
+            "user_id": 684101,
+            "display_name": "CoachNono",
+            "reputation": 38,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/1177a6ab80763947c1282f0c424f5d12?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/684101/coachnono"
+          }
+        },
+        {
+          "comment_id": 10476165,
+          "post_id": 8470267,
+          "creation_date": 1323668226,
+          "score": 1,
+          "edited": false,
+          "body": "I can&#39;t find any documentation for it, but it looks like changing the theme is through the <code>SetSystemVisualStyle</code> function.",
+          "owner": {
+            "user_id": 200291,
+            "display_name": "icktoofay",
+            "reputation": 17620,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/399cacf55045372a29f1f844d12ee777?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/200291/icktoofay"
+          }
+        },
+        {
+          "comment_id": 10476193,
+          "post_id": 8470267,
+          "creation_date": 1323668399,
+          "edited": false,
+          "body": "so I would make my own theme, save it and then I would be able to apply it via a software using the &quot;SetSystemVisualStyle&quot; function or something else is that it ?",
+          "owner": {
+            "user_id": 684101,
+            "display_name": "CoachNono",
+            "reputation": 38,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/1177a6ab80763947c1282f0c424f5d12?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/684101/coachnono"
+          }
+        },
+        {
+          "comment_id": 10476225,
+          "post_id": 8470267,
+          "creation_date": 1323668609,
+          "edited": false,
+          "body": "C++/C# is not the right language for this. These kinds of things are handled by programs which keep their configurations in the registry. You are using the wrong tool for the job.",
+          "owner": {
+            "user_id": 982617,
+            "display_name": "moshbear",
+            "reputation": 1177,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/a6e69d9b28f2595857e7c524426a9a11?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/982617/moshbear"
+          }
+        },
+        {
+          "comment_id": 10476244,
+          "post_id": 8470267,
+          "creation_date": 1323668716,
+          "edited": false,
+          "body": "@moshbear What tool do you suggest ?",
+          "owner": {
+            "user_id": 684101,
+            "display_name": "CoachNono",
+            "reputation": 38,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/1177a6ab80763947c1282f0c424f5d12?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/684101/coachnono"
+          },
+          "reply_to_user": {
+            "user_id": 982617,
+            "display_name": "moshbear",
+            "reputation": 1177,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/a6e69d9b28f2595857e7c524426a9a11?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/982617/moshbear"
+          }
+        },
+        {
+          "comment_id": 10476256,
+          "post_id": 8470267,
+          "creation_date": 1323668843,
+          "edited": false,
+          "body": "Scripting languages, preferably WSH and similar.",
+          "owner": {
+            "user_id": 982617,
+            "display_name": "moshbear",
+            "reputation": 1177,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/a6e69d9b28f2595857e7c524426a9a11?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/982617/moshbear"
+          }
+        }
+      ]
+    },
+    {
+      "post_id": 8470353,
+      "post_type": "question",
+      "body": "<p>Is there any way to keep my background service running indefinitely even if there is no activity of application currently running ?</p>\n\n<p>there is a requirement where user can use other application on the phone and he either closed all application's activities or he moved to other application so the activity of my application goes to pause or stop state so in this case service should not get destroy.</p>\n\n<p>I am not sure how to make it possible because as of now what I observed is whenever i pressed the back button of the phone when i am the first activity of the application, application's service is also get closed.</p>\n\n<p>Please do help me resolve it.Its very urgent.</p>\n\n<p>Regards,\nPiks</p>\n",
+      "owner": {
+        "user_id": 968831,
+        "display_name": "piks",
+        "reputation": 11,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/5dc836f1edc0b01d6c0c34ccf4e1aff3?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/968831/piks"
+      },
+      "creation_date": 1323668437,
+      "last_activity_date": 1323668863,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470389,
+      "post_type": "answer",
+      "body": "<p>for making background service then in android we have to extends Service class same as we are extends Activity in our application. And when you are extends service in your class then it will works as Background service. Then it will run until you uninstall your application from mobile or you are stop this service manually from settings.</p>\n\n<p>More details of <a href=\"http://developer.android.com/reference/android/app/Service.html\" rel=\"nofollow\">Service class</a> and <a href=\"http://marakana.com/forums/android/examples/60.html\" rel=\"nofollow\">example of service</a>.</p>\n",
+      "owner": {
+        "user_id": 815132,
+        "display_name": "Mansi",
+        "reputation": 114,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/17998b0564100f64145e416469231fe4?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/815132/mansi"
+      },
+      "creation_date": 1323668863,
+      "last_activity_date": 1323668863,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470186,
+      "post_type": "answer",
+      "body": "<p>The expression <code>p++</code> which you've written is at namespace scope.  It is forbidden by the grammer of <em>namespace-body</em> which is defined in §7.3.1/1 as:</p>\n\n<blockquote>\n  <p>namespace-body:<br>\n  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;declaration-seq<sub>opt</sub></p>\n</blockquote>\n\n<p>which says the namespace-body can <em>optionally</em> contain <strong>only</strong> <em>declaration</em>. And <code>p++</code> is surely not a declaration, it is an expression, therefore the Standard implicitly forbids it. The Standard might have explicit statement forbidding this, but I think the above should be enough.</p>\n\n<p>In the same way, you can write these at namespace scope:</p>\n\n<pre><code>namespace sample\n{\n  f(10,10); //error\n  std::cout &lt;&lt; \"hello world\" &lt;&lt; std::endl;//error\n}\n</code></pre>\n\n<p>But if you somewhow convert <em>expressions</em> into <em>declarations</em>, then you could evaluate the so-called expressions. Here is one trick:</p>\n\n<pre><code>#include&lt;iostream&gt;\n\nnamespace sample\n{\n  struct any { template&lt;typename T&gt; any(const T&amp;){} };\n\n  void f(int a,int b) { std::cout &lt;&lt; a * b &lt;&lt;  std::endl; }\n\n  any a1= (f(10,10), 0); //ok\n  any a2 = std::cout &lt;&lt; \"hello world\" &lt;&lt; std::endl;//ok\n}\n\nint main() {}\n</code></pre>\n\n<p>Output (if you're lucky):</p>\n\n<pre><code>100\nhello world\n</code></pre>\n\n<p>Online demo : <a href=\"http://ideone.com/icbhh\" rel=\"nofollow\">http://ideone.com/icbhh</a></p>\n\n<p>Notice that the return type of <code>f()</code> is <code>void</code>, which means I cannot write the following (<a href=\"http://ideone.com/YmGpg\" rel=\"nofollow\">see error)</a>:</p>\n\n<pre><code>any a1 = f(10,10); //error\n</code></pre>\n\n<p>That is why I used <em>comma</em> operator so that every expression could have some value, which evaluates to the last operand in the comma expression. In case of <code>std:cout</code>, since it returns <code>std::ostream&amp;</code>, I don't need to use comma operator; it is fine without it.</p>\n\n<p>One more interesting thing in the above code: why I defined <code>any</code> and a <em>templated</em> constructor in it? The answer is, I wrote this so that I could assign value of <em>any</em> type (no pun intended), be it <code>int</code>, <code>std::ostream&amp;</code> or whatever. The <em>templated</em> constructor can take argument of any type.</p>\n\n<p><strong>But don't write such code. They're not guaranteed to work the way you expect.</strong> </p>\n\n<p>Read the answers in this topic where you would see why such coding could be dangerous:</p>\n\n<ul>\n<li><a href=\"http://stackoverflow.com/questions/4783404/is-main-really-start-of-a-c-program\">Is main() really start of a C++ program?</a></li>\n</ul>\n",
+      "owner": {
+        "user_id": 415784,
+        "display_name": "Nawaz",
+        "reputation": 60759,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/acebaaf02be9bbc7319c51af806f9ec2?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/415784/nawaz"
+      },
+      "creation_date": 1323666684,
+      "last_activity_date": 1323668862,
+      "last_edit_date": 1323668862,
+      "score": 3,
+      "up_vote_count": 3,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470065,
+      "post_type": "question",
+      "body": "<p>Any idea on which rule in standard states the statements like this:</p>\n\n<pre><code>p++; //where 'p' is pointer to array\n</code></pre>\n\n<p>cannot appear in global scope? </p>\n\n<p>I'm looking for a reference not just an explanation if possible.</p>\n",
+      "owner": {
+        "user_id": 1086635,
+        "display_name": "user1086635",
+        "reputation": 46,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/3bfda22d0d26c40b82da8de3945f3557?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1086635/user1086635"
+      },
+      "creation_date": 1323665370,
+      "last_activity_date": 1323668862,
+      "last_edit_date": 1323665681,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0,
+      "comments": [
+        {
+          "comment_id": 10475827,
+          "post_id": 8470065,
+          "creation_date": 1323665641,
+          "edited": false,
+          "body": "isn&#39;t it just declarations that can have global scope?",
+          "owner": {
+            "user_id": 16076,
+            "display_name": "Mitch Wheat",
+            "reputation": 102103,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/bf491c31ba2b4018e150397ba2e4f80b?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/16076/mitch-wheat"
+          }
+        },
+        {
+          "comment_id": 10475845,
+          "post_id": 8470065,
+          "creation_date": 1323665832,
+          "score": 7,
+          "edited": false,
+          "body": "When would you expect such a statement to run?",
+          "owner": {
+            "user_id": 151292,
+            "display_name": "James McNellis",
+            "reputation": 108845,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/f9553988d06b69232ceaea7b58615a1b?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/151292/james-mcnellis"
+          }
+        },
+        {
+          "comment_id": 10475901,
+          "post_id": 8470065,
+          "creation_date": 1323666330,
+          "edited": false,
+          "body": "I was excepting the value to be discarded if not left operand is available but this gives me an error, but it seems there&#39;s no where mentioned that they cannot appear in global scope.",
+          "owner": {
+            "user_id": 1086635,
+            "display_name": "user1086635",
+            "reputation": 46,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/3bfda22d0d26c40b82da8de3945f3557?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/1086635/user1086635"
+          }
+        },
+        {
+          "comment_id": 10476033,
+          "post_id": 8470065,
+          "creation_date": 1323667322,
+          "edited": false,
+          "body": "<code>p++</code> doesn&#39;t just assign to an lvalue (if one were present), it also increments the value of <code>p</code>, so that goes back to @JamesMcNellis&#39; comment.",
+          "owner": {
+            "user_id": 2666,
+            "display_name": "Jim Buck",
+            "reputation": 6377,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/aeff0099743dd003da31e22fc33204e3?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/2666/jim-buck"
+          },
+          "reply_to_user": {
+            "user_id": 151292,
+            "display_name": "James McNellis",
+            "reputation": 108845,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/f9553988d06b69232ceaea7b58615a1b?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/151292/james-mcnellis"
+          }
+        }
+      ]
+    },
+    {
+      "post_id": 8470388,
+      "post_type": "question",
+      "body": "<p>I'm using HTML5 boilerplate and have a <strong>header</strong> tag going the full width across the top of the page, with position:fixed. It works properly everywhere except IE7 (of course). In IE7 it creates a horizontal scrollbar that looks to have about the same width as the main content area...</p>\n\n<p>Removing position:fixed from the <strong>header</strong> will remove the scrollbar and fix the issue, but I want to keep that position:fixed to have the whole <strong>header</strong> area overlap the main content as users scroll...</p>\n\n<p>Anyone willing to take a look:  <a href=\"http://www.capitaldesign.ca/sanction3/index.html\" rel=\"nofollow\">http://www.capitaldesign.ca/sanction3/index.html</a></p>\n",
+      "owner": {
+        "user_id": 1093150,
+        "display_name": "user1093150",
+        "reputation": 1,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/c09104607ad356d40464c587bb160e6a?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1093150/user1093150"
+      },
+      "creation_date": 1323668833,
+      "last_activity_date": 1323668833,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470387,
+      "post_type": "answer",
+      "body": "<p>Try using the Remote Service which is not bound to an activity.</p>\n\n<p><a href=\"http://developer.android.com/reference/android/app/Service.html\" rel=\"nofollow\">http://developer.android.com/reference/android/app/Service.html</a></p>\n\n<p><a href=\"http://developer.android.com/guide/topics/fundamentals/services.html\" rel=\"nofollow\">http://developer.android.com/guide/topics/fundamentals/services.html</a></p>\n",
+      "owner": {
+        "user_id": 393488,
+        "display_name": "Rajdeep Dua",
+        "reputation": 1418,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/6b5635c5fa6d406c8b018222f366f923?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/393488/rajdeep-dua"
+      },
+      "creation_date": 1323668823,
+      "last_activity_date": 1323668823,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470386,
+      "post_type": "answer",
+      "body": "<p><code>event.getPointerCount()</code> method call gives you number of touch </p>\n\n<p><strong>Sample Code</strong></p>\n\n<pre><code>@Override\npublic boolean onTouchEvent(final MotionEvent event)\n{\n    System.out.println(\"Touch Count =\"+event.getPointerCount());\n\n    return true;\n}\n</code></pre>\n",
+      "owner": {
+        "user_id": 111988,
+        "display_name": "Sunil Kumar Sahoo",
+        "reputation": 5818,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/95a9b3e3336f0d41ee860643f14944f6?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/111988/sunil-kumar-sahoo"
+      },
+      "creation_date": 1323668823,
+      "last_activity_date": 1323668823,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470174,
+      "post_type": "question",
+      "body": "<p>In a custom view how would it be possible to get how much of a finger touched the screen. In other words, to get if the user used the tip of his finger or a larger area. And then to be able to get each dimension of the rectangle. </p>\n",
+      "owner": {
+        "user_id": 1068924,
+        "display_name": "user1068924",
+        "reputation": 1,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/f1d2564085eab02c931dbb3779929e2f?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1068924/user1068924"
+      },
+      "creation_date": 1323666562,
+      "last_activity_date": 1323668823,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8469914,
+      "post_type": "question",
+      "body": "<p>I'm trying to pull a count of all users created in a year, and month but the following doesn't seem to work as expected.</p>\n\n<pre><code>User.group(\"YEAR(created_AT), MONTH(created_at)\").\n     count(\"DISTINCT(id), YEAR(created_at), MONTH(created_at)\")\n</code></pre>\n\n<p>i'm looking for something like </p>\n\n<pre><code>{2011 =&gt; {1 =&gt; 222, 2 =&gt; 333, 4 =&gt; 444, 5 =&gt; 667 ... }}\n</code></pre>\n\n<p>but i'm getting</p>\n\n<pre><code>{1 =&gt; 222, 2 =&gt; 333, 4 =&gt; 444, 5 =&gt; 667 ... }\n</code></pre>\n\n<p>Am i missing something, or can ActiveRecord not give me this result in one query? </p>\n",
+      "owner": {
+        "user_id": 147390,
+        "display_name": "Schneems",
+        "reputation": 1099,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/db953d125f5cc49756edb6149f1b813e?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/147390/schneems"
+      },
+      "creation_date": 1323663853,
+      "last_activity_date": 1323668814,
+      "last_edit_date": 1323666781,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470385,
+      "post_type": "answer",
+      "body": "<p>The <a href=\"http://api.rubyonrails.org/classes/ActiveRecord/Calculations.html#method-i-count\" rel=\"nofollow\"><code>count</code></a> method doesn't work like you think it does. You end up doing this:</p>\n\n<pre><code>select count(distinct(id), year(created_at), month(created_at))\nfrom users\ngroup by year(created_at), month(created_at)\n</code></pre>\n\n<p>That SELECT clause is pretty dodgy but MySQL will, in its usual sloppy manner, let it through. I think you want this query:</p>\n\n<pre><code>select count(distinct(id)), year(created_at), month(created_at)\nfrom users\ngroup by year(created_at), month(created_at)\n</code></pre>\n\n<p>I'd probably go straight to <code>select_all</code> like this:</p>\n\n<pre><code>a = User.connection.select_all(%q{\n    select count(distinct(id)) as c, year(created_at) as y, month(created_at) as m\n    from users\n    group by y, m\n})\n</code></pre>\n\n<p>Or you could do it like this:</p>\n\n<pre><code>a = User.connection.select_all(\n    User.select('count(distinct(id)) as c, year(created_at) as y, month(created_at) as m').\n         group('y, m')\n)\n</code></pre>\n\n<p>Those will give you an array, <code>a</code>, of Hashes with <code>c</code>, <code>y</code>, and <code>m</code> keys like this:</p>\n\n<pre><code>a = [\n    { 'c' =&gt; '23', 'y' =&gt; '2010', 'm' =&gt; '11' },\n    { 'c' =&gt; '1',  'y' =&gt; '2011', 'm' =&gt;  '1' },\n    { 'c' =&gt; '5',  'y' =&gt; '2011', 'm' =&gt;  '3' },\n    { 'c' =&gt; '2',  'y' =&gt; '2011', 'm' =&gt;  '4' },\n    { 'c' =&gt; '11', 'y' =&gt; '2011', 'm' =&gt;  '8' }\n]\n</code></pre>\n\n<p>Then a bit of data wrangling is all you need to finish the job:</p>\n\n<pre><code>h = a.group_by { |x| x['y'] }.each_with_object({}) do |(y,v), h|\n    h[y.to_i] = Hash[v.map { |e| [e['m'].to_i, e['c'].to_i] }]\nend\n# {2010 =&gt; {11 =&gt; 23}, 2011 =&gt; {1 =&gt; 1, 3 =&gt; 5, 4 =&gt; 2, 8 =&gt; 11}} \n</code></pre>\n",
+      "owner": {
+        "user_id": 479863,
+        "display_name": "mu is too short",
+        "reputation": 58000,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/7b3297b0f913d67a251ec08401aca583?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/479863/mu-is-too-short"
+      },
+      "creation_date": 1323668814,
+      "last_activity_date": 1323668814,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470384,
+      "post_type": "question",
+      "body": "<p>Why  InetAddress ,Inet4Address, Inet6Address have no visible construtor?</p>\n",
+      "owner": {
+        "user_id": 1091144,
+        "display_name": "sheo",
+        "reputation": 28,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/8776d7d616f807d09c0b004d8f457813?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1091144/sheo"
+      },
+      "creation_date": 1323668790,
+      "last_activity_date": 1323668790,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8449608,
+      "post_type": "question",
+      "body": "<p>I am developing a control for an IPAD application (My first time doing Apple development). Its a simple control that mimics a grid - consists of a collection of UIViews (each of which represents a cell) all added to a parent UIView (in a grid like fashion).</p>\n\n<p>One of the requirements is to implement a swipe gesture - the users swipe across the grid to activate/inactivate the cell - this corresponds to a 1/0 in the database.</p>\n\n<p>I create a UISwipeGesture and added it to each of my UIView which represents a cell. That appears to be an incorrect approach as it fires the event for the UIView in which the swipe originated but not across all the UIViews.</p>\n\n<p>My understanding would be that i need to implement the SwipeGesture across the parent UIView which contains all these children UIView. However if i do that how will i know which child UIView has been swiped over? Or any other approach which would make sense?</p>\n",
+      "owner": {
+        "user_id": 1076100,
+        "display_name": "user1076100",
+        "reputation": 11,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/5785c0eabd94e48bfcae4b07159da728?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1076100/user1076100"
+      },
+      "creation_date": 1323452921,
+      "last_activity_date": 1323668789,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470383,
+      "post_type": "answer",
+      "body": "<p>I think you're correct that the gesture recognizer has to be attached to the parent view. In the action method associated with the gesture recognizer I think you can use the Monotouch equivalent of CGRectContainsPoint() to determine whether the swipe occurred in a particular subview. I imagine you would have to iterate through the subviews until you found the one in which the swipe occurred. I'm not aware of a method that would immediately identify the swiped subview.</p>\n",
+      "owner": {
+        "user_id": 490682,
+        "display_name": "StephenAshley.developer",
+        "reputation": 81,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/778b3d548b5fddda35149f2965414050?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/490682/stephenashley-developer"
+      },
+      "creation_date": 1323668789,
+      "last_activity_date": 1323668789,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470382,
+      "post_type": "answer",
+      "body": "<p>Your concern about 'the files on my local machine will be a weird mix of different experiments.' is unfounded - if you have branch 2 checked out, you will not see the files of branch 1 at the same time. </p>\n\n<p>I would do something like</p>\n\n<pre><code># on master branch\ngit checkout master\n# Create a branch for feature 1\ngit checkout -b feature_1\n# work on feature 1\ngit checkout master\ngit checkout -b feature_2\n# work on feature 2\n\n# feature 2 finished and committed, time to merge \ngit checkout master\ngit merge feature_2\n\n# update feature_1 branch\ngit checkout feature_1\ngit merge master\n</code></pre>\n",
+      "owner": {
+        "user_id": 155392,
+        "display_name": "I82Much",
+        "reputation": 6372,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/e130b072760751611b76f2c9c6d6f640?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/155392/i82much"
+      },
+      "creation_date": 1323668783,
+      "last_activity_date": 1323668783,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470360,
+      "post_type": "question",
+      "body": "<p>This is a follow-up on <a href=\"http://stackoverflow.com/questions/8453039/cleaning-my-git-branch-of-features-in-development\">this question</a> on creating branches.</p>\n\n<p>It strikes me as odd that I would still work on one repository because the files on my local machine will be a weird mix of different experiments.</p>\n\n<p>I would imagine the best-practice method is to duplicate the repository and work in different folders on my computer for each branch -- but I don't know how to set this up. I have my current repository at Documents/San/CompProj so what are the commands I'd use to create a new repository tied to a different branch on a different local folder?</p>\n\n<p>Git is fairly new to me so I'd love any corrections you can make on what I'm assuming/asking above.</p>\n",
+      "owner": {
+        "user_id": 341583,
+        "display_name": "sscirrus",
+        "reputation": 3586,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/cf9edfdcf79bd399f9b077b815dece35?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/341583/sscirrus"
+      },
+      "creation_date": 1323668506,
+      "last_activity_date": 1323668783,
+      "score": 1,
+      "up_vote_count": 1,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8453357,
+      "post_type": "question",
+      "body": "<p>I'm a bit stumped as to how to run scaladoc on a Play! framework project.  It seems there are a lot of intricacies to account for, and I'm not having success.</p>\n\n<p>Is there a tutorial I am missing?  Do you need to add in sbt or a build tool to make it reasonable?</p>\n",
+      "owner": {
+        "user_id": 94146,
+        "display_name": "Kevin Bowling",
+        "reputation": 73,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/c55a8f166d9f121501a5dec95ed07992?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/94146/kevin-bowling"
+      },
+      "creation_date": 1323476666,
+      "last_activity_date": 1323668781,
+      "score": 1,
+      "up_vote_count": 2,
+      "down_vote_count": 1,
+      "comments": [
+        {
+          "comment_id": 10456653,
+          "post_id": 8453357,
+          "creation_date": 1323531262,
+          "edited": false,
+          "body": "Do you mean that haven&#39;t run Scaladoc on any project or that you have a specific problem because of Play? I think you&#39;ll probably need to clarify how you&#39;re currently building your project and generating the docs and what specific problems you&#39;re coming across. If you&#39;re using sbt it is just a matter of running the <code>doc</code> command, so that&#39;s certainly pretty easy.",
+          "owner": {
+            "user_id": 241990,
+            "display_name": "Luke Taylor",
+            "reputation": 339,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/91c15183d9efc15c30ff1e65f084314d?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/241990/luke-taylor"
+          }
+        },
+        {
+          "comment_id": 10466407,
+          "post_id": 8453357,
+          "creation_date": 1323532232,
+          "edited": false,
+          "body": "Playframework 2.0 uses SBT to build your project. What version of play did you use ? Did you try to run <code>doc</code> task in play console ?",
+          "owner": {
+            "user_id": 229823,
+            "display_name": "David",
+            "reputation": 595,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/abd09c5900bb2daa0ab96c2931fc3563?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/229823/david"
+          }
+        },
+        {
+          "comment_id": 10460439,
+          "post_id": 8453357,
+          "creation_date": 1323552927,
+          "edited": false,
+          "body": "It&#39;s a specific problem because of Play.  Versions before 2.0 don&#39;t use sbt and I&#39;m not sure how to set everything up to run scaladoc manually.",
+          "owner": {
+            "user_id": 94146,
+            "display_name": "Kevin Bowling",
+            "reputation": 73,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/c55a8f166d9f121501a5dec95ed07992?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/94146/kevin-bowling"
+          },
+          "reply_to_user": {
+            "user_id": 241990,
+            "display_name": "Luke Taylor",
+            "reputation": 339,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/91c15183d9efc15c30ff1e65f084314d?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/241990/luke-taylor"
+          }
+        },
+        {
+          "comment_id": 10466408,
+          "post_id": 8453357,
+          "creation_date": 1323569514,
+          "edited": false,
+          "body": "1.2.4 with Scala module.  It has a javadoc command but no others.  I tried replicating the javadoc command but replacing it with scaladoc.  No luck so far.",
+          "owner": {
+            "user_id": 94146,
+            "display_name": "Kevin Bowling",
+            "reputation": 73,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/c55a8f166d9f121501a5dec95ed07992?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/94146/kevin-bowling"
+          }
+        }
+      ]
+    },
+    {
+      "post_id": 8470381,
+      "post_type": "answer",
+      "body": "<p>I came up with a solution that works, but not perfect.  You need to run the app to generate the Scala code for the templates.  Then run 'play scaladoc' with the code below.</p>\n\n<p>Add 'play/framework/pym/play/commands/scaladoc.py' with contents: </p>\n\n<pre><code>import os, os.path\nimport shutil\nimport subprocess\n\nfrom play.utils import *\n\nCOMMANDS = ['scaladoc', 'sd']\n\nHELP = {\n    'scaladoc': 'Generate your application scaladoc'\n}\n\ndef execute(**kargs):\n    command = kargs.get(\"command\")\n    app = kargs.get(\"app\")\n    args = kargs.get(\"args\")\n    play_env = kargs.get(\"env\")\n\n    app.check()\n    modules = app.modules()\n    if not os.environ.has_key('SCALA_HOME'):\n        scaladoc_path = \"scaladoc\"\n    else:\n        scaladoc_path = os.path.normpath(\"%s/bin/scaladoc\" % os.environ['SCALA_HOME'])\n\n    fileList = []\n    def add_scala_files(app_path):\n        for root, subFolders, files in os.walk(os.path.join(app_path, 'app')):\n            for file in files:\n                if file.endswith(\".scala\"):\n                    fileList.append(os.path.join(root, file))\n        for root, subFolders, files in os.walk(os.path.join(app_path,\n            'tmp/generated')):\n            for file in files:\n                if file.endswith(\".scala\"):\n                    fileList.append(os.path.join(root, file))\n    add_scala_files(app.path)\n    for module in modules:\n        add_scala_files(os.path.normpath(module))\n    outdir = os.path.join(app.path, 'scaladoc')\n    sout = open(os.path.join(app.log_path(), 'scaladoc.log'), 'w')\n    serr = open(os.path.join(app.log_path(), 'scaladoc.err'), 'w')\n    if (os.path.isdir(outdir)):\n        shutil.rmtree(outdir)\n    scaladoc_cmd = [scaladoc_path, '-classpath', app.cp_args(), '-d', outdir] + args + fileList\n    print \"Generating scaladoc in \" + outdir + \"...\"\n    subprocess.call(scaladoc_cmd, env=os.environ, stdout=sout, stderr=serr)\n    print \"Done! You can open \" + os.path.join(outdir, 'overview-tree.html') + \" in your browser.\"\n</code></pre>\n",
+      "owner": {
+        "user_id": 94146,
+        "display_name": "Kevin Bowling",
+        "reputation": 73,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/c55a8f166d9f121501a5dec95ed07992?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/94146/kevin-bowling"
+      },
+      "creation_date": 1323668781,
+      "last_activity_date": 1323668781,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470330,
+      "post_type": "answer",
+      "body": "<p>There seem to be a few solutions out there, though they mostly seem to involve changing your API architecture. </p>\n\n<ul>\n<li><a href=\"http://apigee.com/about/products\" rel=\"nofollow\">Apigee</a></li>\n<li><a href=\"http://mashery.com/solution/product/#analytics\" rel=\"nofollow\">Mashery</a></li>\n<li><a href=\"http://www.3scale.net/support/analytics-api/\" rel=\"nofollow\">3scale</a></li>\n<li><a href=\"http://www.reportgrid.com/index.html\" rel=\"nofollow\">ReportGrid</a></li>\n</ul>\n\n<p>You could potentially use one of the Google Analytics <a href=\"http://code.google.com/p/serversidegoogleanalytics/\" rel=\"nofollow\">server-side tracking libraries</a>.</p>\n\n<p>I see you're using AppEngine; I also run an API using AppEngine, and recently have been playing with using a <a href=\"https://github.com/singhj/Google-Analytics-for-Mobile--Google-App-Engine\" rel=\"nofollow\">Google Analytics Library for App Engine</a>. It's not a perfect solution, but there's a decent amount of quality data.</p>\n\n<p>Be warned that Google Analytics data modeling really isn't that analagous to that of an API; depending on your API, the notion of a \"visit\" is somewhat meaningless.</p>\n",
+      "owner": {
+        "user_id": 172322,
+        "display_name": "yahelc",
+        "reputation": 10019,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/86bfb88db64df750b7f297895d4f56f9?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/172322/yahelc"
+      },
+      "creation_date": 1323668189,
+      "last_activity_date": 1323668777,
+      "last_edit_date": 1323668777,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8464863,
+      "post_type": "question",
+      "body": "<p>Just wondering if there's any out of the box solution for this, I am not too familiar with the analytics api maybe I can write some simple js that updates analytics before going to my service etc. -- otherwise I am going to have to stick to the good old 'store records in the database'.</p>\n\n<p>Any help appreciated!</p>\n",
+      "owner": {
+        "user_id": 19967,
+        "display_name": "JohnIdol",
+        "reputation": 7803,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/2e1ccbdcff5ab29fe347675640333a63?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/19967/johnidol"
+      },
+      "creation_date": 1323615031,
+      "last_activity_date": 1323668777,
+      "last_edit_date": 1323653628,
+      "score": 2,
+      "up_vote_count": 2,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470351,
+      "post_type": "question",
+      "body": "<p>what i want to do is have a normal link for desktop browsers like so\n<code>&lt;div style=\"text-align: center;\"&gt;&lt;a href=\"http://db.tt/b6ecH2Dh\"&gt;&lt;img src=\"img/download.gif\"/&gt;&lt;/div&gt;</code>\nbut whan a ios user clicks the link it opens a different link like this\n<code>&lt;div style=\"text-align: center;\"&gt;&lt;a href=\"cydia://package/bla\"&gt;&lt;img src=\"img/download.gif\"/&gt;&lt;/div&gt;</code></p>\n\n<p>could i do it with javascript or php? if so how?</p>\n",
+      "owner": {
+        "user_id": 1022866,
+        "display_name": "lewis denny",
+        "reputation": 6,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/030eb0d4589174b95713cc5481a969fe?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1022866/lewis-denny"
+      },
+      "creation_date": 1323668431,
+      "last_activity_date": 1323668772,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0,
+      "comments": [
+        {
+          "comment_id": 10476235,
+          "post_id": 8470351,
+          "creation_date": 1323668667,
+          "edited": false,
+          "body": "I&#39;d suggest having a quick google for &quot;Mobile Device Detection&quot; or something of that nature.",
+          "owner": {
+            "user_id": 61795,
+            "display_name": "Scuzzy",
+            "reputation": 1094,
+            "user_type": "registered",
+            "profile_image": "http://www.gravatar.com/avatar/8622bd07a6e4fbb934942f541b06e91f?d=identicon&r=PG",
+            "link": "http://stackoverflow.com/users/61795/scuzzy"
+          }
+        }
+      ]
+    },
+    {
+      "post_id": 8470380,
+      "post_type": "answer",
+      "body": "<pre><code>if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) \n{\n     document.getElementById('download_link').href = \"http://iphonedl\";\n}\n</code></pre>\n\n<p>Should work</p>\n\n<p><a href=\"http://davidwalsh.name/detect-iphone\" rel=\"nofollow\">http://davidwalsh.name/detect-iphone</a></p>\n",
+      "owner": {
+        "user_id": 763138,
+        "display_name": "CommunistPancake",
+        "reputation": 131,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/e73f3094956bbe7480cee0af6f04c6b5?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/763138/communistpancake"
+      },
+      "creation_date": 1323668772,
+      "last_activity_date": 1323668772,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470379,
+      "post_type": "question",
+      "body": "<p>I'd like to intercept the submission of a form on a particular website. The form has no ID, but it does have a name. I'd prefer not to use jQuery, as my extension is very light weight and has no dependencies. The form is not submitted by a button, but by the submit() method.</p>\n\n<p>I thought I could just handle the onSubmit event, but it doesn't seem to get raised.</p>\n\n<p>Now I'm stumped, any ideas?</p>\n",
+      "owner": {
+        "user_id": 983253,
+        "display_name": "kwerty",
+        "reputation": 11,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/8fa0ba324f96400e17ebc34a04c04011?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/983253/kwerty"
+      },
+      "creation_date": 1323668766,
+      "last_activity_date": 1323668766,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470378,
+      "post_type": "question",
+      "body": "<p>I'm having trouble wrapping my head around this and Google's sprawling documentation isn't helping (I can't even find a list of response types and their properties).</p>\n\n<p>I have my storefront built in PHP and my shopping cart is stored in the session.  When I hit the Google Checkout button, it posts to a different window (using the HTML API) and I get the Google sign-in where everything looks more or less right.</p>\n\n<p>However, I don't know how I'm supposed to clear my shopping cart once somebody finishes an order.  I haven't actually been through a test order because I can't get the sandbox directions to work (it keeps \"forgetting\" any settings).  Does my callback page recieve any sort of message I should be handling?  I'd like to do custom order processing someday but resetting the shopping cart is absolutely critical!</p>\n",
+      "owner": {
+        "user_id": 1080718,
+        "display_name": "Ryan Killian",
+        "reputation": 1,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/d7b7ad1d242c9101db69fdb60d4f9163?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/1080718/ryan-killian"
+      },
+      "creation_date": 1323668760,
+      "last_activity_date": 1323668760,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470216,
+      "post_type": "question",
+      "body": "<p>I get the following error when I tried to run a 'Published' local website.</p>\n\n<pre><code>Server Error in '/' Application.\n--------------------------------------------------------------------------------\n\nSecurity Exception \nDescription: The application attempted to perform an operation not allowed by the security policy.  To grant this application the required permission please contact your system administrator or change the application's trust level in the configuration file. \n\nException Details: System.Security.SecurityException: Request for the permission of type 'System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' failed.\n\nSource Error: \n\nAn unhandled exception was generated during the execution of the current web request. Information regarding the origin and location of the exception can be identified using the exception stack trace below.  \n\nStack Trace: \n\n\n[SecurityException: Request for the permission of type 'System.Security.Permissions.EnvironmentPermission, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' failed.]\n   System.Security.CodeAccessSecurityEngine.Check(Object demand, StackCrawlMark&amp; stackMark, Boolean isPermSet) +0\n   System.Security.CodeAccessPermission.Demand() +54\n   System.Environment.ExpandEnvironmentVariables(String name) +650\n   cc..cctor() +88\n\n\n\n\n--------------------------------------------------------------------------------\nVersion Information: Microsoft .NET Framework Version:2.0.50727.4927; ASP.NET Version:2.0.50727.4927 \n</code></pre>\n\n<p>After reading some blogs, I added the following in <code>Web.config</code>, but still have the same error.</p>\n\n<p><code>&lt;system.web&gt;\n    &lt;trust level=\"Full\"/&gt; ...</code></p>\n\n<p>Is there any settings in IIS to configure the trust level(I would like to overcome the error without changing code behind files) ?</p>\n",
+      "owner": {
+        "user_id": 441343,
+        "display_name": "Rauf",
+        "reputation": 840,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/11bd0c1785e5271beb31b26d4b083838?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/441343/rauf"
+      },
+      "creation_date": 1323667100,
+      "last_activity_date": 1323668695,
+      "last_edit_date": 1323668695,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470336,
+      "post_type": "question",
+      "body": "<p>is there a way to run multiple cURLs at once?</p>\n\n<p>I'm not sure if I have multiple cURLs it'll slow down the performance of the server?</p>\n\n<p>ie:</p>\n\n<pre><code>$url = \"https://example.com\";\n$ch = curl_init();\ncurl_setopt($ch, CURLOPT_URL,$url);\ncurl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);\ncurl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);\n$json = curl_exec($ch);\n$obj = json_decode($json,true);\n\n\n$url2= \"https://example.com\";    \n$ch2= curl_init();\ncurl_setopt($ch2, CURLOPT_URL,$self);\ncurl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);\ncurl_setopt($ch2, CURLOPT_SSL_VERIFYPEER, false);\n$json2 = curl_exec($ch2);\n$obj2 = json_decode($json2 ,true);\n</code></pre>\n\n<p>is there a way to make this work together? if so, is there an example someone can help me out with? I'm still fairly new at this stuff.</p>\n\n<p>Thanks!</p>\n",
+      "owner": {
+        "user_id": 659751,
+        "display_name": "andrewliu",
+        "reputation": 399,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/2b059a7c8b48313de728b6eac3022277?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/659751/andrewliu"
+      },
+      "creation_date": 1323668246,
+      "last_activity_date": 1323668673,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    },
+    {
+      "post_id": 8470377,
+      "post_type": "answer",
+      "body": "<p>PHP's documentation has an example using <a href=\"http://php.net/manual/en/function.curl-multi-exec.php\" rel=\"nofollow\"><code>curl_multi_exec</code></a> . Basically, it creates two cURL handles, adds them to the <code>curl_multi_add_handle</code> interfaec, and then runs them in parallel. </p>\n",
+      "owner": {
+        "user_id": 322129,
+        "display_name": "Russell Dias",
+        "reputation": 6840,
+        "user_type": "registered",
+        "profile_image": "http://www.gravatar.com/avatar/6a26f5664d772bfd68dc95fe955af3ec?d=identicon&r=PG",
+        "link": "http://stackoverflow.com/users/322129/russell-dias"
+      },
+      "creation_date": 1323668673,
+      "last_activity_date": 1323668673,
+      "score": 0,
+      "up_vote_count": 0,
+      "down_vote_count": 0
+    }
+  ],
+  "quota_remaining": -7296,
+  "quota_max": 300
+}

@@ -1,2 +1,247 @@
 https://api.stackexchange.com/2.0/badges?order=desc&sort=rank&site=stackoverflow
-{"items":[{"badge_id":455,"rank":"bronze","name":"xna","description":"Earned 100 upvotes for at least 20 answers in the xna tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/455/xna"},{"badge_id":456,"rank":"bronze","name":"elisp","description":"Earned 100 upvotes for at least 20 answers in the elisp tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/456/elisp"},{"badge_id":457,"rank":"bronze","name":"latex","description":"Earned 100 upvotes for at least 20 answers in the latex tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/457/latex"},{"badge_id":458,"rank":"bronze","name":"swing","description":"Earned 100 upvotes for at least 20 answers in the swing tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/458/swing"},{"badge_id":459,"rank":"bronze","name":"visual-studio","description":"Earned 100 upvotes for at least 20 answers in the visual-studio tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/459/visual-studio"},{"badge_id":460,"rank":"bronze","name":"variables","description":"Earned 100 upvotes for at least 20 answers in the variables tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/460/variables"},{"badge_id":461,"rank":"bronze","name":"programming-languages","description":"Earned 100 upvotes for at least 20 answers in the programming-languages tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/461/programming-languages"},{"badge_id":462,"rank":"bronze","name":"yield","description":"Earned 100 upvotes for at least 20 answers in the yield tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/462/yield"},{"badge_id":463,"rank":"bronze","name":"subsonic3","description":"Earned 100 upvotes for at least 20 answers in the subsonic3 tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/463/subsonic3"},{"badge_id":464,"rank":"bronze","name":"selectors","description":"Earned 100 upvotes for at least 20 answers in the selectors tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/464/selectors"},{"badge_id":465,"rank":"bronze","name":"sharepoint2007","description":"Earned 100 upvotes for at least 20 answers in the sharepoint2007 tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/465/sharepoint2007"},{"badge_id":466,"rank":"bronze","name":"twisted","description":"Earned 100 upvotes for at least 20 answers in the twisted tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/466/twisted"},{"badge_id":467,"rank":"bronze","name":"dns","description":"Earned 100 upvotes for at least 20 answers in the dns tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/467/dns"},{"badge_id":468,"rank":"bronze","name":"constructor","description":"Earned 100 upvotes for at least 20 answers in the constructor tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/468/constructor"},{"badge_id":469,"rank":"bronze","name":"extension-methods","description":"Earned 100 upvotes for at least 20 answers in the extension-methods tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/469/extension-methods"},{"badge_id":470,"rank":"bronze","name":"design","description":"Earned 100 upvotes for at least 20 answers in the design tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/470/design"},{"badge_id":471,"rank":"bronze","name":"interop","description":"Earned 100 upvotes for at least 20 answers in the interop tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/471/interop"},{"badge_id":472,"rank":"bronze","name":"mvc","description":"Earned 100 upvotes for at least 20 answers in the mvc tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/472/mvc"},{"badge_id":473,"rank":"bronze","name":"tdd","description":"Earned 100 upvotes for at least 20 answers in the tdd tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/473/tdd"},{"badge_id":474,"rank":"bronze","name":"generics","description":"Earned 100 upvotes for at least 20 answers in the generics tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/474/generics"},{"badge_id":475,"rank":"bronze","name":"convert","description":"Earned 100 upvotes for at least 20 answers in the convert tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/475/convert"},{"badge_id":476,"rank":"bronze","name":"python-3.x","description":"Earned 100 upvotes for at least 20 answers in the python-3.x tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/476/python-3-x"},{"badge_id":477,"rank":"bronze","name":"ide","description":"Earned 100 upvotes for at least 20 answers in the ide tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/477/ide"},{"badge_id":478,"rank":"bronze","name":"documentation","description":"Earned 100 upvotes for at least 20 answers in the documentation tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/478/documentation"},{"badge_id":479,"rank":"bronze","name":"vba","description":"Earned 100 upvotes for at least 20 answers in the vba tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/479/vba"},{"badge_id":480,"rank":"bronze","name":"dictionary","description":"Earned 100 upvotes for at least 20 answers in the dictionary tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/480/dictionary"},{"badge_id":509,"rank":"bronze","name":"casting","description":"Earned 100 upvotes for at least 20 answers in the casting tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/509/casting"},{"badge_id":510,"rank":"bronze","name":"ejb-3.0","description":"Earned 100 upvotes for at least 20 answers in the ejb-3.0 tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/510/ejb-3-0"},{"badge_id":511,"rank":"bronze","name":"module","description":"Earned 100 upvotes for at least 20 answers in the module tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/511/module"},{"badge_id":513,"rank":"bronze","name":"encoding","description":"Earned 100 upvotes for at least 20 answers in the encoding tag","badge_type":"tag_based","link":"http://stackoverflow.com/badges/513/encoding"}],"quota_remaining":-4386,"quota_max":300}
+{
+  "items": [
+    {
+      "badge_id": 455,
+      "rank": "bronze",
+      "name": "xna",
+      "description": "Earned 100 upvotes for at least 20 answers in the xna tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/455/xna"
+    },
+    {
+      "badge_id": 456,
+      "rank": "bronze",
+      "name": "elisp",
+      "description": "Earned 100 upvotes for at least 20 answers in the elisp tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/456/elisp"
+    },
+    {
+      "badge_id": 457,
+      "rank": "bronze",
+      "name": "latex",
+      "description": "Earned 100 upvotes for at least 20 answers in the latex tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/457/latex"
+    },
+    {
+      "badge_id": 458,
+      "rank": "bronze",
+      "name": "swing",
+      "description": "Earned 100 upvotes for at least 20 answers in the swing tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/458/swing"
+    },
+    {
+      "badge_id": 459,
+      "rank": "bronze",
+      "name": "visual-studio",
+      "description": "Earned 100 upvotes for at least 20 answers in the visual-studio tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/459/visual-studio"
+    },
+    {
+      "badge_id": 460,
+      "rank": "bronze",
+      "name": "variables",
+      "description": "Earned 100 upvotes for at least 20 answers in the variables tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/460/variables"
+    },
+    {
+      "badge_id": 461,
+      "rank": "bronze",
+      "name": "programming-languages",
+      "description": "Earned 100 upvotes for at least 20 answers in the programming-languages tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/461/programming-languages"
+    },
+    {
+      "badge_id": 462,
+      "rank": "bronze",
+      "name": "yield",
+      "description": "Earned 100 upvotes for at least 20 answers in the yield tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/462/yield"
+    },
+    {
+      "badge_id": 463,
+      "rank": "bronze",
+      "name": "subsonic3",
+      "description": "Earned 100 upvotes for at least 20 answers in the subsonic3 tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/463/subsonic3"
+    },
+    {
+      "badge_id": 464,
+      "rank": "bronze",
+      "name": "selectors",
+      "description": "Earned 100 upvotes for at least 20 answers in the selectors tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/464/selectors"
+    },
+    {
+      "badge_id": 465,
+      "rank": "bronze",
+      "name": "sharepoint2007",
+      "description": "Earned 100 upvotes for at least 20 answers in the sharepoint2007 tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/465/sharepoint2007"
+    },
+    {
+      "badge_id": 466,
+      "rank": "bronze",
+      "name": "twisted",
+      "description": "Earned 100 upvotes for at least 20 answers in the twisted tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/466/twisted"
+    },
+    {
+      "badge_id": 467,
+      "rank": "bronze",
+      "name": "dns",
+      "description": "Earned 100 upvotes for at least 20 answers in the dns tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/467/dns"
+    },
+    {
+      "badge_id": 468,
+      "rank": "bronze",
+      "name": "constructor",
+      "description": "Earned 100 upvotes for at least 20 answers in the constructor tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/468/constructor"
+    },
+    {
+      "badge_id": 469,
+      "rank": "bronze",
+      "name": "extension-methods",
+      "description": "Earned 100 upvotes for at least 20 answers in the extension-methods tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/469/extension-methods"
+    },
+    {
+      "badge_id": 470,
+      "rank": "bronze",
+      "name": "design",
+      "description": "Earned 100 upvotes for at least 20 answers in the design tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/470/design"
+    },
+    {
+      "badge_id": 471,
+      "rank": "bronze",
+      "name": "interop",
+      "description": "Earned 100 upvotes for at least 20 answers in the interop tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/471/interop"
+    },
+    {
+      "badge_id": 472,
+      "rank": "bronze",
+      "name": "mvc",
+      "description": "Earned 100 upvotes for at least 20 answers in the mvc tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/472/mvc"
+    },
+    {
+      "badge_id": 473,
+      "rank": "bronze",
+      "name": "tdd",
+      "description": "Earned 100 upvotes for at least 20 answers in the tdd tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/473/tdd"
+    },
+    {
+      "badge_id": 474,
+      "rank": "bronze",
+      "name": "generics",
+      "description": "Earned 100 upvotes for at least 20 answers in the generics tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/474/generics"
+    },
+    {
+      "badge_id": 475,
+      "rank": "bronze",
+      "name": "convert",
+      "description": "Earned 100 upvotes for at least 20 answers in the convert tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/475/convert"
+    },
+    {
+      "badge_id": 476,
+      "rank": "bronze",
+      "name": "python-3.x",
+      "description": "Earned 100 upvotes for at least 20 answers in the python-3.x tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/476/python-3-x"
+    },
+    {
+      "badge_id": 477,
+      "rank": "bronze",
+      "name": "ide",
+      "description": "Earned 100 upvotes for at least 20 answers in the ide tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/477/ide"
+    },
+    {
+      "badge_id": 478,
+      "rank": "bronze",
+      "name": "documentation",
+      "description": "Earned 100 upvotes for at least 20 answers in the documentation tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/478/documentation"
+    },
+    {
+      "badge_id": 479,
+      "rank": "bronze",
+      "name": "vba",
+      "description": "Earned 100 upvotes for at least 20 answers in the vba tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/479/vba"
+    },
+    {
+      "badge_id": 480,
+      "rank": "bronze",
+      "name": "dictionary",
+      "description": "Earned 100 upvotes for at least 20 answers in the dictionary tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/480/dictionary"
+    },
+    {
+      "badge_id": 509,
+      "rank": "bronze",
+      "name": "casting",
+      "description": "Earned 100 upvotes for at least 20 answers in the casting tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/509/casting"
+    },
+    {
+      "badge_id": 510,
+      "rank": "bronze",
+      "name": "ejb-3.0",
+      "description": "Earned 100 upvotes for at least 20 answers in the ejb-3.0 tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/510/ejb-3-0"
+    },
+    {
+      "badge_id": 511,
+      "rank": "bronze",
+      "name": "module",
+      "description": "Earned 100 upvotes for at least 20 answers in the module tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/511/module"
+    },
+    {
+      "badge_id": 513,
+      "rank": "bronze",
+      "name": "encoding",
+      "description": "Earned 100 upvotes for at least 20 answers in the encoding tag",
+      "badge_type": "tag_based",
+      "link": "http://stackoverflow.com/badges/513/encoding"
+    }
+  ],
+  "quota_remaining": -7284,
+  "quota_max": 300
+}

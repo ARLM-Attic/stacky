@@ -1,2 +1,247 @@
 https://api.stackexchange.com/2.0/badges/name?order=desc&sort=rank&site=stackoverflow
-{"items":[{"badge_id":1,"rank":"bronze","name":"Teacher","description":"Answered first question with score of 1 or more","badge_type":"named","link":"http://stackoverflow.com/badges/1/teacher"},{"badge_id":2,"rank":"bronze","name":"Student","description":"Asked first question with at least one up vote","badge_type":"named","link":"http://stackoverflow.com/badges/2/student"},{"badge_id":23,"rank":"bronze","name":"Nice Answer","description":"Answer score of 10 or more","badge_type":"named","link":"http://stackoverflow.com/badges/23/nice-answer"},{"badge_id":222,"rank":"bronze","name":"Altruist","description":"First bounty you manually awarded on another person's question","badge_type":"named","link":"http://stackoverflow.com/badges/222/altruist"},{"badge_id":144,"rank":"bronze","name":"Mortarboard","description":"Earned at least 200 reputation in a single day","badge_type":"named","link":"http://stackoverflow.com/badges/144/mortarboard"},{"badge_id":6,"rank":"bronze","name":"Supporter","description":"First up vote","badge_type":"named","link":"http://stackoverflow.com/badges/6/supporter"},{"badge_id":7,"rank":"bronze","name":"Critic","description":"First down vote","badge_type":"named","link":"http://stackoverflow.com/badges/7/critic"},{"badge_id":8,"rank":"bronze","name":"Citizen Patrol","description":"First flagged post","badge_type":"named","link":"http://stackoverflow.com/badges/8/citizen-patrol"},{"badge_id":9,"rank":"bronze","name":"Autobiographer","description":"Completed all user profile fields","badge_type":"named","link":"http://stackoverflow.com/badges/9/autobiographer"},{"badge_id":26,"rank":"bronze","name":"Popular Question","description":"Asked a question with 1,000 views","badge_type":"named","link":"http://stackoverflow.com/badges/26/popular-question"},{"badge_id":31,"rank":"bronze","name":"Commentator","description":"Left 10 comments","badge_type":"named","link":"http://stackoverflow.com/badges/31/commentator"},{"badge_id":37,"rank":"bronze","name":"Disciplined","description":"Deleted own post with score of 3 or higher","badge_type":"named","link":"http://stackoverflow.com/badges/37/disciplined"},{"badge_id":220,"rank":"bronze","name":"Promoter","description":"First bounty you offered on your own question","badge_type":"named","link":"http://stackoverflow.com/badges/220/promoter"},{"badge_id":221,"rank":"bronze","name":"Benefactor","description":"First bounty you manually awarded on your own question","badge_type":"named","link":"http://stackoverflow.com/badges/221/benefactor"},{"badge_id":10,"rank":"bronze","name":"Scholar","description":"Asked a question and accepted an answer","badge_type":"named","link":"http://stackoverflow.com/badges/10/scholar"},{"badge_id":63,"rank":"bronze","name":"Tumbleweed","description":"Asked a question with no votes, no answers, no comments, and low views for a week","badge_type":"named","link":"http://stackoverflow.com/badges/63/tumbleweed"},{"badge_id":20,"rank":"bronze","name":"Nice Question","description":"Question score of 10 or more","badge_type":"named","link":"http://stackoverflow.com/badges/20/nice-question"},{"badge_id":260,"rank":"bronze","name":"Announcer","description":"Shared a link to a question that was visited by 25 unique IP addresses in 3 days","badge_type":"named","link":"http://stackoverflow.com/badges/260/announcer"},{"badge_id":3,"rank":"bronze","name":"Editor","description":"First edit","badge_type":"named","link":"http://stackoverflow.com/badges/3/editor"},{"badge_id":4,"rank":"bronze","name":"Cleanup","description":"First rollback","badge_type":"named","link":"http://stackoverflow.com/badges/4/cleanup"},{"badge_id":5,"rank":"bronze","name":"Organizer","description":"First retag","badge_type":"named","link":"http://stackoverflow.com/badges/5/organizer"},{"badge_id":14,"rank":"bronze","name":"Self-Learner","description":"Answered your own question with score of 3 or more","badge_type":"named","link":"http://stackoverflow.com/badges/14/self-learner"},{"badge_id":38,"rank":"bronze","name":"Peer Pressure","description":"Deleted own post with score of -3 or lower","badge_type":"named","link":"http://stackoverflow.com/badges/38/peer-pressure"},{"badge_id":219,"rank":"bronze","name":"Investor","description":"First bounty you offered on another person's question","badge_type":"named","link":"http://stackoverflow.com/badges/219/investor"},{"badge_id":254,"rank":"bronze","name":"Tag Editor","description":"First Tag Wiki Edit","badge_type":"named","link":"http://stackoverflow.com/badges/254/tag-editor"},{"badge_id":837,"rank":"bronze","name":"Revival","description":"Answered more than 30 days later as first answer scoring 2 or more","badge_type":"named","link":"http://stackoverflow.com/badges/837/revival"},{"badge_id":1108,"rank":"bronze","name":"Vox Populi","description":"Used the maximum 40 votes in a day","badge_type":"named","link":"http://stackoverflow.com/badges/1108/vox-populi"},{"badge_id":1224,"rank":"bronze","name":"Synonymizer","description":"First approved <a href=\"/tags/synonyms\">tag synonym</a>","badge_type":"named","link":"http://stackoverflow.com/badges/1224/synonymizer"},{"badge_id":1276,"rank":"bronze","name":"Proofreader","description":"Approved or rejected 100 suggested edits","badge_type":"named","link":"http://stackoverflow.com/badges/1276/proofreader"},{"badge_id":1287,"rank":"bronze","name":"Excavator","description":"Edited first post that was inactive for 6 months","badge_type":"named","link":"http://stackoverflow.com/badges/1287/excavator"}],"quota_remaining":-4402,"quota_max":300}
+{
+  "items": [
+    {
+      "badge_id": 1,
+      "rank": "bronze",
+      "name": "Teacher",
+      "description": "Answered first question with score of 1 or more",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/1/teacher"
+    },
+    {
+      "badge_id": 2,
+      "rank": "bronze",
+      "name": "Student",
+      "description": "Asked first question with at least one up vote",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/2/student"
+    },
+    {
+      "badge_id": 23,
+      "rank": "bronze",
+      "name": "Nice Answer",
+      "description": "Answer score of 10 or more",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/23/nice-answer"
+    },
+    {
+      "badge_id": 222,
+      "rank": "bronze",
+      "name": "Altruist",
+      "description": "First bounty you manually awarded on another person's question",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/222/altruist"
+    },
+    {
+      "badge_id": 144,
+      "rank": "bronze",
+      "name": "Mortarboard",
+      "description": "Earned at least 200 reputation in a single day",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/144/mortarboard"
+    },
+    {
+      "badge_id": 6,
+      "rank": "bronze",
+      "name": "Supporter",
+      "description": "First up vote",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/6/supporter"
+    },
+    {
+      "badge_id": 7,
+      "rank": "bronze",
+      "name": "Critic",
+      "description": "First down vote",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/7/critic"
+    },
+    {
+      "badge_id": 8,
+      "rank": "bronze",
+      "name": "Citizen Patrol",
+      "description": "First flagged post",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/8/citizen-patrol"
+    },
+    {
+      "badge_id": 9,
+      "rank": "bronze",
+      "name": "Autobiographer",
+      "description": "Completed all user profile fields",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/9/autobiographer"
+    },
+    {
+      "badge_id": 26,
+      "rank": "bronze",
+      "name": "Popular Question",
+      "description": "Asked a question with 1,000 views",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/26/popular-question"
+    },
+    {
+      "badge_id": 31,
+      "rank": "bronze",
+      "name": "Commentator",
+      "description": "Left 10 comments",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/31/commentator"
+    },
+    {
+      "badge_id": 37,
+      "rank": "bronze",
+      "name": "Disciplined",
+      "description": "Deleted own post with score of 3 or higher",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/37/disciplined"
+    },
+    {
+      "badge_id": 220,
+      "rank": "bronze",
+      "name": "Promoter",
+      "description": "First bounty you offered on your own question",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/220/promoter"
+    },
+    {
+      "badge_id": 221,
+      "rank": "bronze",
+      "name": "Benefactor",
+      "description": "First bounty you manually awarded on your own question",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/221/benefactor"
+    },
+    {
+      "badge_id": 10,
+      "rank": "bronze",
+      "name": "Scholar",
+      "description": "Asked a question and accepted an answer",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/10/scholar"
+    },
+    {
+      "badge_id": 63,
+      "rank": "bronze",
+      "name": "Tumbleweed",
+      "description": "Asked a question with no votes, no answers, no comments, and low views for a week",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/63/tumbleweed"
+    },
+    {
+      "badge_id": 20,
+      "rank": "bronze",
+      "name": "Nice Question",
+      "description": "Question score of 10 or more",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/20/nice-question"
+    },
+    {
+      "badge_id": 260,
+      "rank": "bronze",
+      "name": "Announcer",
+      "description": "Shared a link to a question that was visited by 25 unique IP addresses in 3 days",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/260/announcer"
+    },
+    {
+      "badge_id": 3,
+      "rank": "bronze",
+      "name": "Editor",
+      "description": "First edit",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/3/editor"
+    },
+    {
+      "badge_id": 4,
+      "rank": "bronze",
+      "name": "Cleanup",
+      "description": "First rollback",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/4/cleanup"
+    },
+    {
+      "badge_id": 5,
+      "rank": "bronze",
+      "name": "Organizer",
+      "description": "First retag",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/5/organizer"
+    },
+    {
+      "badge_id": 14,
+      "rank": "bronze",
+      "name": "Self-Learner",
+      "description": "Answered your own question with score of 3 or more",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/14/self-learner"
+    },
+    {
+      "badge_id": 38,
+      "rank": "bronze",
+      "name": "Peer Pressure",
+      "description": "Deleted own post with score of -3 or lower",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/38/peer-pressure"
+    },
+    {
+      "badge_id": 219,
+      "rank": "bronze",
+      "name": "Investor",
+      "description": "First bounty you offered on another person's question",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/219/investor"
+    },
+    {
+      "badge_id": 254,
+      "rank": "bronze",
+      "name": "Tag Editor",
+      "description": "First Tag Wiki Edit",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/254/tag-editor"
+    },
+    {
+      "badge_id": 837,
+      "rank": "bronze",
+      "name": "Revival",
+      "description": "Answered more than 30 days later as first answer scoring 2 or more",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/837/revival"
+    },
+    {
+      "badge_id": 1108,
+      "rank": "bronze",
+      "name": "Vox Populi",
+      "description": "Used the maximum 40 votes in a day",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/1108/vox-populi"
+    },
+    {
+      "badge_id": 1224,
+      "rank": "bronze",
+      "name": "Synonymizer",
+      "description": "First approved <a href=\"/tags/synonyms\">tag synonym</a>",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/1224/synonymizer"
+    },
+    {
+      "badge_id": 1276,
+      "rank": "bronze",
+      "name": "Proofreader",
+      "description": "Approved or rejected 100 suggested edits",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/1276/proofreader"
+    },
+    {
+      "badge_id": 1287,
+      "rank": "bronze",
+      "name": "Excavator",
+      "description": "Edited first post that was inactive for 6 months",
+      "badge_type": "named",
+      "link": "http://stackoverflow.com/badges/1287/excavator"
+    }
+  ],
+  "quota_remaining": -7287,
+  "quota_max": 300
+}
