@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Stacky
 {
@@ -22,11 +23,9 @@ namespace Stacky
             return null;
         }
 
-        protected string GetSortValue(object sort)
+        protected static string GetEnumValue(object sort)
         {
-            if (sort == null)
-                return null;
-            return sort.ToString().ToLower();
+            return EnumHelper.GetQueryStringValue((Enum)sort);
         }
 
         protected long? GetDateValue(DateTime? date)

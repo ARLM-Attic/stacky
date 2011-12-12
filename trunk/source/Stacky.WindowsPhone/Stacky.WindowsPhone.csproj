@@ -149,6 +149,12 @@
     <Compile Include="..\Stacky\Enums\BadgeClass.cs">
       <Link>Enums\BadgeClass.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Enums\BadgeMinMax.cs">
+      <Link>Enums\BadgeMinMax.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Enums\BadgeSort.cs">
+      <Link>Enums\BadgeSort.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\Enums\CommentSort.cs">
       <Link>Enums\CommentSort.cs</Link>
     </Compile>
