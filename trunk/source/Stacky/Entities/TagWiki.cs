@@ -13,8 +13,8 @@ namespace Stacky
         private string wikiExcerpt;
         private DateTime bodyLastEditDate;
         private DateTime excerptLastEditDate;
-        private UserInfo lastBodyEditor;
-        private UserInfo lastExcerptEditor;
+        private ShallowUser lastBodyEditor;
+        private ShallowUser lastExcerptEditor;
 
         [JsonProperty("tag_name")]
         public string TagName
@@ -52,14 +52,14 @@ namespace Stacky
         }
 
         [JsonProperty("last_excerpt_editor")]
-        public UserInfo LastExcerptEditor
+        public ShallowUser LastExcerptEditor
         {
             get { return lastExcerptEditor; }
             set { lastExcerptEditor = value; NotifyOfPropertyChange(() => LastExcerptEditor); }
         }
 
         [JsonProperty("last_body_editor")]
-        public UserInfo LastBodyEditor
+        public ShallowUser LastBodyEditor
         {
             get { return lastBodyEditor; }
             set { lastBodyEditor = value; NotifyOfPropertyChange(() => LastBodyEditor); }

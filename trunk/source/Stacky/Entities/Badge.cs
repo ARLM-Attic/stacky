@@ -12,8 +12,9 @@ namespace Stacky
         private string name;
         private string description;
         private int awardCount;
-        private bool isTagBased;
-        private string badgeRecipientsUrl;
+        private BadgeType type;
+        private string link;
+        private ShallowUser user;
 
         /// <summary>
         /// Gets or sets the id.
@@ -70,24 +71,18 @@ namespace Stacky
             set { awardCount = value; NotifyOfPropertyChange(() => AwardCount); }
         }
 
-        /// <summary>
-        /// Gets or sets whether or not this <see cref="Badge"/> is tag based or not.
-        /// </summary>
-        [JsonProperty("tag_based")]
-        public bool IsTagBased
+        [JsonProperty("badge_type")]
+        public BadgeType Type
         {
-            get { return isTagBased; }
-            set { isTagBased = value; NotifyOfPropertyChange(() => IsTagBased); }
+            get { return type; }
+            set { type = value; NotifyOfPropertyChange(() => Type); }
         }
 
-        /// <summary>
-        /// Gets or sets the url link to the badge recipients.
-        /// </summary>
-        [JsonProperty("badges_recipients_url")]
-        public string BadgeRecipientsUrl
+        [JsonProperty("link")]
+        public string Link
         {
-            get { return badgeRecipientsUrl; }
-            set { badgeRecipientsUrl = value; NotifyOfPropertyChange(() => BadgeRecipientsUrl); }
+            get { return link; }
+            set { link = value; NotifyOfPropertyChange(() => Link); }
         }
     }
 }

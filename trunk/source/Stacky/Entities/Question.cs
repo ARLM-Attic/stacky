@@ -36,7 +36,7 @@ namespace Stacky
         private string timelineUrl;
         private string commentsUrl;
         private MigrationInfo migrated;
-        private UserInfo owner;
+        private ShallowUser owner;
 
         #endregion
 
@@ -271,10 +271,10 @@ namespace Stacky
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="UserInfo">owner</see>.
+        /// Gets or sets the <see cref="ShallowUser">owner</see>.
         /// </summary>
-        /// <value>The <see cref="UserInfo">owner</see>.</value>
-        public UserInfo Owner
+        /// <value>The <see cref="ShallowUser">owner</see>.</value>
+        public ShallowUser Owner
         {
             get { return owner; }
             set { owner = value; NotifyOfPropertyChange(() => Owner); }

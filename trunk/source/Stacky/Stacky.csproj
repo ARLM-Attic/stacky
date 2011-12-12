@@ -57,6 +57,7 @@
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\MigrationInfo.cs" />
+    <Compile Include="Entities\NetworkUser.cs" />
     <Compile Include="Entities\PostEvent.cs" />
     <Compile Include="Entities\Privilege.cs" />
     <Compile Include="Entities\Question.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Entities\Reputation.cs" />
     <Compile Include="Entities\ResponseError.cs" />
     <Compile Include="Entities\Revision.cs" />
+    <Compile Include="Entities\ShallowUser.cs" />
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\SiteInfo.cs" />
     <Compile Include="Entities\SiteStats.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="Entities\TopUser.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserEvent.cs" />
-    <Compile Include="Entities\UserInfo.cs" />
     <Compile Include="Enums\AnswerSort.cs" />
     <Compile Include="Enums\BadgeClass.cs" />
     <Compile Include="Enums\CommentSort.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Enums\UserEventType.cs" />
     <Compile Include="Enums\UserMentionSort.cs" />
     <Compile Include="Enums\UserSort.cs" />
+    <Compile Include="Enums\UserType.cs" />
     <Compile Include="ErrorResponse.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />

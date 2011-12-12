@@ -71,6 +71,9 @@
     <Compile Include="..\Stacky\Entities\MigrationInfo.cs">
       <Link>Entities\MigrationInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Entities\NetworkUser.cs">
+      <Link>NetworkUser.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\Entities\PostEvent.cs">
       <Link>Entities\PostEvent.cs</Link>
     </Compile>
@@ -91,6 +94,9 @@
     </Compile>
     <Compile Include="..\Stacky\Entities\Revision.cs">
       <Link>Entities\Revision.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Entities\ShallowUser.cs">
+      <Link>ShallowUser.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Entities\Site.cs">
       <Link>Entities\Site.cs</Link>
@@ -124,9 +130,6 @@
     </Compile>
     <Compile Include="..\Stacky\Entities\UserEvent.cs">
       <Link>Entities\UserEvent.cs</Link>
-    </Compile>
-    <Compile Include="..\Stacky\Entities\UserInfo.cs">
-      <Link>Entities\UserInfo.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Enums\AnswerSort.cs">
       <Link>Enums\AnswerSort.cs</Link>
@@ -184,6 +187,9 @@
     </Compile>
     <Compile Include="..\Stacky\Enums\UserSort.cs">
       <Link>Enums\UserSort.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Enums\UserType.cs">
+      <Link>Enums\UserType.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\ErrorResponse.cs">
       <Link>ErrorResponse.cs</Link>
