@@ -1,4 +1,5 @@
-﻿namespace Stacky
+﻿using System.Runtime.Serialization;
+namespace Stacky
 {
     /// <summary>
     /// Specifies the badge type.
@@ -22,6 +23,7 @@
     public enum BadgeType
     {
         Named,
+		[EnumMember(Value = "tag_based")]
         TagBased
     }
 }
