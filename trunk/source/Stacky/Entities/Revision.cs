@@ -9,7 +9,7 @@ namespace Stacky
     /// </summary>
     public class Revision : Entity
     {
-                private Guid revisionGuid;
+        private Guid revisionGuid;
         [JsonProperty("revision_guid")]
         public Guid RevisionGuid
         {

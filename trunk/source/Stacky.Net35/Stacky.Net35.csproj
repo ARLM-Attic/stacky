@@ -110,6 +110,9 @@
     <Compile Include="..\Stacky\Entities\SiteStyle.cs">
       <Link>Entities\SiteStyle.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Entities\SuggestedEdit.cs">
+      <Link>Entities\SuggestedEdit.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\Entities\Tag.cs">
       <Link>Entities\Tag.cs</Link>
     </Compile>
@@ -181,6 +184,9 @@
     </Compile>
     <Compile Include="..\Stacky\Enums\SortDirection.cs">
       <Link>Enums\SortDirection.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Enums\SuggestedEditSort.cs">
+      <Link>Enums\SuggestedEditSort.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Enums\TagSort.cs">
       <Link>Enums\TagSort.cs</Link>

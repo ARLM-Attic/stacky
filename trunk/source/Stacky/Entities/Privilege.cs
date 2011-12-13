@@ -8,13 +8,10 @@ namespace Stacky
 {
     public class Privilege : Entity
     {
-        private string shortDescription;
-        private string description;
-        private int reputation;
-        
         /// <summary>
         /// The short description of the Privelege
         /// </summary>
+        private string shortDescription;
         [JsonProperty("short_description")]
         public string ShortDescription
         {
@@ -25,6 +22,7 @@ namespace Stacky
         /// <summary>
         /// The description of the Privelege
         /// </summary>
+        private string description;
         [JsonProperty("description")]
         public string Description
         {
@@ -33,8 +31,9 @@ namespace Stacky
         }
 
         /// <summary>
-        /// The amount of reputation that goes along with the <c ref="Reputation" />
+        /// The amount of reputation that goes along with the <c ref="Privelege" />
         /// </summary>
+        private int reputation;
         [JsonProperty("reputation")]
         public int Reputation
         {

@@ -30,16 +30,6 @@ namespace Stacky.IntegrationTests.Net35
         }
 
         [TestMethod]
-        public void Question_Contains_Urls()
-        {
-            var question = Client.GetQuestion(31415);
-
-            Assert.IsNotNull(question);
-            Assert.IsFalse(String.IsNullOrEmpty(question.CommentsUrl));
-            Assert.IsFalse(String.IsNullOrEmpty(question.TimelineUrl));
-        }
-
-        [TestMethod]
         public void Question_GetQuestionTimeline()
         {
             var events = Client.GetQuestionTimeline(31415);
@@ -80,8 +70,8 @@ namespace Stacky.IntegrationTests.Net35
         {
             var question = Client.GetQuestion(970696);
             Assert.IsNotNull(question);
-            Assert.IsNotNull(question.Migrated);
-            Assert.IsNotNull(question.Migrated.ToSite);
+            Assert.IsNotNull(question.MigratedFrom);
+            Assert.IsNotNull(question.MigratedTo);
         }
 
         [TestMethod]

@@ -9,12 +9,13 @@ namespace Stacky
         /// Get a list of all the Privileges
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Privilege> GetPrivileges()
+        public IPagedList<Privilege> GetPrivileges()
         {
-            return MakeRequest<Privilege>("privileges", null, new
+            var response = MakeRequest<Privilege>("privileges", null, new
             {
                 site = this.SiteUrlName
-            }).Items;
+            });
+            return new PagedList<Privilege>(response);
         }
     }
 }

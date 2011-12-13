@@ -9,33 +9,23 @@ namespace Stacky
     /// </summary>
     public class MigrationInfo : Entity
     {
-        private int newQuestionId;
-        private Site toSite;
+        private int questionId;
+        [JsonProperty("question_id")]
+        public int QuestionId
+        {
+            get { return questionId; }
+            set { questionId = value; NotifyOfPropertyChange(() => QuestionId); }
+        }
+
+        private Site otherSite;
+        [JsonProperty("other_site")]
+        public Site OtherSite
+        {
+            get { return otherSite; }
+            set { otherSite = value; NotifyOfPropertyChange(() => OtherSite); }
+        }
+
         private DateTime onDate;
-
-        /// <summary>
-        /// Gets or sets the destination questionId
-        /// </summary>
-        [JsonProperty("new_question_id")]
-        public int NewQuestionId
-        {
-            get { return newQuestionId; }
-            set { newQuestionId = value; NotifyOfPropertyChange(() => NewQuestionId); }
-        }
-
-        /// <summary>
-        /// Gets or sets the <see cref="Site"/> the <see cref="Question"/> has been migrated to
-        /// </summary>
-        [JsonProperty("to_site")]
-        public Site ToSite
-        {
-            get { return toSite; }
-            set { toSite = value; NotifyOfPropertyChange(() => ToSite); }
-        }
-
-        /// <summary>
-        /// Gets or sets the date the <see cref="Question"/> was migrated
-        /// </summary>
         [JsonProperty("on_date"), JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime OnDate
         {

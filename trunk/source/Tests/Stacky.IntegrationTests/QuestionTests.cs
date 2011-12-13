@@ -12,6 +12,7 @@ namespace Stacky.IntegrationTests
         {
             var questions = Client.GetQuestions();
             Assert.IsNotNull(questions);
+            Assert.IsTrue(questions.Count > 0);
         }
 
         [TestMethod]
@@ -49,18 +50,18 @@ namespace Stacky.IntegrationTests
             Assert.AreEqual(5, questions.Count());
         }
 
-        [TestMethod]
-        public void GetQuestions_SortByActive_WithTags()
-        {
-            var questions = Client.GetQuestions(sortBy: QuestionSort.Activity, tags: new string[] { "lisp" });
-            foreach (var question in questions)
-            {
-                Assert.IsTrue(question.Tags.Contains("lisp"));
-            }
+        //[TestMethod]
+        //public void GetQuestions_SortByActive_WithTags()
+        //{
+        //    var questions = Client.GetQuestions(sortBy: QuestionSort.Activity, tags: new string[] { "lisp" });
+        //    foreach (var question in questions)
+        //    {
+        //        Assert.IsTrue(question.Tags.Contains("lisp"));
+        //    }
 
-            Assert.IsNotNull(questions);
-            Assert.AreEqual(30, questions.Count());
-        }
+        //    Assert.IsNotNull(questions);
+        //    Assert.AreEqual(30, questions.Count());
+        //}
 
         [TestMethod]
         public void GetQuestions_SortByActive_WithDateRange()
@@ -71,39 +72,30 @@ namespace Stacky.IntegrationTests
             Assert.AreEqual(30, questions.Count());
         }
 
-        [TestMethod]
-        public void GetQuestions_SortByActive_WithBody()
-        {
-            var questions = Client.GetQuestions(sortBy: QuestionSort.Activity, includeBody: true);
+        //[TestMethod]
+        //public void GetQuestions_SortByActive_WithBody()
+        //{
+        //    var questions = Client.GetQuestions(sortBy: QuestionSort.Activity, includeBody: true);
 
-            foreach (var question in questions)
-            {
-                Assert.IsFalse(String.IsNullOrEmpty(question.Body));
-            }
+        //    foreach (var question in questions)
+        //    {
+        //        Assert.IsFalse(String.IsNullOrEmpty(question.Body));
+        //    }
 
-            Assert.IsNotNull(questions);
-            Assert.AreEqual(30, questions.Count());
-        }
+        //    Assert.IsNotNull(questions);
+        //    Assert.AreEqual(30, questions.Count());
+        //}
 
         #endregion
 
-        [TestMethod]
-        public void Question_Contains_Urls()
-        {
-            var question = Client.GetQuestion(31415);
+       
+        //[TestMethod]
+        //public void Question_GetQuestionTimeline()
+        //{
+        //    var events = Client.GetQuestionTimeline(31415);
 
-            Assert.IsNotNull(question);
-            Assert.IsFalse(String.IsNullOrEmpty(question.CommentsUrl));
-            Assert.IsFalse(String.IsNullOrEmpty(question.TimelineUrl));
-        }
-
-        [TestMethod]
-        public void Question_GetQuestionTimeline()
-        {
-            var events = Client.GetQuestionTimeline(31415);
-
-            Assert.IsNotNull(events);
-        }
+        //    Assert.IsNotNull(events);
+        //}
 
         [TestMethod]
         public void Question_GetQuestionTimeline_Async()
@@ -111,12 +103,12 @@ namespace Stacky.IntegrationTests
             ClientAsync.GetQuestionTimeline(31415, events => Assert.IsNotNull(events), error => Assert.Fail());
         }
 
-        [TestMethod]
-        public void Question_Search()
-        {
-            var questions = Client.Search("Thread");
-            Assert.IsNotNull(questions);
-        }
+        //[TestMethod]
+        //public void Question_Search()
+        //{
+        //    var questions = Client.Search("Thread");
+        //    Assert.IsNotNull(questions);
+        //}
 
         [TestMethod]
         public void Question_Search_Async()
@@ -134,60 +126,60 @@ namespace Stacky.IntegrationTests
             Assert.IsTrue(questions.TotalItems > 0);
         }
 
-        [TestMethod]
-        public void Question_GetQuestion_ContainsOwner()
-        {
-            var question = Client.GetQuestion(2930182);
-            Assert.IsNotNull(question);
-            Assert.IsNotNull(question.Owner);
-            Assert.IsNotNull(question.Owner.Id);
-        }
+        //[TestMethod]
+        //public void Question_GetQuestion_ContainsOwner()
+        //{
+        //    var question = Client.GetQuestion(2930182);
+        //    Assert.IsNotNull(question);
+        //    Assert.IsNotNull(question.Owner);
+        //    Assert.IsNotNull(question.Owner.Id);
+        //}
 
-        [TestMethod]
-        public void MigratedQuestion_CanDeserialize()
-        {
-            var question = Client.GetQuestion(970696);
-            Assert.IsNotNull(question);
-            Assert.IsNotNull(question.Migrated);
-            Assert.IsNotNull(question.Migrated.ToSite);
-        }
+        //[TestMethod]
+        //public void MigratedQuestion_CanDeserialize()
+        //{
+        //    var question = Client.GetQuestion(970696);
+        //    Assert.IsNotNull(question);
+        //    Assert.IsNotNull(question.Migrated);
+        //    Assert.IsNotNull(question.Migrated.ToSite);
+        //}
 
-        [TestMethod]
-        public void Bug4_GetQuestionTimeline()
-        {
-            IPagedList<Question> questions = Client.GetQuestionsByUser(16587);
-            var editedQuestionIds = from q in questions
-                                    select Convert.ToInt32(q.Id);
-            var events = Client.GetQuestionTimeline(editedQuestionIds); //line that causes problems
-            Assert.IsNotNull(events);
-        }
+        //[TestMethod]
+        //public void Bug4_GetQuestionTimeline()
+        //{
+        //    IPagedList<Question> questions = Client.GetQuestionsByUser(16587);
+        //    var editedQuestionIds = from q in questions
+        //                            select Convert.ToInt32(q.Id);
+        //    var events = Client.GetQuestionTimeline(editedQuestionIds); //line that causes problems
+        //    Assert.IsNotNull(events);
+        //}
 
-        [TestMethod]
-        public void Question_GetLinkedQuestions()
-        {
-            var questions = Client.GetLinkedQuestions(12569);
-            Assert.IsNotNull(questions);
-        }
+        //[TestMethod]
+        //public void Question_GetLinkedQuestions()
+        //{
+        //    var questions = Client.GetLinkedQuestions(12569);
+        //    Assert.IsNotNull(questions);
+        //}
 
-        [TestMethod]
-        public void Question_GetRelatedQuestions()
-        {
-            var questions = Client.GetRelatedQuestions(12569);
-            Assert.IsNotNull(questions);
-        }
+        //[TestMethod]
+        //public void Question_GetRelatedQuestions()
+        //{
+        //    var questions = Client.GetRelatedQuestions(12569);
+        //    Assert.IsNotNull(questions);
+        //}
 
-        [TestMethod]
-        public void Question_GetNoAnswerQuestions()
-        {
-            var questions = Client.GetNoAnswerQuestions();
-            Assert.IsNotNull(questions);
-        }
+        //[TestMethod]
+        //public void Question_GetNoAnswerQuestions()
+        //{
+        //    var questions = Client.GetNoAnswerQuestions();
+        //    Assert.IsNotNull(questions);
+        //}
 
-        [TestMethod]
-        public void Question_GetSimilarQuestions()
-        {
-            var questions = Client.GetSimilarQuestions("How to for loop c#?");
-            Assert.IsNotNull(questions);
-        }
+        //[TestMethod]
+        //public void Question_GetSimilarQuestions()
+        //{
+        //    var questions = Client.GetSimilarQuestions("How to for loop c#?");
+        //    Assert.IsNotNull(questions);
+        //}
     }
 }
