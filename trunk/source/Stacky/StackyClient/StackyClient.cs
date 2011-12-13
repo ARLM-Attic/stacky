@@ -86,9 +86,8 @@ namespace Stacky
             return new PagedList<TEntity>(response);
         }
 
-        protected IPagedList<TEntity> Execute<TEntity, TSort>(string methodName, string[] urlArguments, TSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        protected IPagedList<TEntity> Execute<TEntity>(string methodName, string[] urlArguments, object sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
             where TEntity : Entity, new()
-            where TSort : struct
         {
             var response = MakeRequest<TEntity>(methodName, urlArguments, new
             {

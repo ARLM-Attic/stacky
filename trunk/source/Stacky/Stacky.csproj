@@ -72,6 +72,7 @@
     <Compile Include="Entities\SiteStats.cs" />
     <Compile Include="Entities\SiteStyle.cs" />
     <Compile Include="Entities\SortArgsAttribute.cs" />
+    <Compile Include="Entities\SuggestedEdit.cs" />
     <Compile Include="Entities\Tag.cs" />
     <Compile Include="Entities\TagSynonym.cs" />
     <Compile Include="Entities\TagWiki.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Enums\SearchSort.cs" />
     <Compile Include="Enums\SiteState.cs" />
     <Compile Include="Enums\SortDirection.cs" />
+    <Compile Include="Enums\SuggestedEditSort.cs" />
     <Compile Include="Enums\TagSort.cs" />
     <Compile Include="Enums\TagSynonymSort.cs" />
     <Compile Include="Enums\TopUserPeriod.cs" />

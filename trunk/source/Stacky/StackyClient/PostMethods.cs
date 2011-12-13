@@ -8,13 +8,13 @@ namespace Stacky
     {
         public IPagedList<Post> GetPosts(PostSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            return Execute<Post, PostSort>("posts", null,
+            return Execute<Post>("posts", null,
                 sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         public IPagedList<Post> GetPosts(IEnumerable<int> ids, PostSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            return Execute<Post, PostSort>("posts", new string[] { ids.Vectorize() },
+            return Execute<Post>("posts", new string[] { ids.Vectorize() },
                 sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
@@ -25,18 +25,29 @@ namespace Stacky
 
         public IPagedList<Comment> GetPostComments(IEnumerable<int> ids, CommentSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            return Execute<Comment, CommentSort>("posts", new string[] { ids.Vectorize(), "comments" },
+            return Execute<Comment>("posts", new string[] { ids.Vectorize(), "comments" },
                 sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
-        public Revision GetPostRevision(int id, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        public IPagedList<Revision> GetPostRevisions(int id, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
         {
-            return GetPostRevision(id.ToArray(), page, pageSize, fromDate, toDate, filter).FirstOrDefault();
+            return GetPostRevisions(id.ToArray(), page, pageSize, fromDate, toDate, filter);
         }
 
-        public IPagedList<Revision> GetPostRevision(IEnumerable<int> ids, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        public IPagedList<Revision> GetPostRevisions(IEnumerable<int> ids, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
         {
-            return Execute<Revision, CommentSort>("posts", new string[] { ids.Vectorize(), "revisions" },
+            return Execute<Revision>("posts", new string[] { ids.Vectorize(), "revisions" },
+                null, null, page, pageSize, fromDate, toDate, null, null, filter);
+        }
+
+        public IPagedList<SuggestedEdit> GetPostSuggestedEdits(int id, SuggestedEditSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            return GetPostSuggestedEdits(id.ToArray(), sortBy, sortDirection, page, pageSize, fromDate, toDate, filter);
+        }
+
+        public IPagedList<SuggestedEdit> GetPostSuggestedEdits(IEnumerable<int> ids, SuggestedEditSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            return Execute<SuggestedEdit>("posts", new string[] { ids.Vectorize(), "suggested-edits" },
                 null, null, page, pageSize, fromDate, toDate, null, null, filter);
         }
     }
