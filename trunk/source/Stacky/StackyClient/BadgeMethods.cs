@@ -5,10 +5,11 @@ namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IPagedList<Badge> GetBadges(BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromdate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null)
+        public virtual IPagedList<Badge> GetBadges(BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromdate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
         {
             var response = MakeRequest<Badge>("badges", null, new
             {
+				site = this.SiteUrlName,
                 sort = GetEnumValue(sortBy),
                 order = GetSortDirection(sortDirection),
                 page = page ?? null,
@@ -16,7 +17,8 @@ namespace Stacky
                 fromDate = GetDateValue(fromdate),
                 toDate = GetDateValue(toDate),
                 min = GetEnumValue(min),
-                max = GetEnumValue(max)
+                max = GetEnumValue(max),
+				filter = filter
             });
             return new PagedList<Badge>(response);
         }
@@ -47,10 +49,23 @@ namespace Stacky
             return new PagedList<User>(response);
         }
 
-        public virtual IEnumerable<Badge> GetTagBasedBadges()
-        {
-            return GetBadges("badges", new string[] { "tags" });
-        }
+		public virtual IPagedList<Badge> GetTagBasedBadges(BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromdate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
+		{
+			var response = MakeRequest<Badge>("badges", new string[] { "tags" }, new
+			{
+				site = this.SiteUrlName,
+				sort = GetEnumValue(sortBy),
+				order = GetSortDirection(sortDirection),
+				page = page ?? null,
+				pagesize = pageSize ?? null,
+				fromDate = GetDateValue(fromdate),
+				toDate = GetDateValue(toDate),
+				min = GetEnumValue(min),
+				max = GetEnumValue(max),
+				filter = filter
+			});
+			return new PagedList<Badge>(response);
+		}
 
         public virtual IEnumerable<Badge> GetUserBadges(int userId)
         {

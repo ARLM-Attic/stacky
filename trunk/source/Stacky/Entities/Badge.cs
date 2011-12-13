@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Stacky
 {
@@ -71,7 +72,7 @@ namespace Stacky
             set { awardCount = value; NotifyOfPropertyChange(() => AwardCount); }
         }
 
-        [JsonProperty("badge_type")]
+        [JsonProperty("badge_type"), JsonConverter(typeof(StringEnumConverter))]
         public BadgeType Type
         {
             get { return type; }

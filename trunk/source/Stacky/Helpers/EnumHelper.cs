@@ -46,5 +46,57 @@ namespace Stacky
 
             return new string(result.ToArray());
         }
-    }
+
+		public static bool IsEnum(Type type)
+		{
+			Type t = (EnumHelper.IsNullableType(type))
+			? Nullable.GetUnderlyingType(type)
+			: type;
+
+			return t.IsEnum;
+		}
+
+		public static bool IsNullable(Type type)
+		{
+			if (type == null)
+				throw new ArgumentNullException("type");
+
+			if (type.IsValueType)
+				return IsNullableType(type);
+
+			return true;
+		}
+
+		public static bool IsNullableType(Type type)
+		{
+			if (type == null)
+				throw new ArgumentNullException("type");
+
+			return (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
+		}
+
+		// TODO: Consider removing this method and it's associated tests as it is currently not being used
+		public static string ParseQueryStringValue(string value)
+		{
+			List<char> result = new List<char>();
+			for (int i = 0; i < value.Length; i++)
+			{
+				char c = value[i];
+				if (i == 0)
+				{
+					result.Add(Char.ToUpper(c));
+				}
+				else if (c == '_')
+				{
+					// skip the underscore and capitalize the next letter
+					result.Add(Char.ToUpper(value[++i]));
+				}
+				else
+				{
+					result.Add(c);
+				}
+			}
+			return new string(result.ToArray());
+		}
+	}
 }

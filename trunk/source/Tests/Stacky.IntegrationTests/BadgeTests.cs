@@ -28,6 +28,8 @@ namespace Stacky.IntegrationTests
         {
             var badges = Client.GetTagBasedBadges();
             Assert.IsNotNull(badges);
+			foreach (var badge in badges)
+				Assert.AreEqual(BadgeType.TagBased, badge.Type);
         }
 
         [TestMethod]
