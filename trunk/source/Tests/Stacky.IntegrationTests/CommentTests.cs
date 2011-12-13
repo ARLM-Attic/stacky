@@ -36,27 +36,27 @@ namespace Stacky.IntegrationTests
             Assert.IsNotNull(comment.Owner.DisplayName);
         }
 
-        [TestMethod]
-        public void GetCommentsByPost_ByQuestionId()
-        {
-            var comments = Client.GetCommentsByPost(9033);
-            Assert.IsNotNull(comments);
-            Assert.AreEqual(PostType.Question, comments.FirstOrDefault().PostType);
-        }
+        //[TestMethod]
+        //public void GetCommentsByPost_ByQuestionId()
+        //{
+        //    var comments = Client.GetCommentsByPost(9033);
+        //    Assert.IsNotNull(comments);
+        //    Assert.AreEqual(PostType.Question, comments.FirstOrDefault().PostType);
+        //}
 
-        [TestMethod]
-        public void GetCommentsByPost_ByAnswerId()
-        {
-            var comments = Client.GetCommentsByPost(11738);
-            Assert.IsNotNull(comments);
-            Assert.AreEqual(PostType.Answer, comments.FirstOrDefault().PostType);
-        }
+        //[TestMethod]
+        //public void GetCommentsByPost_ByAnswerId()
+        //{
+        //    var comments = Client.GetCommentsByPost(11738);
+        //    Assert.IsNotNull(comments);
+        //    Assert.AreEqual(PostType.Answer, comments.FirstOrDefault().PostType);
+        //}
 
-        [TestMethod]
-        public void GetAnswerComments()
-        {
-            var answers = Client.GetAnswerComments(1330865);
-            Assert.IsNotNull(answers);
-        }
+        //[TestMethod]
+        //public void GetAnswerComments()
+        //{
+        //    var answers = Client.GetAnswerComments(1330865);
+        //    Assert.IsNotNull(answers);
+        //}
     }
 }

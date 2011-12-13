@@ -170,6 +170,9 @@
     <Compile Include="..\Stacky\Enums\PostEventType.cs">
       <Link>Enums\PostEventType.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Enums\PostSort.cs">
+      <Link>Enums\PostSort.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\Enums\PostType.cs">
       <Link>Enums\PostType.cs</Link>
     </Compile>
@@ -178,6 +181,9 @@
     </Compile>
     <Compile Include="..\Stacky\Enums\QuestionSort.cs">
       <Link>Enums\QuestionSort.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Enums\RevisionType.cs">
+      <Link>Enums\RevisionType.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Enums\SearchSort.cs">
       <Link>Enums\SearchSort.cs</Link>
