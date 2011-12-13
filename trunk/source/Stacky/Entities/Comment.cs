@@ -3,25 +3,9 @@ using Newtonsoft.Json;
 
 namespace Stacky
 {
-    /// <summary>
-    /// Represents a comment.
-    /// </summary>
     public class Comment : Entity
     {
         private int id;
-        private string body;
-        private DateTime creationDate;
-        private PostType postType;
-        private int postId;
-        private int score;
-        private int editCount;
-        private User owner;
-        private User replyTo;
-
-        /// <summary>
-        /// Gets or sets the <see cref="Comment"/> id.
-        /// </summary>
-        /// <value>The <see cref="Comment"/> id.</value>
         [JsonProperty("comment_id")]
         public int Id
         {
@@ -29,10 +13,7 @@ namespace Stacky
             set { id = value; NotifyOfPropertyChange(() => Id); }
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="Comment"/> body.
-        /// </summary>
-        /// <value>The <see cref="Comment"/> body.</value>
+        private string body;
         [JsonProperty("body")]
         public string Body
         {
@@ -40,10 +21,7 @@ namespace Stacky
             set { body = value; NotifyOfPropertyChange(() => Body); }
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="Comment"/> creation date.
-        /// </summary>
-        /// <value>The <see cref="Comment"/> creation date.</value>
+        private DateTime creationDate;
         [JsonProperty("creation_date"), JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime CreationDate
         {
@@ -51,10 +29,7 @@ namespace Stacky
             set { creationDate = value; NotifyOfPropertyChange(() => CreationDate); }
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="PostType">post type</see>.
-        /// </summary>
-        /// <value>The type of the post.</value>
+        private PostType postType;
         [JsonProperty("post_type"), JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public PostType PostType
         {
@@ -62,9 +37,7 @@ namespace Stacky
             set { postType = value; NotifyOfPropertyChange(() => PostType); }
         }
 
-        /// <summary>
-        /// Gets or sets the Id of the post this comment is on
-        /// </summary>
+        private int postId;
         [JsonProperty("post_id")]
         public int PostId
         {
@@ -72,10 +45,7 @@ namespace Stacky
             set { postId = value; NotifyOfPropertyChange(() => PostId); }
         }
 
-        /// <summary>
-        /// Gets or sets the score.
-        /// </summary>
-        /// <value>The score.</value>
+        private int score;
         [JsonProperty("score")]
         public int Score
         {
@@ -83,32 +53,25 @@ namespace Stacky
             set { score = value; NotifyOfPropertyChange(() => Score); }
         }
 
-        /// <summary>
-        /// Gets or sets the edit count.
-        /// </summary>
-        /// <value>The edit count.</value>
-        [JsonProperty("edit_count")]
-        public int EditCount
+        private bool edited;
+        [JsonProperty("edited")]
+        public bool Edited
         {
-            get { return editCount; }
-            set { editCount = value; NotifyOfPropertyChange(() => EditCount); }
+            get { return edited; }
+            set { edited = value; NotifyOfPropertyChange(() => Edited); }
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="User"/> associated with this <see cref="Comment"/>.
-        /// </summary>
+        private ShallowUser owner;
         [JsonProperty("owner")]
-        public User Owner
+        public ShallowUser Owner
         {
             get { return owner; }
             set { owner = value; NotifyOfPropertyChange(() => Owner); }
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="User"/> which this <see cref="Comment"/> was in reply to.
-        /// </summary>
+        private ShallowUser replyTo;
         [JsonProperty("reply_to_user")]
-        public User ReplyTo
+        public ShallowUser ReplyTo
         {
             get { return replyTo; }
             set { replyTo = value; NotifyOfPropertyChange(() => ReplyTo); }

@@ -58,6 +58,7 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\MigrationInfo.cs" />
     <Compile Include="Entities\NetworkUser.cs" />
+    <Compile Include="Entities\Post.cs" />
     <Compile Include="Entities\PostEvent.cs" />
     <Compile Include="Entities\Privilege.cs" />
     <Compile Include="Entities\Question.cs" />
@@ -86,9 +87,11 @@
     <Compile Include="Enums\ErrorCode.cs" />
     <Compile Include="Enums\FavoriteQuestionsSort.cs" />
     <Compile Include="Enums\PostEventType.cs" />
+    <Compile Include="Enums\PostSort.cs" />
     <Compile Include="Enums\PostType.cs" />
     <Compile Include="Enums\QuestionsByUserSort.cs" />
     <Compile Include="Enums\QuestionSort.cs" />
+    <Compile Include="Enums\RevisionType.cs" />
     <Compile Include="Enums\SearchSort.cs" />
     <Compile Include="Enums\SiteState.cs" />
     <Compile Include="Enums\SortDirection.cs" />
@@ -138,6 +141,7 @@
     <Compile Include="StackyClient\AnswerMethods.cs" />
     <Compile Include="StackyClient\BadgeMethods.cs" />
     <Compile Include="StackyClient\CommentMethods.cs" />
+    <Compile Include="StackyClient\PostMethods.cs" />
     <Compile Include="StackyClient\PrivilegeMethods.cs" />
     <Compile Include="StackyClient\QuestionMethods.cs" />
     <Compile Include="StackyClient\RevisionMethods.cs" />

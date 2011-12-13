@@ -65,6 +65,47 @@ namespace Stacky
             return WebClient.MakeRequest(url);
         }
 
+        protected IPagedList<TEntity> Execute<TEntity, TSort, TMinMax>(string methodName, string[] urlArguments, TSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, TMinMax? min = null, TMinMax? max = null, string filter = null)
+            where TEntity : Entity, new()
+            where TSort : struct
+            where TMinMax : struct
+        {
+            var response = MakeRequest<TEntity>(methodName, urlArguments, new
+            {
+                site = this.SiteUrlName,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                min = min.HasValue ? min : null,
+                max = max.HasValue ? max : null,
+                filter = filter
+            });
+            return new PagedList<TEntity>(response);
+        }
+
+        protected IPagedList<TEntity> Execute<TEntity, TSort>(string methodName, string[] urlArguments, TSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+            where TEntity : Entity, new()
+            where TSort : struct
+        {
+            var response = MakeRequest<TEntity>(methodName, urlArguments, new
+            {
+                site = this.SiteUrlName,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                min = GetDateValue(min),
+                max = GetDateValue(max),
+                filter = filter
+            });
+            return new PagedList<TEntity>(response);
+        }
+
         #endregion
 
         #region Properties
