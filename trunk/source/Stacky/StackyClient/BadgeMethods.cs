@@ -1,83 +1,58 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IPagedList<Badge> GetBadges(BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromdate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
+        public virtual IPagedList<Badge> GetBadges(BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
         {
-            var response = MakeRequest<Badge>("badges", null, new
-            {
-				site = this.SiteUrlName,
-                sort = GetEnumValue(sortBy),
-                order = GetSortDirection(sortDirection),
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                fromDate = GetDateValue(fromdate),
-                toDate = GetDateValue(toDate),
-                min = GetEnumValue(min),
-                max = GetEnumValue(max),
-				filter = filter
-            });
-            return new PagedList<Badge>(response);
+			return Execute<Badge, BadgeMinMax>("badges", null,
+				sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
-        private IEnumerable<Badge> GetBadges(string method, string[] urlArguments)
-        {
-            return MakeRequest<Badge>(method, urlArguments, new
-            {
-                site = this.SiteUrlName,
-            }).Items;
-        }
-
-        public virtual IEnumerable<User> GetUsersByBadge(int badgeId, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            return GetUsersByBadge(badgeId.ToArray(), page, pageSize, fromDate, toDate);
-        }
-
-        public virtual IPagedList<User> GetUsersByBadge(IEnumerable<int> badgeIds, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            var response = MakeRequest<User>("badges", new string[] { badgeIds.Vectorize() }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            });
-            return new PagedList<User>(response);
-        }
-
-		public virtual IPagedList<Badge> GetTagBasedBadges(BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromdate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
+		public virtual Badge GetBadge(int id, string filter = null)
 		{
-			var response = MakeRequest<Badge>("badges", new string[] { "tags" }, new
-			{
-				site = this.SiteUrlName,
-				sort = GetEnumValue(sortBy),
-				order = GetSortDirection(sortDirection),
-				page = page ?? null,
-				pagesize = pageSize ?? null,
-				fromDate = GetDateValue(fromdate),
-				toDate = GetDateValue(toDate),
-				min = GetEnumValue(min),
-				max = GetEnumValue(max),
-				filter = filter
-			});
-			return new PagedList<Badge>(response);
+			return GetBadges(id.ToArray(), filter: filter).FirstOrDefault();
 		}
 
-        public virtual IEnumerable<Badge> GetUserBadges(int userId)
-        {
-            return GetUserBadges(userId.ToArray());
-        }
+		public virtual IPagedList<Badge> GetBadges(IEnumerable<int> ids, BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+		{
+			ValidateVectorizedParameters(ids);
+			return Execute<Badge>("badges", new string[] { ids.Vectorize() },
+				sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+		}
 
-        public virtual IEnumerable<Badge> GetUserBadges(IEnumerable<int> userIds)
-        {
-            return MakeRequest<Badge>("users", new string[] { userIds.Vectorize(), "badges" }, new
-            {
-                site = this.SiteUrlName
-            }).Items;
-        }
+		public virtual IPagedList<Badge> GetNamedBadges(BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
+		{
+			return Execute<Badge, BadgeMinMax>("badges", new string[] { "name" },
+				sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+		}
+
+		public virtual IPagedList<Badge> GetRecentlyAwardedBadges(int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+		{
+			return Execute<Badge, BadgeMinMax>("badges", new string[] { "recipients" },
+				null, null, page, pageSize, fromDate, toDate, null, null, filter);
+		}
+
+		public virtual IPagedList<Badge> GetRecentlyAwardedBadges(int id, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+		{
+			return GetRecentlyAwardedBadges(id.ToArray(), page, pageSize, fromDate, toDate, filter);
+		}
+
+		public virtual IPagedList<Badge> GetRecentlyAwardedBadges(IEnumerable<int> ids, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+		{
+			ValidateVectorizedParameters(ids);
+			return Execute<Badge, BadgeMinMax>("badges", new string[] { ids.Vectorize(), "recipients" },
+				null, null, page, pageSize, fromDate, toDate, null, null, filter);
+		}
+
+		public virtual IPagedList<Badge> GetTagBasedBadges(BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
+		{
+			return Execute<Badge, BadgeMinMax>("badges", new string[] { "tags" },
+				sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+		}
+        
     }
 }

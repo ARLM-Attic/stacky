@@ -65,9 +65,8 @@ namespace Stacky
             return WebClient.MakeRequest(url);
         }
 
-        protected IPagedList<TEntity> Execute<TEntity, TSort, TMinMax>(string methodName, string[] urlArguments, TSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, TMinMax? min = null, TMinMax? max = null, string filter = null)
+        protected IPagedList<TEntity> Execute<TEntity, TMinMax>(string methodName, string[] urlArguments, object sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, TMinMax? min = null, TMinMax? max = null, string filter = null)
             where TEntity : Entity, new()
-            where TSort : struct
             where TMinMax : struct
         {
             var response = MakeRequest<TEntity>(methodName, urlArguments, new
@@ -104,6 +103,12 @@ namespace Stacky
             });
             return new PagedList<TEntity>(response);
         }
+
+		protected void ValidateVectorizedParameters(IEnumerable<int> items)
+		{
+			if (items.Count() > 100)
+				throw new ArgumentOutOfRangeException("Paramaterized arguments cannot have more than 100 items in them");
+		}
 
         #endregion
 
