@@ -16,12 +16,12 @@ namespace Stacky.IntegrationTests
             Assert.IsNotNull(badges);
         }
 
-        [TestMethod]
-        public void Badge_GetUsersByBadge()
-        {
-            var users = Client.GetUsersByBadge(204);
-            Assert.IsNotNull(users);
-        }
+		//[TestMethod]
+		//public void Badge_GetUsersByBadge()
+		//{
+		//    var users = Client.GetUsersByBadge(204);
+		//    Assert.IsNotNull(users);
+		//}
 
         [TestMethod]
         public void Badge_GetTagBasedBadges()
@@ -32,11 +32,11 @@ namespace Stacky.IntegrationTests
 				Assert.AreEqual(BadgeType.TagBased, badge.Type);
         }
 
-        [TestMethod]
-        public void Bug_2_GetUserBadges()
-        {
-            var badges = Client.GetUserBadges(1);
-            Assert.IsNotNull(badges);
-        }
+		//[TestMethod]
+		//public void Bug_2_GetUserBadges()
+		//{
+		//    var badges = Client.GetUserBadges(1);
+		//    Assert.IsNotNull(badges);
+		//}
     }
 }
