@@ -7,27 +7,37 @@ namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IEnumerable<Revision> GetRevisions(IEnumerable<int> ids, DateTime? fromDate = null, DateTime? toDate = null)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/revisions-by-guids
+        /// </summary>
+        public IPagedList<Revision> GetRevisions(IEnumerable<string> ids, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
         {
-            return MakeRequest<Revision>("revisions", new string[] { ids.Vectorize() }, new
-            {
-                site = this.SiteUrlName,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }).Items;
+            return Execute<Revision>("revisions", new string[] { ids.Vectorize() },
+                null, null, page, pageSize, fromDate, toDate, null, null, filter);
         }
 
-        public virtual IEnumerable<Revision> GetRevisions(int id, DateTime? fromDate = null, DateTime? toDate = null)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/revisions-by-guids
+        /// </summary>
+        public IPagedList<Revision> GetRevisions(IEnumerable<Guid> ids, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
         {
-            return GetRevisions(id.ToArray(), fromDate, toDate);
+            return GetRevisions(ids.Select(i => i.ToString()), page, pageSize, fromDate, toDate, filter);
         }
 
-        public virtual Revision GetRevision(int id, Guid revision)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/revisions-by-guids
+        /// </summary>
+        public Revision GetRevision(string id, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
         {
-            return MakeRequest<Revision>("revisions", new string[] { id.ToString(), revision.ToString() }, new
-            {
-                site = this.SiteUrlName,
-            }).Items.FirstOrDefault();
+            return GetRevisions(new string[] { id }, page, pageSize, fromDate, toDate, filter).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/revisions-by-guids
+        /// </summary>
+        public Revision GetRevision(Guid id, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            return GetRevisions(new string[] { id.ToString() }, page, pageSize, fromDate, toDate, filter).FirstOrDefault();
         }
     }
 }

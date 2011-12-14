@@ -176,5 +176,61 @@ namespace Stacky
             });
             return new PagedList<Question>(response);
         }
+
+        // <summary>
+        /// See https://api.stackexchange.com/docs/search
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> SearchQuestions(QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string[] tagged = null, string[] notTagged = null, string inTitle = null, string filter = null)
+        {
+            if (((tagged != null && tagged.Length == 0) || tagged == null) &&
+                ((notTagged != null && notTagged.Length == 0) || notTagged == null))
+            {
+                throw new ArgumentException("At least one of tagged or intitle must be set on this method");
+            }
+
+            var response = MakeRequest<Question>("search", null, new
+            {
+                site = this.SiteUrlName,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                min = GetDateValue(min),
+                max = GetDateValue(max),
+                tagged = tagged != null ? String.Join(";", tagged) : null,
+                nottagged = notTagged != null ? String.Join(";", notTagged) : null,
+                intitle = inTitle,
+                filter = filter
+            });
+            return new PagedList<Question>(response);
+        }
+
+        // <summary>
+        /// See https://api.stackexchange.com/docs/similar
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> SimiliarQuestions(string title, QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string[] tagged = null, string[] notTagged = null, string filter = null)
+        {
+            var response = MakeRequest<Question>("similar", null, new
+            {
+                site = this.SiteUrlName,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                min = GetDateValue(min),
+                max = GetDateValue(max),
+                tagged = tagged != null ? String.Join(";", tagged) : null,
+                nottagged = notTagged != null ? String.Join(";", notTagged) : null,
+                title = title,
+                filter = filter
+            });
+            return new PagedList<Question>(response);
+        }
     }
 }
