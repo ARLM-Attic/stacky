@@ -63,26 +63,6 @@ namespace Stacky
             return new PagedList<Answer>(response);
         }
 
-        /// <summary>
-        /// Gets the question answers.
-        /// </summary>
-        /// <param name="questionId">The question id.</param>
-        /// <param name="sortBy">The sort by.</param>
-        /// <param name="sortDirection">The sort direction.</param>
-        /// <param name="page">The page.</param>
-        /// <param name="pageSize">Size of the page.</param>
-        /// <param name="includeBody">if set to <c>true</c> [include body].</param>
-        /// <param name="includeComments">if set to <c>true</c> [include comments].</param>
-        /// <param name="min">The min.</param>
-        /// <param name="max">The max.</param>
-        /// <param name="fromDate">From date.</param>
-        /// <param name="toDate">To date.</param>
-        /// <returns></returns>
-        public virtual IPagedList<Answer> GetQuestionAnswers(int questionId, QuestionsByUserSort sortBy = QuestionsByUserSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            return GetQuestionAnswers(questionId.ToArray(), sortBy, sortDirection, page, pageSize, includeBody, includeComments, min, max, fromDate, toDate);
-        }
-
         public virtual Answer GetAnswer(int answerId, bool includeBody = true, bool includeComments = true)
         {
             return GetAnswers(answerId.ToArray(), includeBody: includeBody, includeComments : includeComments).FirstOrDefault();

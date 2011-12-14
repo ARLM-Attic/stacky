@@ -99,6 +99,9 @@
     <Compile Include="..\Stacky\Entities\Question.cs">
       <Link>Entities\Question.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Entities\QuestionTimeline.cs">
+      <Link>Entities\QuestionTimeline.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\Entities\RelatedSite.cs">
       <Link>Entities\RelatedSite.cs</Link>
     </Compile>
@@ -209,6 +212,9 @@
     </Compile>
     <Compile Include="..\Stacky\Enums\TagSynonymSort.cs">
       <Link>Enums\TagSynonymSort.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Enums\TimelineType.cs">
+      <Link>Enums\TimelineType.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Enums\TopUserPeriod.cs">
       <Link>Enums\TopUserPeriod.cs</Link>
