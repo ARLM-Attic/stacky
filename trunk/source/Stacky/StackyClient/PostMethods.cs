@@ -14,6 +14,7 @@ namespace Stacky
 
         public IPagedList<Post> GetPosts(IEnumerable<int> ids, PostSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
+            ValidateVectorizedParameters(ids);
             return Execute<Post>("posts", new string[] { ids.Vectorize() },
                 sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
@@ -25,6 +26,7 @@ namespace Stacky
 
         public IPagedList<Comment> GetPostComments(IEnumerable<int> ids, CommentSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
+            ValidateVectorizedParameters(ids);
             return Execute<Comment>("posts", new string[] { ids.Vectorize(), "comments" },
                 sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
@@ -36,6 +38,7 @@ namespace Stacky
 
         public IPagedList<Revision> GetPostRevisions(IEnumerable<int> ids, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
         {
+            ValidateVectorizedParameters(ids);
             return Execute<Revision>("posts", new string[] { ids.Vectorize(), "revisions" },
                 null, null, page, pageSize, fromDate, toDate, null, null, filter);
         }
@@ -47,6 +50,7 @@ namespace Stacky
 
         public IPagedList<SuggestedEdit> GetPostSuggestedEdits(IEnumerable<int> ids, SuggestedEditSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
         {
+            ValidateVectorizedParameters(ids);
             return Execute<SuggestedEdit>("posts", new string[] { ids.Vectorize(), "suggested-edits" },
                 null, null, page, pageSize, fromDate, toDate, null, null, filter);
         }

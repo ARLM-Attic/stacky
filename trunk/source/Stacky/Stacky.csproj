@@ -63,6 +63,7 @@
     <Compile Include="Entities\PostEvent.cs" />
     <Compile Include="Entities\Privilege.cs" />
     <Compile Include="Entities\Question.cs" />
+    <Compile Include="Entities\QuestionTimeline.cs" />
     <Compile Include="Entities\RelatedSite.cs" />
     <Compile Include="Entities\Reputation.cs" />
     <Compile Include="Entities\ResponseError.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Entities\Tag.cs" />
     <Compile Include="Entities\TagSynonym.cs" />
     <Compile Include="Entities\TagWiki.cs" />
+    <Compile Include="Enums\TimelineType.cs" />
     <Compile Include="Entities\TopTag.cs" />
     <Compile Include="Entities\TopUser.cs" />
     <Compile Include="Entities\User.cs" />
