@@ -16,6 +16,10 @@
         /// <summary>
         /// Name.
         /// </summary>
-        Name
+        Name,
+        /// <summary>
+        /// Modified
+        /// </summary>
+        Modified
     }
 }

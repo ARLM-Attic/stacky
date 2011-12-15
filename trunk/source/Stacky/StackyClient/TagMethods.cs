@@ -5,138 +5,105 @@ namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IPagedList<Tag> GetTags(TagSort sortBy = TagSort.Popular, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/tags
+        /// </summary>
+        public IPagedList<Tag> GetTags(TagSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string inName = null, string filter = null)
         {
-            return GetTags("tags", null, sortBy.ToString().ToLower(), GetSortDirection(sortDirection), page, pageSize);
-        }
-
-        private IPagedList<Tag> GetTags(string method, string[] urlParameters, string sort, string order, int? page = null, int? pageSize = null)
-        {
-            var response = MakeRequest<Tag>(method, urlParameters, new
+            var response = MakeRequest<Tag>("tags", null, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
-                sort = sort,
-                order = order
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                min = min ?? null,
+                max = max ?? null,
+                inname = inName,
+                filter = filter
             });
             return new PagedList<Tag>(response);
         }
 
-        public virtual IPagedList<Tag> GetTagsByUser(int userId, int? page = null, int? pageSize = null)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/tag-synonyms
+        /// </summary>
+        public IPagedList<TagSynonym> GetTagSynonyms(TagSynonymSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            return GetTagsByUser(userId.ToArray(), page, pageSize);
+            return Execute<TagSynonym>("tags", new string[] { "synonyms" },
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
-        public virtual IPagedList<Tag> GetTagsByUser(IEnumerable<int> userIds, int? page = null, int? pageSize = null)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/synonyms-by-tags
+        /// </summary>
+        public IPagedList<TagSynonym> GetTagSynonyms(IEnumerable<string> tags, TagSynonymSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            //TODO: does this method support sort and order?
-            return GetTags("users", new string[] { userIds.Vectorize(), "tags" }, null, null, page, pageSize);
+            return Execute<TagSynonym>("tags", new string[] { tags.Vectorize(), "synonyms" },
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
-        public virtual IPagedList<TagSynonym> GetAllTagSynonyms(TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/synonyms-by-tags
+        /// </summary>
+        public IPagedList<TagSynonym> GetTagSynonyms(string tag, TagSynonymSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            var response = MakeRequest<TagSynonym>("tags", new string[] { "synonyms" }, new
+            return GetTagSynonyms(new string[] { tag }, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-answerers-on-tags
+        /// </summary>
+        public IPagedList<TagScore> GetTagTopAnswerers(string tag, int? page = null, int? pageSize = null, AnswerTimePeriod period = AnswerTimePeriod.AllTime, string filter = null)
+        {
+            var response = MakeRequest<TagScore>("tags", new string[] { tag, "top-answerers", GetEnumValue(period) }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
-                sort = sortBy.ToString(),
-                order = GetSortDirection(sortDirection),
-                max = max,
-                min = min
+                filter = filter
             });
-            return new PagedList<TagSynonym>(response);
+            return new PagedList<TagScore>(response);
         }
 
-        public virtual IPagedList<TagSynonym> GetTagSynonyms(string tag, TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-askers-on-tags
+        /// </summary>
+        public IPagedList<TagScore> GetTagTopAskers(string tag, int? page = null, int? pageSize = null, AnswerTimePeriod period = AnswerTimePeriod.AllTime, string filter = null)
         {
-            return GetTagSynonyms(new string[] { tag }, sortBy, sortDirection, page, pageSize, min, max, fromDate, toDate);
-        }
-
-        public virtual IPagedList<TagSynonym> GetTagSynonyms(IEnumerable<string> tags, TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            var response = MakeRequest<TagSynonym>("tags", new string[] { tags.Vectorize(), "synonyms" }, new
+            var response = MakeRequest<TagScore>("tags", new string[] { tag, "top-askers", GetEnumValue(period) }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
-                sort = sortBy.ToString(),
-                order = GetSortDirection(sortDirection),
-                max = max,
-                min = min,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
+                filter = filter
             });
-            return new PagedList<TagSynonym>(response);
+            return new PagedList<TagScore>(response);
         }
 
-        public IEnumerable<TagWiki> GetTagWikis(string tag)
-        {
-            return GetTagWikis(new string[] { tag });
-        }
-
-        public IEnumerable<TagWiki> GetTagWikis(IEnumerable<string> tags)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/wikis-by-tags
+        /// </summary>
+        public IPagedList<TagWiki> GetTagWikis(IEnumerable<string> tags, int? page = null, int? pageSize = 0, string filter = null)
         {
             var response = MakeRequest<TagWiki>("tags", new string[] { tags.Vectorize(), "wikis" }, new
             {
-                site = this.SiteUrlName
+                site = this.SiteUrlName,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                filter = filter
             });
-            return response.Items;
+            return new PagedList<TagWiki>(response);
         }
 
         /// <summary>
-        /// Returns the top 30 question askers active in a single tag, of either all-time or the last 30 days.
+        /// See: http://api.stackexchange.com/docs/wikis-by-tags
         /// </summary>
-        /// <param name="tag">The name of the tag to query</param>
-        /// <param name="period">The period of time to query</param>
-        /// <returns></returns>
-        public IEnumerable<TopUser> GetTopAskers(string tag, TopUserPeriod period)
+        public IPagedList<TagWiki> GetTagWikis(string tag, int? page = null, int? pageSize = 0, string filter = null)
         {
-            return GetTopAskers(new string[] { tag }, period);
-        }
-
-        /// <summary>
-        /// Returns the top 30 question askers active in a single tag, of either all-time or the last 30 days.
-        /// </summary>
-        /// <param name="tags">The list of tags to query</param>
-        /// <param name="period">The time period to query</param>
-        /// <returns></returns>
-        public IEnumerable<TopUser> GetTopAskers(IEnumerable<string> tags, TopUserPeriod period)
-        {
-            var sortArgs = period.GetAttribute<SortArgsAttribute>();
-            var response = MakeRequest<TopUser>("tags", new string[] { tags.Vectorize(), "top-askers", sortArgs.Sort }, new
-            {
-                site = this.SiteUrlName
-            });
-            return response.Items;
-        }
-
-        /// <summary>
-        /// Returns the top 30 question answerers active in a single tag, of either all-time or the last 30 days.
-        /// </summary>
-        /// <param name="tag">The name of the tag to query</param>
-        /// <param name="period">The period of time to query</param>
-        /// <returns></returns>
-        public IEnumerable<TopUser> GetTopAnswerers(string tag, TopUserPeriod period)
-        {
-            return GetTopAnswerers(new string[] { tag }, period);
-        }
-
-        /// <summary>
-        /// Returns the top 30 question answerers active in a single tag, of either all-time or the last 30 days.
-        /// </summary>
-        /// <param name="tags">The list of tags to query</param>
-        /// <param name="period">The time period to query</param>
-        /// <returns></returns>
-        public IEnumerable<TopUser> GetTopAnswerers(IEnumerable<string> tags, TopUserPeriod period)
-        {
-            var sortArgs = period.GetAttribute<SortArgsAttribute>();
-            var response = MakeRequest<TopUser>("tags", new string[] { tags.Vectorize(), "top-answerers", sortArgs.Sort }, new
-            {
-                site = this.SiteUrlName
-            });
-            return response.Items;
+            return GetTagWikis(new string[] { tag }, page, pageSize, filter);
         }
     }
 }

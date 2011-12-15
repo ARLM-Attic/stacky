@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace Stacky
 {
+    /// <summary>
+    /// See: http://api.stackexchange.com/docs/types/suggested-edit
+    /// </summary>
     public class SuggestedEdit : Entity
     {
         private int id;

@@ -123,9 +123,6 @@
     <Compile Include="..\Stacky\Entities\SiteInfo.cs">
       <Link>Entities\SiteInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Stacky\Entities\SiteStats.cs">
-      <Link>Entities\SiteStats.cs</Link>
-    </Compile>
     <Compile Include="..\Stacky\Entities\SiteStyle.cs">
       <Link>Entities\SiteStyle.cs</Link>
     </Compile>
@@ -155,6 +152,9 @@
     </Compile>
     <Compile Include="..\Stacky\Enums\AnswerSort.cs">
       <Link>Enums\AnswerSort.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Enums\AnswerTimePeriod.cs">
+      <Link>Enums\AnswerTimePeriod.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Enums\BadgeClass.cs">
       <Link>Enums\BadgeClass.cs</Link>

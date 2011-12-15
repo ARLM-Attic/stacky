@@ -3,17 +3,15 @@ using Newtonsoft.Json;
 
 namespace Stacky
 {
+    /// <summary>
+    /// See: http://api.stackexchange.com/docs/types/tag-synonym
+    /// </summary>
     public class TagSynonym : Entity
     {
-        private string fromTag;
-        private string toTag;
-        private int appliedCount;
-        private DateTime creationDate;
-        private DateTime lastAppliedDate;
-
         /// <summary>
         /// Gets or sets the from tag.
         /// </summary>
+        private string fromTag;
         [JsonProperty("from_tag")]
         public string FromTag
         {
@@ -24,6 +22,7 @@ namespace Stacky
         /// <summary>
         /// Gets or sets the to tag.
         /// </summary>
+        private string toTag;
         [JsonProperty("to_tag")]
         public string ToTag
         {
@@ -34,6 +33,7 @@ namespace Stacky
         /// <summary>
         /// Gets or sets the applied count
         /// </summary>
+        private int appliedCount;
         [JsonProperty("applied_count")]
         public int AppliedCount
         {
@@ -44,6 +44,7 @@ namespace Stacky
         /// <summary>
         /// Gets or sets the last applied date
         /// </summary>
+        private DateTime lastAppliedDate;
         [JsonProperty("last_applied_date"), JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime LastAppliedDate
         {
@@ -54,6 +55,7 @@ namespace Stacky
         /// <summary>
         /// Gets or sets the creation date
         /// </summary>
+        private DateTime creationDate;
         [JsonProperty("creation_date"), JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime CreationDate
         {

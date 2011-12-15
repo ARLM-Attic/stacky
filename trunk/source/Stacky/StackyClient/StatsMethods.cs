@@ -5,9 +5,9 @@ namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual SiteStats GetSiteStats()
+        public virtual SiteInfo GetSiteStats()
         {
-            return MakeRequest<SiteStats>("stats", null, new
+            return MakeRequest<SiteInfo>("info", null, new
             {
                 site = this.SiteUrlName
             }).Items.FirstOrDefault();
