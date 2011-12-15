@@ -228,6 +228,9 @@
     <Compile Include="..\Stacky\Enums\UserType.cs">
       <Link>Enums\UserType.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Enums\VoteType.cs">
+      <Link>Enums\VoteType.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\ErrorResponse.cs">
       <Link>ErrorResponse.cs</Link>
     </Compile>
