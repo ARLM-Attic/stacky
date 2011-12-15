@@ -8,17 +8,15 @@ namespace Stacky
     /// </summary>
     public class Reputation : Entity
     {
-        private int postId;
-        private PostType postType;
-        private string title;
-        private int positiveReputation;
-        private int negativeReputation;
-        private DateTime onDate;
+        private int userId;
+        [JsonProperty("user_id")]
+        public int UserId
+        {
+            get { return userId; }
+            set { userId = value; NotifyOfPropertyChange(() => UserId); }
+        }
 
-        /// <summary>
-        /// Gets or sets the post id.
-        /// </summary>
-        /// <value>The post id.</value>
+        private int postId;
         [JsonProperty("post_id")]
         public int PostId
         {
@@ -26,10 +24,7 @@ namespace Stacky
             set { postId = value; NotifyOfPropertyChange(() => PostId); }
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="PostType">.
-        /// </summary>
-        /// <value>The type of the post.</value>
+        private PostType postType;
         [JsonProperty("post_type")]
         public PostType PostType
         {
@@ -37,10 +32,15 @@ namespace Stacky
             set { postType = value; NotifyOfPropertyChange(() => PostType); }
         }
 
-        /// <summary>
-        /// Gets or sets the title.
-        /// </summary>
-        /// <value>The title.</value>
+        private VoteType voteType;
+        [JsonProperty("vote_type")]
+        public VoteType VoteType
+        {
+            get { return voteType; }
+            set { voteType = value; NotifyOfPropertyChange(() => VoteType); }
+        }
+
+        private string title;
         [JsonProperty("title")]
         public string Title
         {
@@ -48,32 +48,23 @@ namespace Stacky
             set { title = value; NotifyOfPropertyChange(() => Title); }
         }
 
-        /// <summary>
-        /// Gets or sets the positive reputation.
-        /// </summary>
-        /// <value>The positive reputation.</value>
-        [JsonProperty("positive_rep")]
-        public int PositiveReputation
+        private string link;
+        [JsonProperty("link")]
+        public string Link
         {
-            get { return positiveReputation; }
-            set { positiveReputation = value; NotifyOfPropertyChange(() => PositiveReputation); }
+            get { return link; }
+            set { link = value; NotifyOfPropertyChange(() => Link); }
         }
 
-        /// <summary>
-        /// Gets or sets the negative reputation.
-        /// </summary>
-        /// <value>The negative reputation.</value>
-        [JsonProperty("negative_rep")]
-        public int NegativeReputation
+        private int reputationChange;
+        [JsonProperty("reputation_change")]
+        public int ReputationChange
         {
-            get { return negativeReputation; }
-            set { negativeReputation = value; NotifyOfPropertyChange(() => NegativeReputation); }
+            get { return reputationChange; }
+            set { reputationChange = value; NotifyOfPropertyChange(() => ReputationChange); }
         }
 
-        /// <summary>
-        /// Gets or sets the on date.
-        /// </summary>
-        /// <value>The on date.</value>
+        private DateTime onDate;
         [JsonProperty("on_date"), JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime OnDate
         {

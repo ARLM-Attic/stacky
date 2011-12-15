@@ -108,6 +108,7 @@
     <Compile Include="Enums\UserMentionSort.cs" />
     <Compile Include="Enums\UserSort.cs" />
     <Compile Include="Enums\UserType.cs" />
+    <Compile Include="Enums\VoteType.cs" />
     <Compile Include="ErrorResponse.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
