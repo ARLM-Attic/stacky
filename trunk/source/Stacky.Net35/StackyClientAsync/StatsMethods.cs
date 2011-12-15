@@ -9,9 +9,9 @@ namespace Stacky
     public partial class StackyClientAsync
 #endif
     {
-        public virtual void GetSiteStats(Action<SiteStats> onSuccess, Action<ApiException> onError)
+        public virtual void GetSiteStats(Action<SiteInfo> onSuccess, Action<ApiException> onError)
         {
-            MakeRequest<SiteStats>("stats", null, new
+            MakeRequest<SiteInfo>("stats", null, new
             {
                 site = this.SiteUrlName
             }, results => onSuccess(results.Items.FirstOrDefault()), onError);

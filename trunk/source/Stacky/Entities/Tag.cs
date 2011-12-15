@@ -4,19 +4,11 @@ namespace Stacky
 {
     /// <summary>
     /// Represents a tag.
+    /// See: http://api.stackexchange.com/docs/types/tag
     /// </summary>
     public class Tag : Entity
     {
         private string name;
-        private int count;
-        private string restrictedTo;
-        private bool fulfillsRequired;
-        private int? userId;
-
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>The name.</value>
         [JsonProperty("name")]
         public string Name
         {
@@ -24,10 +16,7 @@ namespace Stacky
             set { name = value; NotifyOfPropertyChange(() => Name); }
         }
 
-        /// <summary>
-        /// Gets or sets the count.
-        /// </summary>
-        /// <value>The count.</value>
+        private int count;
         [JsonProperty("count")]
         public int Count
         {
@@ -35,37 +24,28 @@ namespace Stacky
             set { count = value; NotifyOfPropertyChange(() => Count); }
         }
 
-        /// <summary>
-        /// Gets or sets the restricted to.
-        /// </summary>
-        /// <value>The restricted to.</value>
-        [JsonProperty("restricted_to")]
-        public string RestrictedTo
+        private bool isRequired;
+        [JsonProperty("is_required")]
+        public bool IsRequired
         {
-            get { return restrictedTo; }
-            set { restrictedTo = value; NotifyOfPropertyChange(() => RestrictedTo); }
+            get { return isRequired; }
+            set { isRequired = value; NotifyOfPropertyChange(() => IsRequired); }
         }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the tag fulfills the post requirement.
-        /// </summary>
-        /// <value><c>true</c> if the tag fulfills the post requirement; otherwise, <c>false</c>.</value>
-        [JsonProperty("fulfills_required")]
-        public bool FulfillsRequired
+        private bool isModeratorOnly;
+        [JsonProperty("is_moderator_only")]
+        public bool IsModeratorOnly
         {
-            get { return fulfillsRequired; }
-            set { fulfillsRequired = value; NotifyOfPropertyChange(() => FulfillsRequired); }
+            get { return isModeratorOnly; }
+            set { isModeratorOnly = value; NotifyOfPropertyChange(() => IsModeratorOnly); }
         }
 
-        /// <summary>
-        /// Gets or sets the user id.
-        /// </summary>
-        /// <value>The user id.</value>
+        private int userid;
         [JsonProperty("user_id")]
-        public int? UserId
+        public int UserId
         {
-            get { return userId; }
-            set { userId = value; NotifyOfPropertyChange(() => UserId); }
+            get { return userid; }
+            set { userid = value; NotifyOfPropertyChange(() => UserId); }
         }
     }
 }

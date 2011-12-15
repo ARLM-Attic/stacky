@@ -6,287 +6,90 @@ namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IPagedList<User> GetUsers(UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, string filter = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/users
+        /// </summary>
+        public IPagedList<User> GetUsers(UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string filter = null)
         {
-            var response = MakeRequest<User>("users", null, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                filter = filter,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection),
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                min = min ?? null,
-                max = max ?? null
-            });
-            return new PagedList<User>(response);
-        }
-
-        public virtual IPagedList<User> GetUsers(IEnumerable<int> userIds, UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, string filter = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
-        {
-           var response = MakeRequest<User>("users", new string[] { userIds.Vectorize() }, new
-           {
-               site = this.SiteUrlName,
-               page = page ?? null,
-               pagesize = pageSize ?? null,
-               filter = filter,
-               sort = sortBy.ToString().ToLower(),
-               order = GetSortDirection(sortDirection),
-               fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-               todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-               min = min ?? null,
-               max = max ?? null
-           });
-           return new PagedList<User>(response);
-        }
-
-        public virtual User GetUser(int userId)
-        {
-            return GetUsers(userId.ToArray()).FirstOrDefault();
-        }
-
-        public virtual IPagedList<Comment> GetUserMentions(int userId, UserMentionSort sortBy = UserMentionSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
-        {
-            return GetUserMentions(userId.ToArray(), sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max);
-        }
-
-        public virtual IPagedList<Comment> GetUserMentions(IEnumerable<int> userIds, UserMentionSort sortBy = UserMentionSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
-        {
-            var response = MakeRequest<Comment>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
-            {
-                site = this.SiteUrlName,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                min = min ?? null,
-                max = max ?? null,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection)
-            });
-            return new PagedList<Comment>(response);
-        }
-
-        public virtual IPagedList<UserEvent> GetUserTimeline(int userId, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            return GetUserTimeline(userId.ToArray(), page, pageSize, fromDate, toDate);
-        }
-
-        public virtual IPagedList<UserEvent> GetUserTimeline(IEnumerable<int> userIds, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            var response = MakeRequest<UserEvent>("users", new string[] { userIds.Vectorize(), "timeline" }, new
-            {
-                site = this.SiteUrlName,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                page = page ?? null,
-                pagesize = pageSize ?? null
-            });
-            return new PagedList<UserEvent>(response);
-        }
-
-        public virtual IPagedList<Reputation> GetUserReputation(int userId, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            return GetUserReputation(userId.ToArray(), page, pageSize, fromDate, toDate);
-        }
-
-        public virtual IPagedList<Reputation> GetUserReputation(IEnumerable<int> userIds, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            var response = MakeRequest<Reputation>("users", new string[] { userIds.Vectorize(), "reputation" }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            });
-            return new PagedList<Reputation>(response);
-        }
-
-        public virtual IPagedList<User> GetModerators(int? page = null, int? pageSize = null, UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, string filter = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            var response = MakeRequest<User>("users", new string[] { "moderators" }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                filter = filter,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection),
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            });
-            return new PagedList<User>(response);
+            return Execute<User, Int32>("users", null,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Gets the questions asked by the users in userId which have no answers.
-        /// Questions returns by this method actually have zero undeleted answers.
+        /// See: http://api.stackexchange.com/docs/users-by-ids
         /// </summary>
-        public virtual IPagedList<Question> GetNoAnswerQuestions(int userId, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
+        public IPagedList<User> GetUsers(IEnumerable<int> ids, UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string filter = null)
         {
-            return GetNoAnswerQuestions(userId.ToArray(), page, pageSize, sortBy, sortDirection, fromDate, toDate, min, max, includeBody, includeAnswers, includeComments);
+            return Execute<User, Int32>("users", new string[] { ids.Vectorize() },
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Gets the questions asked by the users in userIds which have no answers.
-        /// Questions returns by this method actually have zero undeleted answers.
+        /// See: http://api.stackexchange.com/docs/users-by-ids
         /// </summary>
-        public virtual IPagedList<Question> GetNoAnswerQuestions(IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
+        public User GetUser(int id, UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string filter = null)
         {
-            var response = MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "no-answers" }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection),
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                min = min ?? null,
-                max = max ?? null,
-                body = includeBody,
-                comments = includeComments,
-                answers = includeAnswers
-            });
-            return new PagedList<Question>(response);
+            return GetUsers(id.ToArray(), sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter).FirstOrDefault();
         }
 
         /// <summary>
-        /// Gets the questions asked by the users in userId which have at least one answer, but no accepted answer.
-        /// Questions returned by this method have answers, but the owner has not opted to accept any of them.
+        /// See: http://api.stackexchange.com/docs/answers-on-users
         /// </summary>
-        public virtual IPagedList<Question> GetUnacceptedQuestions(int userId, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
+        public IPagedList<Answer> GetUserAnswers(IEnumerable<int> ids, UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            return GetUnacceptedQuestions(userId.ToArray(), page, pageSize, sortBy, sortDirection, fromDate, toDate, min, max, includeBody, includeAnswers, includeComments);
+            return Execute<Answer>("users", new string[] { ids.Vectorize(), "answers" },
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Gets the questions asked by the users in userIds which have at least one answer, but no accepted answer.
-        /// Questions returned by this method have answers, but the owner has not opted to accept any of them.
+        /// See: http://api.stackexchange.com/docs/answers-on-users
         /// </summary>
-        public virtual IPagedList<Question> GetUnacceptedQuestions(IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
+        public IPagedList<Answer> GetUserAnswers(int id, UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            var response = MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "unaccepted" }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection),
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                min = min ?? null,
-                max = max ?? null,
-                body = includeBody,
-                comments = includeComments,
-                answers = includeAnswers
-            });
-            return new PagedList<Question>(response);
-        }
-
-        public virtual IPagedList<Question> GetUnansweredQuestions(int userId, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
-        {
-            return GetUnansweredQuestions(userId.ToArray(), page, pageSize, sortBy, sortDirection, fromDate, toDate, min, max, includeBody, includeAnswers, includeComments);
-        }
-
-        public virtual IPagedList<Question> GetUnansweredQuestions(IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
-        {
-            var response = MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "unanswered" }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection),
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                min = min ?? null,
-                max = max ?? null,
-                body = includeBody,
-                comments = includeComments,
-                answers = includeAnswers
-            });
-            return new PagedList<Question>(response);
+            return GetUserAnswers(id.ToArray(), sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Returns the top 30 answer a user has posted in resposne to questions with the given tags.
+        /// See: http://api.stackexchange.com/docs/badges-on-users
         /// </summary>
-        public virtual IEnumerable<Answer> GetTopTaggedAnswers(int userId, string tag, bool? includeBody = null, bool? includeComments = null)
+        public IPagedList<Badge> GetUserBadges(IEnumerable<int> ids, UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
         {
-            return GetTopTaggedAnswers(userId, new string[] { tag }, includeBody, includeComments);
+            return Execute<Badge, BadgeMinMax>("users", new string[] { ids.Vectorize(), "badges" },
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Returns the top 30 answer a user has posted in response to questions with the given tags.
+        /// See: http://api.stackexchange.com/docs/badges-on-users
         /// </summary>
-        public virtual IEnumerable<Answer> GetTopTaggedAnswers(int userId, IEnumerable<string> tags, bool? includeBody = null, bool? includeComments = null)
+        public IPagedList<Badge> GetUserBadges(int id, UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
         {
-            if (tags == null)
-                throw new ArgumentNullException("tags");
-
-            var response = MakeRequest<Answer>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-answers" }, new
-            {
-                site = this.SiteUrlName,
-                body = includeBody,
-                comments = includeComments
-            });
-            return response.Items;
+            return GetUserBadges(id.ToArray(), sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Returns the top 30 questions a user has asked with the given tags.
+        /// See: http://api.stackexchange.com/docs/comments-on-users
         /// </summary>
-        public virtual IEnumerable<Question> GetTopTaggedQuestions(int userId, string tag, bool? includeBody = null, bool? includeComments = null, bool? includeAnswers = null)
+        public IPagedList<Comment> GetUserComments(IEnumerable<int> ids, UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            return GetTopTaggedQuestions(userId, new string[] { tag }, includeBody, includeComments, includeAnswers);
+            return Execute<Comment>("users", new string[] { ids.Vectorize(), "comments" },
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Returns the top 30 questions a user has asked with the given tags.
+        /// See: http://api.stackexchange.com/docs/comments-on-users
         /// </summary>
-        public virtual IEnumerable<Question> GetTopTaggedQuestions(int userId, IEnumerable<string> tags, bool? includeBody = null, bool? includeComments = null, bool? includeAnswers = null)
+        public IPagedList<Comment> GetUserComments(int id, UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            if (tags == null)
-                throw new ArgumentNullException("tags");
-
-            var response = MakeRequest<Question>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-questions" }, new
-            {
-                site = this.SiteUrlName,
-                body = includeBody,
-                comments = includeComments,
-                answers = includeAnswers
-            });
-            return response.Items;
+            return GetUserComments(id.ToArray(), sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Returns a single user's top 30 tags by answer score.
+        /// See: http://api.stackexchange.com/docs/comments-by-users-to-user
         /// </summary>
-        public virtual IEnumerable<TopTag> GetTopAnswerTags(int userId)
+        public IPagedList<Comment> GetUserCommentsTo(IEnumerable<int> fromIds, IEnumerable<int> toIds, UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            var response = MakeRequest<TopTag>("users", new string[] { userId.ToString(), "top-answer-tags" }, new
-            {
-                site = this.SiteUrlName,
-                id = userId
-            });
-            return response.Items;
-        }
-
-        /// <summary>
-        /// Returns a single user's top 30 tags by question score.
-        /// </summary>
-        public virtual IEnumerable<TopTag> GetTopQuestionTags(int userId)
-        {
-            var response = MakeRequest<TopTag>("users", new string[] { userId.ToString(), "top-question-tags" }, new
-            {
-                site = this.SiteUrlName,
-                id = userId
-            });
-            return response.Items;
+            return Execute<Comment>("users", new string[] { fromIds.Vectorize(), "comments", toIds.Vectorize() },
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
     }
 }

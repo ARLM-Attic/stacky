@@ -18,11 +18,11 @@ namespace Stacky.IntegrationTests
         }
 
         [TestMethod]
-        public void ContainsViewsPerDay()
+        public void ContainsQuestionsPerMinute()
         {
             var stats = Client.GetSiteStats();
             Assert.IsNotNull(stats);
-            Assert.IsTrue(stats.ViewsPerDay > 0);
+            Assert.IsTrue(stats.QuestionsPerMinute > 0);
         }
     }
 }

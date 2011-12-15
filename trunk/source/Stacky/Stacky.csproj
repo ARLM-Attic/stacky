@@ -71,13 +71,14 @@
     <Compile Include="Entities\ShallowUser.cs" />
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Entities\SiteInfo.cs" />
-    <Compile Include="Entities\SiteStats.cs" />
     <Compile Include="Entities\SiteStyle.cs" />
     <Compile Include="Entities\SortArgsAttribute.cs" />
     <Compile Include="Entities\SuggestedEdit.cs" />
     <Compile Include="Entities\Tag.cs" />
+    <Compile Include="Entities\TagScore.cs" />
     <Compile Include="Entities\TagSynonym.cs" />
     <Compile Include="Entities\TagWiki.cs" />
+    <Compile Include="Enums\AnswerTimePeriod.cs" />
     <Compile Include="Enums\TimelineType.cs" />
     <Compile Include="Entities\TopTag.cs" />
     <Compile Include="Entities\TopUser.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="StackyClient\RevisionMethods.cs" />
     <Compile Include="StackyClient\StackyClient.cs" />
     <Compile Include="StackyClient\StatsMethods.cs" />
+    <Compile Include="StackyClient\SuggestedEditMethods.cs" />
     <Compile Include="StackyClient\TagMethods.cs" />
     <Compile Include="StackyClient\UserMethods.cs" />
     <Compile Include="UrlClient.cs" />

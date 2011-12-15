@@ -9,6 +9,7 @@
         /// Popular.
         /// </summary>
         Popular,
+        Activity,
         /// <summary>
         /// Name.
         /// </summary>

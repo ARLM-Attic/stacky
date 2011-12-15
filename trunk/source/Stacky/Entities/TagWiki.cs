@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace Stacky
 {
+    /// <summary>
+    /// See: http://api.stackexchange.com/docs/types/tag-wiki
+    /// </summary>
     public class TagWiki : Entity
     {
         private string tagName;
-        private string wikiBody;
-        private string wikiExcerpt;
-        private DateTime bodyLastEditDate;
-        private DateTime excerptLastEditDate;
-        private ShallowUser lastBodyEditor;
-        private ShallowUser lastExcerptEditor;
-
         [JsonProperty("tag_name")]
         public string TagName
         {
@@ -23,20 +16,23 @@ namespace Stacky
             set { tagName = value; NotifyOfPropertyChange(() => TagName); }
         }
 
-        [JsonProperty("wiki_body")]
-        public string WikiBody
+        private string body;
+        [JsonProperty("body")]
+        public string Body
         {
-            get { return wikiBody; }
-            set { wikiBody = value; NotifyOfPropertyChange(() => WikiBody); }
+            get { return body; }
+            set { body = value; NotifyOfPropertyChange(() => Body); }
         }
 
-        [JsonProperty("wiki_excerpt")]
-        public string WikiExcerpt
+        private string excerpt;
+        [JsonProperty("excerpt")]
+        public string Excerpt
         {
-            get { return wikiExcerpt; }
-            set { wikiExcerpt = value; NotifyOfPropertyChange(() => WikiExcerpt); }
+            get { return excerpt; }
+            set { excerpt = value; NotifyOfPropertyChange(() => Excerpt); }
         }
 
+        private DateTime bodyLastEditDate;
         [JsonProperty("body_last_edit_date"), JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime BodyLastEditDate
         {
@@ -44,6 +40,7 @@ namespace Stacky
             set { bodyLastEditDate = value; NotifyOfPropertyChange(() => BodyLastEditDate); }
         }
 
+        private DateTime excerptLastEditDate;
         [JsonProperty("excerpt_last_edit_date"), JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime ExcerptLastEditDate
         {
@@ -51,18 +48,20 @@ namespace Stacky
             set { excerptLastEditDate = value; NotifyOfPropertyChange(() => ExcerptLastEditDate); }
         }
 
-        [JsonProperty("last_excerpt_editor")]
-        public ShallowUser LastExcerptEditor
-        {
-            get { return lastExcerptEditor; }
-            set { lastExcerptEditor = value; NotifyOfPropertyChange(() => LastExcerptEditor); }
-        }
-
+        private ShallowUser lastBodyEditor;
         [JsonProperty("last_body_editor")]
         public ShallowUser LastBodyEditor
         {
             get { return lastBodyEditor; }
             set { lastBodyEditor = value; NotifyOfPropertyChange(() => LastBodyEditor); }
+        }
+
+        private ShallowUser lastExcerptEditor;
+        [JsonProperty("last_excerpt_editor")]
+        public ShallowUser LastExcerptEditor
+        {
+            get { return lastExcerptEditor; }
+            set { lastExcerptEditor = value; NotifyOfPropertyChange(() => LastExcerptEditor); }
         }
     }
 }
