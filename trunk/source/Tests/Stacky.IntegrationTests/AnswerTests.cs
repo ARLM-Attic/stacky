@@ -10,15 +10,6 @@ namespace Stacky.IntegrationTests
     public class AnswerTests : IntegrationTest
     {
         [TestMethod]
-        public void Answer_Contains_Comments_Url()
-        {
-            var answer = Client.GetUsersAnswers(1464).FirstOrDefault();
-
-            Assert.IsNotNull(answer);
-            Assert.IsFalse(String.IsNullOrEmpty(answer.CommentsUrl));
-        }
-
-        [TestMethod]
         public void Answer_GetQuestionAnswers()
         {
             var answers = Client.GetQuestionAnswers(31415);

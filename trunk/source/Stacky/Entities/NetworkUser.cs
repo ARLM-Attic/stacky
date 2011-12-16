@@ -1,23 +1,14 @@
-﻿namespace Stacky.Entities
+﻿namespace Stacky
 {
     using System;
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// See: http://api.stackexchange.com/docs/types/network-user
+    /// </summary>
     public class NetworkUser : Entity
     {
-        #region Fields
-
         private string siteName;
-        private string siteHost;
-        private int id;
-        private int reputation;
-        private int accountId;
-        private DateTime creationDate;
-        private UserType type;
-        private BadgeCounts badgeCounts = new BadgeCounts();
-
-        #endregion
-
         [JsonProperty("site_name")]
         public string SiteName
         {
@@ -25,20 +16,23 @@
             set { siteName = value; NotifyOfPropertyChange(() => SiteName); }
         }
 
-        [JsonProperty("site_host")]
-        public string SiteHost
+        private string siteUrl;
+        [JsonProperty("site_url")]
+        public string SiteUrl
         {
-            get { return siteHost; }
-            set { siteHost = value; NotifyOfPropertyChange(() => SiteHost); }
+            get { return siteUrl; }
+            set { siteUrl = value; NotifyOfPropertyChange(() => SiteUrl); }
         }
 
+        private int userId;
         [JsonProperty("user_id")]
-        public int Id
+        public int UserId
         {
-            get { return id; }
-            set { id = value; NotifyOfPropertyChange(() => Id); }
+            get { return userId; }
+            set { userId = value; NotifyOfPropertyChange(() => UserId); }
         }
 
+        private int reputation;
         [JsonProperty("reputation")]
         public int Reputation
         {
@@ -46,13 +40,15 @@
             set { reputation = value; NotifyOfPropertyChange(() => Reputation); }
         }
 
-        [JsonProperty("user_type"), JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public UserType Type
+        private int accountId;
+        [JsonProperty("account_id")]
+        public int AccountId
         {
-            get { return type; }
-            set { type = value; NotifyOfPropertyChange(() => Type); }
+            get { return accountId; }
+            set { accountId = value; NotifyOfPropertyChange(() => AccountId); }
         }
 
+        private DateTime creationDate;
         [JsonProperty("creation_date"), JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime CreationDate
         {
@@ -60,11 +56,44 @@
             set { creationDate = value; NotifyOfPropertyChange(() => CreationDate); }
         }
 
+        private UserType userType;
+        [JsonProperty("user_type")]
+        public UserType UserType
+        {
+            get { return userType; }
+            set { userType = value; NotifyOfPropertyChange(() => UserType); }
+        }
+
+        private BadgeCounts badgeCounts;
         [JsonProperty("badge_counts")]
         public BadgeCounts BadgeCounts
         {
             get { return badgeCounts; }
             set { badgeCounts = value; NotifyOfPropertyChange(() => BadgeCounts); }
+        }
+
+        private DateTime lastAccessDate;
+        [JsonProperty("last_access_date"), JsonConverter(typeof(UnixDateTimeConverter))]
+        public DateTime LastAccessDate
+        {
+            get { return lastAccessDate; }
+            set { lastAccessDate = value; NotifyOfPropertyChange(() => LastAccessDate); }
+        }
+
+        private int answerCount;
+        [JsonProperty("answer_count")]
+        public int AnswerCount
+        {
+            get { return answerCount; }
+            set { answerCount = value; NotifyOfPropertyChange(() => AnswerCount); }
+        }
+
+        private int questionCount;
+        [JsonProperty("question_count")]
+        public int QuestionCount
+        {
+            get { return questionCount; }
+            set { questionCount = value; NotifyOfPropertyChange(() => QuestionCount); }
         }
     }
 }

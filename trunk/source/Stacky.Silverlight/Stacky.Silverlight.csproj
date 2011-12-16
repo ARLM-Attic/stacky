@@ -63,6 +63,9 @@
     <Compile Include="..\Stacky\ApiException.cs">
       <Link>ApiException.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Entities\AccessToken.cs">
+      <Link>Entities\AccessToken.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\Entities\Answer.cs">
       <Link>Entities\Answer.cs</Link>
     </Compile>
@@ -83,6 +86,9 @@
     </Compile>
     <Compile Include="..\Stacky\Entities\Entity.cs">
       <Link>Entities\Entity.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Entities\Filter.cs">
+      <Link>Entities\Filter.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Entities\MigrationInfo.cs">
       <Link>Entities\MigrationInfo.cs</Link>
@@ -150,6 +156,9 @@
     <Compile Include="..\Stacky\Entities\UserEvent.cs">
       <Link>Entities\UserEvent.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Entities\UserTimeline.cs">
+      <Link>Entities\UserTimeline.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\Enums\AnswerSort.cs">
       <Link>Enums\AnswerSort.cs</Link>
     </Compile>
@@ -173,6 +182,9 @@
     </Compile>
     <Compile Include="..\Stacky\Enums\FavoriteQuestionsSort.cs">
       <Link>Enums\FavoriteQuestionsSort.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Enums\FilterType.cs">
+      <Link>Enums\FilterType.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Enums\PostEventType.cs">
       <Link>Enums\PostEventType.cs</Link>

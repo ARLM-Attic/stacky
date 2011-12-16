@@ -271,5 +271,108 @@ namespace Stacky
         {
             return GetUserTags(userId.ToArray(), sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-answers-in-tags
+        /// </summary>
+        public IPagedList<Answer> GetUserTopAnswersByTag(IEnumerable<int> userIds, IEnumerable<string> tags, AnswerSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            return Execute<Answer>("users", new string[] { userIds.Vectorize(), "tags", tags.Vectorize(), "top-answers" },
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-answers-in-tags
+        /// </summary>
+        public IPagedList<Answer> GetUserTopAnswersByTag(int userId, IEnumerable<string> tags, AnswerSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            return GetUserTopAnswersByTag(userId.ToArray(), tags, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-answer-tags-on-users
+        /// </summary>
+        public IPagedList<TopTag> GetUserTopAnswersByTag(IEnumerable<int> userIds, int? page = null, int? pageSize = null, string filter = null)
+        {
+            return Execute<TopTag>("users", new string[] { userIds.Vectorize(), "top-answer-tags" },
+                null, null, page, pageSize, null, null, null, null, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-answer-tags-on-users
+        /// </summary>
+        public IPagedList<TopTag> GetUserTopAnswersByTag(int userId, int? page = null, int? pageSize = null, string filter = null)
+        {
+            return GetUserTopAnswersByTag(userId.ToArray(), page, pageSize, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-questions-in-tags
+        /// </summary>
+        public IPagedList<Question> GetUserTopQuestionsByTag(IEnumerable<int> userIds, IEnumerable<string> tags, QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            return Execute<Question>("users", new string[] { userIds.Vectorize(), "tags", tags.Vectorize(), "top-questions" },
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-questions-in-tags
+        /// </summary>
+        public IPagedList<Question> GetUserTopQuestionsByTag(int userId, IEnumerable<string> tags, QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            return GetUserTopQuestionsByTag(userId.ToArray(), tags, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-question-tags-on-users
+        /// </summary>
+        public IPagedList<TopTag> GetUserTopQuestionsByTag(IEnumerable<int> userIds, int? page = null, int? pageSize = null, string filter = null)
+        {
+            return Execute<TopTag>("users", new string[] { userIds.Vectorize(), "top-question-tags" },
+                null, null, page, pageSize, null, null, null, null, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-question-tags-on-users
+        /// </summary>
+        public IPagedList<TopTag> GetUserTopQuestionsByTag(int userId, int? page = null, int? pageSize = null, string filter = null)
+        {
+            return GetUserTopQuestionsByTag(userId.ToArray(), page, pageSize, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/timeline-on-users
+        /// </summary>
+        public IPagedList<UserTimeline> GetUserTimeline(IEnumerable<int> userIds, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            return Execute<UserTimeline>("users", new string[] { userIds.Vectorize(), "timeline" },
+                null, null, page, pageSize, fromDate, toDate, null, null, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/timeline-on-users
+        /// </summary>
+        public IPagedList<UserTimeline> GetUserTimeline(int userId, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            return GetUserTimeline(userId.ToArray(), page, pageSize, fromDate, toDate, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/moderators
+        /// </summary>
+        public IPagedList<User> GetModerators(UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string filter = null)
+        {
+            return Execute<User, Int32>("users", new string[] { "moderators" },
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/elected-moderators
+        /// </summary>
+        public IPagedList<User> GetElectedModerators(UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string filter = null)
+        {
+            return Execute<User, Int32>("users", new string[] { "moderators", "elected" },
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
     }
 }

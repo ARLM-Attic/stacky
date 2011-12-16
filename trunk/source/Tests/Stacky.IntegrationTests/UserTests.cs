@@ -58,39 +58,19 @@ namespace Stacky.IntegrationTests
             Assert.IsTrue(answers.TotalItems > 0);
         }
 
-        //[TestMethod]
-        //public void User_GetUserTimeline()
-        //{
-        //    var events = Client.GetUserTimeline(22656);
-        //    Assert.IsNotNull(events);
-        //}
+        [TestMethod]
+        public void User_GetUserTimeline()
+        {
+            var events = Client.GetUserTimeline(22656);
+            Assert.IsNotNull(events);
+        }
 
-        //[TestMethod]
-        //public void User_GetUserTimeline_ContainsPagingInformation()
-        //{
-        //    var events = Client.GetUserTimeline(22656);
-        //    Assert.IsNotNull(events);
-        //    Assert.IsTrue(events.PageSize > 0);
-        //    Assert.IsTrue(events.CurrentPage > 0);
-        //    Assert.IsTrue(events.TotalItems > 0);
-        //}
-
-        //[TestMethod]
-        //public void User_GetUserReputation()
-        //{
-        //    var rep = Client.GetUserReputation(22656);
-        //    Assert.IsNotNull(rep);
-        //}
-
-        //[TestMethod]
-        //public void User_GetUserReputation_ContainsPagingInformation()
-        //{
-        //    var rep = Client.GetUserReputation(22656);
-        //    Assert.IsNotNull(rep);
-        //    Assert.IsTrue(rep.PageSize > 0);
-        //    Assert.IsTrue(rep.CurrentPage > 0);
-        //    Assert.IsTrue(rep.TotalItems > 0);
-        //}
+        [TestMethod]
+        public void User_GetUserReputation()
+        {
+            var rep = Client.GetUserReputation(22656);
+            Assert.IsNotNull(rep);
+        }
 
         [TestMethod]
         public void User_Returns_Badge_Counts()
@@ -102,33 +82,19 @@ namespace Stacky.IntegrationTests
             Assert.IsTrue(user.BadgeCounts.Bronze > 0);
         }
 
-        //[TestMethod]
-        //public void GetModerators()
-        //{
-        //    var users = Client.GetModerators();
-        //    Assert.IsNotNull(users);
-        //}
+        [TestMethod]
+        public void GetModerators()
+        {
+            var users = Client.GetModerators();
+            Assert.IsNotNull(users);
+        }
 
-        //[TestMethod]
-        //public void User_GetNoAnswerQuestions()
-        //{
-        //    var questions = Client.GetNoAnswerQuestions(238232);
-        //    Assert.IsNotNull(questions);
-        //}
-
-        //[TestMethod]
-        //public void User_GetUnacceptedQuestions()
-        //{
-        //    var questions = Client.GetUnacceptedQuestions(38403);
-        //    Assert.IsNotNull(questions);
-        //}
-
-        //[TestMethod]
-        //public void User_GetUnansweredQuestions()
-        //{
-        //    var questions = Client.GetUnansweredQuestions(38403);
-        //    Assert.IsNotNull(questions);
-        //}
+        [TestMethod]
+        public void GetElectedModerators()
+        {
+            var users = Client.GetElectedModerators();
+            Assert.IsNotNull(users);
+        }
 
         //[TestMethod]
         //public void User_GetTopTaggedAnswers()
@@ -144,18 +110,18 @@ namespace Stacky.IntegrationTests
         //    Assert.IsNotNull(questions);
         //}
 
-        //[TestMethod]
-        //public void User_GetTopAnswerTags()
-        //{
-        //    var topTags = Client.GetTopAnswerTags(646);
-        //    Assert.IsNotNull(topTags);
-        //}
+        [TestMethod]
+        public void User_GetTopAnswerTags()
+        {
+            var topTags = Client.GetUserTopAnswersByTag(646);
+            Assert.IsNotNull(topTags);
+        }
 
-        //[TestMethod]
-        //public void User_GetTopQuestionTags()
-        //{
-        //    var topTags = Client.GetTopQuestionTags(646);
-        //    Assert.IsNotNull(topTags);
-        //}
+        [TestMethod]
+        public void User_GetTopQuestionTags()
+        {
+            var topTags = Client.GetUserTopQuestionsByTag(646);
+            Assert.IsNotNull(topTags);
+        }
     }
 }

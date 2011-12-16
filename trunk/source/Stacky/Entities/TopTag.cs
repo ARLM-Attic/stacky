@@ -2,14 +2,12 @@
 
 namespace Stacky
 {
+    /// <summary>
+    /// See: http://api.stackexchange.com/docs/types/top-tag
+    /// </summary>
     public class TopTag : Entity
     {
         private string tagName;
-        private int questionScore;
-        private int questionCount;
-        private int answerScore;
-        private int answerCount;
-
         [JsonProperty("tag_name")]
         public string TagName
         {
@@ -17,6 +15,7 @@ namespace Stacky
             set { tagName = value; NotifyOfPropertyChange(() => TagName); }
         }
 
+        private int questionScore;
         [JsonProperty("question_score")]
         public int QuestionScore
         {
@@ -24,6 +23,7 @@ namespace Stacky
             set { questionScore = value; NotifyOfPropertyChange(() => QuestionScore); }
         }
 
+        private int questionCount;
         [JsonProperty("question_count")]
         public int QuestionCount
         {
@@ -31,6 +31,7 @@ namespace Stacky
             set { questionCount = value; NotifyOfPropertyChange(() => QuestionCount); }
         }
 
+        private int answerScore;
         [JsonProperty("answer_score")]
         public int AnswerScore
         {
@@ -38,6 +39,7 @@ namespace Stacky
             set { answerScore = value; NotifyOfPropertyChange(() => AnswerScore); }
         }
 
+        private int answerCount;
         [JsonProperty("answer_count")]
         public int AnswerCount
         {
