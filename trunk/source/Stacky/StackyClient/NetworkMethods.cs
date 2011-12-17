@@ -117,9 +117,9 @@ namespace Stacky
             return new PagedList<NetworkUser>(response);
         }
 
-        public NetworkUser GetAssociatedUsers(int id, string filter = null)
+        public IPagedList<NetworkUser> GetAssociatedUsers(int id, string filter = null)
         {
-            return GetAssociatedUsers(id.ToArray(), filter: filter).FirstOrDefault();
+            return GetAssociatedUsers(id.ToArray(), filter: filter);
         }
     }
 }

@@ -141,6 +141,7 @@
     <Compile Include="StackyClientAsync\AnswerMethods.cs" />
     <Compile Include="StackyClientAsync\BadgeMethods.cs" />
     <Compile Include="StackyClientAsync\CommentMethods.cs" />
+    <Compile Include="StackyClientAsync\NetworkMethods.cs" />
     <Compile Include="StackyClientAsync\PrivilegeMethods.cs" />
     <Compile Include="StackyClientAsync\QuestionMethods.cs" />
     <Compile Include="StackyClientAsync\RevisionMethods.cs" />
