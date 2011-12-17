@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Stacky
@@ -9,39 +10,62 @@ namespace Stacky
     public partial class StackyClientAsync
 #endif
     {
-        public virtual void GetBadges(Action<IEnumerable<Badge>> onSuccess, Action<ApiException> onError = null)
+        public void GetBadges(Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError = null, 
+            BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
         {
-            GetBadges(onSuccess, onError, "badges", null);
+            Execute<Badge, BadgeMinMax>("badges", null,
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
-        private void GetBadges(Action<IEnumerable<Badge>> onSuccess, Action<ApiException> onError, string method, string[] urlArguments)
+        public void GetBadge(int id, Action<Badge> onSuccess, Action<ApiException> onError = null, string filter = null)
         {
-            MakeRequest<Badge>(method, urlArguments, new
-            {
-                site = this.SiteUrlName,
-            }, (items) => onSuccess(items.Items), onError);
+            GetBadges(id.ToArray(), items => onSuccess(items.FirstOrDefault()), onError, filter: filter);
         }
 
-        public virtual void GetUsersByBadge(int badgeId, Action<IPagedList<User>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
+        public void GetBadges(IEnumerable<int> ids, Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError = null, BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            GetUsersByBadge(badgeId.ToArray(), onSuccess, onError, page, pageSize, fromDate, toDate);
+            Execute<Badge>("badges", new string[] { ids.Vectorize() },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
-        public virtual void GetUsersByBadge(IEnumerable<int> badgeId, Action<IPagedList<User>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
+        public void GetNamedBadges(Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError = null,
+            BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
         {
-            MakeRequest<User>("badges", new string[] { badgeId.Vectorize() }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<User>(items)), onError);
+            Execute<Badge, BadgeMinMax>("badges", new string[] { "name" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
-        public virtual void GetTagBasedBadges(Action<IEnumerable<Badge>> onSuccess, Action<ApiException> onError = null)
+        public void GetRecentlyAwardedBadges(Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError = null, 
+            int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
         {
-            GetBadges(onSuccess, onError, "badges", new string[] { "tags" });
+            Execute<Badge, BadgeMinMax>("badges", new string[] { "recipients" },
+                onSuccess, onError,
+                null, null, page, pageSize, fromDate, toDate, null, null, filter);
+        }
+
+        public void GetRecentlyAwardedBadges(int id, Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError = null, 
+            int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            GetRecentlyAwardedBadges(id.ToArray(), onSuccess, onError, page, pageSize, fromDate, toDate, filter);
+        }
+
+        public void GetRecentlyAwardedBadges(IEnumerable<int> ids, Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError = null, 
+            int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            Execute<Badge, BadgeMinMax>("badges", new string[] { ids.Vectorize(), "recipients" },
+                onSuccess, onError,
+                null, null, page, pageSize, fromDate, toDate, null, null, filter);
+        }
+
+        public void GetTagBasedBadges(Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError = null, 
+            BadgeSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
+        {
+            Execute<Badge, BadgeMinMax>("badges", new string[] { "tags" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
     }
 }

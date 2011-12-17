@@ -27,26 +27,6 @@ namespace Stacky.IntegrationTests
         }
 
         [TestMethod]
-        public void Answer_GetUsersAnswers_ContainsPagingInformation()
-        {
-            var answers = Client.GetUsersAnswers(1464);
-            Assert.IsNotNull(answers);
-            Assert.IsTrue(answers.PageSize > 0);
-            Assert.IsTrue(answers.CurrentPage > 0);
-            Assert.IsTrue(answers.TotalItems > 0);
-        }
-
-        [TestMethod]
-        public void ContainsOwnerAsObject()
-        {
-            var answer = Client.GetUsersAnswers(1464).FirstOrDefault();
-
-            Assert.IsNotNull(answer);
-            Assert.IsNotNull(answer.Owner);
-            Assert.IsNotNull(answer.Owner.DisplayName);
-        }
-
-        [TestMethod]
         public void Answer_GetAnswer()
         {
             var answer = Client.GetAnswer(11738);

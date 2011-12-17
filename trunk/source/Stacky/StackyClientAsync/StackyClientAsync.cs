@@ -96,6 +96,49 @@ namespace Stacky
             WebClient.MakeRequest(url, onSuccess, onError);
         }
 
+        protected void Execute<TEntity, TMinMax>(string methodName, string[] urlArguments,
+            Action<IPagedList<TEntity>> onSuccess,
+            Action<ApiException> onError,
+            object sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, TMinMax? min = null, TMinMax? max = null, string filter = null)
+            where TEntity : Entity, new()
+            where TMinMax : struct
+        {
+            MakeRequest<TEntity>(methodName, urlArguments, new
+            {
+                site = this.SiteUrlName,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                min = min.HasValue ? min : null,
+                max = max.HasValue ? max : null,
+                filter = filter
+            }, (response) => onSuccess(new PagedList<TEntity>(response)), onError);
+        }
+
+        protected void Execute<TEntity>(string methodName, string[] urlArguments,
+            Action<IPagedList<TEntity>> onSuccess,
+            Action<ApiException> onError,
+            object sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+            where TEntity : Entity, new()
+        {
+            MakeRequest<TEntity>(methodName, urlArguments, new
+            {
+                site = this.SiteUrlName,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                min = GetDateValue(min),
+                max = GetDateValue(max),
+                filter = filter
+            }, (response) => onSuccess(new PagedList<TEntity>(response)), onError);
+        }
+
         #endregion
     }
 }

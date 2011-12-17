@@ -53,6 +53,5 @@ namespace Stacky
 			return Execute<Badge, BadgeMinMax>("badges", new string[] { "tags" },
 				sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
 		}
-        
     }
 }
