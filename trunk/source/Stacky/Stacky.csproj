@@ -142,11 +142,13 @@
     <Compile Include="StackyClientAsync\BadgeMethods.cs" />
     <Compile Include="StackyClientAsync\CommentMethods.cs" />
     <Compile Include="StackyClientAsync\NetworkMethods.cs" />
+    <Compile Include="StackyClientAsync\PostMethods.cs" />
     <Compile Include="StackyClientAsync\PrivilegeMethods.cs" />
     <Compile Include="StackyClientAsync\QuestionMethods.cs" />
     <Compile Include="StackyClientAsync\RevisionMethods.cs" />
     <Compile Include="StackyClientAsync\StackyClientAsync.cs" />
     <Compile Include="StackyClientAsync\StatsMethods.cs" />
+    <Compile Include="StackyClientAsync\SuggestedEditMethods.cs" />
     <Compile Include="StackyClientAsync\TagMethods.cs" />
     <Compile Include="StackyClientAsync\UserMethods.cs" />
     <Compile Include="StackyClientBase.cs" />

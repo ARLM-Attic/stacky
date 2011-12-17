@@ -10,145 +10,243 @@ namespace Stacky
     public partial class StackyClientAsync
 #endif
     {
-        public virtual void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string[] tags = null)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions
+        /// </summary>
+        public void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            var sortArgs = sortBy.GetAttribute<SortArgsAttribute>();
-            GetQuestions(onSuccess, onError, "questions", sortArgs.UrlArgs, sortArgs.Sort, GetSortDirection(sortDirection), page, pageSize, includeBody, includeAnswers, includeComments, fromDate, toDate, min, max, tags);
+            Execute<Question>("questions", null,
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
-        public virtual void GetQuestionsByUser(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, QuestionsByUserSort sortBy = QuestionsByUserSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string[] tags = null)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions-by-ids
+        /// </summary>
+        public void GetQuestion(int id, Action<Question> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            GetQuestions(onSuccess, onError, "users", new string[] { userId.ToString(), "questions" }, sortBy.ToString().ToLower(), GetSortDirection(sortDirection), page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max, tags);
+            GetQuestions(id.ToArray(), items => onSuccess(items.FirstOrDefault()), onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
-        public virtual void GetFavoriteQuestions(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, FavoriteQuestionsSort sortBy = FavoriteQuestionsSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeAnswers = false, bool includeComments = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string[] tags = null)
+        /// <summary>
+        /// https://api.stackexchange.com/docs/questions-by-ids
+        /// </summary>
+        public void GetQuestions(IEnumerable<int> ids, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            GetQuestions(onSuccess, onError, "users", new string[] { userId.ToString(), "favorites" }, sortBy.ToString().ToLower(), GetSortDirection(sortDirection), page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max, tags);
+            Execute<Question>("questions", new string[] { ids.Vectorize() },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
-        private void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, string method, string[] urlArgs, string sort, string order, int? page, int? pageSize, bool includeBody, bool includeComments, bool includeAnswers, DateTime? fromDate, DateTime? toDate, int? min, int? max, params string[] tags)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/answers-on-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetQuestionAnswers(int id, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError = null,
+            AnswerSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            MakeRequest<Question>(method, urlArgs, new
+            GetQuestionAnswers(id.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/answers-on-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetQuestionAnswers(IEnumerable<int> ids, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError = null,
+            AnswerSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Answer>("questions", new string[] { ids.Vectorize(), "answers" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/comments-on-questions
+        /// </summary>
+        public void GetQuestionComments(int id, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError = null,
+            CommentSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetQuestionComments(id.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/comments-on-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetQuestionComments(IEnumerable<int> ids, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError = null,
+            CommentSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Comment>("questions", new string[] { ids.Vectorize(), "comments" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetLinkedQuestions(int id, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null, 
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetLinkedQuestions(id.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetLinkedQuestions(IEnumerable<int> ids, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Question>("questions", new string[] { ids.Vectorize(), "linked" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetRelatedQuestions(int id, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetRelatedQuestions(id.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetRelatedQuestions(IEnumerable<int> ids, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Question>("questions", new string[] { ids.Vectorize(), "related" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions-timeline
+        /// </summary>
+        public void GetQuestionTimeline(int id, Action<IPagedList<QuestionTimeline>> onSuccess, Action<ApiException> onError = null, 
+            int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            GetQuestionTimeline(id.ToArray(), onSuccess, onError, page, pageSize, fromDate, toDate, filter);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions-timeline
+        /// </summary>
+        public void GetQuestionTimeline(IEnumerable<int> ids, Action<IPagedList<QuestionTimeline>> onSuccess, Action<ApiException> onError = null,
+            int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            Execute<QuestionTimeline>("questions", new string[] { ids.Vectorize(), "timeline" },
+                onSuccess, onError,
+                null, null, page, pageSize, fromDate, toDate, null, null, filter);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/unanswered-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetUnansweredQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null, QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string tagged = null, string filter = null)
+        {
+            MakeRequest<Question>("questions", new string[] { "unanswered" }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
-                body = includeBody ? (bool?)true : null,
-                comments = includeComments ? (bool?)true : null,
-                answers = includeAnswers ? (bool?)true : null,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                tagged = tags == null ? (string)null : String.Join(" ", tags),
-                sort = sort,
-                order = order,
-                min = min,
-                max = max
-            }, (items) => onSuccess(new PagedList<Question>(items)), onError);
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                min = GetDateValue(min),
+                max = GetDateValue(max),
+                tagged = tagged,
+                filter = filter
+            }, response => onSuccess(new PagedList<Question>(response)), onError);
         }
 
-        public virtual void GetQuestions(IEnumerable<int> questionIds, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false)
+        // <summary>
+        /// See https://api.stackexchange.com/docs/unanswered-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetQuestionsWithNoAnswers(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string tagged = null, string filter = null)
         {
-            MakeRequest<Question>("questions", new string[] { questionIds.Vectorize() }, new
+            MakeRequest<Question>("questions", new string[] { "no-answers" }, new
             {
                 site = this.SiteUrlName,
-                body = includeBody ? (bool?)true : null,
-                comments = includeComments ? (bool?)true : null,
-                answers = includeAnswers ? (bool?)true : null,
                 page = page ?? null,
-                pagesize = pageSize ?? null
-            }, (items) => onSuccess(new PagedList<Question>(items)), onError);
+                pagesize = pageSize ?? null,
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                min = GetDateValue(min),
+                max = GetDateValue(max),
+                tagged = tagged,
+                filter = filter
+            }, response => onSuccess(new PagedList<Question>(response)), onError);
         }
 
-        public virtual void GetQuestion(int questionId, Action<Question> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false)
+        // <summary>
+        /// See https://api.stackexchange.com/docs/search
+        /// </summary>
+        /// TODO: Fix Sort
+        public void SearchQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string[] tagged = null, string[] notTagged = null, string inTitle = null, string filter = null)
         {
-            GetQuestions(questionId.ToArray(), returnedQuestions => onSuccess(returnedQuestions.FirstOrDefault()), onError, page, pageSize, includeBody, includeComments, includeAnswers);
-        }
-
-        public virtual void GetQuestionTimeline(IEnumerable<int> questionIds, Action<IPagedList<PostEvent>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            MakeRequest<PostEvent>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
+            if (((tagged != null && tagged.Length == 0) || tagged == null) &&
+                ((notTagged != null && notTagged.Length == 0) || notTagged == null))
             {
-                site = this.SiteUrlName,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                page = page ?? null,
-                pagesize = pageSize ?? null
-            }, (items) => onSuccess(new PagedList<PostEvent>(items)), onError);
-        }
-
-        public virtual void GetQuestionTimeline(int questionId, Action<IPagedList<PostEvent>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            GetQuestionTimeline(questionId.ToArray(), onSuccess, onError, page, pageSize, fromDate, toDate);
-        }
-
-        public virtual void Search(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, string inTitle = null, IEnumerable<string> tagged = null, IEnumerable<string> notTagged = null, SearchSort sortBy = SearchSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null)
-        {
-            string taggedString = null;
-            if (tagged != null)
-                taggedString = String.Join(" ", tagged.ToArray());
-
-            string notTaggedString = null;
-            if (notTagged != null)
-                notTaggedString = String.Join(" ", notTagged.ToArray());
+                throw new ArgumentException("At least one of tagged or intitle must be set on this method");
+            }
 
             MakeRequest<Question>("search", null, new
             {
                 site = this.SiteUrlName,
-                intitle = inTitle,
-                tagged = taggedString,
-                nottagged = notTaggedString,
-                sort = sortBy,
-                order = GetSortDirection(sortDirection),
                 page = page ?? null,
-                pagesize = pageSize ?? null
-            }, (items) => onSuccess(new PagedList<Question>(items)), onError);
+                pagesize = pageSize ?? null,
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                min = GetDateValue(min),
+                max = GetDateValue(max),
+                tagged = tagged != null ? String.Join(";", tagged) : null,
+                nottagged = notTagged != null ? String.Join(";", notTagged) : null,
+                intitle = inTitle,
+                filter = filter
+            }, response => onSuccess(new PagedList<Question>(response)), onError);
         }
 
-        public virtual void GetLinkedQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, int questionId, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
+        // <summary>
+        /// See https://api.stackexchange.com/docs/similar
+        /// </summary>
+        /// TODO: Fix Sort
+        public void SimiliarQuestions(string title, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string[] tagged = null, string[] notTagged = null, string filter = null)
         {
-            GetLinkedQuestions(onSuccess, onError, questionId.ToArray(), sortBy, sortDirection, page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max);
-        }
-
-        public virtual void GetLinkedQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, IEnumerable<int> questionIds, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
-        { 
-            GetQuestions(onSuccess, onError, "questions", new string[] { questionIds.Vectorize(), "linked" }, sortBy.ToString(), GetSortDirection(sortDirection), page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max, null);
-        }
-
-        public virtual void GetRelatedQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, int questionId, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
-        {
-            GetRelatedQuestions(onSuccess, onError, questionId.ToArray(), sortBy, sortDirection, page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max);
-        }
-
-        public virtual void GetRelatedQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, IEnumerable<int> questionIds, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
-        {
-            GetQuestions(onSuccess, onError, "questions", new string[] { questionIds.Vectorize(), "related" }, sortBy.ToString(), GetSortDirection(sortDirection), page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max, null);
-        }
-
-        public virtual void GetNoAnswerQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
-        {
-            GetQuestions(onSuccess, onError, "questions", new string[] { "no-answers" }, sortBy.ToString(), GetSortDirection(sortDirection), page, pageSize, includeBody, includeComments, includeAnswers, fromDate, toDate, min, max, null);
-        }
-
-        public virtual void GetSimilarQuestions(Action<IEnumerable<Question>> onSuccess, Action<ApiException> onError, string title, bool includeBody = false, bool includeComments = false, bool includeAnswers = false, IEnumerable<string> tagged = null, IEnumerable<string> notTagged = null)
-        {
-            string taggedString = null;
-            if (tagged != null)
-                taggedString = String.Join(";", tagged.ToArray());
-
-            string notTaggedString = null;
-            if (notTagged != null)
-                notTaggedString = String.Join(";", notTagged.ToArray());
-
             MakeRequest<Question>("similar", null, new
             {
                 site = this.SiteUrlName,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
+                order = GetSortDirection(sortDirection),
+                min = GetDateValue(min),
+                max = GetDateValue(max),
+                tagged = tagged != null ? String.Join(";", tagged) : null,
+                nottagged = notTagged != null ? String.Join(";", notTagged) : null,
                 title = title,
-                body = includeBody ? (bool?)true : null,
-                comments = includeComments ? (bool?)true : null,
-                answers = includeAnswers ? (bool?)true : null,
-                tagged = taggedString,
-                nottagged = notTaggedString
-            }, (items) => onSuccess(items.Items), onError);
+                filter = filter
+            }, response => onSuccess(new PagedList<Question>(response)), onError);
         }
     }
 }

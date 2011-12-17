@@ -36,11 +36,11 @@ namespace Stacky.IntegrationTests
         //    Assert.IsNotNull(tags);
         //}
 
-        [TestMethod]
-        public void Tag_GetTagsByUser_Async()
-        {
-            ClientAsync.GetTagsByUser(1464, tags => Assert.IsNotNull(tags), error => Assert.Fail());
-        }
+        //[TestMethod]
+        //public void Tag_GetTagsByUser_Async()
+        //{
+        //    ClientAsync.GetTagsByUser(1464, tags => Assert.IsNotNull(tags), error => Assert.Fail());
+        //}
 
         //[TestMethod]
         //public void Tag_GetAllTagSynonyms()

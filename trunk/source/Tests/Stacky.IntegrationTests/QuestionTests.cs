@@ -110,11 +110,11 @@ namespace Stacky.IntegrationTests
         //    Assert.IsNotNull(questions);
         //}
 
-        [TestMethod]
-        public void Question_Search_Async()
-        {
-            ClientAsync.Search(questions => Assert.IsNotNull(questions), error => Assert.Fail(), inTitle: "Thread");
-        }
+        //[TestMethod]
+        //public void Question_Search_Async()
+        //{
+        //    ClientAsync.Search(questions => Assert.IsNotNull(questions), error => Assert.Fail(), inTitle: "Thread");
+        //}
 
         [TestMethod]
         public void Question_GetQuestions_HasPagingInformation()
