@@ -9,140 +9,111 @@ namespace Stacky
     public partial class StackyClientAsync
 #endif
     {
-        public virtual void GetTags(Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError, TagSort sortBy = TagSort.Popular, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/tags
+        /// </summary>
+        public void GetTags(Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError = null,
+            TagSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string inName = null, string filter = null)
         {
-            GetTags(onSuccess, onError, "tags", null, sortBy.ToString().ToLower(), GetSortDirection(sortDirection), page, pageSize);
-        }
-
-        private void GetTags(Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError, string method, string[] urlParameters, string sort, string order, int? page = null, int? pageSize = null)
-        {
-            MakeRequest<Tag>(method, urlParameters, new
+            MakeRequest<Tag>("tags", null, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
-                sort = sort,
-                order = order
-            }, (items) => onSuccess(new PagedList<Tag>(items)), onError);
-        }
-
-        public virtual void GetTagsByUser(int userId, Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null)
-        {
-            GetTagsByUser(userId.ToArray(), onSuccess, onError, page, pageSize);
-        }
-
-        public virtual void GetTagsByUser(IEnumerable<int> userIds, Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null)
-        {
-            //TODO: does this method support sort and order?
-            GetTags(onSuccess, onError, "users", new string[] { userIds.Vectorize(), "tags" }, null, null, page, pageSize);
-        }
-
-        public virtual void GetAllTagSynonyms(Action<IPagedList<TagSynonym>> onSuccess, Action<ApiException> onError, TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null)
-        {
-            MakeRequest<TagSynonym>("tags", new string[] { "synonyms" }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                sort = sortBy.ToString(),
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
+                sort = GetEnumValue(sortBy),
                 order = GetSortDirection(sortDirection),
-                max = max,
-                min = min
-            }, (items) => onSuccess(new PagedList<TagSynonym>(items)), onError);
+                min = min ?? null,
+                max = max ?? null,
+                inname = inName,
+                filter = filter
+            }, response => onSuccess(new PagedList<Tag>(response)), onError);
         }
 
-        public virtual void GetTagSynonyms(Action<IPagedList<TagSynonym>> onSuccess, Action<ApiException> onError, string tag, TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/tag-synonyms
+        /// </summary>
+        public void GetTagSynonyms(Action<IPagedList<TagSynonym>> onSuccess, Action<ApiException> onError = null,
+            TagSynonymSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            GetTagSynonyms(onSuccess, onError, new string[] { tag }, sortBy, sortDirection, page, pageSize, min, max, fromDate, toDate);
+            Execute<TagSynonym>("tags", new string[] { "synonyms" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
-        public virtual void GetTagSynonyms(Action<IPagedList<TagSynonym>> onSuccess, Action<ApiException> onError, IEnumerable<string> tags, TagSynonymSort sortBy = TagSynonymSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, int? min = null, int? max = null, DateTime? fromDate = null, DateTime? toDate = null)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/synonyms-by-tags
+        /// </summary>
+        public void GetTagSynonyms(IEnumerable<string> tags, Action<IPagedList<TagSynonym>> onSuccess, Action<ApiException> onError = null,
+            TagSynonymSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            MakeRequest<TagSynonym>("tags", new string[] { tags.Vectorize(), "synonyms" }, new
+            Execute<TagSynonym>("tags", new string[] { tags.Vectorize(), "synonyms" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/synonyms-by-tags
+        /// </summary>
+        public void GetTagSynonyms(string tag, Action<IPagedList<TagSynonym>> onSuccess, Action<ApiException> onError = null, 
+            TagSynonymSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetTagSynonyms(new string[] { tag }, onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-answerers-on-tags
+        /// </summary>
+        public void GetTagTopAnswerers(string tag, Action<IPagedList<TagScore>> onSuccess, Action<ApiException> onError = null,
+            int? page = null, int? pageSize = null, AnswerTimePeriod period = AnswerTimePeriod.AllTime, string filter = null)
+        {
+            MakeRequest<TagScore>("tags", new string[] { tag, "top-answerers", GetEnumValue(period) }, new
             {
                 site = this.SiteUrlName,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
-                sort = sortBy.ToString(),
-                order = GetSortDirection(sortDirection),
-                max = max,
-                min = min,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<TagSynonym>(items)), onError);
+                filter = filter
+            }, response => onSuccess(new PagedList<TagScore>(response)), onError);
         }
 
-        public void GetTagWikis(Action<IEnumerable<TagWiki>> onSuccess, Action<ApiException> onError, string tag)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-askers-on-tags
+        /// </summary>
+        public void GetTagTopAskers(string tag, Action<IPagedList<TagScore>> onSuccess, Action<ApiException> onError = null,
+            int? page = null, int? pageSize = null, AnswerTimePeriod period = AnswerTimePeriod.AllTime, string filter = null)
         {
-            GetTagWikis(onSuccess, onError, new string[] { tag });
+            MakeRequest<TagScore>("tags", new string[] { tag, "top-askers", GetEnumValue(period) }, new
+            {
+                site = this.SiteUrlName,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                filter = filter
+            }, response => onSuccess(new PagedList<TagScore>(response)), onError);
         }
 
-        public void GetTagWikis(Action<IEnumerable<TagWiki>> onSuccess, Action<ApiException> onError, IEnumerable<string> tags)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/wikis-by-tags
+        /// </summary>
+        public void GetTagWikis(IEnumerable<string> tags, Action<IPagedList<TagWiki>> onSuccess, Action<ApiException> onError = null,
+            int? page = null, int? pageSize = 0, string filter = null)
         {
             MakeRequest<TagWiki>("tags", new string[] { tags.Vectorize(), "wikis" }, new
             {
                 site = this.SiteUrlName,
-            }, (items) => onSuccess(items.Items), onError);
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                filter = filter
+            }, response => onSuccess(new PagedList<TagWiki>(response)), onError);
         }
 
         /// <summary>
-        /// Returns the top 30 question askers active in a single tag, of either all-time or the last 30 days.
+        /// See: http://api.stackexchange.com/docs/wikis-by-tags
         /// </summary>
-        /// <param name="onSuccess"></param>
-        /// <param name="onError"></param>
-        /// <param name="tag">The name of the tag to query</param>
-        /// <param name="period">The period of time to query</param>
-        /// <returns></returns>
-        public void GetTopAskers(Action<IEnumerable<TopUser>> onSuccess, Action<ApiException> onError, string tag, TopUserPeriod period)
+        public void GetTagWikis(string tag, Action<IPagedList<TagWiki>> onSuccess, Action<ApiException> onError = null, 
+            int? page = null, int? pageSize = 0, string filter = null)
         {
-            GetTopAskers(onSuccess, onError, new string[] { tag }, period);
-        }
-
-        /// <summary>
-        /// Returns the top 30 question askers active in a single tag, of either all-time or the last 30 days.
-        /// </summary>
-        /// <param name="onSuccess"></param>
-        /// <param name="onError"></param>
-        /// <param name="tags">The list of tags to query</param>
-        /// <param name="period">The time period to query</param>
-        /// <returns></returns>
-        public void GetTopAskers(Action<IEnumerable<TopUser>> onSuccess, Action<ApiException> onError, IEnumerable<string> tags, TopUserPeriod period)
-        {
-            var sortArgs = period.GetAttribute<SortArgsAttribute>();
-            MakeRequest<TopUser>("tags", new string[] { tags.Vectorize(), "top-askers", sortArgs.Sort }, new
-            {
-                site = this.SiteUrlName,
-            }, (items) => onSuccess(items.Items), onError);
-        }
-
-        /// <summary>
-        /// Returns the top 30 question askers active in a single tag, of either all-time or the last 30 days.
-        /// </summary>
-        /// <param name="onSuccess"></param>
-        /// <param name="onError"></param>
-        /// <param name="tag">The name of the tag to query</param>
-        /// <param name="period">The period of time to query</param>
-        /// <returns></returns>
-        public void GetTopAnswerers(Action<IEnumerable<TopUser>> onSuccess, Action<ApiException> onError, string tag, TopUserPeriod period)
-        {
-            GetTopAnswerers(onSuccess, onError, new string[] { tag }, period);
-        }
-
-        /// <summary>
-        /// Returns the top 30 question askers active in a single tag, of either all-time or the last 30 days.
-        /// </summary>
-        /// <param name="onSuccess"></param>
-        /// <param name="onError"></param>
-        /// <param name="tags">The list of tags to query</param>
-        /// <param name="period">The time period to query</param>
-        /// <returns></returns>
-        public void GetTopAnswerers(Action<IEnumerable<TopUser>> onSuccess, Action<ApiException> onError, IEnumerable<string> tags, TopUserPeriod period)
-        {
-            var sortArgs = period.GetAttribute<SortArgsAttribute>();
-            MakeRequest<TopUser>("tags", new string[] { tags.Vectorize(), "top-answerers", sortArgs.Sort }, new
-            {
-                site = this.SiteUrlName,
-            }, (items) => onSuccess(items.Items), onError);
+            GetTagWikis(new string[] { tag }, onSuccess, onError, page, pageSize, filter);
         }
     }
 }

@@ -93,6 +93,9 @@
     <Compile Include="..\Stacky\Entities\NetworkUser.cs">
       <Link>NetworkUser.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Entities\Post.cs">
+      <Link>Entities\Post.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\Entities\PostEvent.cs">
       <Link>Entities\PostEvent.cs</Link>
     </Compile>
@@ -134,6 +137,9 @@
     </Compile>
     <Compile Include="..\Stacky\Entities\Tag.cs">
       <Link>Entities\Tag.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Entities\TagScore.cs">
+      <Link>Entities\TagScore.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Entities\TagSynonym.cs">
       <Link>Entities\TagSynonym.cs</Link>
@@ -305,6 +311,12 @@
     </Compile>
     <Compile Include="..\Stacky\StackyClientAsync\CommentMethods.cs">
       <Link>StackyClient\CommentMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\StackyClientAsync\NetworkMethods.cs">
+      <Link>StackyClient\NetworkMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\StackyClientAsync\PostMethods.cs">
+      <Link>StackyClient\PostMethods.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\StackyClientAsync\PrivilegeMethods.cs">
       <Link>StackyClient\PrivilegeMethods.cs</Link>

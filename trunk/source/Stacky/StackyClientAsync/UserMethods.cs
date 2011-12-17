@@ -10,259 +10,438 @@ namespace Stacky
     public partial class StackyClientAsync
 #endif
     {
-        public virtual void GetUsers(Action<IPagedList<User>> onSuccess, Action<ApiException> onError, UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, string filter = null)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/users
+        /// </summary>
+        public void GetUsers(Action<IPagedList<User>> onSuccess, Action<ApiException> onError = null,
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string filter = null)
         {
-            MakeRequest<User>("users", null, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                filter = filter,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection)
-            }, (items) => onSuccess(new PagedList<User>(items)), onError);
-        }
-
-        public virtual void GetUsers(IEnumerable<int> userIds, Action<IPagedList<User>> onSuccess, Action<ApiException> onError = null)
-        {
-            MakeRequest<User>("users", new string[] { userIds.Vectorize() }, new
-            {
-                site = this.SiteUrlName,
-            }, (items) => onSuccess(new PagedList<User>(items)), onError);
-        }
-
-        public virtual void GetUser(int userId, Action<User> onSuccess, Action<ApiException> onError = null)
-        {
-            GetUsers(new int[] { userId }, results => onSuccess(results.FirstOrDefault()), onError);
-        }
-
-        public virtual void GetUserMentions(int userId, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError, UserMentionSort sortBy = UserMentionSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
-        {
-            GetUserMentions(new int[] { userId }, onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max);
-        }
-
-        public virtual void GetUserMentions(IEnumerable<int> userIds, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError, UserMentionSort sortBy = UserMentionSort.Creation, SortDirection sortDirection = SortDirection.Descending, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null)
-        {
-            MakeRequest<Comment>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
-            {
-                site = this.SiteUrlName,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                min = min ?? null,
-                max = max ?? null,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection)
-            }, (items) => onSuccess(new PagedList<Comment>(items)), onError);
-        }
-
-        public virtual void GetUserTimeline(int userId, Action<IPagedList<UserEvent>> onSuccess, Action<ApiException> onError, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            GetUserTimeline(new int[] { userId }, onSuccess, onError, fromDate, toDate);
-        }
-
-        public virtual void GetUserTimeline(IEnumerable<int> userIds, Action<IPagedList<UserEvent>> onSuccess, Action<ApiException> onError, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            MakeRequest<UserEvent>("users", new string[] { userIds.Vectorize(), "timeline" }, new
-            {
-                site = this.SiteUrlName,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<UserEvent>(items)), onError);
-        }
-
-        public virtual void GetUserReputation(int userId, Action<IPagedList<Reputation>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            GetUserReputation(new int[] { userId }, onSuccess, onError, page, pageSize, fromDate, toDate);
-        }
-
-        public virtual void GetUserReputation(IEnumerable<int> userIds, Action<IPagedList<Reputation>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            MakeRequest<Reputation>("users", new string[] { userIds.Vectorize(), "reputation" }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (items) => onSuccess(new PagedList<Reputation>(items)), onError);
-        }
-
-        public virtual void GetModerators(Action<IPagedList<User>> onSuccess, Action<ApiException> onError, int? page = null, int? pageSize = null, UserSort sortBy = UserSort.Reputation, SortDirection sortDirection = SortDirection.Descending, string filter = null, DateTime? fromDate = null, DateTime? toDate = null)
-        {
-            MakeRequest<User>("users", new string[] { "moderators" }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                filter = filter,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection),
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
-            }, (response) => onSuccess(new PagedList<User>(response)), onError);
-        }
-
-        public virtual void GetNoAnswerQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, int userId, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
-        {
-            GetNoAnswerQuestions(onSuccess, onError, userId.ToArray(), page, pageSize, sortBy, sortDirection, fromDate, toDate, min, max, includeBody, includeAnswers, includeComments);
-        }
-
-        public virtual void GetNoAnswerQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
-        {
-            MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "no-answers" }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection),
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                min = min ?? null,
-                max = max ?? null,
-                body = includeBody,
-                comments = includeComments,
-                answers = includeAnswers
-            }, (response) => onSuccess(new PagedList<Question>(response)), onError);
+            Execute<User, Int32>("users", null,
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Gets the questions asked by the users in userId which have at least one answer, but no accepted answer.
-        /// Questions returned by this method have answers, but the owner has not opted to accept any of them.
+        /// See: http://api.stackexchange.com/docs/users-by-ids
         /// </summary>
-        public virtual void GetUnacceptedQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, int userId, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
+        public void GetUsers(IEnumerable<int> ids, Action<IPagedList<User>> onSuccess, Action<ApiException> onError = null,
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string filter = null)
         {
-            GetUnacceptedQuestions(onSuccess, onError, userId.ToArray(), page, pageSize, sortBy, sortDirection, fromDate, toDate, min, max, includeBody, includeAnswers, includeComments);
+            Execute<User, Int32>("users", new string[] { ids.Vectorize() },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Gets the questions asked by the users in userIds which have at least one answer, but no accepted answer.
-        /// Questions returned by this method have answers, but the owner has not opted to accept any of them.
+        /// See: http://api.stackexchange.com/docs/users-by-ids
         /// </summary>
-        public virtual void GetUnacceptedQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
+        public void GetUser(int id, Action<User> onSuccess, Action<ApiException> onError = null, 
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string filter = null)
         {
-            MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "unaccepted" }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection),
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                min = min ?? null,
-                max = max ?? null,
-                body = includeBody,
-                comments = includeComments,
-                answers = includeAnswers
-            }, (response) => onSuccess(new PagedList<Question>(response)), onError);
+            GetUsers(id.ToArray(), items => onSuccess(items.FirstOrDefault()), onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Gets the questions asked by the users in id which the site consideres unanswered, while still having at least one answer posted.
-        /// These rules are subject to change, but currently any question without at least one upvoted or accepted answer is considered unanswered.
+        /// See: http://api.stackexchange.com/docs/answers-on-users
         /// </summary>
-        public virtual void GetUnansweredQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, int userId, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
+        public void GetUserAnswers(IEnumerable<int> ids, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError = null,
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            GetUnansweredQuestions(onSuccess, onError, userId.ToArray(), page, pageSize, sortBy, sortDirection, fromDate, toDate, min, max, includeBody, includeAnswers, includeComments);
+            Execute<Answer>("users", new string[] { ids.Vectorize(), "answers" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Gets the questions asked by the users in id which the site consideres unanswered, while still having at least one answer posted.
-        /// These rules are subject to change, but currently any question without at least one upvoted or accepted answer is considered unanswered.
+        /// See: http://api.stackexchange.com/docs/answers-on-users
         /// </summary>
-        public virtual void GetUnansweredQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, IEnumerable<int> userIds, int? page = null, int? pageSize = null, QuestionSort sortBy = QuestionSort.Activity, SortDirection sortDirection = SortDirection.Descending, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, bool? includeBody = null, bool? includeAnswers = null, bool? includeComments = null)
+        public void GetUserAnswers(int id, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError = null, 
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            MakeRequest<Question>("users", new string[] { userIds.Vectorize(), "questions", "unanswered" }, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                sort = sortBy.ToString().ToLower(),
-                order = GetSortDirection(sortDirection),
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
-                min = min ?? null,
-                max = max ?? null,
-                body = includeBody,
-                comments = includeComments,
-                answers = includeAnswers
-            }, (response) => onSuccess(new PagedList<Question>(response)), onError);
+            GetUserAnswers(id.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Returns the top 30 answer a user has posted in resposne to questions with the given tags.
+        /// See: http://api.stackexchange.com/docs/badges-on-users
         /// </summary>
-        public virtual void GetTopTaggedAnswers(Action<IEnumerable<Answer>> onSuccess, Action<ApiException> onError, int userId, string tag, bool? includeBody = null, bool? includeComments = null)
+        public void GetUserBadges(IEnumerable<int> ids, Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError = null,
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
         {
-            GetTopTaggedAnswers(onSuccess, onError, userId, new string[] { tag }, includeBody, includeComments);
+            Execute<Badge, BadgeMinMax>("users", new string[] { ids.Vectorize(), "badges" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Returns the top 30 answer a user has posted in resposne to questions with the given tags.
+        /// See: http://api.stackexchange.com/docs/badges-on-users
         /// </summary>
-        public virtual void GetTopTaggedAnswers(Action<IEnumerable<Answer>> onSuccess, Action<ApiException> onError, int userId, IEnumerable<string> tags, bool? includeBody = null, bool? includeComments = null)
+        public void GetUserBadges(int id, Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError = null,
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, BadgeMinMax? min = null, BadgeMinMax? max = null, string filter = null)
         {
-            if (tags == null)
-                throw new ArgumentNullException("tags");
-
-            MakeRequest<Answer>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-answers" }, new
-            {
-                site = this.SiteUrlName,
-                body = includeBody,
-                comments = includeComments
-            }, (response) => onSuccess(new PagedList<Answer>(response)), onError);
+            GetUserBadges(id.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Returns the top 30 answer a user has posted in resposne to questions with the given tags.
+        /// See: http://api.stackexchange.com/docs/comments-on-users
         /// </summary>
-        public virtual void GetTopTaggedQuestions(Action<IEnumerable<Question>> onSuccess, Action<ApiException> onError, int userId, string tag, bool? includeBody = null, bool? includeComments = null, bool? includeAnswers = null)
+        public void GetUserComments(IEnumerable<int> ids, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError = null,
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            GetTopTaggedQuestions(onSuccess, onError, userId, new string[] { tag }, includeBody, includeComments, includeAnswers);
+            Execute<Comment>("users", new string[] { ids.Vectorize(), "comments" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Returns the top 30 answer a user has posted in resposne to questions with the given tags.
+        /// See: http://api.stackexchange.com/docs/comments-on-users
         /// </summary>
-        public virtual void GetTopTaggedQuestions(Action<IEnumerable<Question>> onSuccess, Action<ApiException> onError, int userId, IEnumerable<string> tags, bool? includeBody = null, bool? includeComments = null, bool? includeAnswers = null)
+        public void GetUserComments(int id, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError = null, 
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            if (tags == null)
-                throw new ArgumentNullException("tags");
-
-            MakeRequest<Question>("users", new string[] { userId.ToString(), "tags", tags.Vectorize(), "top-questions" }, new
-            {
-                site = this.SiteUrlName,
-                body = includeBody,
-                comments = includeComments,
-                answers = includeAnswers
-            }, (response) => onSuccess(new PagedList<Question>(response)), onError);
+            GetUserComments(id.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Returns a single user's top 30 tags by answer score.
+        /// See: http://api.stackexchange.com/docs/comments-by-users-to-user
         /// </summary>
-        public virtual void GetTopAnswerTags(Action<IEnumerable<TopTag>> onSuccess, Action<ApiException> onError, int userId)
+        /// TODO: Fix Sort
+        public void GetUserCommentsTo(IEnumerable<int> fromIds, IEnumerable<int> toIds, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError = null,
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            MakeRequest<TopTag>("users", new string[] { userId.ToString(), "top-answer-tags" }, new
-            {
-                site = this.SiteUrlName,
-                id = userId
-            }, (response) => onSuccess(response.Items), onError);
+            Execute<Comment>("users", new string[] { fromIds.Vectorize(), "comments", toIds.Vectorize() },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
 
         /// <summary>
-        /// Returns a single user's top 30 tags by question score.
+        /// See: https://api.stackexchange.com/docs/favorites-on-users
         /// </summary>
-        public virtual void GetTopQuestionTags(Action<IEnumerable<TopTag>> onSuccess, Action<ApiException> onError, int userId)
+        /// TODO: Fix Sort
+        public void GetUserFavoriteQuestions(IEnumerable<int> userIds, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
         {
-            MakeRequest<TopTag>("users", new string[] { userId.ToString(), "top-question-tags" }, new
-            {
-                site = this.SiteUrlName,
-                id = userId
-            }, (response) => onSuccess(response.Items), onError);
+            Execute<Question>("users", new string[] { userIds.Vectorize(), "favorites" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/favorites-on-users
+        /// </summary>
+        public void GetUserFavoriteQuestions(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null, 
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetUserFavoriteQuestions(userId.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/mentions-on-users
+        /// </summary>
+        public void GetUserMentions(IEnumerable<int> userIds, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError = null,
+            CommentSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Comment>("users", new string[] { userIds.Vectorize(), "mentioned" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/mentions-on-users
+        /// </summary>
+        public void GetUserMentions(int userId, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError = null, 
+            CommentSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetUserMentions(userId.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/privileges-on-users
+        /// </summary>
+        public void GetUserPrivileges(IEnumerable<int> userIds, Action<IPagedList<Privilege>> onSuccess, Action<ApiException> onError = null,
+            int? page = null, int? pageSize = null, string filter = null)
+        {
+            Execute<Privilege>("users", new string[] { userIds.Vectorize(), "privileges" },
+                onSuccess, onError,
+                null, null, page, pageSize, null, null, null, null, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/privileges-on-users
+        /// </summary>
+        public void GetUserPrivileges(int userId, Action<IPagedList<Privilege>> onSuccess, Action<ApiException> onError = null, 
+            CommentSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetUserPrivileges(userId.ToArray(), onSuccess, onError, page, pageSize, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/questions-on-users
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetUserQuestions(IEnumerable<int> userIds, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Question>("users", new string[] { userIds.Vectorize(), "questions" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/questions-on-users
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetUserQuestions(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null, 
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetUserQuestions(userId.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/no-answer-questions-on-users
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetUserQuestionsWithNoAnswers(IEnumerable<int> userIds, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Question>("users", new string[] { userIds.Vectorize(), "questions", "no-answers" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/no-answer-questions-on-users    
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetUserQuestionsWithNoAnswers(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null, 
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetUserQuestionsWithNoAnswers(userId.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/unaccepted-questions-on-users
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetUserUnacceptedQuestions(IEnumerable<int> userIds, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Question>("users", new string[] { userIds.Vectorize(), "questions", "unaccepted" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/unaccepted-questions-on-users    
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetUserUnacceptedQuestions(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null, 
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetUserUnacceptedQuestions(userId.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/unanswered-questions-on-users
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetUserUnansweredQuestions(IEnumerable<int> userIds, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Question>("users", new string[] { userIds.Vectorize(), "questions", "unanswered" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/unanswered-questions-on-users  
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetUserUnansweredQuestions(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null, 
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetUserUnansweredQuestions(userId.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/reputation-on-users
+        /// </summary>
+        public void GetUserReputation(IEnumerable<int> userIds, Action<IPagedList<Reputation>> onSuccess, Action<ApiException> onError = null,
+            int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            Execute<Reputation>("users", new string[] { userIds.Vectorize(), "reputation" },
+                onSuccess, onError,
+                null, null, page, pageSize, fromDate, toDate, null, null, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/reputation-on-users 
+        /// </summary>
+        public void GetUserReputation(int userId, Action<IPagedList<Reputation>> onSuccess, Action<ApiException> onError = null, 
+            int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            GetUserReputation(userId.ToArray(), onSuccess, onError, page, pageSize, fromDate, toDate, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/suggested-edits-on-users
+        /// </summary>
+        public void GetUserSuggestedEdits(IEnumerable<int> userIds, Action<IPagedList<SuggestedEdit>> onSuccess, Action<ApiException> onError = null,
+            SuggestedEditSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<SuggestedEdit>("users", new string[] { userIds.Vectorize(), "suggested-edits" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/suggested-edits-on-users 
+        /// </summary>
+        public void GetUserUnansweredQuestions(int userId, Action<IPagedList<SuggestedEdit>> onSuccess, Action<ApiException> onError = null, 
+            SuggestedEditSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetUserSuggestedEdits(userId.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/tags-on-users
+        /// </summary>
+        public void GetUserTags(IEnumerable<int> userIds, Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError = null,
+            TagSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Tag>("users", new string[] { userIds.Vectorize(), "tags" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/tags-on-users
+        /// </summary>
+        public void GetUserTags(int userId, Action<IPagedList<Tag>> onSuccess, Action<ApiException> onError = null, 
+            TagSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetUserTags(userId.ToArray(), onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-answers-in-tags
+        /// </summary>
+        public void GetUserTopAnswersByTag(IEnumerable<int> userIds, IEnumerable<string> tags, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError = null,
+            AnswerSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Answer>("users", new string[] { userIds.Vectorize(), "tags", tags.Vectorize(), "top-answers" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-answers-in-tags
+        /// </summary>
+        public void GetUserTopAnswersByTag(int userId, IEnumerable<string> tags, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError = null, 
+            AnswerSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetUserTopAnswersByTag(userId.ToArray(), tags, onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-answer-tags-on-users
+        /// </summary>
+        public void GetUserTopAnswersByTag(IEnumerable<int> userIds, Action<IPagedList<TopTag>> onSuccess, Action<ApiException> onError = null,
+            int? page = null, int? pageSize = null, string filter = null)
+        {
+            Execute<TopTag>("users", new string[] { userIds.Vectorize(), "top-answer-tags" },
+                onSuccess, onError,
+                null, null, page, pageSize, null, null, null, null, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-answer-tags-on-users
+        /// </summary>
+        public void GetUserTopAnswersByTag(int userId, Action<IPagedList<TopTag>> onSuccess, Action<ApiException> onError = null, 
+            int? page = null, int? pageSize = null, string filter = null)
+        {
+            GetUserTopAnswersByTag(userId.ToArray(), onSuccess, onError, page, pageSize, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-questions-in-tags
+        /// </summary>
+        public void GetUserTopQuestionsByTag(IEnumerable<int> userIds, IEnumerable<string> tags, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null,
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            Execute<Question>("users", new string[] { userIds.Vectorize(), "tags", tags.Vectorize(), "top-questions" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-questions-in-tags
+        /// </summary>
+        public void GetUserTopQuestionsByTag(int userId, IEnumerable<string> tags, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null, 
+            QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string filter = null)
+        {
+            GetUserTopQuestionsByTag(userId.ToArray(), tags, onSuccess, onError, sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-question-tags-on-users
+        /// </summary>
+        public void GetUserTopQuestionsByTag(IEnumerable<int> userIds, Action<IPagedList<TopTag>> onSuccess, Action<ApiException> onError = null,
+            int? page = null, int? pageSize = null, string filter = null)
+        {
+            Execute<TopTag>("users", new string[] { userIds.Vectorize(), "top-question-tags" },
+                onSuccess, onError,
+                null, null, page, pageSize, null, null, null, null, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-question-tags-on-users
+        /// </summary>
+        public void GetUserTopQuestionsByTag(int userId, Action<IPagedList<TopTag>> onSuccess, Action<ApiException> onError = null, 
+            int? page = null, int? pageSize = null, string filter = null)
+        {
+            GetUserTopQuestionsByTag(userId.ToArray(), onSuccess, onError, page, pageSize, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/timeline-on-users
+        /// </summary>
+        public void GetUserTimeline(IEnumerable<int> userIds, Action<IPagedList<UserTimeline>> onSuccess, Action<ApiException> onError = null,
+            int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            Execute<UserTimeline>("users", new string[] { userIds.Vectorize(), "timeline" },
+                onSuccess, onError,
+                null, null, page, pageSize, fromDate, toDate, null, null, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/timeline-on-users
+        /// </summary>
+        public void GetUserTimeline(int userId, Action<IPagedList<UserTimeline>> onSuccess, Action<ApiException> onError = null, 
+            int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null)
+        {
+            GetUserTimeline(userId.ToArray(), onSuccess, onError, page, pageSize, fromDate, toDate, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/moderators
+        /// </summary>
+        public void GetModerators(Action<IPagedList<User>> onSuccess, Action<ApiException> onError = null,
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string filter = null)
+        {
+            Execute<User, Int32>("users", new string[] { "moderators" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/elected-moderators
+        /// </summary>
+        public void GetElectedModerators(Action<IPagedList<User>> onSuccess, Action<ApiException> onError = null,
+            UserSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, int? min = null, int? max = null, string filter = null)
+        {
+            Execute<User, Int32>("users", new string[] { "moderators", "elected" },
+                onSuccess, onError,
+                sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
     }
 }
