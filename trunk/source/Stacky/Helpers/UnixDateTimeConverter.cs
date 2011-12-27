@@ -37,7 +37,7 @@ namespace Stacky
             if (value is DateTime)
             {
                 DateTime dateTime = (DateTime)value;
-                val = dateTime.ToUnixTime();
+                val = UnixDateTime.UnixTimeFromDate(dateTime);
             }
             else
             {
@@ -52,7 +52,7 @@ namespace Stacky
                 throw new Exception("Wrong Token Type");
 
             long ticks = (long)reader.Value;
-            return ticks.FromUnixTime();
+            return UnixDateTime.DateFromUnixTime(ticks);
         }
     }
 }

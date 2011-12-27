@@ -44,8 +44,8 @@ namespace Stacky
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
             }, (items) => onSuccess(new PagedList<User>(items)), onError);
         }
 

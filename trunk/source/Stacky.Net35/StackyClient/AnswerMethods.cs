@@ -1,109 +1,57 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IPagedList<Answer> GetUsersAnswers(int userId)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/answers
+        /// </summary>
+        public IPagedList<Answer> GetAnswers()
         {
-            return GetUsersAnswers(userId.ToArray(), new AnswerOptions());
+            return GetAnswers(null);
         }
 
-        public virtual IPagedList<Answer> GetUsersAnswers(int userId, AnswerOptions options)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/answers
+        /// </summary>
+        public IPagedList<Answer> GetAnswers(Options<AnswerSort> options)
         {
-            return GetUsersAnswers(userId.ToArray(), options);
+            return Execute<Answer>("answers", null, options);
         }
 
-        public virtual IPagedList<Answer> GetUsersAnswers(IEnumerable<int> userIds)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/answers-by-ids
+        /// </summary>
+        public IPagedList<Answer> GetAnswers(IEnumerable<int> ids, Options<AnswerSort> options)
         {
-            return GetUsersAnswers(userIds, new AnswerOptions());
+            return Execute<Answer>("answers", new string[] { ids.Vectorize() }, options);
         }
 
-        public virtual IPagedList<Answer> GetUsersAnswers(IEnumerable<int> userIds, AnswerOptions options)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/answers-by-ids
+        /// </summary>
+        public Answer GetAnswer(int id, Options<AnswerSort> options)
         {
-            var response = MakeRequest<Answer>("users", new string[] { userIds.Vectorize(), "answers" }, new
-            {
-                site = this.SiteUrlName,
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null,
-                body = options.IncludeBody ? (bool?)true : null,
-                comments = options.IncludeComments ? (bool?)true : null,
-                sort = options.SortBy.ToString().ToLower(),
-                order = GetSortDirection(options.SortDirection),
-                min = options.Min ?? null,
-                max = options.Max ?? null,
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null
-            });
-            return new PagedList<Answer>(response);
+            return GetAnswers(id.ToArray(), options).FirstOrDefault();
         }
 
-        public virtual IPagedList<Answer> GetQuestionAnswers(IEnumerable<int> questionIds)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/comments-on-answers
+        /// </summary>
+        public IPagedList<Comment> GetAnswerComments(IEnumerable<int> ids, Options<AnswerSort> options)
         {
-            return GetQuestionAnswers(questionIds, new AnswerOptions());
+            return Execute<Comment>("answers", new string[] { ids.Vectorize(), "comments" }, options);
         }
 
-        public virtual IPagedList<Answer> GetQuestionAnswers(IEnumerable<int> questionIds, AnswerOptions options)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/comments-on-answers
+        /// </summary>
+        public IPagedList<Comment> GetAnswerComments(int id, Options<AnswerSort> options)
         {
-            var response = MakeRequest<Answer>("questions", new string[] { questionIds.Vectorize(), "answers" }, new
-            {
-                site = this.SiteUrlName,
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null,
-                body = options.IncludeBody ? (bool?)true : null,
-                comments = options.IncludeComments ? (bool?)true : null,
-                sort = options.SortBy.ToString().ToLower(),
-                order = GetSortDirection(options.SortDirection),
-                min = options.Min ?? null,
-                max = options.Max ?? null,
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null
-            });
-            return new PagedList<Answer>(response);
-        }
-
-        public virtual IPagedList<Answer> GetQuestionAnswers(int questionId)
-        {
-            return GetQuestionAnswers(questionId.ToArray(), new AnswerOptions());
-        }
-
-        public virtual IPagedList<Answer> GetQuestionAnswers(int questionId, AnswerOptions options)
-        {
-            return GetQuestionAnswers(questionId.ToArray(), options);
-        }
-
-        public virtual Answer GetAnswer(int answerId)
-        {
-            return GetAnswer(answerId, new AnswerOptions());
-        }
-
-        public virtual Answer GetAnswer(int answerId, AnswerOptions options)
-        {
-            return GetAnswers(answerId.ToArray(), options).FirstOrDefault();
-        }
-
-        public virtual IPagedList<Answer> GetAnswers(IEnumerable<int> answerIds)
-        {
-            return GetAnswers(answerIds, new AnswerOptions());
-        }
-
-        public virtual IPagedList<Answer> GetAnswers(IEnumerable<int> answerIds, AnswerOptions options)
-        {
-            var response = MakeRequest<Answer>("answers", new string[] { answerIds.Vectorize() }, new
-            {
-                site = this.SiteUrlName,
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null,
-                body = options.IncludeBody ? (bool?)true : null,
-                sort = options.SortBy.ToString().ToLower(),
-                order = GetSortDirection(options.SortDirection),
-                min = options.Min ?? null,
-                max = options.Max ?? null,
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null
-            });
-            return new PagedList<Answer>(response);
+            return GetAnswerComments(id.ToArray(), options);
         }
     }
 }

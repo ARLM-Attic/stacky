@@ -79,7 +79,7 @@
       <Link>Entities\MigrationInfo.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Entities\NetworkUser.cs">
-      <Link>NetworkUser.cs</Link>
+      <Link>Entities\NetworkUser.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Entities\Post.cs">
       <Link>Entities\Post.cs</Link>
@@ -109,7 +109,7 @@
       <Link>Entities\Revision.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Entities\ShallowUser.cs">
-      <Link>ShallowUser.cs</Link>
+      <Link>Entities\ShallowUser.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Entities\Site.cs">
       <Link>Entities\Site.cs</Link>
@@ -240,9 +240,6 @@
     <Compile Include="..\Stacky\ErrorResponse.cs">
       <Link>ErrorResponse.cs</Link>
     </Compile>
-    <Compile Include="..\Stacky\Helpers\DateHelper.cs">
-      <Link>Helpers\DateHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Stacky\Helpers\EnumHelper.cs">
       <Link>Helpers\EnumHelper.cs</Link>
     </Compile>
@@ -254,6 +251,9 @@
     </Compile>
     <Compile Include="..\Stacky\Helpers\SerializationHelper.cs">
       <Link>Helpers\SerializationHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Helpers\UnixDateTime.cs">
+      <Link>Helpers\UnixDateTime.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Helpers\UnixDateTimeConverter.cs">
       <Link>Helpers\UnixDateTimeConverter.cs</Link>
