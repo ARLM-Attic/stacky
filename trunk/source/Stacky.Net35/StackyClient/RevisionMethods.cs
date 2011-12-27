@@ -17,8 +17,8 @@ namespace Stacky
             return MakeRequest<Revision>("revisions", new string[] { ids.Vectorize() }, new
             {
                 site = this.SiteUrlName,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate)
             }).Items;
         }
 

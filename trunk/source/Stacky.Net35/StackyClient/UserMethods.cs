@@ -36,8 +36,8 @@ namespace Stacky
                 filter = options.Filter,
                 sort = options.SortBy.ToString().ToLower(),
                 order = GetSortDirection(options.SortDirection),
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
                 min = options.Min ?? null,
                 max = options.Max ?? null
             });
@@ -74,8 +74,8 @@ namespace Stacky
                 filter = options.Filter,
                 sort = options.SortBy.ToString().ToLower(),
                 order = GetSortDirection(options.SortDirection),
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
                 min = options.Min ?? null,
                 max = options.Max ?? null
             });
@@ -102,8 +102,8 @@ namespace Stacky
             var response = MakeRequest<UserEvent>("users", new string[] { userIds.Vectorize(), "timeline" }, new
             {
                 site = this.SiteUrlName,
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null
             });
@@ -130,8 +130,8 @@ namespace Stacky
             var response = MakeRequest<Reputation>("users", new string[] { userIds.Vectorize(), "reputation" }, new
             {
                 site = this.SiteUrlName,
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null
             });

@@ -104,7 +104,7 @@ namespace Stacky
             return new PagedList<TEntity>(response);
         }
 
-		protected void ValidateVectorizedParameters(IEnumerable<int> items)
+        protected void ValidateVectorizedParameters(IEnumerable<int> items)
 		{
 			if (items.Count() > 100)
 				throw new ArgumentOutOfRangeException("Paramaterized arguments cannot have more than 100 items in them");

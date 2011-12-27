@@ -31,7 +31,7 @@ namespace Stacky
         protected long? GetDateValue(DateTime? date)
         {
             if (date.HasValue)
-                return (long?)date.Value.ToUnixTime();
+                return UnixDateTime.UnixTimeFromDate(date.Value);
             return null;
         }
     }

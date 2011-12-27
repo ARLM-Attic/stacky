@@ -18,8 +18,8 @@ namespace Stacky
                 pagesize = pageSize ?? null,
                 sort = sort,
                 order = order,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
                 min = min ?? null,
                 max = max ?? null
             }, (items) => onSuccess(new PagedList<Tag>(items)), onError);

@@ -41,22 +41,22 @@ namespace Stacky.IntegrationTests.Net35
             Assert.IsTrue(mentions.TotalItems > 0);
         }
 
-        [TestMethod]
-        public void User_GetQuestionAnswers()
-        {
-            var answers = Client.GetQuestionAnswers(31415);
-            Assert.IsNotNull(answers);
-        }
+        //[TestMethod]
+        //public void User_GetQuestionAnswers()
+        //{
+        //    var answers = Client.GetQuestionAnswers(31415);
+        //    Assert.IsNotNull(answers);
+        //}
 
-        [TestMethod]
-        public void User_GetQuestionAnswers_ContainsPagingInformation()
-        {
-            var answers = Client.GetQuestionAnswers(31415);
-            Assert.IsNotNull(answers);
-            Assert.IsTrue(answers.PageSize > 0);
-            Assert.IsTrue(answers.CurrentPage > 0);
-            Assert.IsTrue(answers.TotalItems > 0);
-        }
+        //[TestMethod]
+        //public void User_GetQuestionAnswers_ContainsPagingInformation()
+        //{
+        //    var answers = Client.GetQuestionAnswers(31415);
+        //    Assert.IsNotNull(answers);
+        //    Assert.IsTrue(answers.PageSize > 0);
+        //    Assert.IsTrue(answers.CurrentPage > 0);
+        //    Assert.IsTrue(answers.TotalItems > 0);
+        //}
 
         [TestMethod]
         public void User_GetUserTimeline()

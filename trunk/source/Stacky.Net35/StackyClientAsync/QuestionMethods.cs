@@ -20,8 +20,8 @@ namespace Stacky
                 body = includeBody ? (bool?)true : null,
                 comments = includeComments ? (bool?)true : null,
                 answers = includeAnswers ? (bool?)true : null,
-                fromdate = fromDate.HasValue ? (long?)fromDate.Value.ToUnixTime() : null,
-                todate = toDate.HasValue ? (long?)toDate.Value.ToUnixTime() : null,
+                fromdate = GetDateValue(fromDate),
+                todate = GetDateValue(toDate),
                 tagged = tags == null ? (string)null : String.Join(" ", tags),
                 sort = sort,
                 order = sortDirection,
@@ -95,8 +95,8 @@ namespace Stacky
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
             }, (items) => onSuccess(new PagedList<PostEvent>(items)), onError);
         }
 

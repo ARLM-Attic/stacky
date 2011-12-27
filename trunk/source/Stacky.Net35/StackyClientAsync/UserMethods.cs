@@ -20,8 +20,8 @@ namespace Stacky
                 filter = options.Filter,
                 sort = options.SortBy.ToString().ToLower(),
                 order = GetSortDirection(options.SortDirection),
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
                 min = options.Min ?? null,
                 max = options.Max ?? null
             }, (items) => onSuccess(new PagedList<User>(items)), onError);
@@ -77,8 +77,8 @@ namespace Stacky
                 filter = options.Filter,
                 sort = options.SortBy.ToString().ToLower(),
                 order = GetSortDirection(options.SortDirection),
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
                 min = options.Min ?? null,
                 max = options.Max ?? null
             }, (items) => onSuccess(new PagedList<Comment>(items)), onError);
@@ -104,8 +104,8 @@ namespace Stacky
             MakeRequest<UserEvent>("users", new string[] { userIds.Vectorize(), "timeline" }, new
             {
                 site = this.SiteUrlName,
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null
             }, (items) => onSuccess(new PagedList<UserEvent>(items)), onError);
@@ -131,8 +131,8 @@ namespace Stacky
             MakeRequest<Reputation>("users", new string[] { userIds.Vectorize(), "reputation" }, new
             {
                 site = this.SiteUrlName,
-                fromdate = options.FromDate.HasValue ? (long?)options.FromDate.Value.ToUnixTime() : null,
-                todate = options.ToDate.HasValue ? (long?)options.ToDate.Value.ToUnixTime() : null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null
             }, (items) => onSuccess(new PagedList<Reputation>(items)), onError);
