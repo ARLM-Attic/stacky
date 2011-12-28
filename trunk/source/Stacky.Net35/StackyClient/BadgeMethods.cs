@@ -1,53 +1,68 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IEnumerable<Badge> GetBadges()
+        public virtual IPagedList<Badge> GetBadges()
         {
-            return GetBadges("badges", null);
+            return GetBadges(null);
         }
 
-        private IEnumerable<Badge> GetBadges(string method, string[] urlArguments)
+        public virtual IPagedList<Badge> GetBadges(Options<BadgeSort, BadgeMinMax> options)
         {
-            return MakeRequest<Badge>(method, urlArguments, new
+            return Execute<Badge, BadgeMinMax>("badges", null, options);
+        }
+
+        public virtual Badge GetBadge(int id)
+        {
+            return GetBadge(id, null);
+        }
+
+        public virtual Badge GetBadge(int id, string filter)
+        {
+            var options = new Options<BadgeSort, BadgeMinMax>
             {
-                site = this.SiteUrlName
-            }).Items;
+                Filter = filter
+            };
+            return GetBadges(id.ToArray(), options).FirstOrDefault();
         }
 
-        public virtual IEnumerable<User> GetUsersByBadge(int badgeId)
+        public virtual IPagedList<Badge> GetBadges(IEnumerable<int> ids, Options<BadgeSort, BadgeMinMax> options)
         {
-            return GetUsersByBadge(badgeId, new BadgeByUserOptions());
+            return Execute<Badge, BadgeSort, BadgeMinMax>("badges", new string[] { ids.Vectorize() }, options);
         }
 
-        public virtual IEnumerable<User> GetUsersByBadge(int badgeId, BadgeByUserOptions options)
+        public virtual IPagedList<Badge> GetNamedBadges()
         {
-            return GetUsersByBadge(badgeId.ToArray(), options);
+            return GetNamedBadges(null);
         }
 
-        public virtual IPagedList<User> GetUsersByBadge(IEnumerable<int> badgeIds)
+        public virtual IPagedList<Badge> GetNamedBadges(Options<BadgeSort, BadgeMinMax> options)
         {
-            return GetUsersByBadge(badgeIds, new BadgeByUserOptions());
+            return Execute<Badge, BadgeMinMax>("badges", new string[] { "name" }, options);
         }
 
-        public virtual IPagedList<User> GetUsersByBadge(IEnumerable<int> badgeIds, BadgeByUserOptions options)
+        public virtual IPagedList<Badge> GetRecentlyAwardedBadges(Options options)
         {
-            var response = MakeRequest<User>("badges", new string[] { badgeIds.Vectorize() }, new
-            {
-                site = this.SiteUrlName,
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null,
-                fromdate = GetDateValue(options.FromDate),
-                todate = GetDateValue(options.ToDate),
-            });
-            return new PagedList<User>(response);
+            return Execute<Badge, BadgeMinMax>("badges", new string[] { "recipients" }, options);
         }
 
-        public virtual IEnumerable<Badge> GetTagBasedBadges()
+        public virtual IPagedList<Badge> GetRecentlyAwardedBadges(int id, Options options)
         {
-            return GetBadges("badges", new string[] { "tags" });
+            return GetRecentlyAwardedBadges(id.ToArray(), options);
+        }
+
+        public virtual IPagedList<Badge> GetRecentlyAwardedBadges(IEnumerable<int> ids, Options options)
+        {
+            return Execute<Badge, BadgeMinMax>("badges", new string[] { ids.Vectorize(), "recipients" }, options);
+        }
+
+        public virtual IPagedList<Badge> GetTagBasedBadges(Options<BadgeSort, BadgeMinMax> options)
+        {
+            return Execute<Badge, BadgeMinMax>("badges", new string[] { "tags" }, options);
         }
     }
 }

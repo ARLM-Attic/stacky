@@ -16,18 +16,18 @@ namespace Stacky.IntegrationTests.Net35
             Assert.IsNotNull(badges);
         }
 
-        [TestMethod]
-        public void Badge_GetUsersByBadge()
-        {
-            var users = Client.GetUsersByBadge(1464);
-            Assert.IsNotNull(users);
-        }
+        //[TestMethod]
+        //public void Badge_GetUsersByBadge()
+        //{
+        //    var users = Client.GetUsersByBadge(1464);
+        //    Assert.IsNotNull(users);
+        //}
 
-        [TestMethod]
-        public void Badge_GetTagBasedBadges()
-        {
-            var badges = Client.GetTagBasedBadges();
-            Assert.IsNotNull(badges);
-        }
+        //[TestMethod]
+        //public void Badge_GetTagBasedBadges()
+        //{
+        //    var badges = Client.GetTagBasedBadges();
+        //    Assert.IsNotNull(badges);
+        //}
     }
 }
