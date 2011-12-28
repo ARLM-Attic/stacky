@@ -324,7 +324,7 @@
     <Compile Include="..\Stacky\UrlClientAsync.cs">
       <Link>UrlClientAsync.cs</Link>
     </Compile>
-    <Compile Include="Options\AnswerOptions.cs" />
+    <Compile Include="Options\Options.cs" />
     <Compile Include="Options\BadgeByUserOptions.cs" />
     <Compile Include="Options\CommentOptions.cs" />
     <Compile Include="Options\CommentsByPostOptions.cs" />
@@ -352,6 +352,7 @@
     <Compile Include="StackyClient\CommentMethods.cs" />
     <Compile Include="StackyClient\QuestionMethods.cs" />
     <Compile Include="StackyClient\RevisionMethods.cs" />
+    <Compile Include="StackyClient\StackyClientWithOptions.cs" />
     <Compile Include="StackyClient\StatsMethods.cs" />
     <Compile Include="StackyClient\TagMethods.cs" />
     <Compile Include="StackyClient\UserMethods.cs" />
