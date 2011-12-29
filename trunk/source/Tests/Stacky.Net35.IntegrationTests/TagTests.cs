@@ -22,11 +22,11 @@ namespace Stacky.IntegrationTests.Net35
             Assert.IsTrue(tags.TotalItems > 0);
         }
 
-        [TestMethod]
-        public void Tag_GetTagsByUser()
-        {
-            var tags = Client.GetTagsByUser(1464);
-            Assert.IsNotNull(tags);
-        }
+        //[TestMethod]
+        //public void Tag_GetTagsByUser()
+        //{
+        //    var tags = Client.GetTagsByUser(1464);
+        //    Assert.IsNotNull(tags);
+        //}
     }
 }

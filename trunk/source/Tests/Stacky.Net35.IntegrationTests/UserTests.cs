@@ -24,22 +24,22 @@ namespace Stacky.IntegrationTests.Net35
             Assert.IsTrue(users.TotalItems > 0);
         }
 
-        [TestMethod]
-        public void User_GetUserMentions()
-        {
-            var mentions = Client.GetUserMentions(22656);
-            Assert.IsNotNull(mentions);
-        }
+        //[TestMethod]
+        //public void User_GetUserMentions()
+        //{
+        //    var mentions = Client.GetUserMentions(22656);
+        //    Assert.IsNotNull(mentions);
+        //}
 
-        [TestMethod]
-        public void User_GetUserMentions_ContainsPagingInformation()
-        {
-            var mentions = Client.GetUserMentions(22656);
-            Assert.IsNotNull(mentions);
-            Assert.IsTrue(mentions.PageSize > 0);
-            Assert.IsTrue(mentions.CurrentPage > 0);
-            Assert.IsTrue(mentions.TotalItems > 0);
-        }
+        //[TestMethod]
+        //public void User_GetUserMentions_ContainsPagingInformation()
+        //{
+        //    var mentions = Client.GetUserMentions(22656);
+        //    Assert.IsNotNull(mentions);
+        //    Assert.IsTrue(mentions.PageSize > 0);
+        //    Assert.IsTrue(mentions.CurrentPage > 0);
+        //    Assert.IsTrue(mentions.TotalItems > 0);
+        //}
 
         //[TestMethod]
         //public void User_GetQuestionAnswers()
@@ -58,49 +58,49 @@ namespace Stacky.IntegrationTests.Net35
         //    Assert.IsTrue(answers.TotalItems > 0);
         //}
 
-        [TestMethod]
-        public void User_GetUserTimeline()
-        {
-            var events = Client.GetUserTimeline(22656);
-            Assert.IsNotNull(events);
-        }
+        //[TestMethod]
+        //public void User_GetUserTimeline()
+        //{
+        //    var events = Client.GetUserTimeline(22656);
+        //    Assert.IsNotNull(events);
+        //}
 
-        [TestMethod]
-        public void User_GetUserTimeline_ContainsPagingInformation()
-        {
-            var events = Client.GetUserTimeline(22656);
-            Assert.IsNotNull(events);
-            Assert.IsTrue(events.PageSize > 0);
-            Assert.IsTrue(events.CurrentPage > 0);
-            Assert.IsTrue(events.TotalItems > 0);
-        }
+        //[TestMethod]
+        //public void User_GetUserTimeline_ContainsPagingInformation()
+        //{
+        //    var events = Client.GetUserTimeline(22656);
+        //    Assert.IsNotNull(events);
+        //    Assert.IsTrue(events.PageSize > 0);
+        //    Assert.IsTrue(events.CurrentPage > 0);
+        //    Assert.IsTrue(events.TotalItems > 0);
+        //}
 
-        [TestMethod]
-        public void User_GetUserReputation()
-        {
-            var rep = Client.GetUserReputation(22656);
-            Assert.IsNotNull(rep);
-        }
+        //[TestMethod]
+        //public void User_GetUserReputation()
+        //{
+        //    var rep = Client.GetUserReputation(22656);
+        //    Assert.IsNotNull(rep);
+        //}
 
-        [TestMethod]
-        public void User_GetUserReputation_ContainsPagingInformation()
-        {
-            var rep = Client.GetUserReputation(22656);
-            Assert.IsNotNull(rep);
-            Assert.IsTrue(rep.PageSize > 0);
-            Assert.IsTrue(rep.CurrentPage > 0);
-            Assert.IsTrue(rep.TotalItems > 0);
-        }
+        //[TestMethod]
+        //public void User_GetUserReputation_ContainsPagingInformation()
+        //{
+        //    var rep = Client.GetUserReputation(22656);
+        //    Assert.IsNotNull(rep);
+        //    Assert.IsTrue(rep.PageSize > 0);
+        //    Assert.IsTrue(rep.CurrentPage > 0);
+        //    Assert.IsTrue(rep.TotalItems > 0);
+        //}
 
-        [TestMethod]
-        public void User_Returns_Badge_Counts()
-        {
-            var user = Client.GetUser(22656);
+        //[TestMethod]
+        //public void User_Returns_Badge_Counts()
+        //{
+        //    var user = Client.GetUser(22656);
 
-            Assert.IsNotNull(user);
-            Assert.IsNotNull(user.BadgeCounts);
-            Assert.IsTrue(user.BadgeCounts.Bronze > 0);
-        }
+        //    Assert.IsNotNull(user);
+        //    Assert.IsNotNull(user.BadgeCounts);
+        //    Assert.IsTrue(user.BadgeCounts.Bronze > 0);
+        //}
 
         [TestMethod]
         public void GetModerators()

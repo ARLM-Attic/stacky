@@ -5,108 +5,30 @@ namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IPagedList<Comment> GetComments(IEnumerable<int> fromUserIds)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/comments
+        /// </summary>
+        public IPagedList<Comment> GetComments()
         {
-            return GetComments(fromUserIds, new CommentOptions());
+            return GetComments(null);
         }
 
-        public virtual IPagedList<Comment> GetComments(IEnumerable<int> fromUserIds, CommentOptions options)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/comments
+        /// </summary>
+        public IPagedList<Comment> GetComments(Options<CommentSort> options)
         {
-            string[] urlParameters = null;
-            if (options.ToUserId.HasValue)
-            {
-                urlParameters = new string[] { fromUserIds.Vectorize(), "comments", options.ToUserId.ToString() };
-            }
-            else
-            {
-                urlParameters = new string[] { fromUserIds.Vectorize(), "comments" };
-            }
-
-            var response = MakeRequest<Comment>("users", urlParameters, new
-            {
-                site = this.SiteUrlName,
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null,
-                fromdate = GetDateValue(options.FromDate),
-                todate = GetDateValue(options.ToDate),
-                sort = options.SortBy.ToString().ToLower(),
-                order = GetSortDirection(options.SortDirection),
-                min = options.Min ?? null,
-                max = options.Max ?? null
-            });
-            return new PagedList<Comment>(response);
+            return Execute<Comment>("comments", null, options);
         }
 
-        public virtual IPagedList<Comment> GetComments(int fromUserId)
+        public IPagedList<Comment> GetComments(int id, Options<CommentSort> options)
         {
-            return GetComments(fromUserId.ToArray(), new CommentOptions());
+            return GetComments(id.ToArray(), options);
         }
 
-        public virtual IPagedList<Comment> GetComments(int fromUserId, CommentOptions options)
+        public IPagedList<Comment> GetComments(IEnumerable<int> ids, Options<CommentSort> options)
         {
-            return GetComments(fromUserId.ToArray(), options);
-        }
-
-        public virtual IPagedList<Comment> GetCommentsByPost(int postId)
-        {
-            return GetCommentsByPost(postId, new CommentsByPostOptions());
-        }
-
-        public virtual IPagedList<Comment> GetCommentsByPost(int postId, CommentsByPostOptions options)
-        {
-            return GetCommentsByPost(postId.ToArray(), options);
-        }
-
-        public virtual IPagedList<Comment> GetCommentsByPost(IEnumerable<int> postIds)
-        {
-            return GetCommentsByPost(postIds, new CommentsByPostOptions());
-        }
-
-        public virtual IPagedList<Comment> GetCommentsByPost(IEnumerable<int> postIds, CommentsByPostOptions options)
-        {
-            var response = MakeRequest<Comment>("posts", new string[] { postIds.Vectorize(), "comments" }, new
-            {
-                site = this.SiteUrlName,
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null,
-                fromdate = GetDateValue(options.FromDate),
-                todate = GetDateValue(options.ToDate),
-                sort = options.SortBy.ToString().ToLower(),
-                order = GetSortDirection(options.SortDirection),
-            });
-            return new PagedList<Comment>(response);
-        }
-
-        public virtual IPagedList<Comment> GetAnswerComments(int answerId)
-        {
-            return GetAnswerComments(answerId, new CommentsByPostOptions());
-        }
-
-        public virtual IPagedList<Comment> GetAnswerComments(int answerId, CommentsByPostOptions options)
-        {
-            return GetAnswerComments(answerId.ToArray(), options);
-        }
-
-        public virtual IPagedList<Comment> GetAnswerComments(IEnumerable<int> answerIds)
-        {
-            return GetAnswerComments(answerIds, new CommentsByPostOptions());
-        }
-
-        public virtual IPagedList<Comment> GetAnswerComments(IEnumerable<int> answerIds, CommentsByPostOptions options)
-        {
-            var response = MakeRequest<Comment>("answers", new string[] { answerIds.Vectorize(), "comments" }, new
-            {
-                site = this.SiteUrlName,
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null,
-                fromdate = GetDateValue(options.FromDate),
-                todate = GetDateValue(options.ToDate),
-                sort = options.SortBy.ToString().ToLower(),
-                order = GetSortDirection(options.SortDirection),
-                min = options.Min ?? null,
-                max = options.Max ?? null
-            });
-            return new PagedList<Comment>(response);
+            return Execute<Comment>("comments", new string[] { ids.Vectorize() }, options);
         }
     }
 }

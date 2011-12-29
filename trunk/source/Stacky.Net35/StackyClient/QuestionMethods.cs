@@ -7,130 +7,224 @@ namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IPagedList<Question> GetQuestions()
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions
+        /// </summary>
+        public IPagedList<Question> GetQuestions()
         {
-            return GetQuestions(new QuestionOptions());
+            return GetQuestions(null);
         }
 
-        public virtual IPagedList<Question> GetQuestions(QuestionOptions options)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions
+        /// </summary>
+        public IPagedList<Question> GetQuestions(Options<QuestionSort> options)
         {
-            var sortArgs = options.SortBy.GetAttribute<SortArgsAttribute>();
-            return GetQuestions("questions", sortArgs.UrlArgs, sortArgs.Sort, GetSortDirection(options.SortDirection), options.Page, options.PageSize, options.IncludeBody, options.IncludeComments, options.IncludeAnswers, options.FromDate, options.ToDate, options.Min, options.Max, options.Tags);
+            return Execute<Question>("questions", null, options);
         }
 
-        public virtual IPagedList<Question> GetQuestions(IEnumerable<int> questionIds)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions-by-ids
+        /// </summary>
+        public Question GetQuestion(int id, Options<QuestionSort> options)
         {
-            return GetQuestions(questionIds, new QuestionOptions());
+            return GetQuestions(id.ToArray(), options).FirstOrDefault();
         }
 
-        public virtual IPagedList<Question> GetQuestions(IEnumerable<int> questionIds, QuestionOptions options)
+        /// <summary>
+        /// https://api.stackexchange.com/docs/questions-by-ids
+        /// </summary>
+        public IPagedList<Question> GetQuestions(IEnumerable<int> ids, Options<QuestionSort> options)
         {
-            var sortArgs = options.SortBy.GetAttribute<SortArgsAttribute>();
-            string[] urlArgs = sortArgs.UrlArgs.Concat(new string[] { questionIds.Vectorize() }).ToArray();
-            return GetQuestions("questions", urlArgs, sortArgs.Sort, GetSortDirection(options.SortDirection), options.Page, options.PageSize, options.IncludeBody, options.IncludeComments, options.IncludeAnswers, options.FromDate, options.ToDate, options.Min, options.Max, options.Tags);
+            return Execute<Question>("questions", new string[] { ids.Vectorize() }, options);
         }
 
-        public virtual IPagedList<Question> GetQuestionsByUser(int userId)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/answers-on-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Answer> GetQuestionAnswers(int id, Options<AnswerSort> options)
         {
-            return GetQuestionsByUser(userId, new QuestionByUserOptions());
+            return GetQuestionAnswers(id.ToArray(), options);
         }
 
-        public virtual IPagedList<Question> GetQuestionsByUser(int userId, QuestionByUserOptions options)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/answers-on-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Answer> GetQuestionAnswers(IEnumerable<int> ids, Options<AnswerSort> options)
         {
-            return GetQuestions("users", new string[] { userId.ToString(), "questions" }, options.SortBy.ToString().ToLower(), GetSortDirection(options.SortDirection), options.Page, options.PageSize, options.IncludeBody, options.IncludeComments, options.IncludeAnswers, options.FromDate, options.ToDate, options.Min, options.Max, options.Tags);
+            return Execute<Answer>("questions", new string[] { ids.Vectorize(), "answers" }, options);
         }
 
-        public virtual IPagedList<Question> GetFavoriteQuestions(int userId)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/comments-on-questions
+        /// </summary>
+        public IPagedList<Comment> GetQuestionComments(int id, Options<CommentSort> options)
         {
-            return GetFavoriteQuestions(userId, new FavoriteQuestionOptions());
+            return GetQuestionComments(id.ToArray(), options);
         }
 
-        public virtual IPagedList<Question> GetFavoriteQuestions(int userId, FavoriteQuestionOptions options)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/comments-on-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Comment> GetQuestionComments(IEnumerable<int> ids, Options<CommentSort> options)
         {
-            return GetQuestions("users", new string[] { userId.ToString(), "favorites" }, options.SortBy.ToString().ToLower(), GetSortDirection(options.SortDirection), options.Page, options.PageSize, options.IncludeBody, options.IncludeComments, options.IncludeAnswers, options.FromDate, options.ToDate, options.Min, options.Max, options.Tags);
+            return Execute<Comment>("questions", new string[] { ids.Vectorize(), "comments" }, options);
         }
 
-        private IPagedList<Question> GetQuestions(string method, string[] urlArguments, string sort, string sortDirection, int? page, int? pageSize, bool includeBody, bool includeComments, bool includeAnswers, DateTime? fromDate, DateTime? toDate, int? min, int? max, params string[] tags)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetLinkedQuestions(int id, Options<QuestionSort> options)
         {
-            var response = MakeRequest<Question>(method, urlArguments, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                body = includeBody ? (bool?)true : null,
-                comments = includeComments ? (bool?)true : null,
-                answers = includeAnswers ? (bool?)true : null,
-                fromdate = GetDateValue(fromDate),
-                todate = GetDateValue(toDate),
-                tagged = tags == null ? (string)null : String.Join(" ", tags),
-                sort = sort,
-                order = sortDirection,
-                min = min ?? null,
-                max = max ?? null
-            });
-            return new PagedList<Question>(response);
+            return GetLinkedQuestions(id.ToArray(), options);
         }
 
-        public virtual Question GetQuestion(int questionId)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetLinkedQuestions(IEnumerable<int> ids, Options<QuestionSort> options)
         {
-            return GetQuestion(questionId, null, null, null);
+            return Execute<Question>("questions", new string[] { ids.Vectorize(), "linked" }, options);
         }
 
-        public virtual Question GetQuestion(int questionId, bool? includeBody, bool? includeComments, bool? includeAnswers)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetRelatedQuestions(int id, Options<QuestionSort> options)
         {
-            return GetQuestions("questions", new string[] { questionId.ToString() }, null, null, null, null, includeBody ?? false, includeComments ?? false, includeAnswers ?? false, null, null, null, null, null).FirstOrDefault();
+            return GetRelatedQuestions(id.ToArray(), options);
         }
 
-        public virtual IPagedList<PostEvent> GetQuestionTimeline(IEnumerable<int> questionIds)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetRelatedQuestions(IEnumerable<int> ids, Options<QuestionSort> options)
         {
-            return GetQuestionTimeline(questionIds, new QuestionTimelineOptions());
+            return Execute<Question>("questions", new string[] { ids.Vectorize(), "related" }, options);
         }
 
-        public virtual IPagedList<PostEvent> GetQuestionTimeline(IEnumerable<int> questionIds, QuestionTimelineOptions options)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions-timeline
+        /// </summary>
+        public IPagedList<QuestionTimeline> GetQuestionTimeline(int id, OptionsWithDates options)
         {
-            var response = MakeRequest<PostEvent>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
+            return GetQuestionTimeline(id.ToArray(), options);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions-timeline
+        /// </summary>
+        public IPagedList<QuestionTimeline> GetQuestionTimeline(IEnumerable<int> ids, OptionsWithDates options)
+        {
+            ValidateVectorizedParameters(ids);
+            return Execute<QuestionTimeline>("questions", new string[] { ids.Vectorize(), "timeline" }, options);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/unanswered-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetUnansweredQuestions(TaggedOptions<QuestionSort> options)
+        {
+            var response = MakeRequest<Question>("questions", new string[] { "unanswered" }, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
                 fromdate = GetDateValue(options.FromDate),
                 todate = GetDateValue(options.ToDate),
+                sort = GetEnumValue(options.SortBy),
+                order = GetSortDirection(options.SortDirection),
+                min = GetDateValue(options.Min),
+                max = GetDateValue(options.Max),
+                tagged = options.Tagged,
+                filter = options.Filter
             });
-            return new PagedList<PostEvent>(response);
+            return new PagedList<Question>(response);
         }
 
-        public virtual IEnumerable<PostEvent> GetQuestionTimeline(int questionId)
+        // <summary>
+        /// See https://api.stackexchange.com/docs/unanswered-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetQuestionsWithNoAnswers(TaggedOptions<QuestionSort> options)
         {
-            return GetQuestionTimeline(questionId.ToArray());
+            var response = MakeRequest<Question>("questions", new string[] { "no-answers" }, new
+            {
+                site = this.SiteUrlName,
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
+                sort = GetEnumValue(options.SortBy),
+                order = GetSortDirection(options.SortDirection),
+                min = GetDateValue(options.Min),
+                max = GetDateValue(options.Max),
+                tagged = options.GetListValue(options.Tagged),
+                filter = options.Filter
+            });
+            return new PagedList<Question>(response);
         }
 
-        public virtual IEnumerable<PostEvent> GetQuestionTimeline(int questionId, QuestionTimelineOptions options)
+        // <summary>
+        /// See https://api.stackexchange.com/docs/search
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> SearchQuestions(QuestionSearchOptions options)
         {
-            return GetQuestionTimeline(questionId.ToArray(), options);
-        }
-
-        public virtual IPagedList<Question> Search(QuestionSearchOptions options)
-        {
-            string taggedString = null;
-            if (options.Tagged != null)
-                taggedString = String.Join(" ", options.Tagged.ToArray());
-
-            string notTaggedString = null;
-            if (options.NotTagged != null)
-                notTaggedString = String.Join(" ", options.NotTagged.ToArray());
+            if (((options.Tagged != null && options.Tagged.Count() == 0) || options.Tagged == null) &&
+                String.IsNullOrEmpty(options.InTitle))
+            {
+                throw new ArgumentException("At least one of tagged or intitle must be set on this method");
+            }
 
             var response = MakeRequest<Question>("search", null, new
             {
                 site = this.SiteUrlName,
-                intitle = options.InTitle,
-                tagged = taggedString,
-                nottagged = notTaggedString,
-                sort = options.SortBy.ToString(),
-                order = GetSortDirection(options.SortDirection),
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
-                min = options.Min ?? null,
-                max = options.Max ?? null
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
+                sort = GetEnumValue(options.SortBy),
+                order = GetSortDirection(options.SortDirection),
+                min = GetDateValue(options.Min),
+                max = GetDateValue(options.Max),
+                tagged = options.GetListValue(options.Tagged),
+                nottagged = options.GetListValue(options.NotTagged),
+                intitle = options.InTitle,
+                filter = options.Filter
+            });
+            return new PagedList<Question>(response);
+        }
+
+        // <summary>
+        /// See https://api.stackexchange.com/docs/similar
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> SimiliarQuestions(string title, SimiliarQuestionsOptions options)
+        {
+            var response = MakeRequest<Question>("similar", null, new
+            {
+                site = this.SiteUrlName,
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
+                sort = GetEnumValue(options.SortBy),
+                order = GetSortDirection(options.SortDirection),
+                min = GetDateValue(options.Min),
+                max = GetDateValue(options.Max),
+                tagged = options.GetListValue(options.Tagged),
+                nottagged = options.GetListValue(options.NotTagged),
+                title = title,
+                filter = options.Filter
             });
             return new PagedList<Question>(response);
         }

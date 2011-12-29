@@ -1,18 +1,24 @@
 namespace Stacky
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
 
-    //int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null
     public class Options
     {
         public int? Page = null;
         public int? PageSize = null;
-        public DateTime? FromDate = null;
-        public DateTime? ToDate = null;
         public string Filter = null;
     }
 
-    public class Options<TSort, TMaxMin> : Options
+    //int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, string filter = null
+    public class OptionsWithDates : Options
+    {   
+        public DateTime? FromDate = null;
+        public DateTime? ToDate = null;
+    }
+
+    public class Options<TSort, TMaxMin> : OptionsWithDates
         where TSort : struct
         where TMaxMin : struct
     {
@@ -25,5 +31,26 @@ namespace Stacky
     public class Options<TSort> : Options<TSort, DateTime>
         where TSort : struct
     {
+    }
+
+    public class TaggedOptions<TSort> : Options<TSort>
+        where TSort : struct
+    {
+        public IEnumerable<string> Tagged = null;
+
+        public string GetListValue(IEnumerable<string> items)
+        {
+            if (items == null || items.Count() == 0)
+                return null;
+            return String.Join(";", items.ToArray());
+        }
+    }
+
+    public class TopAnswerOptions
+    {
+        public int? Page = null;
+        public int? PageSize = null;
+        public AnswerTimePeriod Period = AnswerTimePeriod.AllTime;
+        public string Filter = null;
     }
 }

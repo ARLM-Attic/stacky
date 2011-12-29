@@ -16,35 +16,35 @@ namespace Stacky.IntegrationTests.Net35
             Assert.IsNotNull(questions);
         }
 
-        [TestMethod]
-        public void GetQuestions_SortByActive_Desc()
-        {
-            var questions = Client.GetQuestions(new QuestionOptions
-            {
-                SortBy = QuestionSort.Activity,
-                SortDirection = SortDirection.Descending
-            });
+        //[TestMethod]
+        //public void GetQuestions_SortByActive_Desc()
+        //{
+        //    var questions = Client.GetQuestions(new QuestionOptions
+        //    {
+        //        SortBy = QuestionSort.Activity,
+        //        SortDirection = SortDirection.Descending
+        //    });
 
-            Assert.IsNotNull(questions);
-            Assert.AreEqual(30, questions.Count());
-        }
+        //    Assert.IsNotNull(questions);
+        //    Assert.AreEqual(30, questions.Count());
+        //}
 
-        [TestMethod]
-        public void Question_GetQuestionTimeline()
-        {
-            var events = Client.GetQuestionTimeline(31415);
-            Assert.IsNotNull(events);
-        }
+        //[TestMethod]
+        //public void Question_GetQuestionTimeline()
+        //{
+        //    var events = Client.GetQuestionTimeline(31415);
+        //    Assert.IsNotNull(events);
+        //}
 
-        [TestMethod]
-        public void Question_Search()
-        {
-            var questions = Client.Search(new QuestionSearchOptions
-            {
-                InTitle = "Thread"
-            });
-            Assert.IsNotNull(questions);
-        }
+        //[TestMethod]
+        //public void Question_Search()
+        //{
+        //    var questions = Client.Search(new QuestionSearchOptions
+        //    {
+        //        InTitle = "Thread"
+        //    });
+        //    Assert.IsNotNull(questions);
+        //}
 
         [TestMethod]
         public void Question_GetQuestions_HasPagingInformation()
@@ -56,32 +56,32 @@ namespace Stacky.IntegrationTests.Net35
             Assert.IsTrue(questions.TotalItems > 0);
         }
 
-        [TestMethod]
-        public void Question_GetQuestion_ContainsOwner()
-        {
-            var question = Client.GetQuestion(2930182);
-            Assert.IsNotNull(question);
-            Assert.IsNotNull(question.Owner);
-            Assert.IsNotNull(question.Owner.Id);
-        }
+        //[TestMethod]
+        //public void Question_GetQuestion_ContainsOwner()
+        //{
+        //    var question = Client.GetQuestion(2930182);
+        //    Assert.IsNotNull(question);
+        //    Assert.IsNotNull(question.Owner);
+        //    Assert.IsNotNull(question.Owner.Id);
+        //}
 
-        [TestMethod]
-        public void MigratedQuestion_CanDeserialize()
-        {
-            var question = Client.GetQuestion(970696);
-            Assert.IsNotNull(question);
-            Assert.IsNotNull(question.MigratedFrom);
-            Assert.IsNotNull(question.MigratedTo);
-        }
+        //[TestMethod]
+        //public void MigratedQuestion_CanDeserialize()
+        //{
+        //    var question = Client.GetQuestion(970696);
+        //    Assert.IsNotNull(question);
+        //    Assert.IsNotNull(question.MigratedFrom);
+        //    Assert.IsNotNull(question.MigratedTo);
+        //}
 
-        [TestMethod]
-        public void Bug4_GetQuestionTimeline()
-        {
-            IPagedList<Question> questions = Client.GetQuestionsByUser(16587);
-            var editedQuestionIds = from q in questions
-                                    select Convert.ToInt32(q.Id);
-            var events = Client.GetQuestionTimeline(editedQuestionIds); //line that causes problems
-            Assert.IsNotNull(events);
-        }
+        //[TestMethod]
+        //public void Bug4_GetQuestionTimeline()
+        //{
+        //    IPagedList<Question> questions = Client.GetQuestionsByUser(16587);
+        //    var editedQuestionIds = from q in questions
+        //                            select Convert.ToInt32(q.Id);
+        //    var events = Client.GetQuestionTimeline(editedQuestionIds); //line that causes problems
+        //    Assert.IsNotNull(events);
+        //}
     }
 }

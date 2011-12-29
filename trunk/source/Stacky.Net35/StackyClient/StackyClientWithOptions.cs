@@ -16,6 +16,19 @@ namespace Stacky
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
+                filter = options.Filter
+            });
+            return new PagedList<TEntity>(response);
+        }
+
+        protected IPagedList<TEntity> Execute<TEntity>(string methodName, string[] urlArguments, OptionsWithDates options)
+            where TEntity : Entity, new()
+        {
+            var response = MakeRequest<TEntity>(methodName, urlArguments, new
+            {
+                site = this.SiteUrlName,
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
                 fromdate = GetDateValue(options.FromDate),
                 todate = GetDateValue(options.ToDate),
                 filter = options.Filter
