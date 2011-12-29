@@ -45,17 +45,17 @@ namespace Stacky
             return Execute<Badge, BadgeMinMax>("badges", new string[] { "name" }, options);
         }
 
-        public virtual IPagedList<Badge> GetRecentlyAwardedBadges(Options options)
+        public virtual IPagedList<Badge> GetRecentlyAwardedBadges(OptionsWithDates options)
         {
             return Execute<Badge, BadgeMinMax>("badges", new string[] { "recipients" }, options);
         }
 
-        public virtual IPagedList<Badge> GetRecentlyAwardedBadges(int id, Options options)
+        public virtual IPagedList<Badge> GetRecentlyAwardedBadges(int id, OptionsWithDates options)
         {
             return GetRecentlyAwardedBadges(id.ToArray(), options);
         }
 
-        public virtual IPagedList<Badge> GetRecentlyAwardedBadges(IEnumerable<int> ids, Options options)
+        public virtual IPagedList<Badge> GetRecentlyAwardedBadges(IEnumerable<int> ids, OptionsWithDates options)
         {
             return Execute<Badge, BadgeMinMax>("badges", new string[] { ids.Vectorize(), "recipients" }, options);
         }

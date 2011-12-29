@@ -184,7 +184,7 @@ namespace Stacky
         public IPagedList<Question> SearchQuestions(QuestionSort? sortBy = null, SortDirection? sortDirection = null, int? page = null, int? pageSize = null, DateTime? fromDate = null, DateTime? toDate = null, DateTime? min = null, DateTime? max = null, string[] tagged = null, string[] notTagged = null, string inTitle = null, string filter = null)
         {
             if (((tagged != null && tagged.Length == 0) || tagged == null) &&
-                ((notTagged != null && notTagged.Length == 0) || notTagged == null))
+                String.IsNullOrEmpty(inTitle))
             {
                 throw new ArgumentException("At least one of tagged or intitle must be set on this method");
             }

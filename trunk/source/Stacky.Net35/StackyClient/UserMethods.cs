@@ -6,146 +6,374 @@ namespace Stacky
 {
     public partial class StackyClient
     {
-        public virtual IPagedList<User> GetUsers()
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/users
+        /// </summary>
+        public IPagedList<User> GetUsers()
         {
-            return GetUsers(new UserOptions());
+            return GetUsers(null);
         }
 
-        public virtual IPagedList<User> GetUsers(UserOptions options)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/users
+        /// </summary>
+        public IPagedList<User> GetUsers(Options<UserSort, int> options)
         {
-            return GetUsers(options, null);
+            return Execute<User, Int32>("users", null, options);
         }
 
-        public virtual IPagedList<User> GetUsers(IEnumerable<int> userIds)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/users-by-ids
+        /// </summary>
+        public IPagedList<User> GetUsers(IEnumerable<int> ids, Options<UserSort, int> options)
         {
-            return GetUsers(userIds, new UserOptions());
+            return Execute<User, Int32>("users", new string[] { ids.Vectorize() }, options);
         }
 
-        public virtual IPagedList<User> GetUsers(IEnumerable<int> userIds, UserOptions options)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/users-by-ids
+        /// </summary>
+        public User GetUser(int id, Options<UserSort, int> options)
         {
-            return GetUsers(options, new string[] { userIds.Vectorize() });
+            return GetUsers(id.ToArray(), options).FirstOrDefault();
         }
 
-        private IPagedList<User> GetUsers(UserOptions options, string[] urlParameters)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/answers-on-users
+        /// </summary>
+        public IPagedList<Answer> GetUserAnswers(IEnumerable<int> ids, Options<UserSort> options)
         {
-            var response = MakeRequest<User>("users", urlParameters, new
-            {
-                site = this.SiteUrlName,
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null,
-                filter = options.Filter,
-                sort = options.SortBy.ToString().ToLower(),
-                order = GetSortDirection(options.SortDirection),
-                fromdate = GetDateValue(options.FromDate),
-                todate = GetDateValue(options.ToDate),
-                min = options.Min ?? null,
-                max = options.Max ?? null
-            });
-            return new PagedList<User>(response);
+            return Execute<Answer>("users", new string[] { ids.Vectorize(), "answers" }, options);
         }
 
-        public virtual User GetUser(int userId)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/answers-on-users
+        /// </summary>
+        public IPagedList<Answer> GetUserAnswers(int id, Options<UserSort> options)
         {
-            return GetUsers(userId.ToArray()).FirstOrDefault();
+            return GetUserAnswers(id.ToArray(), options);
         }
 
-        public virtual IPagedList<Comment> GetUserMentions(int userId)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/badges-on-users
+        /// </summary>
+        public IPagedList<Badge> GetUserBadges(IEnumerable<int> ids, Options<UserSort, BadgeMinMax> options)
         {
-            return GetUserMentions(userId, new UserMentionsOptions());
+            return Execute<Badge, BadgeMinMax>("users", new string[] { ids.Vectorize(), "badges" }, options);
         }
 
-        public virtual IPagedList<Comment> GetUserMentions(int userId, UserMentionsOptions options)
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/badges-on-users
+        /// </summary>
+        public IPagedList<Badge> GetUserBadges(int id, Options<UserSort, BadgeMinMax> options)
+        {
+            return GetUserBadges(id.ToArray(), options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/comments-on-users
+        /// </summary>
+        public IPagedList<Comment> GetUserComments(IEnumerable<int> ids, Options<UserSort> options)
+        {
+            return Execute<Comment>("users", new string[] { ids.Vectorize(), "comments" }, options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/comments-on-users
+        /// </summary>
+        public IPagedList<Comment> GetUserComments(int id, Options<UserSort> options)
+        {
+            return GetUserComments(id.ToArray(), options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/comments-by-users-to-user
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Comment> GetUserCommentsTo(IEnumerable<int> fromIds, IEnumerable<int> toIds, Options<UserSort> options)
+        {
+            return Execute<Comment>("users", new string[] { fromIds.Vectorize(), "comments", toIds.Vectorize() }, options);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/favorites-on-users
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetUserFavoriteQuestions(IEnumerable<int> userIds, Options<QuestionSort> options)
+        {
+            return Execute<Question>("users", new string[] { userIds.Vectorize(), "favorites" }, options);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/favorites-on-users
+        /// </summary>
+        public IPagedList<Question> GetUserFavoriteQuestions(int userId, Options<QuestionSort> options)
+        {
+            return GetUserFavoriteQuestions(userId.ToArray(), options);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/mentions-on-users
+        /// </summary>
+        public IPagedList<Comment> GetUserMentions(IEnumerable<int> userIds, Options<CommentSort> options)
+        {
+            return Execute<Comment>("users", new string[] { userIds.Vectorize(), "mentioned" }, options);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/mentions-on-users
+        /// </summary>
+        public IPagedList<Comment> GetUserMentions(int userId, Options<CommentSort> options)
         {
             return GetUserMentions(userId.ToArray(), options);
         }
 
-        public virtual IPagedList<Comment> GetUserMentions(IEnumerable<int> userIds)
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/privileges-on-users
+        /// </summary>
+        public IPagedList<Privilege> GetUserPrivileges(IEnumerable<int> userIds, Options options)
         {
-            return GetUserMentions(userIds, new UserMentionsOptions());
+            return Execute<Privilege>("users", new string[] { userIds.Vectorize(), "privileges" }, options);
         }
 
-        public virtual IPagedList<Comment> GetUserMentions(IEnumerable<int> userIds, UserMentionsOptions options)
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/privileges-on-users
+        /// </summary>
+        public IPagedList<Privilege> GetUserPrivileges(int userId, Options options)
         {
-            var response = MakeRequest<Comment>("users", new string[] { userIds.Vectorize(), "mentioned" }, new
-            {
-                site = this.SiteUrlName,
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null,
-                filter = options.Filter,
-                sort = options.SortBy.ToString().ToLower(),
-                order = GetSortDirection(options.SortDirection),
-                fromdate = GetDateValue(options.FromDate),
-                todate = GetDateValue(options.ToDate),
-                min = options.Min ?? null,
-                max = options.Max ?? null
-            });
-            return new PagedList<Comment>(response);
+            return GetUserPrivileges(userId.ToArray(), options);
         }
 
-        public virtual IPagedList<UserEvent> GetUserTimeline(int userId)
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/questions-on-users
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetUserQuestions(IEnumerable<int> userIds, Options<QuestionSort> options)
         {
-            return GetUserTimeline(userId, new UserTimelineOptions());
+            return Execute<Question>("users", new string[] { userIds.Vectorize(), "questions" }, options);
         }
 
-        public virtual IPagedList<UserEvent> GetUserTimeline(int userId, UserTimelineOptions options)
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/questions-on-users
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetUserQuestions(int userId, Options<QuestionSort> options)
         {
-            return GetUserTimeline(userId.ToArray(), options);
+            return GetUserQuestions(userId.ToArray(), options);
         }
 
-        public virtual IPagedList<UserEvent> GetUserTimeline(IEnumerable<int> userIds)
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/no-answer-questions-on-users
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetUserQuestionsWithNoAnswers(IEnumerable<int> userIds, Options<QuestionSort> options)
         {
-            return GetUserTimeline(userIds, new UserTimelineOptions());
+            return Execute<Question>("users", new string[] { userIds.Vectorize(), "questions", "no-answers" }, options);
         }
 
-        public virtual IPagedList<UserEvent> GetUserTimeline(IEnumerable<int> userIds, UserTimelineOptions options)
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/no-answer-questions-on-users    
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetUserQuestionsWithNoAnswers(int userId, Options<QuestionSort> options)
         {
-            var response = MakeRequest<UserEvent>("users", new string[] { userIds.Vectorize(), "timeline" }, new
-            {
-                site = this.SiteUrlName,
-                fromdate = GetDateValue(options.FromDate),
-                todate = GetDateValue(options.ToDate),
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null
-            });
-            return new PagedList<UserEvent>(response);
+            return GetUserQuestionsWithNoAnswers(userId.ToArray(), options);
         }
 
-        public virtual IPagedList<Reputation> GetUserReputation(int userId)
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/unaccepted-questions-on-users
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetUserUnacceptedQuestions(IEnumerable<int> userIds, Options<QuestionSort> options)
         {
-            return GetUserReputation(userId, new ReputationOptions());
+            return Execute<Question>("users", new string[] { userIds.Vectorize(), "questions", "unaccepted" }, options);
         }
 
-        public virtual IPagedList<Reputation> GetUserReputation(int userId, ReputationOptions options)
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/unaccepted-questions-on-users    
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetUserUnacceptedQuestions(int userId, Options<QuestionSort> options)
+        {
+            return GetUserUnacceptedQuestions(userId.ToArray(), options);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/unanswered-questions-on-users
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetUserUnansweredQuestions(IEnumerable<int> userIds, Options<QuestionSort> options)
+        {
+            return Execute<Question>("users", new string[] { userIds.Vectorize(), "questions", "unanswered" }, options);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/unanswered-questions-on-users  
+        /// </summary>
+        /// TODO: Fix Sort
+        public IPagedList<Question> GetUserUnansweredQuestions(int userId, Options<QuestionSort> options)
+        {
+            return GetUserUnansweredQuestions(userId.ToArray(), options);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/reputation-on-users
+        /// </summary>
+        public IPagedList<Reputation> GetUserReputation(IEnumerable<int> userIds, OptionsWithDates options)
+        {
+            return Execute<Reputation>("users", new string[] { userIds.Vectorize(), "reputation" }, options);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/reputation-on-users 
+        /// </summary>
+        public IPagedList<Reputation> GetUserReputation(int userId, OptionsWithDates options)
         {
             return GetUserReputation(userId.ToArray(), options);
         }
 
-        public virtual IPagedList<Reputation> GetUserReputation(IEnumerable<int> userIds)
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/suggested-edits-on-users
+        /// </summary>
+        public IPagedList<SuggestedEdit> GetUserSuggestedEdits(IEnumerable<int> userIds, Options<SuggestedEditSort> options)
         {
-            return GetUserReputation(userIds, new ReputationOptions());
+            return Execute<SuggestedEdit>("users", new string[] { userIds.Vectorize(), "suggested-edits" }, options);
         }
 
-        public virtual IPagedList<Reputation> GetUserReputation(IEnumerable<int> userIds, ReputationOptions options)
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/suggested-edits-on-users 
+        /// </summary>
+        public IPagedList<SuggestedEdit> GetUserUnansweredQuestions(int userId, Options<SuggestedEditSort> options)
         {
-            var response = MakeRequest<Reputation>("users", new string[] { userIds.Vectorize(), "reputation" }, new
-            {
-                site = this.SiteUrlName,
-                fromdate = GetDateValue(options.FromDate),
-                todate = GetDateValue(options.ToDate),
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null
-            });
-            return new PagedList<Reputation>(response);
+            return GetUserSuggestedEdits(userId.ToArray(), options);
         }
 
-        public virtual IPagedList<User> GetModerators()
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/tags-on-users
+        /// </summary>
+        public IPagedList<Tag> GetUserTags(IEnumerable<int> userIds, Options<TagSort> options)
         {
-            return GetModerators(new UserOptions());
+            return Execute<Tag>("users", new string[] { userIds.Vectorize(), "tags" }, options);
         }
 
-        public virtual IPagedList<User> GetModerators(UserOptions options)
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/tags-on-users
+        /// </summary>
+        public IPagedList<Tag> GetUserTags(int userId, Options<TagSort> options)
         {
-            return GetUsers(options, new string[] { "moderators" });
+            return GetUserTags(userId.ToArray(), options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-answers-in-tags
+        /// </summary>
+        public IPagedList<Answer> GetUserTopAnswersByTag(IEnumerable<int> userIds, IEnumerable<string> tags, Options<AnswerSort> options)
+        {
+            return Execute<Answer>("users", new string[] { userIds.Vectorize(), "tags", tags.Vectorize(), "top-answers" }, options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-answers-in-tags
+        /// </summary>
+        public IPagedList<Answer> GetUserTopAnswersByTag(int userId, IEnumerable<string> tags, Options<AnswerSort> options)
+        {
+            return GetUserTopAnswersByTag(userId.ToArray(), tags, options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-answer-tags-on-users
+        /// </summary>
+        public IPagedList<TopTag> GetUserTopAnswersByTag(IEnumerable<int> userIds, Options options)
+        {
+            return Execute<TopTag>("users", new string[] { userIds.Vectorize(), "top-answer-tags" }, options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-answer-tags-on-users
+        /// </summary>
+        public IPagedList<TopTag> GetUserTopAnswersByTag(int userId, Options options)
+        {
+            return GetUserTopAnswersByTag(userId.ToArray(), options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-questions-in-tags
+        /// </summary>
+        public IPagedList<Question> GetUserTopQuestionsByTag(IEnumerable<int> userIds, IEnumerable<string> tags, Options<QuestionSort> options)
+        {
+            return Execute<Question>("users", new string[] { userIds.Vectorize(), "tags", tags.Vectorize(), "top-questions" }, options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-user-questions-in-tags
+        /// </summary>
+        public IPagedList<Question> GetUserTopQuestionsByTag(int userId, IEnumerable<string> tags, Options<QuestionSort> options)
+        {
+            return GetUserTopQuestionsByTag(userId.ToArray(), tags, options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-question-tags-on-users
+        /// </summary>
+        public IPagedList<TopTag> GetUserTopQuestionsByTag(IEnumerable<int> userIds, Options options)
+        {
+            return Execute<TopTag>("users", new string[] { userIds.Vectorize(), "top-question-tags" }, options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/top-question-tags-on-users
+        /// </summary>
+        public IPagedList<TopTag> GetUserTopQuestionsByTag(int userId, Options options)
+        {
+            return GetUserTopQuestionsByTag(userId.ToArray(), options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/timeline-on-users
+        /// </summary>
+        public IPagedList<UserTimeline> GetUserTimeline(IEnumerable<int> userIds, OptionsWithDates options)
+        {
+            return Execute<UserTimeline>("users", new string[] { userIds.Vectorize(), "timeline" }, options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/timeline-on-users
+        /// </summary>
+        public IPagedList<UserTimeline> GetUserTimeline(int userId, OptionsWithDates options)
+        {
+            return GetUserTimeline(userId.ToArray(), options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/moderators
+        /// </summary>
+        public IPagedList<User> GetModerators()
+        {
+            return GetModerators(null);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/moderators
+        /// </summary>
+        public IPagedList<User> GetModerators(Options<UserSort, int> options)
+        {
+            return Execute<User, Int32>("users", new string[] { "moderators" }, options);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/elected-moderators
+        /// </summary>
+        public IPagedList<User> GetElectedModerators()
+        {
+            return GetElectedModerators(null);
+        }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/elected-moderators
+        /// </summary>
+        public IPagedList<User> GetElectedModerators(Options<UserSort, int> options)
+        {
+            return Execute<User, Int32>("users", new string[] { "moderators", "elected" }, options);
         }
     }
 }
