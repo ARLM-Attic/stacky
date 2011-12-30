@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Stacky
@@ -9,49 +10,44 @@ namespace Stacky
     public partial class StackyClientAsync
 #endif
     {
-        public virtual void GetBadges(Action<IEnumerable<Badge>> onSuccess, Action<ApiException> onError)
+        public void GetBadges(Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError, Options<BadgeSort, BadgeMinMax> options)
         {
-            GetBadges(onSuccess, onError, "badges", null);
+            Execute<Badge, BadgeMinMax>("badges", null, onSuccess, onError, options);
         }
 
-        private void GetBadges(Action<IEnumerable<Badge>> onSuccess, Action<ApiException> onError, string method, string[] urlArguments)
+        public void GetBadge(int id, Action<Badge> onSuccess, Action<ApiException> onError, string filter)
         {
-            MakeRequest<Badge>(method, urlArguments, new
-            {
-                site = this.SiteUrlName
-            }, (items) => onSuccess(items.Items), onError);
+            GetBadges(id.ToArray(), items => onSuccess(items.FirstOrDefault()), onError, new OptionsWithDates { Filter = filter });
         }
 
-        public virtual void GetUsersByBadge(int userId, Action<IPagedList<User>> onSuccess, Action<ApiException> onError)
+        public void GetBadges(IEnumerable<int> ids, Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError, OptionsWithDates options)
         {
-            GetUsersByBadge(userId, onSuccess, onError, new BadgeByUserOptions());
+            Execute<Badge>("badges", new string[] { ids.Vectorize() }, onSuccess, onError, options);
         }
 
-        public virtual void GetUsersByBadge(int userId, Action<IPagedList<User>> onSuccess, Action<ApiException> onError, BadgeByUserOptions options)
+        public void GetNamedBadges(Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError, Options<BadgeSort, BadgeMinMax> options)
         {
-            GetUsersByBadge(userId.ToArray(), onSuccess, onError, options);
+            Execute<Badge, BadgeMinMax>("badges", new string[] { "name" }, onSuccess, onError, options);
         }
 
-        public virtual void GetUsersByBadge(IEnumerable<int> userIds, Action<IPagedList<User>> onSuccess, Action<ApiException> onError = null)
+        public void GetRecentlyAwardedBadges(Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError, OptionsWithDates options)
         {
-            GetUsersByBadge(userIds, onSuccess, onError, new BadgeByUserOptions());
+            Execute<Badge, BadgeMinMax>("badges", new string[] { "recipients" }, onSuccess, onError, options);
         }
 
-        public virtual void GetUsersByBadge(IEnumerable<int> userIds, Action<IPagedList<User>> onSuccess, Action<ApiException> onError, BadgeByUserOptions options)
+        public void GetRecentlyAwardedBadges(int id, Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError, OptionsWithDates options)
         {
-            MakeRequest<User>("badges", new string[] { userIds.Vectorize(), "badges" }, new
-            {
-                site = this.SiteUrlName,
-                page = options.Page ?? null,
-                pagesize = options.PageSize ?? null,
-                fromdate = GetDateValue(options.FromDate),
-                todate = GetDateValue(options.ToDate),
-            }, (items) => onSuccess(new PagedList<User>(items)), onError);
+            GetRecentlyAwardedBadges(id.ToArray(), onSuccess, onError, options);
         }
 
-        public virtual void GetTagBasedBadges(Action<IEnumerable<Badge>> onSuccess, Action<ApiException> onError = null)
+        public void GetRecentlyAwardedBadges(IEnumerable<int> ids, Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError, OptionsWithDates options)
         {
-            GetBadges(onSuccess, onError, "badges", new string[] { "tags" });
+            Execute<Badge, BadgeMinMax>("badges", new string[] { ids.Vectorize(), "recipients" }, onSuccess, onError, options);
+        }
+
+        public void GetTagBasedBadges(Action<IPagedList<Badge>> onSuccess, Action<ApiException> onError, Options<BadgeSort, BadgeMinMax> options)
+        {
+            Execute<Badge, BadgeMinMax>("badges", new string[] { "tags" }, onSuccess, onError, options);
         }
     }
 }
