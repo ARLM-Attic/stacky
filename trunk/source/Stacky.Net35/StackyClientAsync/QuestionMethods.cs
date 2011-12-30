@@ -10,129 +10,213 @@ namespace Stacky
     public partial class StackyClientAsync
 #endif
     {
-        private void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, string method, string[] urlArgs, string sort, string sortDirection, int? page, int? pageSize, bool includeBody, bool includeComments, bool includeAnswers, DateTime? fromDate, DateTime? toDate, int? min, int? max, params string[] tags)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions
+        /// </summary>
+        public void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, Options<QuestionSort> options)
         {
-            MakeRequest<Question>(method, urlArgs, new
-            {
-                site = this.SiteUrlName,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                body = includeBody ? (bool?)true : null,
-                comments = includeComments ? (bool?)true : null,
-                answers = includeAnswers ? (bool?)true : null,
-                fromdate = GetDateValue(fromDate),
-                todate = GetDateValue(toDate),
-                tagged = tags == null ? (string)null : String.Join(" ", tags),
-                sort = sort,
-                order = sortDirection,
-                min = min ?? null,
-                max = max ?? null
-            }, (items) => onSuccess(new PagedList<Question>(items)), onError);
+            Execute<Question>("questions", null, onSuccess, onError, options);
         }
 
-        public virtual void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions-by-ids
+        /// </summary>
+        public void GetQuestion(int id, Action<Question> onSuccess, Action<ApiException> onError, Options<QuestionSort> options)
         {
-            GetQuestions(onSuccess, onError, new QuestionOptions());
+            GetQuestions(id.ToArray(), items => onSuccess(items.FirstOrDefault()), onError, options);
         }
 
-        public virtual void GetQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, QuestionOptions options)
+        /// <summary>
+        /// https://api.stackexchange.com/docs/questions-by-ids
+        /// </summary>
+        public void GetQuestions(IEnumerable<int> ids, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, Options<QuestionSort> options)
         {
-            var sortArgs = options.SortBy.GetAttribute<SortArgsAttribute>();
-            GetQuestions(onSuccess, onError, "questions", sortArgs.UrlArgs, sortArgs.Sort, GetSortDirection(options.SortDirection), options.Page, options.PageSize, options.IncludeBody, options.IncludeComments, options.IncludeAnswers, options.FromDate, options.ToDate, options.Min, options.Max, options.Tags);
+            Execute<Question>("questions", new string[] { ids.Vectorize() }, onSuccess, onError, options);
         }
 
-        public virtual void GetQuestionsByUser(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/answers-on-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetQuestionAnswers(int id, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError, Options<AnswerSort> options)
         {
-            GetQuestionsByUser(userId, onSuccess, onError, new QuestionByUserOptions());
+            GetQuestionAnswers(id.ToArray(), onSuccess, onError, options);
         }
 
-        public virtual void GetQuestionsByUser(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, QuestionByUserOptions options)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/answers-on-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetQuestionAnswers(IEnumerable<int> ids, Action<IPagedList<Answer>> onSuccess, Action<ApiException> onError, Options<AnswerSort> options)
         {
-            GetQuestions(onSuccess, onError, "users", new string[] { userId.ToString(), "questions" }, options.SortBy.ToString().ToLower(), GetSortDirection(options.SortDirection), options.Page, options.PageSize, options.IncludeBody, options.IncludeComments, options.IncludeAnswers, options.FromDate, options.ToDate, options.Min, options.Max, options.Tags);
+            Execute<Answer>("questions", new string[] { ids.Vectorize(), "answers" }, onSuccess, onError, options);
         }
 
-        public virtual void GetFavoriteQuestions(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/comments-on-questions
+        /// </summary>
+        public void GetQuestionComments(int id, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError, Options<CommentSort> options)
         {
-            GetFavoriteQuestions(userId, onSuccess, onError, new FavoriteQuestionOptions());
+            GetQuestionComments(id.ToArray(), onSuccess, onError, options);
         }
 
-        public virtual void GetFavoriteQuestions(int userId, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, FavoriteQuestionOptions options)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/comments-on-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetQuestionComments(IEnumerable<int> ids, Action<IPagedList<Comment>> onSuccess, Action<ApiException> onError, Options<CommentSort> options)
         {
-            GetQuestions(onSuccess, onError, "users", new string[] { userId.ToString(), "favorites" }, options.SortBy.ToString().ToLower(), GetSortDirection(options.SortDirection), options.Page, options.PageSize, options.IncludeBody, options.IncludeComments, options.IncludeAnswers, options.FromDate, options.ToDate, options.Min, options.Max, options.Tags);
+            Execute<Comment>("questions", new string[] { ids.Vectorize(), "comments" }, onSuccess, onError, options);
         }
 
-        public virtual void GetQuestions(IEnumerable<int> questionIds, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError = null)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetLinkedQuestions(int id, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, Options<QuestionSort> options)
         {
-            GetQuestions(questionIds, onSuccess, onError, new QuestionOptions());
+            GetLinkedQuestions(id.ToArray(), onSuccess, onError, options);
         }
 
-        public virtual void GetQuestions(IEnumerable<int> questionIds, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, QuestionOptions options)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetLinkedQuestions(IEnumerable<int> ids, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, Options<QuestionSort> options)
         {
-            var sortArgs = options.SortBy.GetAttribute<SortArgsAttribute>();
-            string[] urlArgs = sortArgs.UrlArgs.Concat(new string[] { questionIds.Vectorize() }).ToArray();
-            GetQuestions(onSuccess, onError, "questions", urlArgs, sortArgs.Sort, GetSortDirection(options.SortDirection), options.Page, options.PageSize, options.IncludeBody, options.IncludeComments, options.IncludeAnswers, options.FromDate, options.ToDate, options.Min, options.Max, options.Tags);
+            Execute<Question>("questions", new string[] { ids.Vectorize(), "linked" }, onSuccess, onError, options);
         }
 
-        public virtual void GetQuestion(int questionId, Action<Question> onSuccess, Action<ApiException> onError, bool? includeBody, bool? includeComments, bool? includeAnswers)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetRelatedQuestions(int id, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, Options<QuestionSort> options)
         {
-            GetQuestions(questionId.ToArray(), returnedQuestions => onSuccess(returnedQuestions.FirstOrDefault()), onError, new QuestionOptions
-            {
-                IncludeBody = includeBody ?? false,
-                IncludeComments = includeComments ?? false,
-                IncludeAnswers = includeAnswers ?? false
-            });
+            GetRelatedQuestions(id.ToArray(), onSuccess, onError, options);
         }
 
-        public virtual void GetQuestionTimeline(IEnumerable<int> questionIds, Action<IPagedList<PostEvent>> onSuccess, Action<ApiException> onError)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/linked-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetRelatedQuestions(IEnumerable<int> ids, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, Options<QuestionSort> options)
         {
-            GetQuestionTimeline(questionIds, onSuccess, onError, new QuestionTimelineOptions());
+            Execute<Question>("questions", new string[] { ids.Vectorize(), "related" }, onSuccess, onError, options);
         }
 
-        public virtual void GetQuestionTimeline(IEnumerable<int> questionIds, Action<IPagedList<PostEvent>> onSuccess, Action<ApiException> onError, QuestionTimelineOptions options)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions-timeline
+        /// </summary>
+        public void GetQuestionTimeline(int id, Action<IPagedList<QuestionTimeline>> onSuccess, Action<ApiException> onError, OptionsWithDates options)
         {
-            MakeRequest<PostEvent>("questions", new string[] { questionIds.Vectorize(), "timeline" }, new
+            GetQuestionTimeline(id.ToArray(), onSuccess, onError, options);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/questions-timeline
+        /// </summary>
+        public void GetQuestionTimeline(IEnumerable<int> ids, Action<IPagedList<QuestionTimeline>> onSuccess, Action<ApiException> onError, OptionsWithDates options)
+        {
+            Execute<QuestionTimeline>("questions", new string[] { ids.Vectorize(), "timeline" }, onSuccess, onError, options);
+        }
+
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/unanswered-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetUnansweredQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, TaggedOptions<QuestionSort> options)
+        {
+            MakeRequest<Question>("questions", new string[] { "unanswered" }, new
             {
                 site = this.SiteUrlName,
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
                 fromdate = GetDateValue(options.FromDate),
                 todate = GetDateValue(options.ToDate),
-            }, (items) => onSuccess(new PagedList<PostEvent>(items)), onError);
+                sort = GetEnumValue(options.SortBy),
+                order = GetSortDirection(options.SortDirection),
+                min = GetDateValue(options.Min),
+                max = GetDateValue(options.Max),
+                tagged = options.GetListValue(options.Tagged),
+                filter = options.Filter
+            }, response => onSuccess(new PagedList<Question>(response)), onError);
         }
 
-        public virtual void GetQuestionTimeline(int questionId, Action<IPagedList<PostEvent>> onSuccess, Action<ApiException> onError)
+        // <summary>
+        /// See https://api.stackexchange.com/docs/unanswered-questions
+        /// </summary>
+        /// TODO: Fix Sort
+        public void GetQuestionsWithNoAnswers(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, TaggedOptions<QuestionSort> options)
         {
-            GetQuestionTimeline(questionId, onSuccess, onError, new QuestionTimelineOptions());
+            MakeRequest<Question>("questions", new string[] { "no-answers" }, new
+            {
+                site = this.SiteUrlName,
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
+                sort = GetEnumValue(options.SortBy),
+                order = GetSortDirection(options.SortDirection),
+                min = GetDateValue(options.Min),
+                max = GetDateValue(options.Max),
+                tagged = options.GetListValue(options.Tagged),
+                filter = options.Filter
+            }, response => onSuccess(new PagedList<Question>(response)), onError);
         }
 
-        public virtual void GetQuestionTimeline(int questionId, Action<IPagedList<PostEvent>> onSuccess, Action<ApiException> onError, QuestionTimelineOptions options)
+        // <summary>
+        /// See https://api.stackexchange.com/docs/search
+        /// </summary>
+        /// TODO: Fix Sort
+        public void SearchQuestions(Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, QuestionSearchOptions options)
         {
-            GetQuestionTimeline(questionId.ToArray(), onSuccess, onError, options);
-        }
-
-        public virtual void Search(Action<IEnumerable<Question>> onSuccess, Action<ApiException> onError, QuestionSearchOptions options)
-        {
-            string taggedString = null;
-            if (options.Tagged != null)
-                taggedString = String.Join(" ", options.Tagged.ToArray());
-
-            string notTaggedString = null;
-            if (options.NotTagged != null)
-                notTaggedString = String.Join(" ", options.NotTagged.ToArray());
+            if (((options.Tagged != null && options.Tagged.Count() == 0) || options.Tagged == null) &&
+                String.IsNullOrEmpty(options.InTitle))
+            {
+                throw new ArgumentException("At least one of tagged or intitle must be set on this method");
+            }
 
             MakeRequest<Question>("search", null, new
             {
                 site = this.SiteUrlName,
-                intitle = options.InTitle,
-                tagged = taggedString,
-                nottagged = notTaggedString,
-                sort = options.SortBy.ToString(),
-                order = GetSortDirection(options.SortDirection),
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
-                min = options.Min ?? null,
-                max = options.Max ?? null
-            }, (items) => onSuccess(new PagedList<Question>(items)), onError);
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
+                sort = GetEnumValue(options.SortBy),
+                order = GetSortDirection(options.SortDirection),
+                min = GetDateValue(options.Min),
+                max = GetDateValue(options.Max),
+                tagged = options.GetListValue(options.Tagged),
+                nottagged = options.GetListValue(options.NotTagged),
+                intitle = options.InTitle,
+                filter = options.Filter
+            }, response => onSuccess(new PagedList<Question>(response)), onError);
+        }
+
+        // <summary>
+        /// See https://api.stackexchange.com/docs/similar
+        /// </summary>
+        /// TODO: Fix Sort
+        public void SimiliarQuestions(string title, Action<IPagedList<Question>> onSuccess, Action<ApiException> onError, SimiliarQuestionsOptions options)
+        {
+            MakeRequest<Question>("similar", null, new
+            {
+                site = this.SiteUrlName,
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
+                fromdate = GetDateValue(options.FromDate),
+                todate = GetDateValue(options.ToDate),
+                sort = GetEnumValue(options.SortBy),
+                order = GetSortDirection(options.SortDirection),
+                min = GetDateValue(options.Min),
+                max = GetDateValue(options.Max),
+                tagged = options.GetListValue(options.Tagged),
+                nottagged = options.GetListValue(options.NotTagged),
+                title = title,
+                filter = options.Filter
+            }, response => onSuccess(new PagedList<Question>(response)), onError);
         }
     }
 }
