@@ -133,6 +133,13 @@ namespace Stacky
             return String.Join(";", items.Select(i => i.ToString()).ToArray());
         }
 
+        public static string TryVectorize<T>(this IEnumerable<T> items)
+        {
+            if (items == null || items.Count() == 0)
+                return null;
+            return items.Vectorize();
+        }
+
         /// <summary>
         /// Converts an int to int array.
         /// </summary>

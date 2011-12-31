@@ -10,37 +10,36 @@ namespace Stacky
     public partial class StackyClientAsync
 #endif
     {
-        public virtual void GetRevisions(IEnumerable<int> ids, Action<IEnumerable<Revision>> onSuccess, Action<ApiException> onError)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/revisions-by-guids
+        /// </summary>
+        public void GetRevisions(IEnumerable<string> ids, Action<IPagedList<Revision>> onSuccess, Action<ApiException> onError, OptionsWithDates options)
         {
-            GetRevisions(ids, onSuccess, onError, null, null);
+            Execute<Revision>("revisions", new string[] { ids.Vectorize() }, onSuccess, onError, options);
         }
 
-        public virtual void GetRevisions(IEnumerable<int> ids, Action<IEnumerable<Revision>> onSuccess, Action<ApiException> onError, DateTime? fromDate, DateTime? toDate)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/revisions-by-guids
+        /// </summary>
+        public void GetRevisions(IEnumerable<Guid> ids, Action<IPagedList<Revision>> onSuccess, Action<ApiException> onError, OptionsWithDates options)
         {
-            MakeRequest<Revision>("revisions", new string[] { ids.Vectorize() }, new
-            {
-                site = this.SiteUrlName,
-                fromdate = GetDateValue(fromDate),
-                todate = GetDateValue(toDate),
-            }, (items) => onSuccess(items.Items), onError);
+            GetRevisions(ids.Select(i => i.ToString()), onSuccess, onError, options);
         }
 
-        public virtual void GetRevisions(int id, Action<IEnumerable<Revision>> onSuccess, Action<ApiException> onError)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/revisions-by-guids
+        /// </summary>
+        public void GetRevision(string id, Action<Revision> onSuccess, Action<ApiException> onError, OptionsWithDates options)
         {
-            GetRevisions(id, onSuccess, onError, null, null);
+            GetRevisions(new string[] { id }, items => onSuccess(items.FirstOrDefault()), onError, options);
         }
 
-        public virtual void GetRevisions(int id, Action<IEnumerable<Revision>> onSuccess, Action<ApiException> onError, DateTime? fromDate, DateTime? toDate)
+        /// <summary>
+        /// See https://api.stackexchange.com/docs/revisions-by-guids
+        /// </summary>
+        public void GetRevision(Guid id, Action<Revision> onSuccess, Action<ApiException> onError, OptionsWithDates options)
         {
-            GetRevisions(id.ToArray(), onSuccess, onError, fromDate, toDate);
-        }
-
-        public virtual void GetRevision(int id, Guid revision, Action<Revision> onSuccess, Action<ApiException> onError)
-        {
-            MakeRequest<Revision>("revisions", new string[] { id.ToString(), revision.ToString() }, new
-            {
-                site = this.SiteUrlName
-            }, returnedItems => onSuccess(returnedItems.Items.FirstOrDefault()), onError);
+            GetRevisions(new string[] { id.ToString() }, items => onSuccess(items.FirstOrDefault()), onError, options);
         }
     }
 }
