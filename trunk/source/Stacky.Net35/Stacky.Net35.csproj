@@ -297,9 +297,6 @@
     <Compile Include="..\Stacky\Sites.cs">
       <Link>Sites.cs</Link>
     </Compile>
-    <Compile Include="..\Stacky\StackyClientAsync\NetworkMethods.cs">
-      <Link>StackyClientAsync\NetworkMethods.cs</Link>
-    </Compile>
     <Compile Include="..\Stacky\StackyClientAsync\PrivilegeMethods.cs">
       <Link>StackyClientAsync\PrivilegeMethods.cs</Link>
     </Compile>
@@ -332,11 +329,13 @@
     <Compile Include="StackyClientAsync\AnswerMethods.cs" />
     <Compile Include="StackyClientAsync\BadgeMethods.cs" />
     <Compile Include="StackyClientAsync\CommentMethods.cs" />
+    <Compile Include="StackyClientAsync\NetworkMethods.cs" />
     <Compile Include="StackyClientAsync\PostMethods.cs" />
     <Compile Include="StackyClientAsync\QuestionMethods.cs" />
     <Compile Include="StackyClientAsync\RevisionMethods.cs" />
     <Compile Include="StackyClientAsync\StackyClientWithOptions.cs" />
     <Compile Include="StackyClientAsync\StatsMethods.cs" />
+    <Compile Include="StackyClientAsync\SuggestedEditMethods.cs" />
     <Compile Include="StackyClientAsync\TagMethods.cs" />
     <Compile Include="StackyClientAsync\UserMethods.cs" />
     <Compile Include="StackyClient\AnswerMethods.cs" />
