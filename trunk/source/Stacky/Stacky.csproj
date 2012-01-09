@@ -117,6 +117,7 @@
     <Compile Include="ErrorResponse.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\Execute.cs" />
+    <Compile Include="Helpers\Filters.cs" />
     <Compile Include="Helpers\Paging\PageEnumerator.cs" />
     <Compile Include="Helpers\Paging\PagerInfo.cs" />
     <Compile Include="Helpers\Paging\StackyEnumerable.cs" />

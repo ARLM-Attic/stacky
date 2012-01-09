@@ -1,4 +1,4 @@
-https://api.stackexchange.com/2.0/answers/12/comments?order=desc&sort=creation&site=stackoverflow
+https://api.stackexchange.com/2.0/answers/12/comments/?order=desc&sort=creation&site=stackoverflow
 {
   "items": [
     {

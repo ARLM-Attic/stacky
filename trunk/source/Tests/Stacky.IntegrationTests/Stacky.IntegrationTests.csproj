@@ -50,6 +50,7 @@
     <Compile Include="ClientTests.cs" />
     <Compile Include="CommentTests.cs" />
     <Compile Include="ErrorTests.cs" />
+    <Compile Include="GenerateValue.cs" />
     <Compile Include="HostSiteTests.cs" />
     <Compile Include="IntegrationTest.cs" />
     <Compile Include="PagerTests.cs" />

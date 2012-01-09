@@ -3,6 +3,8 @@ using System.Web;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Stacky.UnitTests
 {
@@ -198,4 +200,76 @@ namespace Stacky.UnitTests
             Assert.IsTrue(url.ToString().Contains("%23"));
         }
     }
+
+    [TestClass]
+    public class OfflineUrlClientTests
+    {
+        [TestMethod]
+        public void ParamatersMapped()
+        {
+            string url = "https://api.stackexchange.com/2.0/answers/{id}/comments";
+            var newUrl = OfflineUrlClient.MapString(url, new { id = 10 });
+            Assert.AreEqual("https://api.stackexchange.com/2.0/answers/10/comments", newUrl);
+        }
+
+        [TestMethod]
+        public void ResponsesLoadedCorrectly()
+        {
+            IUrlClient urlClient = new OfflineUrlClient();
+            StackyClient client = new StackyClient("2.0", Sites.StackOverflow, urlClient, new JsonProtocol());
+            var comments = client.GetAnswerComments(12, AnswerSort.Creation, SortDirection.Descending);
+            Assert.IsNotNull(comments);
+        }
+    }
+
+    public class OfflineUrlClient : IUrlClient
+    {
+        static List<HttpResponse> responses = new List<HttpResponse>();
+        static readonly string InputDirectory = @"C:\Code\Stacky\trunk\data";
+        static OfflineUrlClient()
+        {
+            foreach (string path in Directory.GetFiles(InputDirectory, "*.txt"))
+            {
+                string[] lines = File.ReadAllLines(path);
+                string url = lines[0];
+                responses.Add(new HttpResponse
+                {
+                    Url = new Uri(url),
+                    Body = String.Join(Environment.NewLine, lines.Skip(1).Select(l => l))
+                });
+            }
+        }
+
+        public static string MapString(string source, object values)
+        {
+            var dictionary = UrlHelper.ObjectToDictionary(values);
+            foreach (var pair in dictionary)
+            {
+                source = source.Replace("{" + pair.Key + "}", pair.Value);
+            }
+            return source;
+        }
+
+        public HttpResponse MakeRequest(Uri url)
+        {
+            return responses.FirstOrDefault(r => UrlEquals(url, r.Url));
+        }
+
+        public static bool UrlEquals(Uri url1, Uri url2)
+        {
+            if (url1.Scheme != url2.Scheme)
+                return false;
+            if (url1.AbsolutePath != url2.AbsolutePath)
+                return false;
+            if (!QueryStringEquals(url1.Query, url2.Query))
+                return false;
+            return true;
+        }
+
+        public static bool QueryStringEquals(string query1, string query2)
+        {
+            return false;
+        }
+    }
+
 }

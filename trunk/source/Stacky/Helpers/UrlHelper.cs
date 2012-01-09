@@ -49,7 +49,7 @@ namespace Stacky
         {
             Require.NotNullOrEmpty(method, "method");
 
-            string urlBase = String.Format(CultureInfo.CurrentCulture, "http://api.stackexchange.com/{0}/{1}/", version, method);
+            string urlBase = String.Format(CultureInfo.CurrentCulture, "https://api.stackexchange.com/{0}/{1}/", version, method);
             if (urlParameters != null)
             {
                 foreach (string param in urlParameters)
