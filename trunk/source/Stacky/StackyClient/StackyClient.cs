@@ -46,6 +46,8 @@ namespace Stacky
         public Response<T> ParseResponse<T>(HttpResponse httpResponse)
             where T : new()
         {
+            if (httpResponse == null)
+                throw new ArgumentNullException("httpResponse");
             if (httpResponse.Error != null && String.IsNullOrEmpty(httpResponse.Body))
                 throw new ApiException("Error retrieving url", null, httpResponse.Error, httpResponse.Url);
 
