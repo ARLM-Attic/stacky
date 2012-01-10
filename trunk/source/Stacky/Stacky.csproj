@@ -59,7 +59,9 @@
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Error.cs" />
+    <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\Filter.cs" />
+    <Compile Include="Entities\InboxItem.cs" />
     <Compile Include="Entities\MigrationInfo.cs" />
     <Compile Include="Entities\NetworkUser.cs" />
     <Compile Include="Entities\Post.cs" />
@@ -83,7 +85,9 @@
     <Compile Include="Entities\TagWiki.cs" />
     <Compile Include="Entities\UserTimeline.cs" />
     <Compile Include="Enums\AnswerTimePeriod.cs" />
+    <Compile Include="Enums\EventType.cs" />
     <Compile Include="Enums\FilterType.cs" />
+    <Compile Include="Enums\InboxItemType.cs" />
     <Compile Include="Enums\TimelineType.cs" />
     <Compile Include="Entities\TopTag.cs" />
     <Compile Include="Entities\TopUser.cs" />
@@ -158,6 +162,8 @@
     <Compile Include="StackyClient\BadgeMethods.cs" />
     <Compile Include="StackyClient\CommentMethods.cs" />
     <Compile Include="StackyClient\ErrorMethods.cs" />
+    <Compile Include="StackyClient\EventMethods.cs" />
+    <Compile Include="StackyClient\InboxMethods.cs" />
     <Compile Include="StackyClient\NetworkMethods.cs" />
     <Compile Include="StackyClient\PostMethods.cs" />
     <Compile Include="StackyClient\PrivilegeMethods.cs" />
