@@ -374,5 +374,71 @@ namespace Stacky
             return Execute<User, Int32>("users", new string[] { "moderators", "elected" },
                 sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/me-unread-inbox
+        /// </summary>
+        public IPagedList<InboxItem> GetMyUnreadInbox(string accessToken, DateTime? since = null, int? page = null, int? pageSize = null)
+        {
+            var response = MakeRequest<InboxItem>("me", new string[] { "inbox", "unread" }, new
+            {
+                //key = TODO: add key here?
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                since = GetDateValue(since)
+            });
+            return new PagedList<InboxItem>(response);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/user-unread-inbox
+        /// </summary>
+        public IPagedList<InboxItem> GetUnreadInbox(int userId, string accessToken, DateTime? since = null, int? page = null, int? pageSize = null)
+        {
+            var response = MakeRequest<InboxItem>("users", new string[] { userId.ToString(), "inbox", "unread" }, new
+            {
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                since = GetDateValue(since)
+            });
+            return new PagedList<InboxItem>(response);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/user-inbox
+        /// </summary>
+        public IPagedList<InboxItem> GetInbox(int userId, string accessToken, int? page = null, int? pageSize = null)
+        {
+            var response = MakeRequest<InboxItem>("users", new string[] { userId.ToString(), "inbox" }, new
+            {
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = page ?? null,
+                pagesize = pageSize ?? null
+            });
+            return new PagedList<InboxItem>(response);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/user-inbox
+        /// </summary>
+        public IPagedList<InboxItem> GetMyInbox(string accessToken, int? page = null, int? pageSize = null)
+        {
+            var response = MakeRequest<InboxItem>("me", new string[] { "inbox" }, new
+            {
+                //key = TODO: add key here?
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = page ?? null,
+                pagesize = pageSize ?? null
+            });
+            return new PagedList<InboxItem>(response);
+        }
+
+
     }
 }
