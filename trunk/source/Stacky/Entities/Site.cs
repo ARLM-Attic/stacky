@@ -2,6 +2,7 @@
 {
     using System;
     using Newtonsoft.Json;
+using System.Collections.Generic;
 
     public class Site : Entity
     {
@@ -133,9 +134,11 @@
             set { markdownExtensions = value; NotifyOfPropertyChange(() => MarkdownExtensions); }
         }
 
-        //TODO: Add related_sites
-        //public List<RelatedSite> RelatedSites
-        //{
-        //}
+        private List<RelatedSite> relatedSites = new List<RelatedSite>();
+        public List<RelatedSite> RelatedSites
+        {
+            get { return relatedSites; }
+            set { relatedSites = value; NotifyOfPropertyChange(() => RelatedSites); }
+        }
     }
 }
