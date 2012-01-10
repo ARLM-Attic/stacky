@@ -9,14 +9,14 @@ namespace Stacky
         /// <summary>
         /// See: http://api.stackexchange.com/docs/inbox
         /// </summary>
-        public IPagedList<InboxItem> GetGlobalInbox(string accessToken, int? page = null, int? pageSize = null, string filter = null)
+        public IPagedList<InboxItem> GetGlobalInbox(string accessToken, Options options)
         {
             var response = MakeRequest<InboxItem>("inbox", null, new
             {
                 access_token = accessToken,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
-                filter = filter
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
+                filter = options.Filter
             });
             return new PagedList<InboxItem>(response);
         }
@@ -24,15 +24,15 @@ namespace Stacky
         /// <summary>
         /// See: http://api.stackexchange.com/docs/inbox
         /// </summary>
-        public IPagedList<InboxItem> GetUnreadGlobalInbox(string accessToken, DateTime? since = null, int? page = null, int? pageSize = null, string filter = null)
+        public IPagedList<InboxItem> GetUnreadGlobalInbox(string accessToken, DateTime? since, Options options)
         {
             var response = MakeRequest<InboxItem>("inbox", new string[] { "unread" }, new
             {
                 access_token = accessToken,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
                 since = GetDateValue(since),
-                filter = filter
+                filter = options.Filter
             });
             return new PagedList<InboxItem>(response);
         }

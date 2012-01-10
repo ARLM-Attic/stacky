@@ -6,16 +6,16 @@ namespace Stacky
 {
     public partial class StackyClient
     {
-        public IPagedList<Event> GetEvents(string accessToken, DateTime? since = null, int? page = null, int? pageSize = null, string filter = null)
+        public IPagedList<Event> GetEvents(string accessToken, DateTime? since, Options options)
         {
             var response = MakeRequest<Event>("events", null, new
             {
                 site = this.SiteUrlName,
                 access_token = accessToken,
-                page = page ?? null,
-                pagesize = pageSize ?? null,
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
                 since = GetDateValue(since),
-                filter = filter
+                filter = options.Filter
             });
             return new PagedList<Event>(response);
         }

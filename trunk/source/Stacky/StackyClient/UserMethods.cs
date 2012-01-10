@@ -378,7 +378,7 @@ namespace Stacky
         /// <summary>
         /// See: http://api.stackexchange.com/docs/me-unread-inbox
         /// </summary>
-        public IPagedList<InboxItem> GetMyUnreadInbox(string accessToken, DateTime? since = null, int? page = null, int? pageSize = null)
+        public IPagedList<InboxItem> GetMyUnreadInbox(string accessToken, DateTime? since = null, int? page = null, int? pageSize = null, string filter = null)
         {
             var response = MakeRequest<InboxItem>("me", new string[] { "inbox", "unread" }, new
             {
@@ -387,7 +387,8 @@ namespace Stacky
                 access_token = accessToken,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
-                since = GetDateValue(since)
+                since = GetDateValue(since),
+                filter = filter
             });
             return new PagedList<InboxItem>(response);
         }
@@ -395,7 +396,7 @@ namespace Stacky
         /// <summary>
         /// See: https://api.stackexchange.com/docs/user-unread-inbox
         /// </summary>
-        public IPagedList<InboxItem> GetUnreadInbox(int userId, string accessToken, DateTime? since = null, int? page = null, int? pageSize = null)
+        public IPagedList<InboxItem> GetUnreadInbox(int userId, string accessToken, DateTime? since = null, int? page = null, int? pageSize = null, string filter = null)
         {
             var response = MakeRequest<InboxItem>("users", new string[] { userId.ToString(), "inbox", "unread" }, new
             {
@@ -403,7 +404,8 @@ namespace Stacky
                 access_token = accessToken,
                 page = page ?? null,
                 pagesize = pageSize ?? null,
-                since = GetDateValue(since)
+                since = GetDateValue(since),
+                filter = filter
             });
             return new PagedList<InboxItem>(response);
         }
@@ -411,14 +413,15 @@ namespace Stacky
         /// <summary>
         /// See: https://api.stackexchange.com/docs/user-inbox
         /// </summary>
-        public IPagedList<InboxItem> GetInbox(int userId, string accessToken, int? page = null, int? pageSize = null)
+        public IPagedList<InboxItem> GetInbox(int userId, string accessToken, int? page = null, int? pageSize = null, string filter = null)
         {
             var response = MakeRequest<InboxItem>("users", new string[] { userId.ToString(), "inbox" }, new
             {
                 site = this.SiteUrlName,
                 access_token = accessToken,
                 page = page ?? null,
-                pagesize = pageSize ?? null
+                pagesize = pageSize ?? null,
+                filter = filter
             });
             return new PagedList<InboxItem>(response);
         }
@@ -426,7 +429,7 @@ namespace Stacky
         /// <summary>
         /// See: https://api.stackexchange.com/docs/user-inbox
         /// </summary>
-        public IPagedList<InboxItem> GetMyInbox(string accessToken, int? page = null, int? pageSize = null)
+        public IPagedList<InboxItem> GetMyInbox(string accessToken, int? page = null, int? pageSize = null, string filter = null)
         {
             var response = MakeRequest<InboxItem>("me", new string[] { "inbox" }, new
             {
@@ -434,11 +437,10 @@ namespace Stacky
                 site = this.SiteUrlName,
                 access_token = accessToken,
                 page = page ?? null,
-                pagesize = pageSize ?? null
+                pagesize = pageSize ?? null,
+                filter = filter
             });
             return new PagedList<InboxItem>(response);
         }
-
-
     }
 }

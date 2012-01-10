@@ -355,5 +355,69 @@ namespace Stacky
         {
             Execute<User, Int32>("users", new string[] { "moderators", "elected" }, onSuccess, onError, options);
         }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/me-unread-inbox
+        /// </summary>
+        public void GetMyUnreadInbox(string accessToken, Action<IPagedList<InboxItem>> onSuccess, Action<ApiException> onError,
+            DateTime? since, Options options)
+        {
+            MakeRequest<InboxItem>("me", new string[] { "inbox", "unread" }, new
+            {
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
+                since = GetDateValue(since),
+                filter = options.Filter
+            }, response => onSuccess(new PagedList<InboxItem>(response)), onError);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/user-unread-inbox
+        /// </summary>
+        public void GetUnreadInbox(int userId, string accessToken, Action<IPagedList<InboxItem>> onSuccess, Action<ApiException> onError,
+            DateTime? since, Options options)
+        {
+            MakeRequest<InboxItem>("users", new string[] { userId.ToString(), "inbox", "unread" }, new
+            {
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
+                since = GetDateValue(since),
+                filter = options.Filter
+            }, response => onSuccess(new PagedList<InboxItem>(response)), onError);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/user-inbox
+        /// </summary>
+        public void GetInbox(int userId, string accessToken, Action<IPagedList<InboxItem>> onSuccess, Action<ApiException> onError, Options options)
+        {
+            MakeRequest<InboxItem>("users", new string[] { userId.ToString(), "inbox" }, new
+            {
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
+                filter = options.Filter
+            }, response => onSuccess(new PagedList<InboxItem>(response)), onError);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/user-inbox
+        /// </summary>
+        public void GetMyInbox(string accessToken, Action<IPagedList<InboxItem>> onSuccess, Action<ApiException> onError, Options options)
+        {
+            MakeRequest<InboxItem>("me", new string[] { "inbox" }, new
+            {
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = options.Page ?? null,
+                pagesize = options.PageSize ?? null,
+                filter = options.Filter
+            }, response => onSuccess(new PagedList<InboxItem>(response)), onError);
+        }
     }
 }

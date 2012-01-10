@@ -84,8 +84,14 @@
     <Compile Include="..\Stacky\Entities\Entity.cs">
       <Link>Entities\Entity.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Entities\Event.cs">
+      <Link>Entities\Event.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\Entities\Filter.cs">
       <Link>Entities\Filter.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Entities\InboxItem.cs">
+      <Link>Entities\InboxItem.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Entities\MigrationInfo.cs">
       <Link>Entities\MigrationInfo.cs</Link>
@@ -183,11 +189,17 @@
     <Compile Include="..\Stacky\Enums\ErrorCode.cs">
       <Link>Enums\ErrorCode.cs</Link>
     </Compile>
+    <Compile Include="..\Stacky\Enums\EventType.cs">
+      <Link>Enums\EventType.cs</Link>
+    </Compile>
     <Compile Include="..\Stacky\Enums\FavoriteQuestionsSort.cs">
       <Link>Enums\FavoriteQuestionsSort.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Enums\FilterType.cs">
       <Link>Enums\FilterType.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\Enums\InboxItemType.cs">
+      <Link>Enums\InboxItemType.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\Enums\PostEventType.cs">
       <Link>Enums\PostEventType.cs</Link>
@@ -311,6 +323,12 @@
     </Compile>
     <Compile Include="..\Stacky\StackyClientAsync\CommentMethods.cs">
       <Link>StackyClient\CommentMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\StackyClientAsync\EventMethods.cs">
+      <Link>StackyClient\EventMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\Stacky\StackyClientAsync\InboxMethods.cs">
+      <Link>StackyClient\InboxMethods.cs</Link>
     </Compile>
     <Compile Include="..\Stacky\StackyClientAsync\NetworkMethods.cs">
       <Link>StackyClient\NetworkMethods.cs</Link>
