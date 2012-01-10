@@ -443,5 +443,71 @@ namespace Stacky
                 onSuccess, onError,
                 sortBy, sortDirection, page, pageSize, fromDate, toDate, min, max, filter);
         }
+
+        /// <summary>
+        /// See: http://api.stackexchange.com/docs/me-unread-inbox
+        /// </summary>
+        public void GetMyUnreadInbox(string accessToken, Action<IPagedList<InboxItem>> onSuccess, Action<ApiException> onError = null, 
+            DateTime? since = null, int? page = null, int? pageSize = null, string filter = null)
+        {
+            MakeRequest<InboxItem>("me", new string[] { "inbox", "unread" }, new
+            {
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                since = GetDateValue(since),
+                filter = filter
+            }, response => onSuccess(new PagedList<InboxItem>(response)), onError);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/user-unread-inbox
+        /// </summary>
+        public void GetUnreadInbox(int userId, string accessToken, Action<IPagedList<InboxItem>> onSuccess, Action<ApiException> onError = null,
+            DateTime? since = null, int? page = null, int? pageSize = null, string filter = null)
+        {
+            MakeRequest<InboxItem>("users", new string[] { userId.ToString(), "inbox", "unread" }, new
+            {
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                since = GetDateValue(since),
+                filter = filter
+            }, response => onSuccess(new PagedList<InboxItem>(response)), onError);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/user-inbox
+        /// </summary>
+        public void GetInbox(int userId, string accessToken, Action<IPagedList<InboxItem>> onSuccess, Action<ApiException> onError = null,
+            int? page = null, int? pageSize = null, string filter = null)
+        {
+            MakeRequest<InboxItem>("users", new string[] { userId.ToString(), "inbox" }, new
+            {
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                filter = filter
+            }, response => onSuccess(new PagedList<InboxItem>(response)), onError);
+        }
+
+        /// <summary>
+        /// See: https://api.stackexchange.com/docs/user-inbox
+        /// </summary>
+        public void GetMyInbox(string accessToken, Action<IPagedList<InboxItem>> onSuccess, Action<ApiException> onError = null,
+            int? page = null, int? pageSize = null, string filter = null)
+        {
+            MakeRequest<InboxItem>("me", new string[] { "inbox" }, new
+            {
+                site = this.SiteUrlName,
+                access_token = accessToken,
+                page = page ?? null,
+                pagesize = pageSize ?? null,
+                filter = filter
+            }, response => onSuccess(new PagedList<InboxItem>(response)), onError);
+        }
     }
 }
