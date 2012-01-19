@@ -31,9 +31,9 @@ namespace Stacky
         /// <summary>
         /// See: http://api.stackexchange.com/docs/read-access-tokens
         /// </summary>
-        public IPagedList<AccessToken> ReadAccessTokens(IEnumerable<string> tokens, int? page = null, int? pageSize = null, string filter = null)
+        public IPagedList<AccessToken> GetAccessTokens(IEnumerable<string> tokens, int? page = null, int? pageSize = null, string filter = null)
         {
-            var response = MakeRequest<AccessToken>("access-tokens", new string[] { tokens.Vectorize(), "read" }, new
+            var response = MakeRequest<AccessToken>("access-tokens", new string[] { tokens.Vectorize() }, new
             {
                 page = page,
                 pagesize = pageSize,
@@ -45,9 +45,9 @@ namespace Stacky
         /// <summary>
         /// See: http://api.stackexchange.com/docs/read-access-tokens
         /// </summary>
-        public AccessToken ReadAccessToken(string token, int? page = null, int? pageSize = null, string filter = null)
+        public AccessToken GetAccessToken(string token, int? page = null, int? pageSize = null, string filter = null)
         {
-            return ReadAccessTokens(new string[] { token }, page, pageSize, filter).FirstOrDefault();
+            return GetAccessTokens(new string[] { token }, page, pageSize, filter).FirstOrDefault();
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Stacky
         /// </summary>
         public Filter CreateFilter(IEnumerable<string> include, IEnumerable<string> exclude, string baseFilter = null, bool? isUnsafe = null)
         {
-            var response = MakeRequest<Filter>("similar", null, new
+            var response = MakeRequest<Filter>("filters/create", null, new
             {
                 include = TryVectorize(include),
                 exclude = TryVectorize(exclude),
@@ -77,7 +77,7 @@ namespace Stacky
         /// </summary>
         public IEnumerable<Filter> GetFilters(IEnumerable<string> filters, string filter = null)
         {
-            var response = MakeRequest<Filter>("similar", new string[] { filters.Vectorize() }, new
+            var response = MakeRequest<Filter>("filter", new string[] { filters.Vectorize() }, new
             {
                 filter = filter
             });
