@@ -36,10 +36,10 @@ namespace Stacky
         /// <summary>
         /// See: http://api.stackexchange.com/docs/read-access-tokens
         /// </summary>
-        public void ReadAccessTokens(IEnumerable<string> tokens, Action<IPagedList<AccessToken>> onSuccess, Action<ApiException> onError = null, 
+        public void GetAccessTokens(IEnumerable<string> tokens, Action<IPagedList<AccessToken>> onSuccess, Action<ApiException> onError = null, 
             int? page = null, int? pageSize = null, string filter = null)
         {
-            MakeRequest<AccessToken>("access-tokens", new string[] { tokens.Vectorize(), "read" }, new
+            MakeRequest<AccessToken>("access-tokens", new string[] { tokens.Vectorize() }, new
             {
                 page = page,
                 pagesize = pageSize,
@@ -50,10 +50,10 @@ namespace Stacky
         /// <summary>
         /// See: http://api.stackexchange.com/docs/read-access-tokens
         /// </summary>
-        public void ReadAccessToken(string token, Action<AccessToken> onSuccess, Action<ApiException> onError = null, 
+        public void GetAccessToken(string token, Action<AccessToken> onSuccess, Action<ApiException> onError = null, 
             int? page = null, int? pageSize = null, string filter = null)
         {
-            ReadAccessTokens(new string[] { token }, items => onSuccess(items.FirstOrDefault()), onError, page, pageSize, filter);
+            GetAccessTokens(new string[] { token }, items => onSuccess(items.FirstOrDefault()), onError, page, pageSize, filter);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Stacky
         public void CreateFilter(IEnumerable<string> include, IEnumerable<string> exclude, Action<Filter> onSuccess, Action<ApiException> onError = null,
             string baseFilter = null, bool? isUnsafe = null)
         {
-            MakeRequest<Filter>("similar", null, new
+            MakeRequest<Filter>("filters/create", null, new
             {
                 include = TryVectorize(include),
                 exclude = TryVectorize(exclude),
@@ -83,7 +83,7 @@ namespace Stacky
         /// </summary>
         public void GetFilters(IEnumerable<string> filters, Action<IEnumerable<Filter>> onSuccess, Action<ApiException> onError = null, string filter = null)
         {
-            MakeRequest<Filter>("similar", new string[] { filters.Vectorize() }, new
+            MakeRequest<Filter>("filters", new string[] { filters.Vectorize() }, new
             {
                 filter = filter
             }, response => onSuccess(response.Items), onError);

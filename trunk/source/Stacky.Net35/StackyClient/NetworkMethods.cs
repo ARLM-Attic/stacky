@@ -31,9 +31,9 @@ namespace Stacky
         /// <summary>
         /// See: http://api.stackexchange.com/docs/read-access-tokens
         /// </summary>
-        public IPagedList<AccessToken> ReadAccessTokens(IEnumerable<string> tokens, Options options)
+        public IPagedList<AccessToken> GetAccessTokens(IEnumerable<string> tokens, Options options)
         {
-            var response = MakeRequest<AccessToken>("access-tokens", new string[] { tokens.Vectorize(), "read" }, new
+            var response = MakeRequest<AccessToken>("access-tokens", new string[] { tokens.Vectorize() }, new
             {
                 page = options.Page ?? null,
                 pagesize = options.PageSize ?? null,
@@ -47,7 +47,7 @@ namespace Stacky
         /// </summary>
         public AccessToken ReadAccessToken(string token, Options options)
         {
-            return ReadAccessTokens(new string[] { token }, options).FirstOrDefault();
+            return GetAccessTokens(new string[] { token }, options).FirstOrDefault();
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Stacky
         /// </summary>
         public Filter CreateFilter(IEnumerable<string> include, IEnumerable<string> exclude, string baseFilter, bool? isUnsafe)
         {
-            var response = MakeRequest<Filter>("similar", null, new
+            var response = MakeRequest<Filter>("filter/create", null, new
             {
                 include = TryVectorize(include),
                 exclude = TryVectorize(exclude),
@@ -77,7 +77,7 @@ namespace Stacky
         /// </summary>
         public IEnumerable<Filter> GetFilters(IEnumerable<string> filters, string filter)
         {
-            var response = MakeRequest<Filter>("similar", new string[] { filters.Vectorize() }, new
+            var response = MakeRequest<Filter>("filters", new string[] { filters.Vectorize() }, new
             {
                 filter = filter
             });
