@@ -48,6 +48,7 @@ namespace Stacky
         private static Uri BuildUrl(string method, string version, string[] urlParameters, string queryString)
         {
             Require.NotNullOrEmpty(method, "method");
+            Require.NotNullOrEmpty(version, "version");
 
             string urlBase = String.Format(CultureInfo.CurrentCulture, "https://api.stackexchange.com/{0}/{1}/", version, method);
             if (urlParameters != null)
