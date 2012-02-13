@@ -11,12 +11,12 @@ namespace Stacky
     {
         private string version;
 
-        public StackyClient(string version, Site site, IUrlClient client, IProtocol protocol)
-            : this(version, site.ApiSiteParameter, client, protocol)
+        public StackyClient(string version, Site site, IUrlClient client, IProtocol protocol, string apiKey = null)
+            : this(version, site.ApiSiteParameter, client, protocol, apiKey)
         {
         }
 
-        public StackyClient(string version, string siteUrlName, IUrlClient client, IProtocol protocol)
+        public StackyClient(string version, string siteUrlName, IUrlClient client, IProtocol protocol, string apiKey = null)
         {
             Require.NotNullOrEmpty(version, "version");
             Require.NotNullOrEmpty(siteUrlName, "baseUrl");
@@ -26,6 +26,7 @@ namespace Stacky
             SiteUrlName = siteUrlName;
             WebClient = client;
             Protocol = protocol;
+            ApiKey = apiKey;
         }
 
         #region Methods
@@ -63,6 +64,7 @@ namespace Stacky
 
         public HttpResponse GetResponse(string method, string[] urlArguments, Dictionary<string, string> queryStringArguments)
         {
+            EnsureApiKey(queryStringArguments);
             Uri url = UrlHelper.BuildUrl(method, version, urlArguments, queryStringArguments);
             return WebClient.MakeRequest(url);
         }

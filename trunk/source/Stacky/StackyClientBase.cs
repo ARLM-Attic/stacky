@@ -7,6 +7,7 @@ namespace Stacky
     {
         public IProtocol Protocol { get; set; }
         public string SiteUrlName { get; set; }
+        public string ApiKey { get; set; }
 
         public int RemainingRequests { get; internal set; }
         public int MaxRequests { get; internal set; }
@@ -33,6 +34,14 @@ namespace Stacky
             if (date.HasValue)
                 return UnixDateTime.UnixTimeFromDate(date.Value);
             return null;
+        }
+
+        protected void EnsureApiKey(IDictionary<string, string> queryStringArguments)
+        {
+            if (!String.IsNullOrEmpty(ApiKey) && !queryStringArguments.ContainsKey("key"))
+            {
+                queryStringArguments.Add("key", ApiKey);
+            }
         }
     }
 }

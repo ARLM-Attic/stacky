@@ -12,18 +12,18 @@ namespace Stacky
         private string version;
 
 #if SILVERLIGHT
-        public StackyClient(string version, Site site, IUrlClient client, IProtocol protocol)
+        public StackyClient(string version, Site site, IUrlClient client, IProtocol protocol, string apiKey)
 #else
-        public StackyClientAsync(string version, Site site, IUrlClientAsync client, IProtocol protocol)
+        public StackyClientAsync(string version, Site site, IUrlClientAsync client, IProtocol protocol, string apiKey = null)
 #endif
-            : this(version, site.ApiSiteParameter, client, protocol)
+            : this(version, site.ApiSiteParameter, client, protocol, apiKey)
         {
         }
 
 #if SILVERLIGHT
-        public StackyClient(string version, string siteUrlName, IUrlClient client, IProtocol protocol)
+        public StackyClient(string version, string siteUrlName, IUrlClient client, IProtocol protocol, string apiKey)
 #else
-        public StackyClientAsync(string version, string siteUrlName, IUrlClientAsync client, IProtocol protocol)
+        public StackyClientAsync(string version, string siteUrlName, IUrlClientAsync client, IProtocol protocol, string apiKey = null)
 #endif
         {
             Require.NotNullOrEmpty(version, "version");
@@ -35,6 +35,7 @@ namespace Stacky
             WebClient = client;
             SiteUrlName = siteUrlName;
             Protocol = protocol;
+            ApiKey = apiKey;
         }
 
         #region Properties
@@ -92,6 +93,7 @@ namespace Stacky
 
         public virtual void GetResponse(string method, string[] urlArguments, Dictionary<string, string> queryStringArguments, Action<HttpResponse> onSuccess, Action<ApiException> onError)
         {
+            EnsureApiKey(queryStringArguments);
             Uri url = UrlHelper.BuildUrl(method, version, urlArguments, queryStringArguments);
             WebClient.MakeRequest(url, onSuccess, onError);
         }
